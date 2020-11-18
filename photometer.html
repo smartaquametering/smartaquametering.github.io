@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Copyright © 2020 by https://github.com/smartAquaMetering. All Rights Reserved. -->
+		<meta name="author" content="smartAquaMetering">
+		<meta name="description" content="smartPhotometer">
+		<meta name="keywords" content="Photometry, Nephelometry">
+
+		<!-- Required meta tags -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<meta http-equiv="X-UA-Compatible" content="text/html">
+
+		<title>smartPhotometer</title>
+
+		<!-- Bootstrap 4 and jQuery -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+		<!-- Bootstrap 4 Toggle -->
+		<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+		<!-- Bootstrap 4 Tables -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.18.0/dist/bootstrap-table.min.css" integrity="sha256-bRy3jXEEDZFb32UUfxldDDaeWXCiIscfWkUrJOBdcN4=" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.18.0/dist/bootstrap-table.min.js" integrity="sha256-p8GRrkt9a/cuKDspGMLC0jhsjPKCkGC1XJmF2dYF+Gw=" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.18.0/dist/extensions/treegrid/bootstrap-table-treegrid.min.js" integrity="sha256-7/bamjJdCGcpYZP8ASh8WtgzH0TM7Rq3+rPl0CRjZYs=" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.18.0/dist/extensions/editable/bootstrap-table-editable.min.js" integrity="sha256-cjlxyGvqWqb9w1nBjTIYNP3Gy3J6j4v/lq1ujrqFIZ4=" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.18.0/dist/extensions/export/bootstrap-table-export.min.js" integrity="sha256-IJbTGDnL3KrrGbYJhjEi1jT1ssBnzqPT22eCOuHyGOo=" crossorigin="anonymous"></script>
+
+		<!-- Bootstrap 4 x-editable-->
+		<link href="https://cdn.jsdelivr.net/gh/Talv/x-editable@develop/dist/bootstrap4-editable/css/bootstrap-editable.css" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/gh/Talv/x-editable@develop/dist/bootstrap4-editable/js/bootstrap-editable.min.js"></script>
+
+		<!-- jQuery TimeCircles -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.min.css" integrity="sha512-lZ3AwSh5B+1EgCuXvjkdhFX8xU4dMDO8SPqAn71VFY4luNN8gwKpajLxaZRMSeNMghUghfodtkZAWO2rM7H6Qw==" crossorigin="anonymous" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.min.js" integrity="sha512-FofOhk0jW4BYQ6CFM9iJutqL2qLk6hjZ9YrS2/OnkqkD5V4HFnhTNIFSAhzP3x//AD5OzVMO8dayImv06fq0jA==" crossorigin="anonymous"></script>
+
+		<!-- jQuery treegrid -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-treegrid@0.3.0/css/jquery.treegrid.css" integrity="sha256-gZo//QecN1byuwnUdIUIc7s2oEmAR2+mDhvUEsI0hOw=" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/jquery-treegrid@0.3.0/js/jquery.treegrid.min.js" integrity="sha256-HgE8/BlaJxNT2fERNSTYrtrm//4U8GVpXt3czDj8EwU=" crossorigin="anonymous"></script>
+
+		<!-- jQuery tableExport -->
+		<script src="https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/tableExport.min.js" integrity="sha256-/VfFIAF4GLBN7iah7RFGi+zISoczKczfQTP4Dh4N0uw=" crossorigin="anonymous"></script>
+
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css" integrity="sha256-rx5u3IdaOCszi7Jb18XD9HSn8bNiEgAqWJbdBvIYYyU=" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/js/fontawesome.min.js" integrity="sha256-TMRxGf3NaZhrxTfD8y/NGiyE4UXBA3udH1l+Co8JDVU=" crossorigin="anonymous"></script>
+
+		<script defer="" type="text/JavaScript">
+
+			var VersionNumber='0.0.1';
+			var VersionDate='2020-11-16';
+			var Repository='smartPhotometer';
+			var RepositoryPath='https://github.com/smartaquametering/smartPhotometer';
+			var Owner='smartAquaMetering';
+			var OwnerPath='https://github.com/smartaquametering';
+			var Copyright='Copyright © 2020-2020'
+			var CopyrightPath='https://github.com/smartaquametering/smartPhotometer/blob/main/LICENSE';
+			var Release=Repository+' - '+VersionNumber+' ('+VersionDate+')';
+
+			$(function() {
+				document.getElementById('AboutModalBanner').href=RepositoryPath;
+				document.getElementById('AboutSupport').href=RepositoryPath;
+				document.getElementById('AboutSupport').innerHTML=RepositoryPath;
+				document.getElementById('AboutRepository').href=RepositoryPath;
+				document.getElementById('AboutRepository').innerHTML=RepositoryPath;
+				document.getElementById('AboutCopyright').href=CopyrightPath;
+				document.getElementById('AboutCopyright').innerHTML=Copyright;
+				document.getElementById('AboutOwner').href=OwnerPath;
+				document.getElementById('AboutOwner').innerHTML=Owner;
+				document.getElementById('AboutRelease').innerHTML=Release;
+				document.getElementById('HelpModalBanner').href=RepositoryPath;
+				document.getElementById('FooterRepository').href=RepositoryPath;
+				document.getElementById('FooterRepository').innerHTML=Repository+' - '+VersionNumber;
+				document.getElementById('FooterOwner').href=OwnerPath;
+				document.getElementById('FooterOwner').innerHTML=Owner;
+				var swaction=0;
+				var ProtocolID=0;
+				var ProtocolData=[];
+				var LogData=[];
+				var ReadingData=new Array();
+					ReadingData[0]=new Array();
+					ReadingData[1]=new Array();
+					ReadingData[2]=new Array();
+						ReadingData[2]['Switch']='Empty Sample';
+						ReadingData[2]['GPIO']='25';
+					ReadingData[3]=new Array();
+						ReadingData[3]['Switch']='Sample';
+						ReadingData[3]['GPIO']='25';
+					ReadingData[4]=new Array();
+						ReadingData[4]['Light']='Red';
+						ReadingData[4]['Wavelength']='626';
+						ReadingData[4]['GPIO']='12';
+						ReadingData[4]['BeamAngle']='180';
+						ReadingData[4]['Thickness']='1.4';
+						ReadingData[4]['IncidentLight']='';
+						ReadingData[4]['TransmittedLight']='';
+						ReadingData[4]['Transmission']='';
+						ReadingData[4]['Absorbance']='';
+						ReadingData[4]['SAC']='';
+					ReadingData[5]=new Array();
+						ReadingData[5]['Light']='Green';
+						ReadingData[5]['Wavelength']='525';
+						ReadingData[5]['GPIO']='13';
+						ReadingData[5]['BeamAngle']='180';
+						ReadingData[5]['Thickness']='1.4';
+						ReadingData[5]['IncidentLight']='';
+						ReadingData[5]['TransmittedLight']='';
+						ReadingData[5]['Transmission']='';
+						ReadingData[5]['Absorbance']='';
+						ReadingData[5]['SAC']='';
+					ReadingData[6]=new Array();
+						ReadingData[6]['Light']='Blue';
+						ReadingData[6]['Wavelength']='470';
+						ReadingData[6]['GPIO']='14';
+						ReadingData[6]['BeamAngle']='180';
+						ReadingData[6]['Thickness']='1.4';
+						ReadingData[6]['IncidentLight']='';
+						ReadingData[6]['TransmittedLight']='';
+						ReadingData[6]['Transmission']='';
+						ReadingData[6]['Absorbance']='';
+						ReadingData[6]['SAC']='';
+					ReadingData[7]=new Array();
+						ReadingData[7]['Light']='IR';
+						ReadingData[7]['Wavelength']='850';
+						ReadingData[7]['GPIO']='23';
+						ReadingData[7]['BeamAngle']='90';
+						ReadingData[7]['Thickness']='1.4';
+						ReadingData[7]['IncidentLight']='';
+						ReadingData[7]['TransmittedLight']='';
+						ReadingData[7]['Transmission']='';
+						ReadingData[7]['Absorbance']='';
+						ReadingData[7]['SAC']='';
+				var SensorData=new Array();
+					SensorData[0]=new Array();
+						SensorData[0]['Parameter']='<var><b>Lux</b><sub> Calculation based on Full and IR</sub></var>';
+						SensorData[0]['Intensity']='';
+					SensorData[1]=new Array();
+						SensorData[1]['Parameter']='<var><b>Full</b><sub> VIS and IR spectrum</sub></var>';
+						SensorData[1]['Intensity']='';
+					SensorData[2]=new Array();
+						SensorData[2]['Parameter']='<var><b>VIS</b><sub> Visible spectrum</sub></var>';
+						SensorData[2]['Intensity']='';
+					SensorData[3]=new Array();
+						SensorData[3]['Parameter']='<var><b>IR</b><sub> Infrared spectrum</sub></var>';
+						SensorData[3]['Intensity']='';
+				function loopDeLoop(e,s){
+					var a,l,o=0;
+					isNaN(s)&&(s=1),null==e&&(e=1e3);
+					var n=setInterval(function(){
+						o>0?clearInterval(n):++s>1?o=1:(fetch("/json?view=sensorupdate").then(function(s){
+							var o;200===s.status?s.json().then(function(s){
+								for(e=s.TTL,a=0;a<s.Sensors.length;a++)
+									if(s.Sensors[a].hasOwnProperty("TaskValues"))
+										for(l=0;l<s.Sensors[a].TaskValues.length;l++)
+											try{o=s.Sensors[a].TaskValues[l].Value}catch(e){o=e.name}finally{
+												if("TypeError"!==o){
+													tempValue=s.Sensors[a].TaskValues[l].Value;
+													if(s.Sensors[a].TaskNumber<3){
+														decimalsValue=s.Sensors[a].TaskValues[l].NrDecimals;
+														tempValue=parseFloat(tempValue).toFixed(decimalsValue);
+														if (s.Sensors[a].TaskNumber==1) {
+															SensorData[(s.Sensors[a].TaskValues[l].ValueNumber-1)]['Intensity']=tempValue;
+														} else if (s.Sensors[a].TaskNumber==2 && $('#switch_2').prop('checked')===true) {
+															ReadingData[(s.Sensors[a].TaskValues[l].ValueNumber+3)]['IncidentLight']=tempValue;
+														} else if (s.Sensors[a].TaskNumber==2 && $('#switch_3').prop('checked')===true) {
+															ReadingData[(s.Sensors[a].TaskValues[l].ValueNumber+3)]['TransmittedLight']=tempValue;
+														}
+													} else {
+														var sw="switch_"+(s.Sensors[a].TaskNumber);
+														var swd=document.getElementById(sw);
+														if (tempValue==0 && $(swd).prop('checked')===true && swaction==0) {
+															$(swd).bootstrapToggle('enable', false);
+															$(swd).bootstrapToggle('off', false);
+														} else if (tempValue==0 && sw=="switch_3" && swaction==0 && $('#switch_2').prop('checked')===true) {
+															$('#switch_2').bootstrapToggle('enable', false);
+															$('#switch_2').bootstrapToggle('off', false);
+														} else if (tempValue==0 && $(swd).prop('checked')===true) {
+															swaction = 0;
+														} else if (tempValue==1 && $(swd).prop('checked')===false && swaction==0) {
+															$(swd).bootstrapToggle('on', false);
+														} else if (tempValue==1 && $(swd).prop('checked')===false) {
+															swaction = 0;
+														};
+														swaction = 0;
+													}
+												}
+											}
+											e=s.TTL,
+											clearInterval(n),
+											$('#SensorTable').bootstrapTable('load', SensorData),
+											AppendLogData(),
+											loopDeLoop(e,0)
+							}):console.log("Looks like there was a problem. Status Code: "+s.status)
+						}).catch(function(s){
+							console.log(s.message),e=5e3,clearInterval(n),loopDeLoop(e,0)
+						}),o=1
+					)},e)
+				}loopDeLoop(1e3,0);
+
+				function TimerSwitches(state) {
+					$('#StartTimer').bootstrapToggle(state);
+					$('#StopTimer').bootstrapToggle(state);
+				};
+				function LedSwitches(state) {
+					for (i = 2; i < 8; i++) {
+						var switchid = "#switch_" + i;
+						$(switchid).bootstrapToggle(state);
+					}
+				};
+				// Empty Sample
+				$('#switch_2').change(function() {
+					if ($(this).prop('checked')===true) {
+						swaction = 1;
+						$.get('/control?cmd=GPIO,'+ReadingData[2]['GPIO']+',1');
+						TimerSwitches('disable');
+						LedSwitches('disable');
+						ResetReadingData();
+					} else {
+						TimerSwitches('enable');
+						LedSwitches('enable');
+						UpdateReadingData();
+					}
+				});
+				// Sample
+				$('#switch_3').change(function() {
+					if ($(this).prop('checked')===true) {
+						swaction = 1;
+						$.get('/control?cmd=GPIO,'+ReadingData[3]['GPIO']+',1');
+						TimerSwitches('disable');
+						LedSwitches('disable');
+						ResetTransmissionReadingData();
+					} else {
+						LedSwitches('enable');
+						TimerSwitches('enable');
+						$('#StopTimer').bootstrapToggle('on');
+						UpdateReadingData();
+						AppendProtocolData();
+					}
+				});
+				// Red LED
+				$('#switch_4').change(function() {
+					swaction = 1;
+					if ($(this).prop('checked')===true) {
+						$.get('/control?cmd=GPIO,'+ReadingData[4]['GPIO']+',1');
+					} else {
+						$.get('/control?cmd=GPIO,'+ReadingData[4]['GPIO']+',0');
+					}	
+				});
+				// Green LED
+				$('#switch_5').change(function() {
+					swaction = 1;
+					if ($(this).prop('checked')===true) {
+						swaction = 1;
+						$.get('/control?cmd=GPIO,'+ReadingData[5]['GPIO']+',1');
+					} else {
+						$.get('/control?cmd=GPIO,'+ReadingData[5]['GPIO']+',0');
+					}
+				});
+				// Blue LED
+				$('#switch_6').change(function() {
+					swaction = 1;
+					if ($(this).prop('checked')===true) {
+						swaction = 1;
+						$.get('/control?cmd=GPIO,'+ReadingData[6]['GPIO']+',1');
+					} else {
+						$.get('/control?cmd=GPIO,'+ReadingData[6]['GPIO']+',0');
+					}
+				});
+				// IR LED
+				$('#switch_7').change(function() {
+					swaction = 1;
+					if ($(this).prop('checked')===true) {
+						swaction = 1;
+						$.get('/control?cmd=GPIO,'+ReadingData[7]['GPIO']+',1');
+					} else {
+						$.get('/control?cmd=GPIO,'+ReadingData[7]['GPIO']+',0');
+					}
+				});
+				$('.StopWatch').TimeCircles({start: false,
+					count_past_zero: true,
+					time: {
+						Days: { show: false },
+						Hours: { show: false },
+						Minutes: { show: true },
+						Seconds: { show: true }
+					}}).addListener(function(unit,value,total) {
+						if (total == 0) {
+							$('#switch_3').bootstrapToggle('enable');
+							$('#switch_3').bootstrapToggle('on');
+						}
+					} 
+				);
+				$('#StartTimer').change(function() {
+					if ($(this).prop('checked')===true) {
+						$('.StopWatch').data('timer', document.getElementById('SecondsTimer').value).TimeCircles({start: false,
+							count_past_zero: true,
+							time: {
+								Days: { show: false },
+								Hours: { show: false },
+								Minutes: { show: true },
+								Seconds: { show: true }
+						}}).restart();
+						$('#StartTimer').bootstrapToggle('disable');
+						$('#StopTimer').bootstrapToggle('enable');
+						$('#StopTimer').bootstrapToggle('off');
+						LedSwitches('disable');
+					}
+				});
+				$('#StopTimer').change(function() {
+					if ($(this).prop('checked')===true) {
+						$('.StopWatch').TimeCircles().stop();
+						if ($('#StartTimer').prop('checked')!=false) {
+							$('#StartTimer').bootstrapToggle('enable');
+							$('#StartTimer').bootstrapToggle('off')
+							LedSwitches('enable');
+						}
+					} else {
+						$('.StopWatch').TimeCircles().start();
+						LedSwitches('disable');
+					}
+				});
+				$('#FadeTimer').change(function() {
+					if ($(this).prop('checked')===true) {
+						$('.StopWatch').TimeCircles().elements.last().fadeOut();
+						document.getElementById('StopWatchCol2').style.opacity = '0';
+						document.getElementById('StopWatchCol3').style.opacity = '0';
+					} else {
+						$('.StopWatch').TimeCircles().elements.last().fadeIn();
+						document.getElementById('StopWatchCol2').style.opacity = '1';
+						document.getElementById('StopWatchCol3').style.opacity = '1';
+					}
+				});
+				$('#SensorTable').bootstrapTable('destroy').bootstrapTable({
+					columns: [{
+						field: 'Parameter',
+						title: '<var>Sensor<sub> Light parameter</sub></var>'
+					}, {
+						field: 'Intensity',
+						title: 'Intensity'
+					}],
+					data: SensorData
+				});
+				$('#ReadingTable').bootstrapTable('destroy').bootstrapTable({
+					columns: [{
+						field: 'Light',
+						title: 'Light',
+						align: 'left'
+					}, {
+						field: 'Wavelength',
+						title: 'λ',
+						align: 'right'
+					}, {
+						field: 'BeamAngle',
+						title: '<var>B<sup>o</sup></var>',
+						align: 'right'
+					}, {
+						field: 'Thickness',
+						title: 'd',
+						align: 'right'
+					}, {
+						field: 'IncidentLight',
+						title: '<var>I<sub>0</sub></var>',
+						align: 'right'
+					}, {
+						field: 'TransmittedLight',
+						title: '<var>I<sub>T</sub></var>',
+						align: 'right'
+					}, {
+						field: 'Transmission',
+						title: 'T',
+						align: 'right'
+					}, {
+						field: 'Absorbance',
+						title: '<var>E<sub>λ</sub></var>',
+						align: 'right'
+					}, {
+						field: 'SAC',
+						title: '<var>SAC<sub>λ</sub></var>',
+						align: 'right'
+					}],
+					data: ReadingData,
+					toolbar: '#ReadingTableToolbar',
+					showColumns: true,
+					showToggle: true,
+					showColumnsToggleAll: true,
+					showFullscreen: true
+				});
+				$('#ReadingTable').bootstrapTable('filterBy', {
+					Light: ['Red','Green','Blue','IR']
+				});
+				$('#ReadingTableButtonReset').click(function () {
+					ResetReadingData();
+				});
+				function ResetReadingData() {
+					for (i = 4; i < 8; i++) {
+						ReadingData[i]['IncidentLight']='';
+						ReadingData[i]['TransmittedLight']='';
+						ReadingData[i]['Transmission']='';
+						ReadingData[i]['Absorbance']='';
+						ReadingData[i]['SAC']='';
+					}
+					$('#ReadingTable').bootstrapTable('load', ReadingData);
+				};
+				function ResetTransmissionReadingData() {
+					for (i = 4; i < 8; i++) {
+						ReadingData[i]['TransmittedLight']='';
+						ReadingData[i]['Transmission']='';
+						ReadingData[i]['Absorbance']='';
+						ReadingData[i]['SAC']='';
+					}
+					$('#ReadingTable').bootstrapTable('load', ReadingData);
+				};
+				function UpdateReadingData() {
+					for (i = 4; i < 8; i++) {
+						if (ReadingData[i]['TransmittedLight']!='') {
+							ReadingData[i]['Transmission']=parseFloat(ReadingData[i]['TransmittedLight']/ReadingData[i]['IncidentLight']).toFixed(5);
+							ReadingData[i]['Absorbance']=parseFloat(-1*Math.log10(ReadingData[i]['Transmission'])).toFixed(5);
+							ReadingData[i]['SAC']=parseFloat(ReadingData[i]['Absorbance']/0.014).toFixed(5);
+						}
+					}
+					$('#ReadingTable').bootstrapTable('load', ReadingData);
+				};
+				$('#ProtocolTable').bootstrapTable({
+					columns: [{
+						field: 'Timestamp',
+						title: 'Timestamp',
+						sortable: true,
+						align: 'left'
+					}, {
+						field: 'Parameter',
+						title: 'Parameter',
+						editable: true,
+						align: 'left'
+					}, {
+						field: 'Remark',
+						title: 'Remark',
+						editable: true,
+						align: 'left'
+					}, {
+						field: 'Light',
+						title: 'Light',
+						align: 'left'
+					}, {
+						field: 'Wavelength',
+						title: 'λ',
+						align: 'right'
+					}, {
+						field: 'BeamAngle',
+						title: '<var>B<sup>o</sup></var>',
+						align: 'right'
+					}, {
+						field: 'Thickness',
+						title: 'd',
+						align: 'right'
+					}, {
+						field: 'IncidentLight',
+						title: '<var>I<sub>0</sub></var>',
+						align: 'right'
+					}, {
+						field: 'TransmittedLight',
+						title: '<var>I<sub>T</sub></var>',
+						align: 'right'
+					}, {
+						field: 'Transmission',
+						title: 'T',
+						align: 'right'
+					}, {
+						field: 'Absorbance',
+						title: '<var>E<sub>λ</sub></var>',
+						align: 'right'
+					}, {
+						field: 'SAC',
+						title: '<var>SAC<sub>λ</sub></var>',
+						align: 'right'
+					}],
+					data: ProtocolData,
+					idField: 'id',
+					toolbar: '#ProtocolTableToolbar',
+					showColumns: true,
+					showToggle: true,
+					showColumnsToggleAll: true,
+					showFullscreen: true,
+					showExport: true,
+					treeShowField: 'Timestamp',
+					parentIdField: 'pid',
+					onPostBody: function() {
+						var columns = $('#ProtocolTable').bootstrapTable('getOptions').columns
+						if (columns && columns[0][1].visible) {
+							$('#ProtocolTable').treegrid({
+								initialState: 'collapsed',
+								treeColumn: 0,
+							})
+						}
+					}
+				});
+				$('#ProtocolTableButtonReset').click(function () {
+					$('#ProtocolTable').bootstrapTable('removeAll');
+				});
+				function AppendProtocolData() {
+					ProtocolID = ++ProtocolID;
+					var ProtocolPID = ProtocolID;
+					ProtocolData = [{
+							'id': ProtocolPID,
+							'pid': 0,
+							'Timestamp': new Date().toLocaleString()
+					}];
+					$('#ProtocolTable').bootstrapTable('append', ProtocolData);
+					for (i = 4; i < 8; i++) {
+						ProtocolID = ++ProtocolID;
+						ProtocolData = [{
+								'id': ProtocolID,
+								'pid': ProtocolPID,
+								'Light': ReadingData[i]['Light'],
+								'Wavelength': ReadingData[i]['Wavelength'],
+								'BeamAngle': ReadingData[i]['BeamAngle'],
+								'Thickness': ReadingData[i]['Thickness'],
+								'IncidentLight': ReadingData[i]['IncidentLight'],
+								'TransmittedLight': ReadingData[i]['TransmittedLight'],
+								'Transmission': ReadingData[i]['Transmission'],
+								'Absorbance': ReadingData[i]['Absorbance'],
+								'SAC': ReadingData[i]['SAC']
+						}];
+						$('#ProtocolTable').bootstrapTable('append', ProtocolData);
+					};
+				};
+				$('#LogTableButtonBuild').click(function () {
+					$('#LogTable').bootstrapTable({
+						columns: [{
+							field: 'Timestamp',
+							title: 'Timestamp',
+							sortable: true,
+							align: 'left'
+						}, {
+							field: 'Red',
+							title: 'Red',
+							align: 'left'
+						}, {
+							field: 'Green',
+							title: 'Green',
+							align: 'left'
+						}, {
+							field: 'Blue',
+							title: 'Blue',
+							align: 'left'
+						}, {
+							field: 'IR',
+							title: 'IR',
+							align: 'left'
+						}, {
+							field: 'Lux',
+							title: 'Lux',
+							align: 'right'
+						}, {
+							field: 'Full',
+							title: 'Full',
+							align: 'right'
+						}, {
+							field: 'VIS',
+							title: 'VIS',
+							align: 'right'
+						}, {
+							field: 'Infrared',
+							title: 'IR',
+							align: 'right'
+						}],
+						data: LogData,
+						toolbar: '#LogTableToolbar',
+						showColumns: true,
+						showToggle: true,
+						showColumnsToggleAll: true,
+						showFullscreen: true,
+						showExport: true
+					});
+				});
+				$('#LogTableButtonReset').click(function () {
+					$('#LogTable').bootstrapTable('removeAll');
+				});
+				$('#LogTableButtonDestroy').click(function () {
+					$('#LogTable').bootstrapTable('destroy');
+				});
+				function AppendLogData() {
+					LogData = [{
+							'Timestamp': new Date().toLocaleString(),
+							'Red': $('#switch_4').prop('checked'),
+							'Green': $('#switch_5').prop('checked'),
+							'Blue': $('#switch_6').prop('checked'),
+							'IR': $('#switch_7').prop('checked'),
+							'Lux': SensorData[0]['Intensity'],
+							'Full': SensorData[1]['Intensity'],
+							'VIS': SensorData[2]['Intensity'],
+							'Infrared': SensorData[3]['Intensity']
+					}];
+					$('#LogTable').bootstrapTable('append', LogData);
+				};
+				window.onbeforeunload = function() {
+					return "Dude, are you sure you want to leave? Think of the kittens!";
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+				<a class="navbar-brand"><img src="/logo.png" width="40" height="30" class="" alt=""> smartPhotometer</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav">
+						<li class="nav-item"><a class="nav-link" href="/dashboard.esp" target="_blank">Dashboard</a></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarSystem" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">System</a>
+							<div class="dropdown-menu" aria-labelledby="navbarSystem">
+								<a class="dropdown-item" href="#" target="_blank">System Info and Settings</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="/json?view=sensorupdate" target="_blank">Sensor Status</a>
+								<a class="dropdown-item" href="/json" target="_blank">System Configuration</a>
+							</div>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarHelp" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Help</a>
+							<div class="dropdown-menu" aria-labelledby="navbarHelp">
+								<a class="dropdown-item" href="#AboutModal" data-toggle="modal" data-target="#AboutModal">About</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#HelpModal" data-toggle="modal" data-target="#HelpModal">Help</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<div class="modal fade" id="AboutModal" tabindex="-1" aria-labelledby="AboutModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="AboutModalLabel">About</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<h5><a href="#" id="AboutModalBanner" target="_blank"><img class="img-fluid" alt="" src="/banner.png"></a></h5>
+
+							<h5>Firmware build</h5>
+							<div class="card p-3 bg-light" style="margin: 0.5em 0em 1.5em;">
+								ESPEasy (mega), ESP_Easy_mega_20201103_custom_ESP32_4M316k
+							</div>
+							<h5>Release</h5>
+							<div class="card p-3 bg-light" style="margin: 0.5em 0em 1.5em;" id="AboutRelease"></div>
+							<h5>HTML, CSS, and JavaScript framework</h5>
+							<div class="card p-3 bg-light" style="margin: 0.5em 0em 1.5em;">
+								Bootstrap 4 CSS - https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css
+								<br>jQuery - https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js
+								<br>Bootstrap 4 JS bundle - https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js
+								<br>Bootstrap 4 Toggle CSS - https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css
+								<br>Bootstrap 4 Toggle JS - https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js
+								<br>Bootstrap 4 Tables CSS - https://cdn.jsdelivr.net/npm/bootstrap-table@1.18.0/dist/bootstrap-table.min.css
+								<br>Bootstrap 4 Tables JS - https://cdn.jsdelivr.net/npm/bootstrap-table@1.18.0/dist/bootstrap-table.min.js
+								<br>Bootstrap 4 Tables treegrid - https://cdn.jsdelivr.net/npm/bootstrap-table@1.18.0/dist/extensions/treegrid/bootstrap-table-treegrid.min.js
+								<br>Bootstrap 4 Tables editable - https://cdn.jsdelivr.net/npm/bootstrap-table@1.18.0/dist/extensions/editable/bootstrap-table-editable.min.js
+								<br>Bootstrap 4 Tables export - https://cdn.jsdelivr.net/npm/bootstrap-table@1.18.0/dist/extensions/export/bootstrap-table-export.min.js
+								<br>Bootstrap 4 x-editable CSS - https://cdn.jsdelivr.net/gh/Talv/x-editable@develop/dist/bootstrap4-editable/css/bootstrap-editable.css
+								<br>Bootstrap 4 x-editable JS - https://cdn.jsdelivr.net/gh/Talv/x-editable@develop/dist/bootstrap4-editable/js/bootstrap-editable.min.js
+								<br>jQuery TimeCircles CSS - https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.min.css
+								<br>jQuery TimeCircles JS - https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.min.js
+								<br>jQuery treegrid CSS - https://cdn.jsdelivr.net/npm/jquery-treegrid@0.3.0/css/jquery.treegrid.css
+								<br>jQuery treegrid JS - https://cdn.jsdelivr.net/npm/jquery-treegrid@0.3.0/js/jquery.treegrid.min.js
+								<br>jQuery tableExport - https://cdn.jsdelivr.net/npm/tableexport.jquery.plugin@1.10.21/tableExport.min.js
+								<br>Font Awesome CSS - https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css
+								<br>Font Awesome JS - https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/js/fontawesome.min.js
+							</div>
+							<h5>Support and documentation</h5>
+
+							<div class="card p-3 bg-light" style="margin: 0.5em 0em 1.5em;">
+								<samp>
+									GitHub: <a href="#" id="AboutSupport" target="_blank"></a>
+								</samp>
+							</div>
+
+							<h5>Development</h5>
+
+							<div class="card p-3 bg-light" style="margin: 0.5em 0em 1.5em;">
+								<samp>
+									GitHub: <a href="#" id="AboutRepository" target="_blank"></a>
+								</samp>
+							</div>
+
+							<h5>Copyrights</h5>
+
+							<div class="card p-3 bg-light" style="margin: 0.5em 0em 1.5em;">
+								<samp>
+									smartPhotometer - <a href="#" id="AboutCopyright" target="_blank"></a> by <a href="#" id="AboutOwner" target="_blank"></a>. All Rights Reserved. Licensed under <a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU GPL v3 or higher</a>.
+								</samp>
+							</div>
+								
+							<h5>Licenses</h5>
+
+							<p>All of the source code to this project is available under licenses which are both <a href="http://www.gnu.org/philosophy/free-sw.html" target="_blank">free</a> and <a href="http://www.opensource.org/docs/definition.php" target="_blank">open source</a>.<br>
+							Most of it is available under <a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU GPL</a> and <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.</p>
+
+							<p>The remainder of the software which is not under the GNU GPL is available under one of a variety of other licenses. Those that require reproduction of the license text in the distribution are given below.<br>
+							(Note: Your copy of this product may not contain code covered by one or more of the licenses listed here, depending on the exact product and version you choose.)</p>
+
+							<div class="card p-3 bg-light" style="margin: 0.5em 0em 1.5em;">
+								<samp>
+									ESPEasy - <a href="https://github.com/letscontrolit/ESPEasy/blob/mega/License.txt" target="_blank">Copyright © letscontrolit</a>. Licensed under <a href="https://github.com/letscontrolit/ESPEasy/blob/mega/License.txt" target="_blank">GNU GPL v3 or higher</a>.
+									<br>Bootstrap - <a href="https://github.com/twbs/bootstrap/blob/v4-dev/LICENSE" target="_blank">Copyright © 2011-2020 Twitter, Inc</a>. Licensed under <a href="https://github.com/twbs/bootstrap/blob/v4-dev/LICENSE" target="_blank">MIT License</a>.
+									<br>jQuery - <a href="https://github.com/jquery/jquery/blob/master/LICENSE.txt" target="_blank">Copyright © OpenJS Foundation and other contributors</a>. Licensed under <a href="https://github.com/jquery/jquery/blob/master/LICENSE.txt" target="_blank">MIT License</a>.
+									<br>Bootstrap 4 Toggle - <a href="https://github.com/gitbrent/bootstrap4-toggle/blob/master/LICENSE" target="_blank">Copyright © 2018 by Brent Ely</a>. Licensed under <a href="https://github.com/gitbrent/bootstrap4-toggle/blob/master/LICENSE" target="_blank">MIT License</a>.
+									<br>Bootstrap 4 Tables - <a href="https://github.com/wenzhixin/bootstrap-table/blob/master/LICENSE" target="_blank">Copyright © 2012-2019 by Zhixin Wen</a>. Licensed under <a href="https://github.com/wenzhixin/bootstrap-table/blob/master/LICENSE" target="_blank">MIT License</a>.
+									<br>jQuery TimeCircles - <a href="https://github.com/wimbarelds/TimeCircles/blob/master/MIT.txt" target="_blank">Copyright © 2013 by Wim Barelds</a>. Licensed under <a href="https://github.com/wimbarelds/TimeCircles/blob/master/MIT.txt" target="_blank">MIT License</a>.
+									<br>jQuery treegrid - <a href="https://github.com/maxazan/jquery-treegrid/blob/master/LICENSE" target="_blank">Copyright © 2013 by Maksym Pomazan</a>. Licensed under <a href="https://github.com/maxazan/jquery-treegrid/blob/master/LICENSE" target="_blank">MIT License</a>.
+									<br>jQuery tableExport - <a href="https://github.com/hhurz/tableExport.jquery.plugin/blob/master/LICENSE" target="_blank">Copyright © 2015-2020 by hhurz</a>. Licensed under <a href="https://github.com/hhurz/tableExport.jquery.plugin/blob/master/LICENSE" target="_blank">MIT License</a>.
+									<br>Font Awesome - by <a href="https://github.com/FortAwesome/Font-Awesome/blob/master/LICENSE.txt" target="_blank">Font Awesome</a>.
+								</samp>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="HelpModal" tabindex="-1" aria-labelledby="HelpModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="HelpModalLabel">Help</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+
+							<h5><a href="#" id="HelpModalBanner" target="_blank"><img class="img-fluid" alt="" src="/banner.png"></a></h5>
+
+							<h5 class="mt-4 mb-4">Legend</h5>
+							<dl class="row">
+								<dt class="col-sm-3">λ</dt>
+								<dd class="col-sm-9 text-truncate">Wavelength [nm]</dd>
+
+								<dt class="col-sm-3"><var>B<sup>o</sup></var></dt>
+								<dd class="col-sm-9 text-truncate">
+									Beam (measuring) angle [<var><sup>o</sup></var>]</br>
+									<var>180 <sup>o</sup>: Transmitted light measurement (Absorbance)</var></br>
+									<var>90 <sup>o</sup>: Nephelometric turbidity (scattered light) measurement</var>
+								</dd>
+
+								<dt class="col-sm-3"><var>I<sub>0</sub></var></dt>
+								<dd class="col-sm-9 text-truncate">Intensity of incident light [lux]</dd>
+
+								<dt class="col-sm-3"><var>I<sub>T</sub></var></dt>
+								<dd class="col-sm-9 text-truncate">Intensity of transmitted light [lux]</dd>
+
+								<dt class="col-sm-3">T = <var>I<sub>T</sub></var> / <var>I<sub>0</sub></var></dt>
+								<dd class="col-sm-9 text-truncate">
+									Transmission</br>
+									Energy passing through</br>
+									Range: 1.0 - 0.0
+								</dd>
+
+								<dt class="col-sm-3">A = 1 - T</dt>
+								<dd class="col-sm-9 text-truncate">
+									Absorption</br>
+									Energy lost
+								</dd>
+
+								<dt class="col-sm-3"><var>E<sub>λ</sub></var> = - log ( T ) = <var>ε<sub>λ</sub></var> * c * d</dt>
+								<dd class="col-sm-9 text-truncate">
+									Absorbance</br>
+									Attenuation</br>
+									Lambert-Beer law</br>
+									Optimum range: 0.1 – 1.0
+								</dd>
+
+								<dt class="col-sm-3"><var>SAC<sub>λ</sub></var> = <var>E<sub>λ</sub></var> / d * 100</dt>
+								<dd class="col-sm-9 text-truncate">Spectral Absorption Coefficient [<var>m<sup>-1</sup></var>]</dd>
+
+								<dt class="col-sm-3">c = <var>E<sub>λ</sub></var> / ( <var>ε<sub>λ</sub></var> * d ) = <var>E<sub>λ</sub></var> * F</dt>
+								<dd class="col-sm-9 text-truncate">Concentration of absorbing substance in the liquid [mol/l]</dd>
+
+								<dt class="col-sm-3">F = 1 / ( <var>ε<sub>λ</sub></var> * d )</dt>
+								<dd class="col-sm-9 text-truncate">
+									Factor</br>
+									Test specific
+								</dd>
+
+								<dt class="col-sm-3"><var>ε<sub>λ</sub></var></dt>
+								<dd class="col-sm-9 text-truncate">Molar decadic extinction coefficient [l/mol/cm]</dd>
+
+								<dt class="col-sm-3">d</dt>
+								<dd class="col-sm-9 text-truncate">Thickness of the solution layer [cm]</dd>
+
+								<dt class="col-sm-3">Turbidity</dt>
+								<dd class="col-sm-9 text-truncate">Opacity, clouding, haze</dd>
+
+								<dt class="col-sm-3">FNU</dt>
+								<dd class="col-sm-9 text-truncate">Formazine Nephelometric Unit</dd>
+
+								<dt class="col-sm-3">NTU</dt>
+								<dd class="col-sm-9 text-truncate">Nephelometric Turbidity Unit</dd>
+
+								<dt class="col-sm-3">FAU</dt>
+								<dd class="col-sm-9 text-truncate">Formazine Attenuation Unit</dd>
+							</dl>
+
+							<h5 class="mt-4 mb-4">Measurement methods</h5>
+							<dl class="row">
+								<dt class="col-sm-3">Photometry</dt>
+								<dd class="col-sm-9 text-truncate">
+									Absorbance measurement (transmitted light or absorption measurement)</br>
+									Recommended measuring range: 40–4000 FAU (DIN EN ISO 7027)</br>
+									Light source and detector are located on the same axis (180° angle).</br>
+									The reduced light intensity which remains after passing through the sample is measured
+								</dd>
+								<dt class="col-sm-3">Nephelometry</dt>
+								<dd class="col-sm-9 text-truncate">
+									Scattered light measurement</br>
+									Recommended measuring range: 0–40 FNU (DIN EN ISO 7027)</br>
+									Light source and detector are oriented at an angle of 90° relative to each other
+								</dd>
+							</dl>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row align-items-center">
+				<div id="StopWatchCol1" class="col-sm-6">
+					<div class="StopWatch"></div>
+				</div>
+				<div id="StopWatchCol2" class="col-sm-2">
+					<input id="SecondsTimer" class="form-control" style="width: 100px" type="number" value="60" min="0" step="1"></input>
+				</div>
+				<div id="StopWatchCol3" class="col-sm-2">
+					<input id="StartTimer" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-on="Running" data-off="Start" data-onstyle="secondary" data-offstyle="light">
+					<input id="StopTimer" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-on="Continue" data-off="Stop" data-onstyle="light" data-offstyle="light" disabled>
+				</div>
+				<div id="StopWatchCol4" class="col-sm-2">
+					<input id="FadeTimer" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-on="Fade In" data-off="Fade Out" data-onstyle="light" data-offstyle="light">
+				</div>
+			</div>
+			<p>
+				<div class="row">
+					<div class="col">
+						<input id="switch_2" type="checkbox" data-toggle="toggle" data-width="300" data-size="lg" data-on="Running</br>Do not touch" data-off="Empty&nbsp;Sample</br><var>I<sub>0</sub></var>" data-onstyle="secondary" data-offstyle="light">
+					</div>
+					<div class="col">
+						<input id="switch_3" type="checkbox" data-toggle="toggle" data-width="300" data-size="lg" data-on="Running</br>Do not touch" data-off="Sample</br><var>I<sub>T</sub></var>" data-onstyle="secondary" data-offstyle="light">
+					</div>
+				</div>
+			</p>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="switch_4" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="outline-danger" data-offstyle="outline-danger" data-on="Red On" data-off="Red Off">
+				</div>
+				<div class="col">
+					<input id="switch_5" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="outline-success" data-offstyle="outline-success" data-on="Green On" data-off="Green Off">
+				</div>
+				<div class="col">
+					<input id="switch_6" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="outline-info" data-offstyle="outline-info" data-on="Blue On" data-off="Blue Off">
+				</div>
+				<div class="col">
+					<input id="switch_7" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="outline-dark" data-offstyle="outline-dark" data-on="IR On" data-off="IR Off">
+				</div>
+			</div>
+			</p>
+			<h4 class="mt-4 mb-4">Status</h4>
+			<table id="SensorTable"></table>
+
+			<h4 class="mt-4 mb-4">Readings</h4>
+			<div id="ReadingTableToolbar">
+				<button id="ReadingTableButtonReset" class="btn btn-secondary" style="width: 80px">Reset</button>
+			</div>
+			<table id="ReadingTable"></table>
+
+			<h4 class="mt-4 mb-4">Protocol</h4>
+			<div id="ProtocolTableToolbar">
+				<button id="ProtocolTableButtonReset" class="btn btn-secondary" style="width: 80px">Reset</button>
+			</div>
+			<table id="ProtocolTable"></table>
+
+			<h4 class="mt-4 mb-4">Logging</h4>
+			<div id="LogTableToolbar">
+				<button id="LogTableButtonBuild" class="btn btn-secondary" style="width: 80px">Enable</button>
+				<button id="LogTableButtonReset" class="btn btn-secondary" style="width: 80px">Reset</button>
+				<button id="LogTableButtonDestroy" class="btn btn-secondary" style="width: 80px">Disable</button>
+			</div>
+			<table id="LogTable"></table>
+			</br>
+			<footer id="sticky-footer" class="py-3 bg-primary text-white-50">
+				<div class="container text-center">
+					<a class="text-light" href="#" id="FooterRepository" target="_blank"></a> by
+					<a class="text-light" href="#" id="FooterOwner" target="_blank"></a>
+				</div>
+			</footer>
+		</div>
+	</body>
+</html>
