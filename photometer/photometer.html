@@ -154,7 +154,7 @@
 					var a,l,o=0;
 					isNaN(s)&&(s=1),null==e&&(e=1e3);
 					var n=setInterval(function(){
-						o>0?clearInterval(n):++s>1?o=1:(fetch("/json?view=sensorupdate").then(function(s){
+						o>0?clearInterval(n):++s>1?o=1:(fetch("./json?view=sensorupdate").then(function(s){
 							var o;200===s.status?s.json().then(function(s){
 								for(e=s.TTL,a=0;a<s.Sensors.length;a++)
 									if(s.Sensors[a].hasOwnProperty("TaskValues"))
@@ -218,7 +218,7 @@
 				$('#switch_2').change(function() {
 					if ($(this).prop('checked')===true) {
 						swaction = 1;
-						$.get('/control?cmd=GPIO,'+ReadingData[2]['GPIO']+',1');
+						$.get('./control?cmd=GPIO,'+ReadingData[2]['GPIO']+',1');
 						TimerSwitches('disable');
 						LedSwitches('disable');
 						ResetReadingData();
@@ -232,7 +232,7 @@
 				$('#switch_3').change(function() {
 					if ($(this).prop('checked')===true) {
 						swaction = 1;
-						$.get('/control?cmd=GPIO,'+ReadingData[3]['GPIO']+',1');
+						$.get('./control?cmd=GPIO,'+ReadingData[3]['GPIO']+',1');
 						TimerSwitches('disable');
 						LedSwitches('disable');
 						ResetTransmissionReadingData();
@@ -248,9 +248,9 @@
 				$('#switch_4').change(function() {
 					swaction = 1;
 					if ($(this).prop('checked')===true) {
-						$.get('/control?cmd=GPIO,'+ReadingData[4]['GPIO']+',1');
+						$.get('./control?cmd=GPIO,'+ReadingData[4]['GPIO']+',1');
 					} else {
-						$.get('/control?cmd=GPIO,'+ReadingData[4]['GPIO']+',0');
+						$.get('./control?cmd=GPIO,'+ReadingData[4]['GPIO']+',0');
 					}	
 				});
 				// Green LED
@@ -258,9 +258,9 @@
 					swaction = 1;
 					if ($(this).prop('checked')===true) {
 						swaction = 1;
-						$.get('/control?cmd=GPIO,'+ReadingData[5]['GPIO']+',1');
+						$.get('./control?cmd=GPIO,'+ReadingData[5]['GPIO']+',1');
 					} else {
-						$.get('/control?cmd=GPIO,'+ReadingData[5]['GPIO']+',0');
+						$.get('./control?cmd=GPIO,'+ReadingData[5]['GPIO']+',0');
 					}
 				});
 				// Blue LED
@@ -268,9 +268,9 @@
 					swaction = 1;
 					if ($(this).prop('checked')===true) {
 						swaction = 1;
-						$.get('/control?cmd=GPIO,'+ReadingData[6]['GPIO']+',1');
+						$.get('./control?cmd=GPIO,'+ReadingData[6]['GPIO']+',1');
 					} else {
-						$.get('/control?cmd=GPIO,'+ReadingData[6]['GPIO']+',0');
+						$.get('./control?cmd=GPIO,'+ReadingData[6]['GPIO']+',0');
 					}
 				});
 				// IR LED
@@ -278,9 +278,9 @@
 					swaction = 1;
 					if ($(this).prop('checked')===true) {
 						swaction = 1;
-						$.get('/control?cmd=GPIO,'+ReadingData[7]['GPIO']+',1');
+						$.get('./control?cmd=GPIO,'+ReadingData[7]['GPIO']+',1');
 					} else {
-						$.get('/control?cmd=GPIO,'+ReadingData[7]['GPIO']+',0');
+						$.get('./control?cmd=GPIO,'+ReadingData[7]['GPIO']+',0');
 					}
 				});
 				$('.StopWatch').TimeCircles({start: false,
