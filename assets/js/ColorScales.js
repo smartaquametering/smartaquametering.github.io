@@ -1,4 +1,8 @@
+// Dummy Color Index
+var None = {};
+
 // CIE-L*a*b* coordinates of Iodine Color Index
+// D65
 var IodineColorIndex = {
 'IodineColor-1': '100, -3, 6',
 'IodineColor-3': '100, -7, 18',
@@ -7,6 +11,11 @@ var IodineColorIndex = {
 'IodineColor-10': '100, -11, 59',
 'IodineColor-20': '100, -10, 72',
 'IodineColor-90': '100, 20, 103'
+};
+
+// CIE-L*a*b* coordinates of XXX Color Index
+// D65
+var XXXColorIndex = {
 };
 
 // CIE-L*a*b* coordinates of ColorChecker Patches (2005)

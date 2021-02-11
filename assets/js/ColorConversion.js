@@ -771,7 +771,7 @@ function GetRGBModel(SelectedRGBModel)
 //			RGBModel.Gamma = 2.2;
 //			break;
 //		case 3:	/* sRGB */
-//			RGBModel.Gamma = -2.2
+//			RGBModel.Gamma = -2.2;
 //			break;
 //		case 4: /* L* */
 //			RGBModel.Gamma = 0.0;
