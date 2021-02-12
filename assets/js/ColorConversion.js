@@ -847,12 +847,12 @@ function GetAdaptation(SelectedAdaptationMethod)
 function ChromaticAdaptationXYZ(XYZ)
 {
 	let res = {
-		X: XYZ.X,
-		Y: XYZ.Y,
-		Z: XYZ.Z,
 		Source: SourceWhite.Name,
 		Reference: RefWhite.Name,
-		Adaptation: AdaptationMethod
+		Adaptation: AdaptationMethod,
+		X: XYZ.X,
+		Y: XYZ.Y,
+		Z: XYZ.Z
 	}
 
 	if (SelectedAdaptationMethod != 3)
