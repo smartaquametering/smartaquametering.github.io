@@ -849,7 +849,10 @@ function ChromaticAdaptationXYZ(XYZ)
 	let res = {
 		X: XYZ.X,
 		Y: XYZ.Y,
-		Z: XYZ.Z
+		Z: XYZ.Z,
+		Source: SourceWhite.Name,
+		Reference: RefWhite.Name,
+		Adaptation: AdaptationMethod
 	}
 
 	if (SelectedAdaptationMethod != 3)
