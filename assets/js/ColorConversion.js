@@ -47,6 +47,7 @@ var kE = 216.0 / 24389.0;
 var kK = 24389.0 / 27.0;
 var kKE = 8.0;
 
+var SourceWhite = {};
 var RefWhite = {};
 var RGBModel = {};
 
@@ -135,6 +136,11 @@ function MtxTranspose3x3(m)
 
 function GetRefWhite(SelectedRefWhite)
 {
+	var x = 'SourceWhite';
+	 window[x].X = 10;
+	
+	console.log('SourceWhite: '+SourceWhite.X);
+	
 	RefWhite.Y = 1.0;
 	switch (SelectedRefWhite)
 	{
@@ -492,7 +498,7 @@ function GetRGBModel(SelectedRGBModel)
 
 	switch (SelectedRGBModel)
 	{
-		case 0:	/* Adobe RGB (1998) */
+		case 0:
 			RGBModel.xr = 0.64;
 			RGBModel.yr = 0.33;
 			RGBModel.xg = 0.21;
@@ -507,7 +513,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  2.2;
 			RGBModel.GammaIndex = 2;
 			break;
-		case 1:	/* AppleRGB */
+		case 1:
 			RGBModel.xr = 0.625;
 			RGBModel.yr = 0.340;
 			RGBModel.xg = 0.280;
@@ -522,7 +528,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  1.8;
 			RGBModel.GammaIndex = 1;
 			break;
-		case 2:	/* Best RGB */
+		case 2:
 			RGBModel.xr = 0.7347;
 			RGBModel.yr = 0.2653;
 			RGBModel.xg = 0.2150;
@@ -537,7 +543,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  2.2;
 			RGBModel.GammaIndex = 2;
 			break;
-		case 3:	/* Beta RGB */
+		case 3:
 			RGBModel.xr = 0.6888;
 			RGBModel.yr = 0.3112;
 			RGBModel.xg = 0.1986;
@@ -552,7 +558,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  2.2;
 			RGBModel.GammaIndex = 2;
 			break;
-		case 4:	/* Bruce RGB */
+		case 4:
 			RGBModel.xr = 0.64;
 			RGBModel.yr = 0.33;
 			RGBModel.xg = 0.28;
@@ -567,7 +573,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  2.2;
 			RGBModel.GammaIndex = 2;
 			break;
-		case 5:	/* CIE RGB */
+		case 5:
 			RGBModel.xr = 0.735;
 			RGBModel.yr = 0.265;
 			RGBModel.xg = 0.274;
@@ -582,7 +588,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  2.2;
 			RGBModel.GammaIndex = 2;
 			break;
-		case 6:	/* ColorMatch RGB */
+		case 6:
 			RGBModel.xr = 0.630;
 			RGBModel.yr = 0.340;
 			RGBModel.xg = 0.295;
@@ -597,7 +603,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  1.8;
 			RGBModel.GammaIndex = 1;
 			break;
-		case 7:	/* Don RGB 4 */
+		case 7:
 			RGBModel.xr = 0.696;
 			RGBModel.yr = 0.300;
 			RGBModel.xg = 0.215;
@@ -612,7 +618,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  2.2;
 			RGBModel.GammaIndex = 2;
 			break;
-		case 8:	/* ECI RGB v2 */
+		case 8:
 			RGBModel.xr = 0.67;
 			RGBModel.yr = 0.33;
 			RGBModel.xg = 0.21;
@@ -627,7 +633,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  0.0;
 			RGBModel.GammaIndex = 4;
 			break;
-		case 9:	/* Ekta Space PS5 */
+		case 9:
 			RGBModel.xr = 0.695;
 			RGBModel.yr = 0.305;
 			RGBModel.xg = 0.260;
@@ -642,7 +648,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  2.2;
 			RGBModel.GammaIndex = 2;
 			break;
-		case 10:	/* NTSC RGB */
+		case 10:
 			RGBModel.xr = 0.67;
 			RGBModel.yr = 0.33;
 			RGBModel.xg = 0.21;
@@ -657,7 +663,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  2.2;
 			RGBModel.GammaIndex = 2;
 			break;
-		case 11:	/* PAL/SECAM RGB */
+		case 11:
 			RGBModel.xr = 0.64;
 			RGBModel.yr = 0.33;
 			RGBModel.xg = 0.29;
@@ -672,7 +678,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  2.2;
 			RGBModel.GammaIndex = 2;
 			break;
-		case 12:	/* ProPhoto RGB */
+		case 12:
 			RGBModel.xr = 0.7347;
 			RGBModel.yr = 0.2653;
 			RGBModel.xg = 0.1596;
@@ -687,7 +693,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  1.8;
 			RGBModel.GammaIndex = 1;
 			break;
-		case 13:	/* SMPTE-C RGB */
+		case 13:
 			RGBModel.xr = 0.630;
 			RGBModel.yr = 0.340;
 			RGBModel.xg = 0.310;
@@ -702,7 +708,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma =  2.2;
 			RGBModel.GammaIndex = 2;
 			break;
-		case 14:	/* sRGB */
+		case 14:
 			RGBModel.xr = 0.64;
 			RGBModel.yr = 0.33;
 			RGBModel.xg = 0.30;
@@ -717,7 +723,7 @@ function GetRGBModel(SelectedRGBModel)
 			RGBModel.Gamma = -2.2;
 			RGBModel.GammaIndex = 3;
 			break;
-		case 15:	/* Wide Gamut RGB */
+		case 15:
 			RGBModel.xr = 0.735;
 			RGBModel.yr = 0.265;
 			RGBModel.xg = 0.115;
