@@ -50,6 +50,7 @@ var kKE = 8.0;
 var SourceWhite = {};
 var RefWhite = {};
 var RGBModel = {};
+var AdaptationMethod;
 
 var MtxRGB2XYZ = {m00:1.0, m01:0.0, m02:0.0, m10:0.0, m11:1.0, m12:0.0, m20:0.0, m21:0.0, m22:1.0};
 var MtxXYZ2RGB = {m00:1.0, m01:0.0, m02:0.0, m10:0.0, m11:1.0, m12:0.0, m20:0.0, m21:0.0, m22:1.0};
@@ -798,6 +799,7 @@ function GetAdaptation(SelectedAdaptationMethod)
 
 			MtxInvert3x3(MtxAdaptMa, MtxAdaptMaI);
 
+			AdaptationMethod = "Bradford";
 			RGBModel.AdaptationMethod = "Bradford";
 			break;
 		case 1:	/* von Kries */
@@ -813,6 +815,7 @@ function GetAdaptation(SelectedAdaptationMethod)
 
 			MtxInvert3x3(MtxAdaptMa, MtxAdaptMaI);
 
+			AdaptationMethod = "von Kries";
 			RGBModel.AdaptationMethod = "von Kries";
 			break;
 		case 2:	/* XYZ Scaling */
@@ -837,6 +840,7 @@ function GetAdaptation(SelectedAdaptationMethod)
 			MtxAdaptMaI.m21 = 0.0;
 			MtxAdaptMaI.m22 = 1.0;
 
+			AdaptationMethod = "XYZ Scaling / None";
 			RGBModel.AdaptationMethod = "XYZ Scaling / None";
 			break;
 	}
