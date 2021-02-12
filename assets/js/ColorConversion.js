@@ -34,6 +34,7 @@
 //
 // Functions by smartAquaMetering
 // - function RGB2Hex({R, G, B})
+// - function ChromaticAdaptationXYZ(XYZ)
 // - function XYZ2HunterLab(XYZ)
 // - function XYZ2CCT_McCamy(XYZ)
 // smartColorimeter - Copyright © 2020-2021 by smartAquaMetering. All Rights Reserved. Licensed under GNU GPL v3 or higher..
@@ -841,6 +842,40 @@ function GetAdaptation(SelectedAdaptationMethod)
 			AdaptationMethod = "XYZ Scaling / None";
 			break;
 	}
+}
+
+function ChromaticAdaptationXYZ(XYZ)
+{
+	let res = {
+		X: XYZ.X,
+		Y: XYZ.Y,
+		Z: XYZ.Z
+	}
+
+	if (SelectedAdaptationMethod != 3)
+	{
+		var As = SourceWhite.X * MtxAdaptMa.m00 + SourceWhite.Y * MtxAdaptMa.m10 + SourceWhite.Z * MtxAdaptMa.m20;
+		var Bs = SourceWhite.X * MtxAdaptMa.m01 + SourceWhite.Y * MtxAdaptMa.m11 + SourceWhite.Z * MtxAdaptMa.m21;
+		var Cs = SourceWhite.X * MtxAdaptMa.m02 + SourceWhite.Y * MtxAdaptMa.m12 + SourceWhite.Z * MtxAdaptMa.m22;
+
+		var Ad = RefWhite.X * MtxAdaptMa.m00 + RefWhite.Y * MtxAdaptMa.m10 + RefWhite.Z * MtxAdaptMa.m20;
+		var Bd = RefWhite.X * MtxAdaptMa.m01 + RefWhite.Y * MtxAdaptMa.m11 + RefWhite.Z * MtxAdaptMa.m21;
+		var Cd = RefWhite.X * MtxAdaptMa.m02 + RefWhite.Y * MtxAdaptMa.m12 + RefWhite.Z * MtxAdaptMa.m22;
+
+		var X1 = XYZ.X * MtxAdaptMa.m00 + XYZ.Y * MtxAdaptMa.m10 + XYZ.Z * MtxAdaptMa.m20;
+		var Y1 = XYZ.X * MtxAdaptMa.m01 + XYZ.Y * MtxAdaptMa.m11 + XYZ.Z * MtxAdaptMa.m21;
+		var Z1 = XYZ.X * MtxAdaptMa.m02 + XYZ.Y * MtxAdaptMa.m12 + XYZ.Z * MtxAdaptMa.m22;
+
+		X1 *= (Ad / As);
+		Y1 *= (Bd / Bs);
+		Z1 *= (Cd / Cs);
+
+		res.X = X1 * MtxAdaptMaI.m00 + Y1 * MtxAdaptMaI.m10 + Z1 * MtxAdaptMaI.m20;
+		res.Y = X1 * MtxAdaptMaI.m01 + Y1 * MtxAdaptMaI.m11 + Z1 * MtxAdaptMaI.m21;
+		res.Z = X1 * MtxAdaptMaI.m02 + Y1 * MtxAdaptMaI.m12 + Z1 * MtxAdaptMaI.m22;
+	}
+
+	return(res);
 }
 
 function CheckXYZ(XYZ)
