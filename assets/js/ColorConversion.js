@@ -134,362 +134,357 @@ function MtxTranspose3x3(m)
 	m.m21 = v;
 }
 
-function GetRefWhite(SelectedRefWhite)
+function GetRefWhite(SelectedRefWhite, White)
 {
-	var x = 'SourceWhite';
-	window[x].X = 10;
-	
-	console.log(SourceWhite.X);
-	
-	RefWhite.Y = 1.0;
+	window[White].Y = 1.0;
 	switch (SelectedRefWhite)
 	{
 		case 0:		// A (ASTM E308-01)
-			RefWhite.X = 1.09850;
-			RefWhite.Z = 0.35585;
-			RefWhite.x = 0.44757;
-			RefWhite.y = 0.40745;
-			RefWhite.Name = "A/2°";
+			window[White].X = 1.09850;
+			window[White].Z = 0.35585;
+			window[White].x = 0.44757;
+			window[White].y = 0.40745;
+			window[White].Name = "A/2°";
 			break;
 		case 1:		// B (Wyszecki & Stiles, p. 769)
-			RefWhite.X = 0.99072;
-			RefWhite.Z = 0.85223;
-			RefWhite.x = 0.34842;
-			RefWhite.y = 0.35161;
-			RefWhite.Name = "B/2°";
+			window[White].X = 0.99072;
+			window[White].Z = 0.85223;
+			window[White].x = 0.34842;
+			window[White].y = 0.35161;
+			window[White].Name = "B/2°";
 			break;
 		case 2:		// C (ASTM E308-01)
-			RefWhite.X = 0.98074;
-			RefWhite.Z = 1.18232;
-			RefWhite.x = 0.31006;
-			RefWhite.y = 0.31616;
-			RefWhite.Name = "C/2°";
+			window[White].X = 0.98074;
+			window[White].Z = 1.18232;
+			window[White].x = 0.31006;
+			window[White].y = 0.31616;
+			window[White].Name = "C/2°";
 			break;
 		case 3:		// D50 (ASTM E308-01)
-			RefWhite.X = 0.96422;
-			RefWhite.Z = 0.82521;
-			RefWhite.x = 0.34567;
-			RefWhite.y = 0.35850;
-			RefWhite.Name = "D50/2°";
+			window[White].X = 0.96422;
+			window[White].Z = 0.82521;
+			window[White].x = 0.34567;
+			window[White].y = 0.35850;
+			window[White].Name = "D50/2°";
 			break;
 		case 4:		// D55 (ASTM E308-01)
-			RefWhite.X = 0.95682;
-			RefWhite.Z = 0.92149;
-			RefWhite.x = 0.33242;
-			RefWhite.y = 0.34743;
-			RefWhite.Name = "D55/2°";
+			window[White].X = 0.95682;
+			window[White].Z = 0.92149;
+			window[White].x = 0.33242;
+			window[White].y = 0.34743;
+			window[White].Name = "D55/2°";
 			break;
 		case 5:		// D65 (ASTM E308-01)
-			RefWhite.X = 0.95047;
-			RefWhite.Z = 1.08883;
-			RefWhite.x = 0.31273;
-			RefWhite.y = 0.32902;
-			RefWhite.Name = "D65/2°";
+			window[White].X = 0.95047;
+			window[White].Z = 1.08883;
+			window[White].x = 0.31273;
+			window[White].y = 0.32902;
+			window[White].Name = "D65/2°";
 			break;
 		case 6:		// D75 (ASTM E308-01)
-			RefWhite.X = 0.94972;
-			RefWhite.Z = 1.22638;
-			RefWhite.x = 0.29902;
-			RefWhite.y = 0.31485;
-			RefWhite.Name = "D75/2°";
+			window[White].X = 0.94972;
+			window[White].Z = 1.22638;
+			window[White].x = 0.29902;
+			window[White].y = 0.31485;
+			window[White].Name = "D75/2°";
 			break;
 		case 7:		// E (ASTM E308-01)
-			RefWhite.X = 1.00000;
-			RefWhite.Z = 1.00000;
-			RefWhite.x = 0.33333;
-			RefWhite.y = 0.33333;
-			RefWhite.Name = "E/2°";
+			window[White].X = 1.00000;
+			window[White].Z = 1.00000;
+			window[White].x = 0.33333;
+			window[White].y = 0.33333;
+			window[White].Name = "E/2°";
 			break;
 		case 8:		// F1 (EasyRGB)
-			RefWhite.X = 0.92834;
-			RefWhite.Z = 1.03665;
-			RefWhite.x = 0.31310;
-			RefWhite.y = 0.33727;
-			RefWhite.Name = "F1/2°";
+			window[White].X = 0.92834;
+			window[White].Z = 1.03665;
+			window[White].x = 0.31310;
+			window[White].y = 0.33727;
+			window[White].Name = "F1/2°";
 			break;
 		case 9:		// F2 (ASTM E308-01)
-			RefWhite.X = 0.99186;
-			RefWhite.Z = 0.67393;
-			RefWhite.x = 0.37207;
-			RefWhite.y = 0.37512;
-			RefWhite.Name = "F2/2°";
+			window[White].X = 0.99186;
+			window[White].Z = 0.67393;
+			window[White].x = 0.37207;
+			window[White].y = 0.37512;
+			window[White].Name = "F2/2°";
 			break;
 		case 10:	// F3 (EasyRGB)
-			RefWhite.X = 1.03754;
-			RefWhite.Z = 0.49861;
-			RefWhite.x = 0.40910;
-			RefWhite.y = 0.39430;
-			RefWhite.Name = "F3/2°";
+			window[White].X = 1.03754;
+			window[White].Z = 0.49861;
+			window[White].x = 0.40910;
+			window[White].y = 0.39430;
+			window[White].Name = "F3/2°";
 			break;
 		case 11:	// F4 (EasyRGB)
-			RefWhite.X = 1.09147;
-			RefWhite.Z = 0.38813;
-			RefWhite.x = 0.44018;
-			RefWhite.y = 0.40329;
-			RefWhite.Name = "F4/2°";
+			window[White].X = 1.09147;
+			window[White].Z = 0.38813;
+			window[White].x = 0.44018;
+			window[White].y = 0.40329;
+			window[White].Name = "F4/2°";
 			break;
 		case 12:	// F5 (EasyRGB)
-			RefWhite.X = 0.90872;
-			RefWhite.Z = 0.98723;
-			RefWhite.x = 0.31379;
-			RefWhite.y = 0.34531;
-			RefWhite.Name = "F5/2°";
+			window[White].X = 0.90872;
+			window[White].Z = 0.98723;
+			window[White].x = 0.31379;
+			window[White].y = 0.34531;
+			window[White].Name = "F5/2°";
 			break;
 		case 13:	// F6 (EasyRGB)
-			RefWhite.X = 0.97309;
-			RefWhite.Z = 0.60191;
-			RefWhite.x = 0.37790;
-			RefWhite.y = 0.38835;
-			RefWhite.Name = "F6/2°";
+			window[White].X = 0.97309;
+			window[White].Z = 0.60191;
+			window[White].x = 0.37790;
+			window[White].y = 0.38835;
+			window[White].Name = "F6/2°";
 			break;
 		case 14:	// F7 (ASTM E308-01)
-			RefWhite.X = 0.95041;
-			RefWhite.Z = 1.08747;
-			RefWhite.x = 0.31285;
-			RefWhite.y = 0.32918;
-			RefWhite.Name = "F7/2°";
+			window[White].X = 0.95041;
+			window[White].Z = 1.08747;
+			window[White].x = 0.31285;
+			window[White].y = 0.32918;
+			window[White].Name = "F7/2°";
 			break;
 		case 15:	// F8 (EasyRGB)
-			RefWhite.X = 0.96413;
-			RefWhite.Z = 0.82333;
-			RefWhite.x = 0.34588;
-			RefWhite.y = 0.35875;
-			RefWhite.Name = "F8/2°";
+			window[White].X = 0.96413;
+			window[White].Z = 0.82333;
+			window[White].x = 0.34588;
+			window[White].y = 0.35875;
+			window[White].Name = "F8/2°";
 			break;
 		case 16:	// F9 (EasyRGB)
-			RefWhite.X = 1.00365;
-			RefWhite.Z = 0.67868;
-			RefWhite.x = 0.37417;
-			RefWhite.y = 0.37281;
-			RefWhite.Name = "F9/2°";
+			window[White].X = 1.00365;
+			window[White].Z = 0.67868;
+			window[White].x = 0.37417;
+			window[White].y = 0.37281;
+			window[White].Name = "F9/2°";
 			break;
 		case 17:	// F10 (EasyRGB)
-			RefWhite.X = 0.96174;
-			RefWhite.Z = 0.81712;
-			RefWhite.x = 0.34609;
-			RefWhite.y = 0.35986;
-			RefWhite.Name = "F10/2°";
+			window[White].X = 0.96174;
+			window[White].Z = 0.81712;
+			window[White].x = 0.34609;
+			window[White].y = 0.35986;
+			window[White].Name = "F10/2°";
 			break;
 		case 18:	// F11 (ASTM E308-01)
-			RefWhite.X = 1.00962;
-			RefWhite.Z = 0.64350;
-			RefWhite.x = 0.38054;
-			RefWhite.y = 0.37691;
-			RefWhite.Name = "F11/2°";
+			window[White].X = 1.00962;
+			window[White].Z = 0.64350;
+			window[White].x = 0.38054;
+			window[White].y = 0.37691;
+			window[White].Name = "F11/2°";
 			break;
 		case 19:	// F12 (EasyRGB)
-			RefWhite.X = 1.08046;
-			RefWhite.Z = 0.39228;
-			RefWhite.x = 0.43695;
-			RefWhite.y = 0.40441;
-			RefWhite.Name = "F12/2°";
+			window[White].X = 1.08046;
+			window[White].Z = 0.39228;
+			window[White].x = 0.43695;
+			window[White].y = 0.40441;
+			window[White].Name = "F12/2°";
 			break;
 		case 20:	// LED-B1 (https://en.wikipedia.org/wiki/Standard_illuminant)
-			RefWhite.X = 1.118195;
-			RefWhite.Z = 0.333987;
-			RefWhite.x = 0.4560;
-			RefWhite.y = 0.4078;
-			RefWhite.Name = "LED-B1/2°";
+			window[White].X = 1.118195;
+			window[White].Z = 0.333987;
+			window[White].x = 0.4560;
+			window[White].y = 0.4078;
+			window[White].Name = "LED-B1/2°";
 			break;
 		case 21:	// LED-B2 (https://en.wikipedia.org/wiki/Standard_illuminant)
-			RefWhite.X = 1.085992;
-			RefWhite.Z = 0.406530;
-			RefWhite.x = 0.4357;
-			RefWhite.y = 0.4012;
-			RefWhite.Name = "LED-B2/2°";
+			window[White].X = 1.085992;
+			window[White].Z = 0.406530;
+			window[White].x = 0.4357;
+			window[White].y = 0.4012;
+			window[White].Name = "LED-B2/2°";
 			break;
 		case 22:	// LED-B3 (https://en.wikipedia.org/wiki/Standard_illuminant)
-			RefWhite.X = 1.008864;
-			RefWhite.Z = 0.677142;
-			RefWhite.x = 0.3756;
-			RefWhite.y = 0.3723;
-			RefWhite.Name = "LED-B3/2°";
+			window[White].X = 1.008864;
+			window[White].Z = 0.677142;
+			window[White].x = 0.3756;
+			window[White].y = 0.3723;
+			window[White].Name = "LED-B3/2°";
 			break;
 		case 23:	// LED-B4 (https://en.wikipedia.org/wiki/Standard_illuminant)
-			RefWhite.X = 0.977156;
-			RefWhite.Z = 0.878355;
-			RefWhite.x = 0.3422;
-			RefWhite.y = 0.3502;
-			RefWhite.Name = "LED-B4/2°";
+			window[White].X = 0.977156;
+			window[White].Z = 0.878355;
+			window[White].x = 0.3422;
+			window[White].y = 0.3502;
+			window[White].Name = "LED-B4/2°";
 			break;
 		case 24:	// LED-B5 (https://en.wikipedia.org/wiki/Standard_illuminant)
-			RefWhite.X = 0.963535;
-			RefWhite.Z = 1.126700;
-			RefWhite.x = 0.3118;
-			RefWhite.y = 0.3236;
-			RefWhite.Name = "LED-B5/2°";
+			window[White].X = 0.963535;
+			window[White].Z = 1.126700;
+			window[White].x = 0.3118;
+			window[White].y = 0.3236;
+			window[White].Name = "LED-B5/2°";
 			break;
 		case 25:	// LED-BH1 (https://en.wikipedia.org/wiki/Standard_illuminant)
-			RefWhite.X = 1.100344;
-			RefWhite.Z = 0.359075;
-			RefWhite.x = 0.4474;
-			RefWhite.y = 0.4066;
-			RefWhite.Name = "LED-BH1/2°";
+			window[White].X = 1.100344;
+			window[White].Z = 0.359075;
+			window[White].x = 0.4474;
+			window[White].y = 0.4066;
+			window[White].Name = "LED-BH1/2°";
 			break;
 		case 26:	// LED-RGB1 (https://en.wikipedia.org/wiki/Standard_illuminant)
-			RefWhite.X = 1.082166;
-			RefWhite.Z = 0.292567;
-			RefWhite.x = 0.4557;
-			RefWhite.y = 0.4211;
-			RefWhite.Name = "LED-RGB1/2°";
+			window[White].X = 1.082166;
+			window[White].Z = 0.292567;
+			window[White].x = 0.4557;
+			window[White].y = 0.4211;
+			window[White].Name = "LED-RGB1/2°";
 			break;
 		case 27:	// LED-V1 (https://en.wikipedia.org/wiki/Standard_illuminant)
-			RefWhite.X = 1.002639;
-			RefWhite.Z = 0.196130;
-			RefWhite.x = 0.4560;
-			RefWhite.y = 0.4548;
-			RefWhite.Name = "LED-V1/2°";
+			window[White].X = 1.002639;
+			window[White].Z = 0.196130;
+			window[White].x = 0.4560;
+			window[White].y = 0.4548;
+			window[White].Name = "LED-V1/2°";
 			break;
 		case 28:	// LED-V2 (https://en.wikipedia.org/wiki/Standard_illuminant)
-			RefWhite.X = 1.001589;
-			RefWhite.Z = 0.647417;
-			RefWhite.x = 0.3781;
-			RefWhite.y = 0.3775;
-			RefWhite.Name = "LED-V2/2°";
+			window[White].X = 1.001589;
+			window[White].Z = 0.647417;
+			window[White].x = 0.3781;
+			window[White].y = 0.3775;
+			window[White].Name = "LED-V2/2°";
 			break;
 
 		case 30:		// A (EasyRGB)
-			RefWhite.X = 1.11144;
-			RefWhite.Z = 0.35200;
-			RefWhite.x = 0.45117;
-			RefWhite.y = 0.40594;
-			RefWhite.Name = "A/10°";
+			window[White].X = 1.11144;
+			window[White].Z = 0.35200;
+			window[White].x = 0.45117;
+			window[White].y = 0.40594;
+			window[White].Name = "A/10°";
 			break;
 		case 31:		// B (EasyRGB)
-			RefWhite.X = 0.991778;
-			RefWhite.Z = 0.843493;
-			RefWhite.x = 0.34980;
-			RefWhite.y = 0.35270;
-			RefWhite.Name = "B/10°";
+			window[White].X = 0.991778;
+			window[White].Z = 0.843493;
+			window[White].x = 0.34980;
+			window[White].y = 0.35270;
+			window[White].Name = "B/10°";
 			break;
 		case 32:		// C (EasyRGB)
-			RefWhite.X = 0.97285;
-			RefWhite.Z = 1.16145;
-			RefWhite.x = 0.31039;
-			RefWhite.y = 0.31905;
-			RefWhite.Name = "C/10°";
+			window[White].X = 0.97285;
+			window[White].Z = 1.16145;
+			window[White].x = 0.31039;
+			window[White].y = 0.31905;
+			window[White].Name = "C/10°";
 			break;
 		case 33:		// D50 (EasyRGB)
-			RefWhite.X = 0.96720;
-			RefWhite.Z = 0.81427;
-			RefWhite.x = 0.34773;
-			RefWhite.y = 0.35952;
-			RefWhite.Name = "D50/10°";
+			window[White].X = 0.96720;
+			window[White].Z = 0.81427;
+			window[White].x = 0.34773;
+			window[White].y = 0.35952;
+			window[White].Name = "D50/10°";
 			break;
 		case 34:		// D55 (EasyRGB)
-			RefWhite.X = 0.95799;
-			RefWhite.Z = 0.90926;
-			RefWhite.x = 0.33411;
-			RefWhite.y = 0.34877;
-			RefWhite.Name = "D55/10°";
+			window[White].X = 0.95799;
+			window[White].Z = 0.90926;
+			window[White].x = 0.33411;
+			window[White].y = 0.34877;
+			window[White].Name = "D55/10°";
 			break;
 		case 35:		// D65 (EasyRGB)
-			RefWhite.X = 0.94811;
-			RefWhite.Z = 1.07304;
-			RefWhite.x = 0.31382;
-			RefWhite.y = 0.33100;
-			RefWhite.Name = "D65/10°";
+			window[White].X = 0.94811;
+			window[White].Z = 1.07304;
+			window[White].x = 0.31382;
+			window[White].y = 0.33100;
+			window[White].Name = "D65/10°";
 			break;
 		case 36:		// D75 (EasyRGB)
-			RefWhite.X = 0.94416;
-			RefWhite.Z = 1.20641;
-			RefWhite.x = 0.29968;
-			RefWhite.y = 0.31740;
-			RefWhite.Name = "D75/10°";
+			window[White].X = 0.94416;
+			window[White].Z = 1.20641;
+			window[White].x = 0.29968;
+			window[White].y = 0.31740;
+			window[White].Name = "D75/10°";
 			break;
 		case 37:		// E (EasyRGB)
-			RefWhite.X = 1.00000;
-			RefWhite.Z = 1.00000;
-			RefWhite.x = 0.33333;
-			RefWhite.y = 0.33333;
-			RefWhite.Name = "E/10°";
+			window[White].X = 1.00000;
+			window[White].Z = 1.00000;
+			window[White].x = 0.33333;
+			window[White].y = 0.33333;
+			window[White].Name = "E/10°";
 			break;
 		case 38:		// F1 (EasyRGB)
-			RefWhite.X = 0.94791;
-			RefWhite.Z = 1.03191;
-			RefWhite.x = 0.31811;
-			RefWhite.y = 0.33559;
-			RefWhite.Name = "F1/10°";
+			window[White].X = 0.94791;
+			window[White].Z = 1.03191;
+			window[White].x = 0.31811;
+			window[White].y = 0.33559;
+			window[White].Name = "F1/10°";
 			break;
 		case 39:		// F2 (EasyRGB)
-			RefWhite.X = 1.03280;
-			RefWhite.Z = 0.69026;
-			RefWhite.x = 0.37928;
-			RefWhite.y = 0.36723;
-			RefWhite.Name = "F2/10°";
+			window[White].X = 1.03280;
+			window[White].Z = 0.69026;
+			window[White].x = 0.37928;
+			window[White].y = 0.36723;
+			window[White].Name = "F2/10°";
 			break;
 		case 40:	// F3 (EasyRGB)
-			RefWhite.X = 1.08968;
-			RefWhite.Z = 0.51965;
-			RefWhite.x = 0.41761;
-			RefWhite.y = 0.38324;
-			RefWhite.Name = "F3/10°";
+			window[White].X = 1.08968;
+			window[White].Z = 0.51965;
+			window[White].x = 0.41761;
+			window[White].y = 0.38324;
+			window[White].Name = "F3/10°";
 			break;
 		case 41:	// F4 (EasyRGB)
-			RefWhite.X = 1.14961;
-			RefWhite.Z = 0.40963;
-			RefWhite.x = 0.44920;
-			RefWhite.y = 0.39074;
-			RefWhite.Name = "F4/10°";
+			window[White].X = 1.14961;
+			window[White].Z = 0.40963;
+			window[White].x = 0.44920;
+			window[White].y = 0.39074;
+			window[White].Name = "F4/10°";
 			break;
 		case 42:	// F5 (EasyRGB)
-			RefWhite.X = 0.93369;
-			RefWhite.Z = 0.98636;
-			RefWhite.x = 0.31975;
-			RefWhite.y = 0.34246;
-			RefWhite.Name = "F5/10°";
+			window[White].X = 0.93369;
+			window[White].Z = 0.98636;
+			window[White].x = 0.31975;
+			window[White].y = 0.34246;
+			window[White].Name = "F5/10°";
 			break;
 		case 43:	// F6 (EasyRGB)
-			RefWhite.X = 1.02148;
-			RefWhite.Z = 0.62074;
-			RefWhite.x = 0.38660;
-			RefWhite.y = 0.37847;
-			RefWhite.Name = "F6/10°";
+			window[White].X = 1.02148;
+			window[White].Z = 0.62074;
+			window[White].x = 0.38660;
+			window[White].y = 0.37847;
+			window[White].Name = "F6/10°";
 			break;
 		case 44:	// F7 (EasyRGB)
-			RefWhite.X = 0.95792;
-			RefWhite.Z = 1.07687;
-			RefWhite.x = 0.31565;
-			RefWhite.y = 0.32951;
-			RefWhite.Name = "F7/10°";
+			window[White].X = 0.95792;
+			window[White].Z = 1.07687;
+			window[White].x = 0.31565;
+			window[White].y = 0.32951;
+			window[White].Name = "F7/10°";
 			break;
 		case 45:	// F8 (EasyRGB)
-			RefWhite.X = 0.97115;
-			RefWhite.Z = 0.81135;
-			RefWhite.x = 0.34902;
-			RefWhite.y = 0.35939;
-			RefWhite.Name = "F8/10°";
+			window[White].X = 0.97115;
+			window[White].Z = 0.81135;
+			window[White].x = 0.34902;
+			window[White].y = 0.35939;
+			window[White].Name = "F8/10°";
 			break;
 		case 46:	// F9 (EasyRGB)
-			RefWhite.X = 1.02116;
-			RefWhite.Z = 0.67826;
-			RefWhite.x = 0.37829;
-			RefWhite.y = 0.37045;
-			RefWhite.Name = "F9/10°";
+			window[White].X = 1.02116;
+			window[White].Z = 0.67826;
+			window[White].x = 0.37829;
+			window[White].y = 0.37045;
+			window[White].Name = "F9/10°";
 			break;
 		case 47:	// F10 (EasyRGB)
-			RefWhite.X = 0.99001;
-			RefWhite.Z = 0.83134;
-			RefWhite.x = 0.35090;
-			RefWhite.y = 0.35444;
-			RefWhite.Name = "F10/10°";
+			window[White].X = 0.99001;
+			window[White].Z = 0.83134;
+			window[White].x = 0.35090;
+			window[White].y = 0.35444;
+			window[White].Name = "F10/10°";
 			break;
 		case 48:	// F11 (EasyRGB)
-			RefWhite.X = 1.03866;
-			RefWhite.Z = 0.65627;
-			RefWhite.x = 0.38541;
-			RefWhite.y = 0.37107;
-			RefWhite.Name = "F11/10°";
+			window[White].X = 1.03866;
+			window[White].Z = 0.65627;
+			window[White].x = 0.38541;
+			window[White].y = 0.37107;
+			window[White].Name = "F11/10°";
 			break;
 		case 49:	// F12 (EasyRGB)
-			RefWhite.X = 1.11428;
-			RefWhite.Z = 0.40353;
-			RefWhite.x = 0.44256;
-			RefWhite.y = 0.39717;
-			RefWhite.Name = "F12/10°";
+			window[White].X = 1.11428;
+			window[White].Z = 0.40353;
+			window[White].x = 0.44256;
+			window[White].y = 0.39717;
+			window[White].Name = "F12/10°";
 			break;
 	}
-	return(RefWhite);
+	return(window[White]);
 }
 
 function GetRGBModel(SelectedRGBModel)
