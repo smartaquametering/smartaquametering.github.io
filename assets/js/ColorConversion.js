@@ -887,6 +887,7 @@ function XYZ2RGB(XYZ)
 	RGB.B = Compand(X2 * MtxXYZ2RGB.m02 + Y2 * MtxXYZ2RGB.m12 + Z2 * MtxXYZ2RGB.m22);
 
 	RGB.Model = RGBModel.Name;
+	RGB.Source = SourceWhite;
 	RGB.Reference = RGBModel.Reference;
 	RGB.Adaptation = RGBModel.AdaptationMethod;
 	RGB.Gamma = RGBModel.Gamma;
@@ -1031,6 +1032,7 @@ function XYZ2xyY(XYZ)
 		xyY.y = RefWhite.Y / (RefWhite.X + RefWhite.Y + RefWhite.Z);
 	}
 	xyY.Y = XYZ.Y;
+	xyY.Source = SourceWhite;
 	xyY.Reference = RefWhite.Name;
 	return(xyY);
 }
@@ -1053,6 +1055,7 @@ function XYZ2Lab(XYZ)
 	Lab.b = (200.0 * (fy - fz)).toFixed(4);
 
 	Lab.L = (Lab.L < 0.0) ? 0.0 : (Lab.L > 100.0) ? 100.0 : Lab.L;
+	Lab.Source = SourceWhite;
 	Lab.Reference = RefWhite.Name;
 	return(Lab);
 }
@@ -1080,6 +1083,7 @@ function XYZ2Luv(XYZ)
 	Luv.L = Luv.L.toFixed(4);
 	Luv.u = Luv.u.toFixed(4);
 	Luv.v = Luv.v.toFixed(4);
+	Luv.Source = SourceWhite;
 	Luv.Reference = RefWhite.Name;
 	return(Luv);
 }
@@ -1140,7 +1144,7 @@ function Luv2LCHuv(Luv)
 		LCHuv.H -= 360.0;
 	}
 
-	RefWhite.L = LCHuv.L.toFixed(4);
+	LCHuv.L = LCHuv.L.toFixed(4);
 	LCHuv.C = LCHuv.C.toFixed(4);
 	LCHuv.H = LCHuv.H.toFixed(4);
 	return(LCHuv);
