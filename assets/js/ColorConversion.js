@@ -137,9 +137,9 @@ function MtxTranspose3x3(m)
 function GetRefWhite(SelectedRefWhite)
 {
 	var x = 'SourceWhite';
-	 window[x].X = 10;
+	window[x].X = 10;
 	
-	console.log('SourceWhite: '+SourceWhite.X);
+	console.log(SourceWhite.X);
 	
 	RefWhite.Y = 1.0;
 	switch (SelectedRefWhite)
