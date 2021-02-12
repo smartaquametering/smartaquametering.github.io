@@ -800,7 +800,6 @@ function GetAdaptation(SelectedAdaptationMethod)
 			MtxInvert3x3(MtxAdaptMa, MtxAdaptMaI);
 
 			AdaptationMethod = "Bradford";
-			RGBModel.AdaptationMethod = "Bradford";
 			break;
 		case 1:	/* von Kries */
 			MtxAdaptMa.m00 =  0.40024;
@@ -816,7 +815,6 @@ function GetAdaptation(SelectedAdaptationMethod)
 			MtxInvert3x3(MtxAdaptMa, MtxAdaptMaI);
 
 			AdaptationMethod = "von Kries";
-			RGBModel.AdaptationMethod = "von Kries";
 			break;
 		case 2:	/* XYZ Scaling */
 		case 3:	/* None */
@@ -841,7 +839,6 @@ function GetAdaptation(SelectedAdaptationMethod)
 			MtxAdaptMaI.m22 = 1.0;
 
 			AdaptationMethod = "XYZ Scaling / None";
-			RGBModel.AdaptationMethod = "XYZ Scaling / None";
 			break;
 	}
 }
@@ -893,7 +890,7 @@ function XYZ2RGB(XYZ)
 	RGB.Model = RGBModel.Name;
 	RGB.Source = SourceWhite.Name;
 	RGB.Reference = RGBModel.Reference;
-	RGB.Adaptation = RGBModel.AdaptationMethod;
+	RGB.Adaptation = AdaptationMethod;
 	RGB.Gamma = RGBModel.Gamma;
 	RGB.HEX = RGB2Hex(RGB);
 	return(RGB);
@@ -1038,6 +1035,7 @@ function XYZ2xyY(XYZ)
 	xyY.Y = XYZ.Y;
 	xyY.Source = SourceWhite.Name;
 	xyY.Reference = RefWhite.Name;
+	xyY.Adaptation = AdaptationMethod;
 	return(xyY);
 }
 
@@ -1061,6 +1059,7 @@ function XYZ2Lab(XYZ)
 	Lab.L = (Lab.L < 0.0) ? 0.0 : (Lab.L > 100.0) ? 100.0 : Lab.L;
 	Lab.Source = SourceWhite.Name;
 	Lab.Reference = RefWhite.Name;
+	Lab.Adaptation = AdaptationMethod;
 	return(Lab);
 }
 
@@ -1089,6 +1088,7 @@ function XYZ2Luv(XYZ)
 	Luv.v = Luv.v.toFixed(4);
 	Luv.Source = SourceWhite.Name;
 	Luv.Reference = RefWhite.Name;
+	Luv.Adaptation = AdaptationMethod;
 	return(Luv);
 }
 
@@ -1183,6 +1183,7 @@ function XYZ2HunterLab(XYZ)
 	HunterLab.b = HunterLab.b.toFixed(4);
 	HunterLab.Source = SourceWhite.Name;
 	HunterLab.Reference = RefWhite.Name;
+	HunterLab.Adaptation = AdaptationMethod;
 	return(HunterLab);
 }
 
