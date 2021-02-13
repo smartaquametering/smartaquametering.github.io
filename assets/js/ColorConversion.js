@@ -877,7 +877,6 @@ function ChromaticAdaptationXYZ(XYZ)
 		res.Y = X1 * MtxAdaptMaI.m01 + Y1 * MtxAdaptMaI.m11 + Z1 * MtxAdaptMaI.m21;
 		res.Z = X1 * MtxAdaptMaI.m02 + Y1 * MtxAdaptMaI.m12 + Z1 * MtxAdaptMaI.m22;
 	}
-
 	return(res);
 }
 

@@ -2,7 +2,7 @@
 var None = {};
 
 // CIE-L*a*b* coordinates of Iodine Color Number
-// D65
+// D65/2°/2°
 var IodineColorIndex = {
 	'IodineColor-1': '100, -3, 6',
 	'IodineColor-3': '100, -7, 18',
@@ -14,93 +14,94 @@ var IodineColorIndex = {
 };
 
 // CIE-L*a*b* coordinates of Hazen/APHA/PtCo Color Number
-// D65
+// D65/2°
 var PtCoColorIndex = {
 };
 
 // CIE-L*a*b* coordinates of Gardner Color Number
-// D65
+// D65/2°
 var GardnerColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of Lovibond Color System
-// D65
+// D65/2°
 var LovibondColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of European Pharmacopoeia (EP) Color Determination
-// D65
+// D65/2°
 var EuropeanPharmacopoeiaColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of US Pharmacopoeia (USP) Color Determination
-// D65
+// D65/2°
 var USPharmacopoeiaColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of Chinese Pharmacopoeia (CP) Color Determination
-// D65
+// D65/2°
 var ChinesePharmacopoeiaColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of Klett Color Number
-// D65
+// D65/2°
 var KlettColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of Hess-Ives Color Number
-// D65
+// D65/2°
 var HessIvesColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of Yellowness Index (ASTM D1925)
-// D65
+// D65/2°
 var YellownessColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of ADMI Color Number
-// D65
+// D65/2°
 var ADMIColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of Acid Wash Color Determination
-// D65
+// D65/2°
 var AcidWashColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of EBC Brewery Color Number
-// D65
+// D65/2°
 var EBCBreweryColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of ASBC Brewery Color Number
-// D65
+// D65/2°
 var ASBCBreweryColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of ASTM-Farbzahl
-// D65
+// D65/2°
 var ASTMColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of Saybolt-Farbzahl
-// D65
+// D65/2°
 var SayboltColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of ICUMSA Zuckerfarbe
-// D65
+// D65/2°
 var ICUMSASuguarColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of SAC436
-// D65
+// D65/2°
 var SAC436ColorIndex = {
 }
 
 // CIE-L*a*b* coordinates of ColorChecker Patches (2005)
-// D65
+// D65/2°
 var ColorCheckerIndex = {
+	Reference: 'D65/2°',
 	'ColorChecker-1-Dark-Skin': '37.77320582, 12.59128198, 13.73769561',
 	'ColorChecker-2-Light-Skin': '65.43191905, 16.84716181, 17.38241346',
 	'ColorChecker-3-Blue-Sky': '50.22174301, -2.30111402, -21.54911359',
