@@ -14,7 +14,7 @@ function GetColorScale(SelectedColorScale)
 				Range: '0-120',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
-				CurveType: 'function',
+				Line: 'Curve',
 				Index: {
 					'IodineColor-0': '0, 0, 0',
 					'IodineColor-1': '100, -2, 6',
