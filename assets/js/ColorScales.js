@@ -107,31 +107,41 @@ function GetColorScale(SelectedColorScale)
 			ColorScale = {
 				Name: 'European Pharmacopoeia (EP) Color Determination',
 				Standard: 'Colors in CIE-L*a*b* colorimetric system',
-				Range: 'B, BY, Y, GY, R',
+				Range: 'B1-B9, BY1-BY7, Y1-Y7, GY1-GY7, R1-R7',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
+				CurveType: 'function',
+				LineWidth: 2,
 				Index: {
 				}
 			};
 			break;
 		case 6:
+			// Optical path length: 50 mm
+			//
 			ColorScale = {
 				Name: 'US Pharmacopoeia (USP) Color Determination',
-				Standard: 'Colors in CIE-L*a*b* colorimetric system',
-				Range: 'A - T',
+				Standard: 'Colors in CIE-L*a*b* colorimetric system (ASTM Z 58.7.1 and DIN 6174)',
+				Range: 'A-T',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
+				CurveType: 'none',
+				LineWidth: 0,
 				Index: {
 				}
 			};
 			break;
 		case 7:
+			// Optical path length: 50 mm
+			//
 			ColorScale = {
 				Name: 'Chinese Pharmacopoeia (CP) Color Determination',
 				Standard: 'Colors in CIE-L*a*b* colorimetric system',
-				Range: 'OR,OY,Y,YG,BR',
+				Range: 'OR1-OR10,OY1-OY10,Y1-Y10,YG1-YG10,BR1-BR10',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
+				CurveType: 'function',
+				LineWidth: 2,
 				Index: {
 				}
 			};
@@ -180,10 +190,10 @@ function GetColorScale(SelectedColorScale)
 			// Yi = 100 * ( Tx - Tz / Ty ) Tx, Ty, Tz => transmission ????
 			//
 			ColorScale = {
-				Name: 'Yellowness Index (ASTM D1925)',
+				Name: 'Yellowness Index (ASTM D 5386-93b)',
 				Standard: 'For transparent liquids on the basis of CIE XYZ-tristimulus values',
 				Range: '',
-				ColorSpace: 'CIE-L*a*b*',
+				ColorSpace: 'CIE XYZ-tristimulus values',
 				Reference: 'C/2°',
 				Index: {
 				}
@@ -262,7 +272,7 @@ function GetColorScale(SelectedColorScale)
 			//
 			ColorScale = {
 				Name: 'Saybolt-Farbzahl',
-				Standard: '',
+				Standard: '(ASTM6 D 156)',
 				Range: '',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
