@@ -13,6 +13,7 @@ function GetColorScale(SelectedColorScale)
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
+					'IodineColor-0': '0, 0, 0',
 					'IodineColor-1': '100, -3, 6',
 					'IodineColor-3': '100, -7, 18',
 					'IodineColor-5': '100, -9, 27',
