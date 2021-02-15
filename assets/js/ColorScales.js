@@ -10,23 +10,39 @@ function GetColorScale(SelectedColorScale)
 		case 1:
 			ColorScale = {
 				Name: 'Iodine Color Number',
+				Standard: 'mg of iodine per 100ml potassium iodide solution (DIN 6162)',
+				Range: '0-120',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
 					'IodineColor-0': '0, 0, 0',
-					'IodineColor-1': '100, -3, 6',
-					'IodineColor-3': '100, -7, 18',
+					'IodineColor-1': '100, -2, 6',
+					'IodineColor-3': '100, -6, 17',
 					'IodineColor-5': '100, -9, 27',
-					'IodineColor-7': '100, -11, 37',
-					'IodineColor-10': '100, -11, 59',
+					'IodineColor-7': '100, -12, 37',
+					'IodineColor-10': '100, -12, 59',
 					'IodineColor-20': '100, -10, 72',
-					'IodineColor-90': '100, 20, 103'
+					'IodineColor-30': '100, -5, 86',
+					'IodineColor-50': '100, 6, 99',
+					'IodineColor-90': '100, 19, 104'
 				}
 			};
 			break;
 		case 2:
+			// Measure yellow hues in liquids (DIN ISO 6271)
+			// Calibration standard with 500 mg/l Pt/Co 500 (500 Hazen)
+			//
+			// E430 = 0.115
+			// E455 = 0.135
+			// E480 = 0.115
+			// E510 = 0.06
+			//
+			// (Optical path length: 10 mm)
+			//
 			ColorScale = {
 				Name: 'Hazen/APHA/PtCo Color Number',
+				Standard: '',
+				Range: '0-1000',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -34,17 +50,47 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 3:
+			// Calculation:
+			//
+			// GTM = G1 + GF
+			//
+			// G1 takes the Gardner number of the x value that is lower (xlower)
+			// GF = [(𝑥𝑢𝑝𝑝𝑒𝑟−𝑥𝑙𝑜𝑤𝑒𝑟)(𝑥𝑠𝑎𝑚𝑝𝑙𝑒−𝑥𝑙𝑜𝑤𝑒𝑟)+(𝑦𝑢𝑝𝑝𝑒𝑟−𝑦𝑙𝑜𝑤𝑒𝑟)(𝑦𝑠𝑎𝑚𝑝𝑙𝑒−𝑦𝑙𝑜𝑤𝑒𝑟)] / (𝑥𝑢𝑝𝑝𝑒𝑟−𝑥𝑙𝑜𝑤𝑒𝑟)+(𝑦𝑢𝑝𝑝𝑒𝑟−𝑦𝑙𝑜𝑤𝑒𝑟)
+			//
 			ColorScale = {
 				Name: 'Gardner Color Number',
-				ColorSpace: 'CIE-L*a*b*',
-				Reference: 'D65/2°',
+				Standard: 'Calculated from CIE-xyY values (ASTM Standard D6616 (2012), EN ISO 4630-2)',
+				Range: '0-18',
+				ColorSpace: 'CIE-xyY',
+				Reference: 'C/2°',
 				Index: {
+					'GardnerColor-0': '0.3101, 0.3161, 100',
+					'GardnerColor-1': '0.3177, 0.3303, 80',
+					'GardnerColor-2': '0.3233, 0.3352, 79',
+					'GardnerColor-3': '0.3329, 0.3452, 76',
+					'GardnerColor-4': '0.3437, 0.3644, 75',
+					'GardnerColor-5': '0.3558, 0.3840, 74',
+					'GardnerColor-6': '0.3767, 0.4061, 71',
+					'GardnerColor-7': '0.4044, 0.4352, 67',
+					'GardnerColor-8': '0.4207, 0.4498, 64',
+					'GardnerColor-9': '0.4340, 0.4640, 61',
+					'GardnerColor-10': '0.4503, 0.4760, 57',
+					'GardnerColor-11': '0.4842, 0.4818, 45',
+					'GardnerColor-12': '0.5077, 0.4638, 36',
+					'GardnerColor-13': '0.5392, 0.4458, 30',
+					'GardnerColor-14': '0.5646, 0.4270, 22',
+					'GardnerColor-15': '0.5857, 0.4089, 16',
+					'GardnerColor-16': '0.6047, 0.3921, 11',
+					'GardnerColor-17': '0.6290, 0.3701, 6',
+					'GardnerColor-18': '0.6477, 0.3521, 4'
 				}
 			};
 			break;
 		case 4:
 			ColorScale = {
 				Name: 'Lovibond Color System',
+				Standard: '',
+				Range: '',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -54,6 +100,8 @@ function GetColorScale(SelectedColorScale)
 		case 5:
 			ColorScale = {
 				Name: 'European Pharmacopoeia (EP) Color Determination',
+				Standard: 'Colors in CIE-L*a*b* colorimetric system',
+				Range: 'B, BY, Y, GY, R',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -63,6 +111,8 @@ function GetColorScale(SelectedColorScale)
 		case 6:
 			ColorScale = {
 				Name: 'US Pharmacopoeia (USP) Color Determination',
+				Standard: 'Colors in CIE-L*a*b* colorimetric system',
+				Range: 'A - T',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -72,6 +122,8 @@ function GetColorScale(SelectedColorScale)
 		case 7:
 			ColorScale = {
 				Name: 'Chinese Pharmacopoeia (CP) Color Determination',
+				Standard: 'Colors in CIE-L*a*b* colorimetric system',
+				Range: 'OR,OY,Y,YG,BR',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -79,8 +131,15 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 8:
+			// Calculated from Absorbance (KlettPhot = E470)
+			//
+			// Absorption of a sample liquid in a square cuvette of 4cm (or 2cm) path length measured through a blue filter
+			//
 			ColorScale = {
 				Name: 'Klett Color Number',
+				Standard: '',
+				Range: '',
+				Range: '0-1000',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -88,8 +147,21 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 9:
+			// Calculated from Absorbance
+			//
+			// Cosmetic industry, color evaluation of fat derivatives
+			// R, G and B are the color components for the red (640 nm), green (560nm) and blue (464nm) shares
+			//
+			// H-I = (R + G + B) * 6 / layerthickness
+			//
+			// R = 43,45 * E640
+			// G = 162,38 * E560
+			// B = 22,89 * ( E460 + E470 ) / 2
+			//
 			ColorScale = {
 				Name: 'Hess-Ives Color Number',
+				Standard: '',
+				Range: '',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -97,17 +169,28 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 10:
+			// Calculated from CIE-L*a*b* or CIE-XYZ values
+			//
+			// Yi = 100 * ( Tx - Tz / Ty ) Tx, Ty, Tz => transmission ????
+			//
 			ColorScale = {
 				Name: 'Yellowness Index (ASTM D1925)',
+				Standard: 'For transparent liquids on the basis of CIE XYZ-tristimulus values',
+				Range: '',
 				ColorSpace: 'CIE-L*a*b*',
-				Reference: 'D65/2°',
+				Reference: 'C/2°',
 				Index: {
 				}
 			};
 			break;
 		case 11:
+			//Die ADMI-Farbzahl ist über E-Werte von Platin-Kobalt-Lösungen gegen destilliertes Wasser definiert.
+			//
 			ColorScale = {
 				Name: 'ADMI Color Number',
+				Standard: '',
+				Range: '',
+				Range: '0-500',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -117,6 +200,8 @@ function GetColorScale(SelectedColorScale)
 		case 12:
 			ColorScale = {
 				Name: 'Acid Wash Color Determination',
+				Standard: '',
+				Range: '0-14',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -124,8 +209,12 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 13:
+			// Calculated from Absorbance (25 * E430, Optical path length: 10 mm)
+			//
 			ColorScale = {
 				Name: 'EBC Brewery Color Number',
+				Standard: '',
+				Range: '',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -133,8 +222,13 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 14:
+			// Calculated from Absorbance (??????? 12.7 * E430, Optical path length: 10 mm)
+			//
+			// 1 ASBC = 0.375 EBC color + 0.46
 			ColorScale = {
 				Name: 'ASBC Brewery Color Number',
+				Standard: '',
+				Range: '',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -142,8 +236,15 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 15:
+			// ASTM D1500-07
+			// https://www.mn-net.com/media/pdf/23/0d/df/Instruction-919600-919650-spectrophotometers-NANOCOLOR-UVVISII-VISII-DE.pdf
+			// Calculated from CIE-XYZ values
+			// Scale: 0.5 - 8
+			// Steps: 0.5
 			ColorScale = {
 				Name: 'ASTM-Farbzahl',
+				Standard: '',
+				Range: '',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -151,8 +252,12 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 16:
+			// Calculated from CIE-L*a*b* or CIE-XYZ values
+			//
 			ColorScale = {
 				Name: 'Saybolt-Farbzahl',
+				Standard: '',
+				Range: '',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -160,8 +265,12 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 17:
+			// Calculated from Absorbance
+			//
 			ColorScale = {
 				Name: 'ICUMSA Suguar Color',
+				Standard: '',
+				Range: '',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -169,8 +278,13 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 18:
+			// Spectral Absorption Coefficient describes the yellow colouring of potable-, used- or wastewater.
+			// The measuring range is indicated in m-1. (Extinction per meter optical path lenght [Ext/m]).
+
 			ColorScale = {
 				Name: 'SAC436',
+				Standard: 'Calculated from Absorbance (E436)',
+				Range: '',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
@@ -180,6 +294,8 @@ function GetColorScale(SelectedColorScale)
 		case 19:
 			ColorScale = {
 				Name: 'ColorChecker Patches (2005)',
+				Standard: 'CIE-L*a*b* reference colors',
+				Range: '1-24',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				Index: {
