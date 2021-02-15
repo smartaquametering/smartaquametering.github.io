@@ -18,8 +18,11 @@ function GetColorScale(SelectedColorScale)
 				Index: {
 					'IodineColor-0': '0, 0, 0',
 					'IodineColor-1': '100, -2, 6',
+					'IodineColor-2': '100, -4.5, 13',
 					'IodineColor-3': '100, -6, 17',
+					'IodineColor-4': '100, -7.5, 23',
 					'IodineColor-5': '100, -8.5, 27.5',
+					'IodineColor-6': '100, -10, 32.5',
 					'IodineColor-7': '100, -11, 38',
 					'IodineColor-10': '100, -12, 49',
 					'IodineColor-20': '100, -10, 72',
