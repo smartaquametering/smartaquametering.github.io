@@ -20,7 +20,7 @@ function GetColorScale(SelectedColorScale)
 					'IodineColor-1': '100, -2, 6',
 					'IodineColor-3': '100, -6, 17',
 					'IodineColor-5': '100, -8.5, 27',
-					'IodineColor-7': '100, -11, 37.5',
+					'IodineColor-7': '100, -11, 38',
 					'IodineColor-10': '100, -12, 49',
 					'IodineColor-20': '100, -10, 72',
 					'IodineColor-30': '100, -5, 86',
