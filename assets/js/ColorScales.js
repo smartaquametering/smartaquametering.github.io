@@ -15,6 +15,7 @@ function GetColorScale(SelectedColorScale)
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				CurveType: 'function',
+				LineWidth: 1,
 				Index: {
 					'IodineColor-0': '0, 0, 0',
 					'IodineColor-1': '100, -2, 6',
@@ -304,6 +305,7 @@ function GetColorScale(SelectedColorScale)
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				CurveType: 'none',
+				LineWidth: 0,
 				Index: {
 					'ColorChecker-1-Dark-Skin': '37.77320582, 12.59128198, 13.73769561',
 					'ColorChecker-2-Light-Skin': '65.43191905, 16.84716181, 17.38241346',
