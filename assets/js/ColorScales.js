@@ -22,9 +22,13 @@ function GetColorScale(SelectedColorScale)
 			// ASTM E313-05 berechnet.
 			// Die NULL-Referenz ist dest. Wasser.
 			//
+			// Water and other clear liquids such as plasticizers, solvents and petroleum spirits
+			// Clear oils, chemicals and petrochemicals such as glycerine,
+			// solvents, carbon tetrachloride, and petroleum spirits
+			//
 			ColorScale = {
-				Name: 'Hazen/APHA/PtCo Color Number (ASTM D5386-05)',
-				Standard: '',
+				Name: 'Hazen/APHA/PtCo Color Number',
+				Standard: 'ASTM D1209, ASTM D5386-05',
 				Range: '0-1000',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
@@ -33,6 +37,12 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 4:
+			//
+			// Based on calibrated series of coloured glasses in each of the colours red,
+			// yellow and blue, going from very pale to dark. It is widely used for oils,
+			// fats, chemicals, resins and other transparent liquid products; it is also used
+			// for some light-refl ecting products such as fats and waxes
+			//
 			ColorScale = {
 				Name: 'Lovibond Color System',
 				Standard: '',
@@ -54,9 +64,11 @@ function GetColorScale(SelectedColorScale)
 			// Wenn der Messpunkt zu weit entfernt von allen Kalibrierpunkten liegt, wird „außerhalb
 			// Messbereich“ angegeben. Bei der Ph. Eur. Farbzahl tritt das bei a* < 25 und b* < -5 ein.
 			//
+			// Pharmaceutical solutions
+			//
 			ColorScale = {
 				Name: 'European Pharmacopoeia (EP) Color Determination',
-				Standard: 'Colors in CIE-L*a*b* colorimetric system',
+				Standard: 'Ph. Eur. Method 2.2.2',
 				Range: 'B1-B9, BY1-BY7, Y1-Y7, GY1-GY7, R1-R7',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
@@ -69,9 +81,11 @@ function GetColorScale(SelectedColorScale)
 		case 6:
 			// Optical path length: 50 mm
 			//
+			// Pharmaceutical solutions
+			//
 			ColorScale = {
 				Name: 'US Pharmacopoeia (USP) Color Determination',
-				Standard: 'Colors in CIE-L*a*b* colorimetric system (ASTM Z 58.7.1 and DIN 6174)',
+				Standard: 'USP (631) Color and Achromicity',
 				Range: 'A-T',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
@@ -84,9 +98,10 @@ function GetColorScale(SelectedColorScale)
 		case 7:
 			// Optical path length: 50 mm
 			//
+			// Pharmaceutical solutions
 			ColorScale = {
 				Name: 'Chinese Pharmacopoeia (CP) Color Determination',
-				Standard: 'Colors in CIE-L*a*b* colorimetric system',
+				Standard: 'CP Appendix IX A',
 				Range: 'OR1-OR10,OY1-OY10,Y1-Y10,YG1-YG10,BR1-BR10',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
@@ -105,9 +120,11 @@ function GetColorScale(SelectedColorScale)
 			// gefärbt sein. Dabei werden die ADMI-Werte basierend auf der Norm AWWA 2120F über ein
 			// Polynom 4. Grades berechnet. Die NULL-Referenz ist dest. Wasser.
 			//
+			// Colored waters and tinted liquids
+			//
 			ColorScale = {
 				Name: 'ADMI Color Number',
-				Standard: '',
+				Standard: 'American Standard Methods 2120 E',
 				Range: '0-500',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
@@ -116,6 +133,8 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 12:
+			// Quality testing of industrial aromatic hydrocarbons
+			//
 			ColorScale = {
 				Name: 'Acid Wash Color Determination',
 				Standard: 'ASTM D848',
@@ -143,10 +162,12 @@ function GetColorScale(SelectedColorScale)
 			// deltaY = -log(Y/100)
 			// deltaZ = -log(Z/188.232
 			//
+			// A wide range of petroleum products including lubricating oils, heating oils and diesel fuel oils
+			//
 			ColorScale = {
 				Name: 'ASTM-Farbzahl',
-				Standard: 'ASTM D1500-07',
-				Range: '',
+				Standard: 'ASTM D1500, D6045, ISO 2049',
+				Range: '0.5–8',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
 				Index: {
@@ -164,9 +185,11 @@ function GetColorScale(SelectedColorScale)
 			// O = 2.55
 			// deltaE = sqrt((100-L*)^2 + a*^2 + b*^2)
 			//
+			// Light Colored petroleum products including aviation fuels, kerosene white mineral oils, hydrocarbon solvents and petroleum waxes
+			//
 			ColorScale = {
 				Name: 'Saybolt-Farbzahl',
-				Standard: '(ASTM D156, ASTM D6045-12)',
+				Standard: '(ASTM D156, ASTM D6045-12, JIS K2580)',
 				Range: '-16 - +30',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
@@ -191,9 +214,9 @@ function GetColorScale(SelectedColorScale)
 			// d				Thickness of the solution layer (cuvette) [cm]
 			// SACλ				Spectral Absorption Coefficient [m-1]
 			//
-			// TCS34725 		Blue channel	=> 465 nm (+/- 22 nm)
+			// TCS34725			Red channel		=> 615 nm (+/- 15 nm)
 			//					Green channel	=> 525 nm (+/- 35 nm)
-			//					Red channel		=> 615 nm (+/- 15 nm)
+			//					Blue channel	=> 465 nm (+/- 22 nm)
 			//
 			// SAC436 describes the yellow colouring of potable-, used- or wastewater
 			// The measuring range is indicated in m-1 (Extinction per meter optical path lenght [Ext/m])
@@ -217,10 +240,17 @@ function GetColorScale(SelectedColorScale)
 			//
 			// d				Thickness of the solution layer (cuvette) [cm]
 			//
+			// TCS34725			Red channel		=> 615 nm (+/- 15 nm)
+			//					Green channel	=> 525 nm (+/- 35 nm)
+			//					Blue channel	=> 465 nm (+/- 22 nm)
+			//
+			// Beers, malts and caramels and similarly Colored liquids.
+			// Based either on absorption at 430 nm or CIE x y chromaticity co-ordinates
+			//
 			ColorScale = {
 				Name: 'EBC Brewery Color Number',
 				Standard: 'EBC MEBAK 2.16.2',
-				Range: '0-60, 120, 50, 25',
+				Range: '2 – 27',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
 				Index: {
@@ -234,10 +264,12 @@ function GetColorScale(SelectedColorScale)
 			//
 			// EBC				EBC Brewery Color Number
 			//
+			// American standard for Color grading of beers
+			//
 			ColorScale = {
 				Name: 'ASBC Brewery Color Number',
 				Standard: 'Calculated from EBC MEBAK 2.16.2',
-				Range: '',
+				Range: '1.2–10.6',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
 				Index: {
@@ -255,9 +287,11 @@ function GetColorScale(SelectedColorScale)
 			// d				Thickness of the solution layer (cuvette) [cm]
 			// c				Concentration of suguar in the liquid [g/ml]
 			//
-			// TCS34725 		Blue channel	=> 465 nm (+/- 22 nm)
+			// TCS34725			Red channel		=> 615 nm (+/- 15 nm)
 			//					Green channel	=> 525 nm (+/- 35 nm)
-			//					Red channel		=> 615 nm (+/- 15 nm)
+			//					Blue channel	=> 465 nm (+/- 22 nm)
+			//
+			// Sugar solutions & syrups
 			//
 			ColorScale = {
 				Name: 'ICUMSA Suguar Color',
@@ -278,21 +312,25 @@ function GetColorScale(SelectedColorScale)
 			// G = 162,38 * E560
 			// B = 22,89 * ( E460 + E470 ) / 2
 			//
+			// R, G and B are the color components for the 
+			// red (640 nm),
+			// green (560nm) and
+			// blue (464nm) shares
 			// d = 1
 			// NULL-Reference	Distilled water
 			//
 			// d				Thickness of the solution layer (cuvette) [cm]
 			//
-			// TCS34725 		Blue channel	=> 465 nm (+/- 22 nm)
+			// TCS34725			Red channel		=> 615 nm (+/- 15 nm)
 			//					Green channel	=> 525 nm (+/- 35 nm)
-			//					Red channel		=> 615 nm (+/- 15 nm)
+			//					Blue channel	=> 465 nm (+/- 22 nm)
 			//
 			// Cosmetic industry, color evaluation of fat derivatives
-			// R, G and B are the color components for the red (640 nm), green (560nm) and blue (464nm) shares
+			// Chemicals and surfactant liquids
 			//
 			ColorScale = {
 				Name: 'Hess-Ives Color Number',
-				Standard: 'DGK-Prüfmethode F 050.2',
+				Standard: 'DGK F050.2',
 				Range: '',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
@@ -307,6 +345,10 @@ function GetColorScale(SelectedColorScale)
 			//
 			// Absorption of a sample liquid in a square cuvette of 4cm (or 2cm) path length measured through a blue filter
 			//
+			// TCS34725			Red channel		=> 615 nm (+/- 15 nm)
+			//					Green channel	=> 525 nm (+/- 35 nm)
+			//					Blue channel	=> 465 nm (+/- 22 nm)
+			//
 			// Im Gegensatz zu den ersten europäischen Photometern wird als Messwert nicht
 			// die Transmission oder Extinktion, sondern ein Wert auf einer willkürlichen logarithmischen
 			// Skala von 1 bis 1000, der Klett-Skala, angegeben. Diese Skala folgt dem
@@ -316,9 +358,11 @@ function GetColorScale(SelectedColorScale)
 			// bis 450 nm durch. Die originale Klett-Zahl ist also ein integraler Messwert über einen
 			// Bereich von etwa 50 nm.
 			//
+			// Detergents and surfactants
+			//
 			ColorScale = {
 				Name: 'Klett Color Number',
-				Standard: '',
+				Standard: 'AOCS Dd 5-92',
 				Range: '0-1000',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
@@ -338,6 +382,9 @@ function GetColorScale(SelectedColorScale)
 			// NULL-Reference	Distilled water
 			//
 			// d				Thickness of the solution layer (cuvette) [cm]
+			//
+			// Oils & chemicals ranging from pale yellow to red, including
+			// lecithins, resins, drying oils & fatty acids
 			//
 			ColorScale = {
 				Name: 'Gardner Color Number',
@@ -379,9 +426,9 @@ function GetColorScale(SelectedColorScale)
 			//
 			// YI = 100 * (T680 − T420) / T560
 			//
-			// TCS34725 		Blue channel	=> 465 nm (+/- 22 nm)
+			// TCS34725			Red channel		=> 615 nm (+/- 15 nm)
 			//					Green channel	=> 525 nm (+/- 35 nm)
-			//					Red channel		=> 615 nm (+/- 15 nm)
+			//					Blue channel	=> 465 nm (+/- 22 nm)
 			//
 			// In the tristimulus method is a simple filter photometric construction where the transmitted light
 			// beam is dispersed after passing the sample into its red, green and blue proportions by 3 color
@@ -401,6 +448,15 @@ function GetColorScale(SelectedColorScale)
 			// a = 0.7832 (Reference: C/2° SIST EN 1557:1997)
 			// b = 0.1975
 			// c = 1.1822
+			//
+			// Xr + Xg + Xb = Xw
+			// Yr + Yg + Yb = Yw = 1
+			// Zr + Zg + Zb = Xw
+			//
+			// X = RXr + GXg + BXb
+			// Y = RYr + GYg + BYb
+			// Z = RZr + GZg + BZb
+			// https://www.sciencedirect.com/topics/computer-science/tristimulus-value
 			//
 			// As factors a, b and c depend on illuminant and observer, they must be put in correspondingly.
 			//
@@ -437,11 +493,13 @@ function GetColorScale(SelectedColorScale)
 			//
 			// d				Thickness of the solution layer (cuvette) [cm]
 			//
-			//For transparent liquids on the basis of CIE XYZ-tristimulus values
+			// For transparent liquids
+			// Determination of the degree of yellowness under daylight illumination
+			// Calculated from X Y Z tristimulus values
 			//
 			ColorScale = {
 				Name: 'Yellowness Index (ASTM D 5386-93b, ASTM E313-05)',
-				Standard: 'ASTM E 313-05 and ASTM D1925 (deprecated)',
+				Standard: 'ASTM E 313-05, ASTM D1925 (deprecated)',
 				Range: '0-???',
 				ColorSpace: 'CIE XYZ-tristimulus values',
 				Reference: 'C/2°',
@@ -449,7 +507,7 @@ function GetColorScale(SelectedColorScale)
 				}
 			};
 			break;
-		case 1:
+		case 32:
 			// Fig. 15 shows the color graphs of the Iodine, Hazen (APHA) and Gardner scales in the CIE-Labcolor space
 			// referred to a cuvette path length of 10mm.
 			// The differences in the color hue between the scales are evident here.
@@ -458,10 +516,14 @@ function GetColorScale(SelectedColorScale)
 			// 10 mm Küvette
 			// Die NULL-Referenz ist dest. Wasser.
 			//
+			// Solvents, plasticisers, resins, oils and fatty acids ranging from yellow to brown.
+			// For colours registering 1 – 500 units
+			// For 1 or less on the Iodine scale, the Pt-Co Colour scale is applicable
+			//
 			ColorScale = {
 				Name: 'Iodine Color Number',
 				Standard: 'mg of iodine per 100ml potassium iodide solution (DIN 6162)',
-				Range: '0-120',
+				Range: '0-500',
 				Interval: 10,
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
