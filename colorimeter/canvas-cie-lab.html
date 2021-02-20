@@ -199,20 +199,96 @@
 
 			<h4 class="mt-4 mb-4">CIE-L*a*b*</h4>
 
-			<p>L = 75</p>
+			<p>L = 100</p>
 
-			<canvas id="painting" width=600 height=600>
+			<canvas id="CIELab_100" width=600 height=600>
 			<script src="https://d3js.org/d3.v4.0.0-alpha.45.js"></script>
 			<script src="https://d3js.org/d3-hsv.v0.0.js"></script>
 			<script src="https://d3js.org/d3-scale-chromatic.v0.3.js"></script>
 
 			<script>
-				var canvas = document.getElementById("painting");
+				var canvas = document.getElementById("CIELab_100");
+				var ctx = canvas.getContext("2d");
+
+				d3.range(0, canvas.width).forEach(function(x) {
+					d3.range(0, canvas.height).forEach(function(y) {
+						ctx.fillStyle = d3.lab(100, -150+300*x/canvas.width, -150+300*y/canvas.height);
+						ctx.fillRect(x, y, 1, 1);
+					});
+				});
+			</script>
+
+			<p>L = 75</p>
+
+			<canvas id="CIELab_75" width=600 height=600>
+			<script src="https://d3js.org/d3.v4.0.0-alpha.45.js"></script>
+			<script src="https://d3js.org/d3-hsv.v0.0.js"></script>
+			<script src="https://d3js.org/d3-scale-chromatic.v0.3.js"></script>
+
+			<script>
+				var canvas = document.getElementById("CIELab_75");
 				var ctx = canvas.getContext("2d");
 
 				d3.range(0, canvas.width).forEach(function(x) {
 					d3.range(0, canvas.height).forEach(function(y) {
 						ctx.fillStyle = d3.lab(75, -150+300*x/canvas.width, -150+300*y/canvas.height);
+						ctx.fillRect(x, y, 1, 1);
+					});
+				});
+			</script>
+
+			<p>L = 50</p>
+
+			<canvas id="CIELab_50" width=600 height=600>
+			<script src="https://d3js.org/d3.v4.0.0-alpha.45.js"></script>
+			<script src="https://d3js.org/d3-hsv.v0.0.js"></script>
+			<script src="https://d3js.org/d3-scale-chromatic.v0.3.js"></script>
+
+			<script>
+				var canvas = document.getElementById("CIELab_50");
+				var ctx = canvas.getContext("2d");
+
+				d3.range(0, canvas.width).forEach(function(x) {
+					d3.range(0, canvas.height).forEach(function(y) {
+						ctx.fillStyle = d3.lab(50, -150+300*x/canvas.width, -150+300*y/canvas.height);
+						ctx.fillRect(x, y, 1, 1);
+					});
+				});
+			</script>
+
+			<p>L = 25</p>
+
+			<canvas id="CIELab_25" width=600 height=600>
+			<script src="https://d3js.org/d3.v4.0.0-alpha.45.js"></script>
+			<script src="https://d3js.org/d3-hsv.v0.0.js"></script>
+			<script src="https://d3js.org/d3-scale-chromatic.v0.3.js"></script>
+
+			<script>
+				var canvas = document.getElementById("CIELab_25");
+				var ctx = canvas.getContext("2d");
+
+				d3.range(0, canvas.width).forEach(function(x) {
+					d3.range(0, canvas.height).forEach(function(y) {
+						ctx.fillStyle = d3.lab(25, -150+300*x/canvas.width, -150+300*y/canvas.height);
+						ctx.fillRect(x, y, 1, 1);
+					});
+				});
+			</script>
+
+			<p>L = 0</p>
+
+			<canvas id="CIELab_0" width=600 height=600>
+			<script src="https://d3js.org/d3.v4.0.0-alpha.45.js"></script>
+			<script src="https://d3js.org/d3-hsv.v0.0.js"></script>
+			<script src="https://d3js.org/d3-scale-chromatic.v0.3.js"></script>
+
+			<script>
+				var canvas = document.getElementById("CIELab_0");
+				var ctx = canvas.getContext("2d");
+
+				d3.range(0, canvas.width).forEach(function(x) {
+					d3.range(0, canvas.height).forEach(function(y) {
+						ctx.fillStyle = d3.lab(0, -150+300*x/canvas.width, -150+300*y/canvas.height);
 						ctx.fillRect(x, y, 1, 1);
 					});
 				});
