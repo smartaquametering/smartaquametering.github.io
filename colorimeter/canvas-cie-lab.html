@@ -70,6 +70,37 @@
 
 		<!-- Color scales by smartAquaMetering -->
 		<script src="https://smartaquametering.github.io/assets/js/ColorScales.js"></script>
+
+
+
+
+
+
+
+		<script>
+
+			$(function() {
+
+				var canvas = document.getElementById("CIELab_100");
+				var canvas = document.getElementById("CIELab_75");
+				var canvas = document.getElementById("CIELab_50");
+				var canvas = document.getElementById("CIELab_25");
+				var canvas = document.getElementById("CIELab_0");
+
+				var ctx = canvas.getContext("2d");
+
+				d3.range(0, canvas.width).forEach(function(x) {
+					d3.range(0, canvas.height).forEach(function(y) {
+						ctx.fillStyle = d3.lab(0, -150+300*x/canvas.width, -150+300*y/canvas.height);
+						ctx.fillRect(x, y, 1, 1);
+					});
+				});
+
+			});
+
+
+		</script>
+
 	</head>
 	<body>
 		<div class="container">
@@ -204,84 +235,19 @@
 			<h4 class="mt-4 mb-4">CIE-L*a*b*</h4>
 
 			<p>L = 100</p>
-
 			<canvas id="CIELab_100" width=600 height=600>
 
-			<script>
-				var canvas = document.getElementById("CIELab_100");
-				var ctx = canvas.getContext("2d");
-
-				d3.range(0, canvas.width).forEach(function(x) {
-					d3.range(0, canvas.height).forEach(function(y) {
-						ctx.fillStyle = d3.lab(100, -150+300*x/canvas.width, -150+300*y/canvas.height);
-						ctx.fillRect(x, y, 1, 1);
-					});
-				});
-			</script>
-
 			<p>L = 75</p>
-
 			<canvas id="CIELab_75" width=600 height=600>
 
-			<script>
-				var canvas = document.getElementById("CIELab_75");
-				var ctx = canvas.getContext("2d");
-
-				d3.range(0, canvas.width).forEach(function(x) {
-					d3.range(0, canvas.height).forEach(function(y) {
-						ctx.fillStyle = d3.lab(75, -150+300*x/canvas.width, -150+300*y/canvas.height);
-						ctx.fillRect(x, y, 1, 1);
-					});
-				});
-			</script>
-
 			<p>L = 50</p>
-
 			<canvas id="CIELab_50" width=600 height=600>
 
-			<script>
-				var canvas = document.getElementById("CIELab_50");
-				var ctx = canvas.getContext("2d");
-
-				d3.range(0, canvas.width).forEach(function(x) {
-					d3.range(0, canvas.height).forEach(function(y) {
-						ctx.fillStyle = d3.lab(50, -150+300*x/canvas.width, -150+300*y/canvas.height);
-						ctx.fillRect(x, y, 1, 1);
-					});
-				});
-			</script>
-
 			<p>L = 25</p>
-
 			<canvas id="CIELab_25" width=600 height=600>
 
-			<script>
-				var canvas = document.getElementById("CIELab_25");
-				var ctx = canvas.getContext("2d");
-
-				d3.range(0, canvas.width).forEach(function(x) {
-					d3.range(0, canvas.height).forEach(function(y) {
-						ctx.fillStyle = d3.lab(25, -150+300*x/canvas.width, -150+300*y/canvas.height);
-						ctx.fillRect(x, y, 1, 1);
-					});
-				});
-			</script>
-
 			<p>L = 0</p>
-
 			<canvas id="CIELab_0" width=600 height=600>
-
-			<script>
-				var canvas = document.getElementById("CIELab_0");
-				var ctx = canvas.getContext("2d");
-
-				d3.range(0, canvas.width).forEach(function(x) {
-					d3.range(0, canvas.height).forEach(function(y) {
-						ctx.fillStyle = d3.lab(0, -150+300*x/canvas.width, -150+300*y/canvas.height);
-						ctx.fillRect(x, y, 1, 1);
-					});
-				});
-			</script>
 
 			<footer id="sticky-footer" class="py-3 bg-primary text-white-50">
 				<div class="container text-center">
