@@ -63,7 +63,7 @@
 		<link rel="shortcut icon" href="https://smartaquametering.github.io/assets/ico/favicon.ico">
 
 		<!-- Colorimeter JS by smartAquaMetering -->
-		<script src="colorimeter.js"></script>
+		<script src="https://smartaquametering.github.io/assets/js/colorimeter.js"></script>
 
 		<!-- Color conversion and Color delta functions by Bruce Justin Lindbloom adapted by smartAquaMetering -->
 		<script src="https://smartaquametering.github.io/assets/js/ColorConversion.js"></script>
@@ -317,22 +317,22 @@
 				</div>
 			</div>
 
-<canvas id="painting" width=600 height=600>
-<script src="https://d3js.org/d3.v4.0.0-alpha.45.js"></script>
-<script src="https://d3js.org/d3-hsv.v0.0.js"></script>
-<script src="https://d3js.org/d3-scale-chromatic.v0.3.js"></script>
+			<canvas id="painting" width=600 height=600>
+			<script src="https://d3js.org/d3.v4.0.0-alpha.45.js"></script>
+			<script src="https://d3js.org/d3-hsv.v0.0.js"></script>
+			<script src="https://d3js.org/d3-scale-chromatic.v0.3.js"></script>
 
-<script>
-	var canvas = document.getElementById("painting");
-	var ctx = canvas.getContext("2d");
+			<script>
+				var canvas = document.getElementById("painting");
+				var ctx = canvas.getContext("2d");
 
-	d3.range(0, canvas.width).forEach(function(x) {
-		d3.range(0, canvas.height).forEach(function(y) {
-			ctx.fillStyle = d3.lab(75, -150+300*x/canvas.width, -150+300*y/canvas.height);
-			ctx.fillRect(x, y, 1, 1);
-		});
-	});
-</script>
+				d3.range(0, canvas.width).forEach(function(x) {
+					d3.range(0, canvas.height).forEach(function(y) {
+						ctx.fillStyle = d3.lab(75, -150+300*x/canvas.width, -150+300*y/canvas.height);
+						ctx.fillRect(x, y, 1, 1);
+					});
+				});
+			</script>
 
 			<footer id="sticky-footer" class="py-3 bg-primary text-white-50">
 				<div class="container text-center">
