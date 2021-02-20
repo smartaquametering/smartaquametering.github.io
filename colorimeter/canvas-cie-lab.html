@@ -80,16 +80,6 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="/dashboard.esp" target="_blank">Dashboard</a></li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="navbarSystem" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">System</a>
-							<div class="dropdown-menu" aria-labelledby="navbarSystem">
-								<a class="dropdown-item" href="/" target="_blank">System Info and Settings</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="./json?view=sensorupdate" target="_blank">Sensor Status</a>
-								<a class="dropdown-item" href="./json" target="_blank">System Configuration</a>
-							</div>
-						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarHelp" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Help</a>
 							<div class="dropdown-menu" aria-labelledby="navbarHelp">
@@ -201,114 +191,6 @@
 									<br>Culori color library for JavaScript - <a href="https://github.com/Evercoder/culori/blob/master/LICENSE" target="_blank">Copyright © 2018 by Dan Burzo</a>. Licensed under <a href="https://github.com/Evercoder/culori/blob/master/LICENSE" target="_blank">MIT License</a>.
 								</samp>
 							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="modal fade" id="HelpModal" tabindex="-1" aria-labelledby="HelpModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-xl">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="HelpModalLabel">Help</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-
-							<h5><a href="#" id="HelpModalBanner" target="_blank"><img id="HelpModalBannerImg" class="img-fluid" alt="" src="#"></a></h5>
-
-							<h5 class="mt-4 mb-4">Legend</h5>
-							<dl class="row">
-								<dt class="col-sm-3">λ</dt>
-								<dd class="col-sm-9 text-truncate">Wavelength [nm]</dd>
-
-								<dt class="col-sm-3"><var>B<sup>o</sup></var></dt>
-								<dd class="col-sm-9 text-truncate">
-									Beam (measuring) angle [<var><sup>o</sup></var>]</br>
-									<var>180 <sup>o</sup>: Transmitted light measurement (Absorbance)</var></br>
-									<var>90 <sup>o</sup>: Nephelometric turbidity (scattered light) measurement</var>
-								</dd>
-
-								<dt class="col-sm-3"><var>I<sub>0</sub></var></dt>
-								<dd class="col-sm-9 text-truncate">Intensity of incident light [lux]</dd>
-
-								<dt class="col-sm-3"><var>I<sub>T</sub></var></dt>
-								<dd class="col-sm-9 text-truncate">Intensity of transmitted light [lux]</dd>
-
-								<dt class="col-sm-3">T = <var>I<sub>T</sub></var> / <var>I<sub>0</sub></var></dt>
-								<dd class="col-sm-9 text-truncate">
-									Transmission</br>
-									Energy passing through</br>
-									Range: 0.0 - 1.0
-								</dd>
-
-								<dt class="col-sm-3">A = 1 - T</dt>
-								<dd class="col-sm-9 text-truncate">
-									Absorption</br>
-									Energy lost
-								</dd>
-
-								<dt class="col-sm-3"><var>E<sub>λ</sub></var> = - log ( T ) = <var>ε<sub>λ</sub></var> * c * d</dt>
-								<dd class="col-sm-9 text-truncate">
-									Absorbance</br>
-									Attenuation</br>
-									Lambert-Beer law</br>
-									Optimum range: 0.1 – 1.0
-								</dd>
-
-								<dt class="col-sm-3"><var>SAC<sub>λ</sub></var> = <var>E<sub>λ</sub></var> / d * 100</dt>
-								<dd class="col-sm-9 text-truncate">Spectral Absorption Coefficient [<var>m<sup>-1</sup></var>]</dd>
-
-								<dt class="col-sm-3">c = <var>E<sub>λ</sub></var> / ( <var>ε<sub>λ</sub></var> * d ) = <var>E<sub>λ</sub></var> * F</dt>
-								<dd class="col-sm-9 text-truncate">Concentration of absorbing substance in the liquid [mol/l]</dd>
-
-								<dt class="col-sm-3">F = 1 / ( <var>ε<sub>λ</sub></var> * d )</dt>
-								<dd class="col-sm-9 text-truncate">
-									Factor</br>
-									Test specific
-								</dd>
-
-								<dt class="col-sm-3"><var>ε<sub>λ</sub></var></dt>
-								<dd class="col-sm-9 text-truncate">Molar decadic extinction coefficient [l/mol/cm]</dd>
-
-								<dt class="col-sm-3">d</dt>
-								<dd class="col-sm-9 text-truncate">Thickness of the solution layer [cm]</dd>
-
-								<dt class="col-sm-3">Turbidity</dt>
-								<dd class="col-sm-9 text-truncate">Opacity, clouding, haze</dd>
-
-								<dt class="col-sm-3">FNU</dt>
-								<dd class="col-sm-9 text-truncate">Formazine Nephelometric Unit</dd>
-
-								<dt class="col-sm-3">NTU</dt>
-								<dd class="col-sm-9 text-truncate">Nephelometric Turbidity Unit</dd>
-
-								<dt class="col-sm-3">FAU</dt>
-								<dd class="col-sm-9 text-truncate">Formazine Attenuation Unit</dd>
-							</dl>
-
-							<h5 class="mt-4 mb-4">Measurement methods</h5>
-							<dl class="row">
-								<dt class="col-sm-3">Photometry</dt>
-								<dd class="col-sm-9 text-truncate">
-									Absorbance measurement (transmitted light or absorption measurement)</br>
-									Recommended measuring range: 40–4000 FAU (DIN EN ISO 7027)</br>
-									Light source and detector are located on the same axis (180° angle).</br>
-									The reduced light intensity which remains after passing through the sample is measured
-								</dd>
-								<dt class="col-sm-3">Nephelometry</dt>
-								<dd class="col-sm-9 text-truncate">
-									Scattered light measurement</br>
-									Recommended measuring range: 0–40 FNU (DIN EN ISO 7027)</br>
-									Light source and detector are oriented at an angle of 90° relative to each other
-								</dd>
-							</dl>
-
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
