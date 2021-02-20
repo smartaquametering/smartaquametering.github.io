@@ -7,36 +7,17 @@ function GetColorScale(SelectedColorScale)
 				Name: 'None'
 			};
 			break;
-		case 2:
-			// Measure yellow hues in liquids (DIN ISO 6271)
-			// Calibration standard with 500 mg/l Pt/Co 500 (500 Hazen)
-			//
-			// E430 = 0.115
-			// E455 = 0.135
-			// E480 = 0.115
-			// E510 = 0.06
-			//
-			// (Optical path length: 10 mm)
-			//
-			// Photometrisch wird die Platin-Kobalt Farbzahl nach ASTM D5386-05 aus dem Yellowness-Index nach
-			// ASTM E313-05 berechnet.
-			// Die NULL-Referenz ist dest. Wasser.
-			//
-			// Water and other clear liquids such as plasticizers, solvents and petroleum spirits
-			// Clear oils, chemicals and petrochemicals such as glycerine,
-			// solvents, carbon tetrachloride, and petroleum spirits
-			//
-			ColorScale = {
-				Name: 'Hazen/APHA/PtCo Color Number',
-				Standard: 'ASTM D1209, ASTM D5386-05',
-				Range: '0-1000',
-				ColorSpace: 'CIE-L*a*b*',
-				Reference: 'C/2°',
-				Index: {
-				}
-			};
-			break;
 		case 4:
+			//
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//
+			//
+			// Optical path length: 50 mm
+			//
+			// d = 1
+			// NULL-Reference	Distilled water
+			//
+			// d				Thickness of the solution layer (cuvette) [cm]
 			//
 			// Based on calibrated series of coloured glasses in each of the colours red,
 			// yellow and blue, going from very pale to dark. It is widely used for oils,
@@ -44,7 +25,7 @@ function GetColorScale(SelectedColorScale)
 			// for some light-refl ecting products such as fats and waxes
 			//
 			ColorScale = {
-				Name: 'Lovibond Color System',
+				Name: 'Lovibond Color',
 				Standard: '',
 				Range: 'Ly: 0-120, Lr: 0-20',
 				ColorSpace: 'CIE-L*a*b*',
@@ -54,9 +35,18 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 5:
+			//
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//
 			// Die Ph. Eur.-Farbzahl wird in 50 mm Küvetten basierend
 			// auf DAB 4.00/2.02.02.00 gemessen.
-			// Die NULL-Referenz ist dest. Wasser.
+			//
+			// Optical path length: 50 mm
+			//
+			// d = 1
+			// NULL-Reference	Distilled water
+			//
+			// d				Thickness of the solution layer (cuvette) [cm]
 			//
 			// Das Photometer bestimmt die
 			// DE CIE 1976 Farbabstände der Probe zu allen Kalibrierpunkten. Als Ph. Eur. Farbzahl wird
@@ -67,7 +57,7 @@ function GetColorScale(SelectedColorScale)
 			// Pharmaceutical solutions
 			//
 			ColorScale = {
-				Name: 'European Pharmacopoeia (EP) Color Determination',
+				Name: 'European Pharmacopoeia (EP) Color',
 				Standard: 'Ph. Eur. Method 2.2.2',
 				Range: 'B1-B9, BY1-BY7, Y1-Y7, GY1-GY7, R1-R7',
 				ColorSpace: 'CIE-L*a*b*',
@@ -79,12 +69,20 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 6:
+			//
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//
 			// Optical path length: 50 mm
+			//
+			// d = 1
+			// NULL-Reference	Distilled water
+			//
+			// d				Thickness of the solution layer (cuvette) [cm]
 			//
 			// Pharmaceutical solutions
 			//
 			ColorScale = {
-				Name: 'US Pharmacopoeia (USP) Color Determination',
+				Name: 'US Pharmacopoeia (USP) Color',
 				Standard: 'USP (631) Color and Achromicity',
 				Range: 'A-T',
 				ColorSpace: 'CIE-L*a*b*',
@@ -96,11 +94,19 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 7:
+			//
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//
 			// Optical path length: 50 mm
+			//
+			// d = 1
+			// NULL-Reference	Distilled water
+			//
+			// d				Thickness of the solution layer (cuvette) [cm]
 			//
 			// Pharmaceutical solutions
 			ColorScale = {
-				Name: 'Chinese Pharmacopoeia (CP) Color Determination',
+				Name: 'Chinese Pharmacopoeia (CP) Color',
 				Standard: 'CP Appendix IX A',
 				Range: 'OR1-OR10,OY1-OY10,Y1-Y10,YG1-YG10,BR1-BR10',
 				ColorSpace: 'CIE-L*a*b*',
@@ -111,88 +117,28 @@ function GetColorScale(SelectedColorScale)
 				}
 			};
 			break;
-		case 11:
-			// Die ADMI-Farbzahl ist über DeltaE-Werte von Platin-Kobalt-Lösungen gegen destilliertes Wasser definiert.
-			// 50 mm Küvette
-			//
-			// Eine Lösung mit 50 ADMI-Einheiten weißt also den gleichen E-Wert wie eine
-			// Hazen/APHA/PtCo-Standardlösung mit 50 mg/L Pt auf, kann aber auch rot, grün oder blau
-			// gefärbt sein. Dabei werden die ADMI-Werte basierend auf der Norm AWWA 2120F über ein
-			// Polynom 4. Grades berechnet. Die NULL-Referenz ist dest. Wasser.
-			//
-			// Colored waters and tinted liquids
-			//
-			ColorScale = {
-				Name: 'ADMI Color Number',
-				Standard: 'American Standard Methods 2120 E',
-				Range: '0-500',
-				ColorSpace: 'CIE-L*a*b*',
-				Reference: 'D65/2°',
-				Index: {
-				}
-			};
-			break;
 		case 12:
+			//
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//
+			// d = 1
+			// NULL-Reference	Distilled water
+			//
+			// d				Thickness of the solution layer (cuvette) [cm]
+			//
 			// Quality testing of industrial aromatic hydrocarbons
 			//
+			// For the determination of the acid wash color of benzene, toluene, xylenes,
+			// refined solvent naphthas, and similar industrial aromatic hydrocarbons.
+			//
 			ColorScale = {
-				Name: 'Acid Wash Color Determination',
+				Name: 'Acid Wash Color',
 				Standard: 'ASTM D848',
 				Range: '0-14',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
 				CurveType: 'function',
 				LineWidth: 2,
-				Index: {
-				}
-			};
-			break;
-		case 15:
-			// ASTM D1500-07
-			// https://www.mn-net.com/media/pdf/23/0d/df/Instruction-919600-919650-spectrophotometers-NANOCOLOR-UVVISII-VISII-DE.pdf
-			// Calculated from CIE-XYZ values
-			// Scale: 0.5 - 8
-			// Steps: 0.5
-			// 32,5 mm Küvetten
-			// Die NULL-Referenz ist dest. Wasser.
-			//
-			// ASTM = 0.25 + 0,8695 * ( DeltaX + DeltaY + DeltaZ )
-			//
-			// deltaX = -log(X/98.074)
-			// deltaY = -log(Y/100)
-			// deltaZ = -log(Z/188.232
-			//
-			// A wide range of petroleum products including lubricating oils, heating oils and diesel fuel oils
-			//
-			ColorScale = {
-				Name: 'ASTM-Farbzahl',
-				Standard: 'ASTM D1500, D6045, ISO 2049',
-				Range: '0.5–8',
-				ColorSpace: 'CIE-L*a*b*',
-				Reference: 'C/2°',
-				Index: {
-				}
-			};
-			break;
-		case 16:
-			// Calculated from CIE-L*a*b* or CIE-XYZ values
-			// 50 mm Küvette
-			// Die NULL-Referenz ist dest. Wasser
-			//
-			// Saybolt = alpha + ( beta / log10(deltaE - O)
-			// alpha = 51.1
-			// beta = 44.5
-			// O = 2.55
-			// deltaE = sqrt((100-L*)^2 + a*^2 + b*^2)
-			//
-			// Light Colored petroleum products including aviation fuels, kerosene white mineral oils, hydrocarbon solvents and petroleum waxes
-			//
-			ColorScale = {
-				Name: 'Saybolt-Farbzahl',
-				Standard: '(ASTM D156, ASTM D6045-12, JIS K2580)',
-				Range: '-16 - +30',
-				ColorSpace: 'CIE-L*a*b*',
-				Reference: 'C/2°',
 				Index: {
 				}
 			};
@@ -214,6 +160,9 @@ function GetColorScale(SelectedColorScale)
 			// d				Thickness of the solution layer (cuvette) [cm]
 			// SACλ				Spectral Absorption Coefficient [m-1]
 			//
+			// d = 1
+			// NULL-Reference	Distilled water
+			//
 			// TCS34725			Red channel		=> 615 nm (+/- 15 nm)
 			//					Green channel	=> 525 nm (+/- 35 nm)
 			//					Blue channel	=> 465 nm (+/- 22 nm)
@@ -225,8 +174,8 @@ function GetColorScale(SelectedColorScale)
 				Name: 'Spectral Absorption Coefficient (SAC)',
 				Standard: 'Calculated from Absorbance [m-1]',
 				Range: '',
-				ColorSpace: 'CIE-L*a*b*',
-				Reference: 'C/2°',
+				ColorSpace: 'n/a',
+				Reference: 'n/a',
 				Index: {
 				}
 			};
@@ -248,30 +197,30 @@ function GetColorScale(SelectedColorScale)
 			// Based either on absorption at 430 nm or CIE x y chromaticity co-ordinates
 			//
 			ColorScale = {
-				Name: 'EBC Brewery Color Number',
+				Name: 'EBC Color',
 				Standard: 'EBC MEBAK 2.16.2',
 				Range: '2 – 27',
-				ColorSpace: 'CIE-L*a*b*',
-				Reference: 'C/2°',
+				ColorSpace: 'n/a',
+				Reference: 'n/a',
 				Index: {
 				}
 			};
 			break;
 		case 23:
-			// Calculated from Absorbance (Eλ) => EBC Brewery Color Number
+			// Calculated from Absorbance (Eλ) => EBC Color
 			//
 			// ASBC = 0.375 * EBC + 0.46
 			//
-			// EBC				EBC Brewery Color Number
+			// EBC				EBC Color
 			//
 			// American standard for Color grading of beers
 			//
 			ColorScale = {
-				Name: 'ASBC Brewery Color Number',
+				Name: 'ASBC Color',
 				Standard: 'Calculated from EBC MEBAK 2.16.2',
 				Range: '1.2–10.6',
-				ColorSpace: 'CIE-L*a*b*',
-				Reference: 'C/2°',
+				ColorSpace: 'n/a',
+				Reference: 'n/a',
 				Index: {
 				}
 			};
@@ -316,6 +265,7 @@ function GetColorScale(SelectedColorScale)
 			// red (640 nm),
 			// green (560nm) and
 			// blue (464nm) shares
+			//
 			// d = 1
 			// NULL-Reference	Distilled water
 			//
@@ -329,7 +279,7 @@ function GetColorScale(SelectedColorScale)
 			// Chemicals and surfactant liquids
 			//
 			ColorScale = {
-				Name: 'Hess-Ives Color Number',
+				Name: 'Hess-Ives Color',
 				Standard: 'DGK F050.2',
 				Range: '',
 				ColorSpace: 'CIE-L*a*b*',
@@ -339,15 +289,23 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 26:
+			//
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//
 			// Calculated from Absorbance
 			//
-			// KlettPhot = E470
+			// KlettPhot = 484.23 * E417
 			//
 			// Absorption of a sample liquid in a square cuvette of 4cm (or 2cm) path length measured through a blue filter
 			//
 			// TCS34725			Red channel		=> 615 nm (+/- 15 nm)
 			//					Green channel	=> 525 nm (+/- 35 nm)
 			//					Blue channel	=> 465 nm (+/- 22 nm)
+			//
+			// d = 50 mm
+			// NULL-Reference	Distilled water
+			//
+			// d				Thickness of the solution layer (cuvette) [cm]
 			//
 			// Im Gegensatz zu den ersten europäischen Photometern wird als Messwert nicht
 			// die Transmission oder Extinktion, sondern ein Wert auf einer willkürlichen logarithmischen
@@ -361,7 +319,7 @@ function GetColorScale(SelectedColorScale)
 			// Detergents and surfactants
 			//
 			ColorScale = {
-				Name: 'Klett Color Number',
+				Name: 'Klett Color',
 				Standard: 'AOCS Dd 5-92',
 				Range: '0-1000',
 				ColorSpace: 'CIE-L*a*b*',
@@ -371,51 +329,6 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 31:
-			// Calculation:
-			//
-			// GTM = G1 + GF
-			//
-			// G1 takes the Gardner number of the x value that is lower (xlower)
-			// GF = [(𝑥𝑢𝑝𝑝𝑒𝑟 − 𝑥𝑙𝑜𝑤𝑒𝑟)(𝑥𝑠𝑎𝑚𝑝𝑙𝑒 − 𝑥𝑙𝑜𝑤𝑒𝑟)+(𝑦𝑢𝑝𝑝𝑒𝑟 − 𝑦𝑙𝑜𝑤𝑒𝑟)(𝑦𝑠𝑎𝑚𝑝𝑙𝑒 − 𝑦𝑙𝑜𝑤𝑒𝑟)] / (𝑥𝑢𝑝𝑝𝑒𝑟 − 𝑥𝑙𝑜𝑤𝑒𝑟)+(𝑦𝑢𝑝𝑝𝑒𝑟 − 𝑦𝑙𝑜𝑤𝑒𝑟)
-			//
-			// d = 1
-			// NULL-Reference	Distilled water
-			//
-			// d				Thickness of the solution layer (cuvette) [cm]
-			//
-			// Oils & chemicals ranging from pale yellow to red, including
-			// lecithins, resins, drying oils & fatty acids
-			//
-			ColorScale = {
-				Name: 'Gardner Color Number',
-				Standard: 'Calculated from CIE-xyY values (ASTM Standard D6616 (2012), EN ISO 4630-2)',
-				Range: '0-18',
-				ColorSpace: 'CIE-xyY',
-				Reference: 'C/2°',
-				Index: {
-					'GardnerColor-0': '0.3101, 0.3161, 100',
-					'GardnerColor-1': '0.3177, 0.3303, 80',
-					'GardnerColor-2': '0.3233, 0.3352, 79',
-					'GardnerColor-3': '0.3329, 0.3452, 76',
-					'GardnerColor-4': '0.3437, 0.3644, 75',
-					'GardnerColor-5': '0.3558, 0.3840, 74',
-					'GardnerColor-6': '0.3767, 0.4061, 71',
-					'GardnerColor-7': '0.4044, 0.4352, 67',
-					'GardnerColor-8': '0.4207, 0.4498, 64',
-					'GardnerColor-9': '0.4340, 0.4640, 61',
-					'GardnerColor-10': '0.4503, 0.4760, 57',
-					'GardnerColor-11': '0.4842, 0.4818, 45',
-					'GardnerColor-12': '0.5077, 0.4638, 36',
-					'GardnerColor-13': '0.5392, 0.4458, 30',
-					'GardnerColor-14': '0.5646, 0.4270, 22',
-					'GardnerColor-15': '0.5857, 0.4089, 16',
-					'GardnerColor-16': '0.6047, 0.3921, 11',
-					'GardnerColor-17': '0.6290, 0.3701, 6',
-					'GardnerColor-18': '0.6477, 0.3521, 4'
-				}
-			};
-			break;
-		case 32:
 			// Calculated from CIE-L*a*b* or CIE-XYZ values
 			//
 			// Yi = 100 * ( Tx - Tz ) / Ty
@@ -495,10 +408,11 @@ function GetColorScale(SelectedColorScale)
 			//
 			// For transparent liquids
 			// Determination of the degree of yellowness under daylight illumination
-			// Calculated from X Y Z tristimulus values
+			//
+			// (ASTM D 5386-93b, ASTM E313-05)
 			//
 			ColorScale = {
-				Name: 'Yellowness Index (ASTM D 5386-93b, ASTM E313-05)',
+				Name: 'Yellowness Index',
 				Standard: 'ASTM E 313-05, ASTM D1925 (deprecated)',
 				Range: '0-???',
 				ColorSpace: 'CIE XYZ-tristimulus values',
@@ -508,20 +422,97 @@ function GetColorScale(SelectedColorScale)
 			};
 			break;
 		case 32:
+			//
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//
+			// Measure yellow hues in liquids (DIN ISO 6271)
+			// Calibration standard with 500 mg/l Pt/Co 500 (500 Hazen)
+			//
+			// E430 = 0.115
+			// E455 = 0.135
+			// E480 = 0.115
+			// E510 = 0.06
+			//
+			// Optical path length: 10 mm
+			//
+			// d = 1
+			// NULL-Reference	Distilled water
+			//
+			// d				Thickness of the solution layer (cuvette) [cm]
+			//
+			// Photometrisch wird die Platin-Kobalt Farbzahl nach ASTM D5386-05 aus dem Yellowness-Index nach
+			// ASTM E313-05 berechnet.
+			// Die NULL-Referenz ist dest. Wasser.
+			//
+			// Water and other clear liquids such as plasticizers, solvents and petroleum spirits
+			// Clear oils, chemicals and petrochemicals such as glycerine,
+			// solvents, carbon tetrachloride, and petroleum spirits
+			//
+			ColorScale = {
+				Name: 'Platinum-Cobalt/Hazen/APHA Color',
+				Standard: 'ASTM D1209, ASTM D5386-05',
+				Range: '0-500',
+				ColorSpace: 'CIE-L*a*b*',
+				Reference: 'C/2°',
+				Index: {
+				}
+			};
+			break;
+		case 33:
+			//
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//
+			// Die ADMI-Farbzahl ist über DeltaE-Werte von Platin-Kobalt-Lösungen gegen destilliertes Wasser definiert.
+			// 50 mm Küvette
+			//
+			// d = 1
+			// NULL-Reference	Distilled water
+			//
+			// d				Thickness of the solution layer (cuvette) [cm]
+			//
+			// Eine Lösung mit 50 ADMI-Einheiten weißt also den gleichen E-Wert wie eine
+			// Hazen/APHA/PtCo-Standardlösung mit 50 mg/L Pt auf, kann aber auch rot, grün oder blau
+			// gefärbt sein. Dabei werden die ADMI-Werte basierend auf der Norm AWWA 2120F über ein
+			// Polynom 4. Grades berechnet. Die NULL-Referenz ist dest. Wasser.
+			//
+			// Developed by the American Dye Manufacturers Institute, the ADMI scale uses a spectral or a
+			// tristimulus method to calculate a single colour value that is independent of hue. It is
+			// typically used for tinted effluents with colour characteristics that are significantly different
+			// from the widely used Pt-Co/Hazen/APHA/Hazen Units.
+			//
+			// Colored waters and tinted liquids
+			//
+			ColorScale = {
+				Name: 'ADMI Color',
+				Standard: 'American Standard Methods 2120 E',
+				Range: '0-500',
+				ColorSpace: 'CIE-L*a*b*',
+				Reference: 'D65/2°',
+				Index: {
+				}
+			};
+			break;
+		case 34:
+			//
+			// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//
 			// Fig. 15 shows the color graphs of the Iodine, Hazen (APHA) and Gardner scales in the CIE-Labcolor space
 			// referred to a cuvette path length of 10mm.
 			// The differences in the color hue between the scales are evident here.
 			//
 			// Das Photometer berechnet die Iodfarbzahl über ein Polynom 3. Grades aus dem Yellowness-Index
-			// 10 mm Küvette
-			// Die NULL-Referenz ist dest. Wasser.
+			//
+			// d = 1
+			// NULL-Reference	Distilled water
+			//
+			// d				Thickness of the solution layer (cuvette) [cm]
 			//
 			// Solvents, plasticisers, resins, oils and fatty acids ranging from yellow to brown.
-			// For colours registering 1 – 500 units
+			//
 			// For 1 or less on the Iodine scale, the Pt-Co Colour scale is applicable
 			//
 			ColorScale = {
-				Name: 'Iodine Color Number',
+				Name: 'Iodine Color',
 				Standard: 'mg of iodine per 100ml potassium iodide solution (DIN 6162)',
 				Range: '0-500',
 				Interval: 10,
@@ -544,6 +535,111 @@ function GetColorScale(SelectedColorScale)
 					'IodineColor-30': '100, -5, 86',
 					'IodineColor-50': '100, 6, 99',
 					'IodineColor-90': '100, 19, 104'
+				}
+			};
+			break;
+		case 35:
+			// Calculation:
+			//
+			// GTM = G1 + GF
+			//
+			// G1 takes the Gardner number of the x value that is lower (xlower)
+			// GF = [(𝑥𝑢𝑝𝑝𝑒𝑟 − 𝑥𝑙𝑜𝑤𝑒𝑟)(𝑥𝑠𝑎𝑚𝑝𝑙𝑒 − 𝑥𝑙𝑜𝑤𝑒𝑟)+(𝑦𝑢𝑝𝑝𝑒𝑟 − 𝑦𝑙𝑜𝑤𝑒𝑟)(𝑦𝑠𝑎𝑚𝑝𝑙𝑒 − 𝑦𝑙𝑜𝑤𝑒𝑟)] / (𝑥𝑢𝑝𝑝𝑒𝑟 − 𝑥𝑙𝑜𝑤𝑒𝑟)+(𝑦𝑢𝑝𝑝𝑒𝑟 − 𝑦𝑙𝑜𝑤𝑒𝑟)
+			//
+			// d = 1
+			// NULL-Reference	Distilled water
+			//
+			// d				Thickness of the solution layer (cuvette) [cm]
+			//
+			// Oils & chemicals ranging from pale yellow to red, including
+			// lecithins, resins, drying oils & fatty acids
+			//
+			ColorScale = {
+				Name: 'Gardner Color',
+				Standard: 'Calculated from CIE-xyY values (ASTM Standard D6616 (2012), EN ISO 4630-2)',
+				Range: '0-18',
+				ColorSpace: 'CIE-xyY',
+				Reference: 'C/2°',
+				Index: {
+					'GardnerColor-0': '0.3101, 0.3161, 100',
+					'GardnerColor-1': '0.3177, 0.3303, 80',
+					'GardnerColor-2': '0.3233, 0.3352, 79',
+					'GardnerColor-3': '0.3329, 0.3452, 76',
+					'GardnerColor-4': '0.3437, 0.3644, 75',
+					'GardnerColor-5': '0.3558, 0.3840, 74',
+					'GardnerColor-6': '0.3767, 0.4061, 71',
+					'GardnerColor-7': '0.4044, 0.4352, 67',
+					'GardnerColor-8': '0.4207, 0.4498, 64',
+					'GardnerColor-9': '0.4340, 0.4640, 61',
+					'GardnerColor-10': '0.4503, 0.4760, 57',
+					'GardnerColor-11': '0.4842, 0.4818, 45',
+					'GardnerColor-12': '0.5077, 0.4638, 36',
+					'GardnerColor-13': '0.5392, 0.4458, 30',
+					'GardnerColor-14': '0.5646, 0.4270, 22',
+					'GardnerColor-15': '0.5857, 0.4089, 16',
+					'GardnerColor-16': '0.6047, 0.3921, 11',
+					'GardnerColor-17': '0.6290, 0.3701, 6',
+					'GardnerColor-18': '0.6477, 0.3521, 4'
+				}
+			};
+			break;
+		case 36:
+			// ASTM D1500-07
+			// https://www.mn-net.com/media/pdf/23/0d/df/Instruction-919600-919650-spectrophotometers-NANOCOLOR-UVVISII-VISII-DE.pdf
+			// Calculated from CIE-XYZ values
+			// Scale: 0.5 - 8
+			// Steps: 0.5
+			// 32,5 mm Küvetten
+			// Die NULL-Referenz ist dest. Wasser.
+			//
+			// d = 1
+			// NULL-Reference	Distilled water
+			//
+			// d				Thickness of the solution layer (cuvette) [cm]
+			//
+			// ASTM = 0.25 + 0.8695 * ( DeltaX + DeltaY + DeltaZ )
+			//
+			// deltaX = -log(X/98.074)
+			// deltaY = -log(Y/100)
+			// deltaZ = -log(Z/118.232
+			//
+			// A wide range of petroleum products including lubricating oils, heating oils and diesel fuel oils
+			//
+			ColorScale = {
+				Name: 'ASTM Color',
+				Standard: 'ASTM D1500, D6045, ISO 2049',
+				Range: '0.5–8',
+				ColorSpace: 'CIE-L*a*b*',
+				Reference: 'C/2°',
+				Index: {
+				}
+			};
+			break;
+		case 37:
+			// Calculated from CIE-L*a*b*
+			// 50 mm Küvette
+			// Die NULL-Referenz ist dest. Wasser
+			//
+			// Saybolt = alpha + ( beta / log10(deltaE - O)
+			// alpha = 51.1
+			// beta = 44.5
+			// O = 2.55
+			// deltaE = sqrt((100-L*)^2 + a*^2 + b*^2)
+			//
+			// d = 1
+			// NULL-Reference	Distilled water
+			//
+			// d				Thickness of the solution layer (cuvette) [cm]
+			//
+			// Light Colored petroleum products including aviation fuels, kerosene white mineral oils, hydrocarbon solvents and petroleum waxes
+			//
+			ColorScale = {
+				Name: 'Saybolt Color',
+				Standard: '(ASTM D156, ASTM D6045-12, JIS K2580)',
+				Range: '-16 - +30',
+				ColorSpace: 'CIE-L*a*b*',
+				Reference: 'C/2°',
+				Index: {
 				}
 			};
 			break;
