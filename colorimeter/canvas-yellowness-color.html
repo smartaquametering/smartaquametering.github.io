@@ -55,7 +55,47 @@
 					for (x = 0; x <= canvas.width; x++) {
 						for (y = 0; y <= canvas.height; y++) {
 							let LAB = {mode: 'lab', l: L, a: -150+300*x/canvas.width, b: 150-300*y/canvas.height};
-							ctx.fillStyle = culori.formatRgb(LAB);
+							let XYZ = culori.xyz(LAB);
+							YI = ((100 * (1.2769 * XYZ.x - 1.0592 * XYZ.z)) / XYZ.y).toFixed(0)
+							if (YI == 0.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 50.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 100.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 150.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 200.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 250.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 300.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 350.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 400.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 450.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 500.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 550.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 600.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 650.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 700.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 750.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 800.0) {
+								ctx.fillStyle = '#000000';
+							} else if (YI == 850.0) {
+								ctx.fillStyle = '#000000';
+							} else {
+								ctx.fillStyle = culori.formatRgb(LAB);
+							}
 							ctx.fillRect(x, y, 1, 1);
 						}
 					}
