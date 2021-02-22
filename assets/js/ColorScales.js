@@ -241,6 +241,7 @@ function GetColorScale(SelectedColorScale)
 				Range: '0-850',
 				ColorSpace: 'CIE XYZ-tristimulus values',
 				Reference: 'C/2°',
+				Background: '',
 				Index: {
 				}
 			};
