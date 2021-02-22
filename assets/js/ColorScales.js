@@ -235,6 +235,11 @@ function GetColorScale(SelectedColorScale)
 			//
 			// (ASTM D 5386-93b, ASTM E313-05)
 			//
+
+			var Cx = 1.2769;
+			var Cz = 1.0592;
+			var YI = (100 * (Cx * X - Cz * Z)) / Y;
+
 			ColorScale = {
 				Name: 'Yellowness Index',
 				Standard: 'ASTM E 313-05, ASTM D1925 (deprecated)',
@@ -242,6 +247,7 @@ function GetColorScale(SelectedColorScale)
 				ColorSpace: 'CIE XYZ-tristimulus values',
 				Reference: 'C/2°',
 				Background: 'cieLab-L100-YellownessColor.png',
+				Value: YI,
 				Index: {
 				}
 			};

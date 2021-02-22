@@ -9,6 +9,7 @@ var CopyrightPath='https://github.com/smartaquametering/smartPhotometer/blob/mai
 var Release=Repository+' - '+VersionNumber+' ('+VersionDate+')';
 
 var AssetsPath='https://smartaquametering.github.io/assets/';
+var ImagesPath=AssetsPath+'images/';
 
 var SelectedSourceWhite;
 var SelectedRefWhite;
@@ -724,7 +725,7 @@ $(function() {
 			CIEChart.draw(CIEYxyChartData, CIEYxyChartOptions);
 			// This two lines are the ones that do the magic to load the background image to the proper chart position
 			var boundingBox = CIEChart.getChartLayoutInterface().getChartAreaBoundingBox(); 
-			$('#CIEChartBackground').css('background-image', "url('"+AssetsPath+"/images/cieLab.png')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
+			$('#CIEChartBackground').css('background-image', "url('"+ImagesPath+ColorScale.Background"')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
 		}
 	}
 
