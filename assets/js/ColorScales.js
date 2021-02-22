@@ -249,7 +249,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				Background: 'cieLab-L100-YellownessColor.png',
 				Value: YI,
 				Index: {
-					window['YellownessIndex-'+YI]: 'L: SensorLab.L, a: SensorLab.a, b: SensorLab.b' 
+					'YellownessIndex-'+YI: 'L: SensorLab.L, a: SensorLab.a, b: SensorLab.b' 
 				}
 			};
 			break;
