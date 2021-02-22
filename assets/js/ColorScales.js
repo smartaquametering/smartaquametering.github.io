@@ -527,6 +527,7 @@ function GetColorScale(SelectedColorScale)
 				Range: 'B1-B9, BY1-BY7, Y1-Y7, GY1-GY7, R1-R7',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
+				Background: 'cieLab-L100.png',
 				CurveType: 'function',
 				LineWidth: 2,
 				Index: {
@@ -552,6 +553,7 @@ function GetColorScale(SelectedColorScale)
 				Range: 'A-T',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
+				Background: 'cieLab-L100.png',
 				CurveType: 'none',
 				LineWidth: 0,
 				Index: {
@@ -576,6 +578,7 @@ function GetColorScale(SelectedColorScale)
 				Range: 'OR1-OR10,OY1-OY10,Y1-Y10,YG1-YG10,BR1-BR10',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'C/2°',
+				Background: 'cieLab-L100.png',
 				CurveType: 'function',
 				LineWidth: 2,
 				Index: {
@@ -589,6 +592,7 @@ function GetColorScale(SelectedColorScale)
 				Range: '1-24',
 				ColorSpace: 'CIE-L*a*b*',
 				Reference: 'D65/2°',
+				Background: 'cieLab-L100.png',
 				CurveType: 'none',
 				LineWidth: 0,
 				Index: {
