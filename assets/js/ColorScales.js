@@ -238,7 +238,7 @@ function GetColorScale(SelectedColorScale)
 
 			var Cx = 1.2769;
 			var Cz = 1.0592;
-			var YI = (100 * (Cx * X - Cz * Z)) / Y;
+			var YI = (100 * (Cx * SensorXYZ.X - Cz * SensorXYZ.Z)) / SensorXYZ.Y;
 
 			ColorScale = {
 				Name: 'Yellowness Index',
