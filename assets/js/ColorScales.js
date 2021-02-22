@@ -1,4 +1,4 @@
-function GetColorScale(SelectedColorScale)
+function GetColorScale(SelectedColorScale, SensorLab)
 {
 	switch (SelectedColorScale)
 	{
