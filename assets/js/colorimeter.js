@@ -17,6 +17,22 @@ var SelectedRGBModel;
 var SelectedAdaptationMethod;
 var SelectedColorScale;
 
+
+var SensorXYZ = {};
+var SensorxyY = {};
+var SensorRGB = {};
+var SensorLab = { L: 100, a: 0, b: 0 };
+
+var SensorCCT = {};
+
+var SampleXYZ = {};
+var SampleLab = {};
+var SampleCCT = {};
+
+var EmptySampleXYZ = {};
+var EmptySampleLab = {};
+var EmptySampleCCT = {};
+
 $(function() {
 	document.getElementById('Logo').src=AssetsPath+'images/logo.png';
 	document.getElementById('AboutModalBanner').href=RepositoryPath;
@@ -36,21 +52,6 @@ $(function() {
 	document.getElementById('FooterRepository').innerHTML=Repository+' - '+VersionNumber;
 	document.getElementById('FooterOwner').href=OwnerPath;
 	document.getElementById('FooterOwner').innerHTML=Owner;
-
-	var SensorXYZ = {};
-	var SensorxyY = {};
-	var SensorRGB = {};
-	var SensorLab = {};
-
-	var SensorCCT = {};
-
-	var SampleXYZ = {};
-	var SampleLab = {};
-	var SampleCCT = {};
-
-	var EmptySampleXYZ = {};
-	var EmptySampleLab = {};
-	var EmptySampleCCT = {};
 
 	var swaction=0;
 	var ProtocolID=0;
@@ -519,7 +520,7 @@ $(function() {
 	});
 	$('#ColorScale').change(function() {
 		SelectedColorScale = parseInt($(this).prop('value'));
-		GetColorScale(SelectedColorScale);
+		GetColorScale(SelectedColorScale, SensorLab);
 	});
 	function UpdateSensorData() {
 
@@ -685,10 +686,16 @@ $(function() {
 			CIEYxyChartData.addColumn({type:'string', role:'tooltip', 'p': {'html': true}});
 			CIEYxyChartData.addColumn('number', ColorScale.Name);
 			CIEYxyChartData.addColumn({type:'string', role:'tooltip', 'p': {'html': true}});
-			CIEYxyChartData.addRows([
-				[parseFloat(SensorLab.a), parseFloat(SensorLab.b), '<div style="background-color: ' + culori.formatHex(SensorColor) + ' ;opacity: 100; text-align: left; min-width: 100px; padding: 8px;"><b>Sensor</b><br><br>L: ' + SensorLab.L + '<br>a: ' + SensorLab.a + '<br>b: ' + SensorLab.a + '</div>', null, null],
-			]);
 
+			if (!ColorScale.Value) {
+				CIEYxyChartData.addRows([
+					[parseFloat(SensorLab.a), parseFloat(SensorLab.b), '<div style="background-color: ' + culori.formatHex(SensorColor) + ' ;opacity: 100; text-align: left; min-width: 100px; padding: 8px;"><b>Sensor</b><br><br>L: ' + SensorLab.L + '<br>a: ' + SensorLab.a + '<br>b: ' + SensorLab.b + '</div>', null, null],
+				]);
+			} else {
+				CIEYxyChartData.addRows([
+					[parseFloat(SensorLab.a), parseFloat(SensorLab.b), '<div style="background-color: ' + culori.formatHex(SensorColor) + ' ;opacity: 100; text-align: left; min-width: 100px; padding: 8px;"><b>Sensor</b><br><br>L: ' + SensorLab.L + '<br>a: ' + SensorLab.a + '<br>b: ' + SensorLab.b + '<br><br>' + ColorScale.Name + ': ' + ColorScale.Value + '</div>', null, null],
+				]);
+			}
 			let ReferenceColors = Object.entries(ColorScale.Index).map(entry => {
 				let ReferenceName = entry[0];
 				let values = entry[1].split(/\s*,\s*/);
@@ -718,14 +725,14 @@ $(function() {
 				tooltip: { isHtml: true },
 				series: {
 					0:{type: 'line', color: 'black', visibleInLegend: true, lineWidth: 0, pointShape: { type: 'star', sides: 5, dent: 0.2 }, pointSize: 18},
-					1:{type: 'line', color: 'grey', visibleInLegend: true, lineWidth: ColorScale.LineWidth, curveType: ColorScale.CurveType, pointSize: 3}
+					1:{type: 'line', color: 'grey', visibleInLegend: true, lineWidth: ColorScale.ChartLineWidth, curveType: ColorScale.ChartCurveType, pointSize: 3}
 				}
 			};
 			var CIEChart = new google.visualization.LineChart(document.getElementById('CIEChart'));
 			CIEChart.draw(CIEYxyChartData, CIEYxyChartOptions);
 			// This two lines are the ones that do the magic to load the background image to the proper chart position
 			var boundingBox = CIEChart.getChartLayoutInterface().getChartAreaBoundingBox(); 
-			$('#CIEChartBackground').css('background-image', "url('"+ImagesPath+ColorScale.Background"')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
+			$('#CIEChartBackground').css('background-image', "url('"+ImagesPath+ColorScale.ChartBackground+"')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
 		}
 	}
 
@@ -733,7 +740,7 @@ $(function() {
 
 		if (ColorScale.Name == "None") {
 			return({Note: 'No color scale selected'});
-		} else if (Color.Reference != ColorScale.Reference) {
+		} else if (Color.Reference != ColorScale.ColorReference) {
 			return({Note: 'Reference White mismatch'});
 		}
 
