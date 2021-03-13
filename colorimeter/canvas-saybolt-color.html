@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<!-- Culori color library for JavaScript -->
+		<script src="https://cdn.jsdelivr.net/npm/culori@0.18.0/build/culori.umd.min.js"></script>
+
+	</head>
+	<body>
+
+		<h4 class="mt-4 mb-4">Saybolt Color (ASTM D156, ASTM D6045-20) in CIE-L*a*b* color space</h4>
+
+		Standard: ASTM D156, ASTM D6045-20</br>
+		Range: -16-30</br>
+		Reference: C/2°</br>
+
+		<p>L = [100], a = [-150..+150], b = [-150..+150]</p>
+		<canvas id="CIELab100" width=600 height=600></canvas>
+
+		<p>L = [75], a = [-150..+150], b = [-150..+150]</p>
+		<canvas id="CIELab75" width=600 height=600></canvas>
+
+		<p>L = [50], a = [-150..+150], b = [-150..+150]</p>
+		<canvas id="CIELab50" width=600 height=600></canvas>
+
+		<p>L = [25], a = [-150..+150], b = [-150..+150]</p>
+		<canvas id="CIELab25" width=600 height=600></canvas>
+
+		<p>L = [0], a = [-150..+150], b = [-150..+150]</p>
+		<canvas id="CIELab0" width=600 height=600></canvas>
+
+		<script>
+
+			var canvas100 = document.getElementById("CIELab100");
+			var ctx100 = canvas100.getContext("2d");
+			ctx100 = printCanvas(canvas100, ctx100, 100);
+
+			var canvas75 = document.getElementById("CIELab75");
+			var ctx75 = canvas75.getContext("2d");
+			ctx75 = printCanvas(canvas75, ctx75, 75);
+
+			var canvas50 = document.getElementById("CIELab50");
+			var ctx50 = canvas50.getContext("2d");
+			ctx50 = printCanvas(canvas50, ctx50, 50);
+
+			var canvas25 = document.getElementById("CIELab25");
+			var ctx25 = canvas25.getContext("2d");
+			ctx25 = printCanvas(canvas25, ctx25, 25);
+
+			var canvas0 = document.getElementById("CIELab0");
+			var ctx0 = canvas0.getContext("2d");
+			ctx0 = printCanvas(canvas0, ctx0, 0);
+
+			function printCanvas(canvas, ctx, L) {
+				var x;
+				var y;
+				var Tx = -5;
+				var Ty = -5;
+				var DMin = 0.985;
+				var DMax = 1.015;
+
+				var Saybolt;
+				var DeltaE;
+
+				var Index=new Array();
+
+				for (x = 0; x <= canvas.width; x++) {
+					for (y = 0; y <= canvas.height; y++) {
+						let Lab = {mode: 'lab', l: L, a: -150+300*x/canvas.width, b: 150-300*y/canvas.height};
+
+						DeltaE = Math.sqrt(Math.pow((100 - Lab.l), 2) + Math.pow(Lab.a, 2) + Math.pow(Lab.b, 2));
+						Saybolt = (51.1 + 44.5 / (Math.log10(DeltaE) - 2.55)).toFixed(2);
+
+						ctx.fillStyle = 'DimGrey';
+
+						if (Saybolt >= 30 * DMin && Saybolt <= 30 * DMax) {
+							if (!Index[0]) {
+								Index[0]=new Array();
+								Index[0]['Color'] = 30;
+								Index[0]['x'] = x + Tx;
+								Index[0]['y'] = y + Ty;
+							}
+						} else if (Saybolt >= 25 * DMin && Saybolt <= 25 * DMax) {
+						ctx.fillStyle = 'Gainsboro';
+						} else if (Saybolt >= 20 * DMin && Saybolt <= 20 * DMax) {
+							if (!Index[1]) {
+								Index[1]=new Array();
+								Index[1]['Color'] = 20;
+								Index[1]['x'] = x + Tx;
+								Index[1]['y'] = y + Ty;
+							}
+						} else if (Saybolt >= 15 * DMin && Saybolt <= 15 * DMax) {
+						ctx.fillStyle = 'Gainsboro';
+						} else if (Saybolt >= 10 * DMin && Saybolt <= 10 * DMax) {
+							if (!Index[2]) {
+								Index[2]=new Array();
+								Index[2]['Color'] = 10;
+								Index[2]['x'] = x + Tx;
+								Index[2]['y'] = y + Ty;
+							}
+						} else if (Saybolt >= 5 * DMin && Saybolt <= 5 * DMax) {
+						ctx.fillStyle = 'Gainsboro';
+						} else if (Saybolt >= 0 * DMin && Saybolt <= 0 * DMax) {
+							if (!Index[3]) {
+								Index[3]=new Array();
+								Index[3]['Color'] = 0;
+								Index[3]['x'] = x + Tx;
+								Index[3]['y'] = y + Ty;
+							}
+						} else if (Saybolt >= -5 * DMax && Saybolt <= -5 * DMin) {
+						ctx.fillStyle = 'Gainsboro';
+						} else if (Saybolt >= -10 * DMax && Saybolt <= -10 * DMin) {
+							if (!Index[4]) {
+								Index[4]=new Array();
+								Index[4]['Color'] = -10;
+								Index[4]['x'] = x + Tx;
+								Index[4]['y'] = y + Ty;
+							}
+						} else if (Saybolt >= -16 * DMax && Saybolt <= -16 * DMin) {
+						ctx.fillStyle = 'Gainsboro';
+							if (!Index[5]) {
+								Index[5]=new Array();
+								Index[5]['Color'] = -16;
+								Index[5]['x'] = x + Tx;
+								Index[5]['y'] = y + Ty;
+							}
+						} else {
+							ctx.fillStyle = culori.formatRgb(Lab);
+						}
+						ctx.fillRect(x, y, 1, 1);
+//console.log(Saybolt);
+					}
+				}
+				ctx.font = "14px Arial";
+				ctx.fillStyle = "black";
+
+				if (Index[0]) {	ctx.fillText(Index[0]['Color'], Index[0]['x'], Index[0]['y']); }
+				if (Index[1]) {	ctx.fillText(Index[1]['Color'], Index[1]['x'], Index[1]['y']); }
+				if (Index[2]) {	ctx.fillText(Index[2]['Color'], Index[2]['x'], Index[2]['y']); }
+				if (Index[3]) {	ctx.fillText(Index[3]['Color'], Index[3]['x'], Index[3]['y']); }
+				if (Index[4]) {	ctx.fillText(Index[4]['Color'], Index[4]['x'], Index[4]['y']); }
+				if (Index[5]) {	ctx.fillText(Index[5]['Color'], Index[5]['x'], Index[5]['y']); }
+				if (Index[6]) {	ctx.fillText(Index[6]['Color'], Index[6]['x'], Index[6]['y']); }
+				if (Index[7]) {	ctx.fillText(Index[7]['Color'], Index[7]['x'], Index[7]['y']); }
+				if (Index[8]) {	ctx.fillText(Index[8]['Color'], Index[8]['x'], Index[8]['y']); }
+
+				return(ctx);
+			}
+
+			//To check if an array is empty using javascript
+			function arrayIsEmpty(array){
+				//If it's not an array, return FALSE.
+				if(!Array.isArray(array)){
+					return FALSE;
+				}
+				//If it is an array, check its length property
+				if(array.length == 0){
+					//Return TRUE if the array is empty
+					return true;
+				}
+				//Otherwise, return FALSE.
+				return false;
+			}
+		</script>
+	</body>
+</html>
