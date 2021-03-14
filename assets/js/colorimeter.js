@@ -17,7 +17,6 @@ var SelectedRGBModel;
 var SelectedAdaptationMethod;
 var SelectedColorScale;
 
-
 var SensorXYZ = {};
 var SensorxyY = {};
 var SensorRGB = {};
@@ -33,26 +32,39 @@ var EmptySampleXYZ = {};
 var EmptySampleLab = {};
 var EmptySampleCCT = {};
 
-$(function() {
-	document.getElementById('Logo').src=AssetsPath+'images/logo.png';
-	document.getElementById('AboutModalBanner').href=RepositoryPath;
-	document.getElementById('AboutModalBannerImg').src=AssetsPath+'images/banner.png';
-	document.getElementById('AboutSupport').href=RepositoryPath;
-	document.getElementById('AboutSupport').innerHTML=RepositoryPath;
-	document.getElementById('AboutRepository').href=RepositoryPath;
-	document.getElementById('AboutRepository').innerHTML=RepositoryPath;
-	document.getElementById('AboutCopyright').href=CopyrightPath;
-	document.getElementById('AboutCopyright').innerHTML=Copyright;
-	document.getElementById('AboutOwner').href=OwnerPath;
-	document.getElementById('AboutOwner').innerHTML=Owner;
-	document.getElementById('AboutRelease').innerHTML=Release;
-	document.getElementById('HelpModalBanner').href=RepositoryPath;
-	document.getElementById('HelpModalBannerImg').src=AssetsPath+'images/banner.png';
-	document.getElementById('FooterRepository').href=RepositoryPath;
-	document.getElementById('FooterRepository').innerHTML=Repository+' - '+VersionNumber;
-	document.getElementById('FooterOwner').href=OwnerPath;
-	document.getElementById('FooterOwner').innerHTML=Owner;
+function LedSwitches(state) {
+	for (i = 2; i < 5; i++) {
+		var switchid = "#switch_" + i;
+		$(switchid).bootstrapToggle(state);
+	}
+};
 
+function trigger() {
+	LedSwitches('enable');
+	$('select').selectpicker();
+
+	$('#SourceWhite').trigger('change');
+	$('#RefWhite').trigger('change');
+	$('#RGBModel').trigger('change');
+	$('#Adaptation').trigger('change');
+	$('#ColorScale').trigger('change');
+};
+
+$(document).ready(function(){
+	trigger();
+});
+
+jQuery.event.special.mousewheel = {
+	setup: function( _, ns, handle ) {
+		this.addEventListener('mousewheel', handle, { passive: !ns.includes('noPreventDefault') });
+	}
+};
+
+window.onbeforeunload = function() {
+	return "Dude, are you sure you want to leave? Think of the kittens!";
+}
+
+function DocumentOnLoad() {
 	var swaction=0;
 	var ProtocolID=0;
 	var ProtocolData=[];
@@ -147,85 +159,49 @@ $(function() {
 			SensorData[8]['Parameter']='<b>Nearest color(s)</b>';
 			SensorData[8]['MeasuredValue']='';
 			SensorData[8]['ScaledValue']='';
-	function loopDeLoop(e,s){
-		var a,l,o=0;
-		isNaN(s)&&(s=1),null==e&&(e=1e3);
-		var n=setInterval(function(){
-			o>0?clearInterval(n):++s>1?o=1:(fetch("./json?view=sensorupdate").then(function(s){
-				var o;200===s.status?s.json().then(function(s){
-					for(e=s.TTL,a=0;a<s.Sensors.length;a++)
-						if(s.Sensors[a].hasOwnProperty("TaskValues"))
-							for(l=0;l<s.Sensors[a].TaskValues.length;l++)
-								try{o=s.Sensors[a].TaskValues[l].Value}catch(e){o=e.name}finally{
-									if("TypeError"!==o){
-										tempValue=s.Sensors[a].TaskValues[l].Value;
-										if(s.Sensors[a].TaskNumber<3){
-											decimalsValue=s.Sensors[a].TaskValues[l].NrDecimals;
-											tempValue=parseFloat(tempValue).toFixed(decimalsValue);
-											if (s.Sensors[a].TaskNumber==1) {
-//												SensorData[(s.Sensors[a].TaskValues[l].ValueNumber-1)]['MeasuredValue']=tempValue;
-												if (s.Sensors[a].TaskValues[l].ValueNumber==1) {
-													SensorXYZ.X = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==2) {
-													SensorXYZ.Y = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==3) {
-													SensorXYZ.Z = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==4) {
-													SensorCCT.Sensor = parseFloat(tempValue);
-												}
-											} else if (s.Sensors[a].TaskNumber==2 && $('#switch_2').prop('checked')===true) {
-												if (s.Sensors[a].TaskValues[l].ValueNumber==1) {
-													EmptySampleXYZ.X = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==2) {
-													EmptySampleXYZ.Y = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==3) {
-													EmptySampleXYZ.Z = parseFloat(tempValue);
-												}
-											} else if (s.Sensors[a].TaskNumber==2 && $('#switch_3').prop('checked')===true) {
-												if (s.Sensors[a].TaskValues[l].ValueNumber==1) {
-													SampleXYZ.X = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==2) {
-													SampleXYZ.Y = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==3) {
-													SampleXYZ.Z = parseFloat(tempValue);
-												}
-											}
-										} else {
-											var sw="switch_"+(s.Sensors[a].TaskNumber);
-											var swd=document.getElementById(sw);
-											if (tempValue==0 && $(swd).prop('checked')===true && swaction==0) {
-												$(swd).bootstrapToggle('enable', false);
-												$(swd).bootstrapToggle('off', false);
-											} else if (tempValue==0 && sw=="switch_3" && swaction==0 && $('#switch_2').prop('checked')===true) {
-												$('#switch_2').bootstrapToggle('enable', false);
-												$('#switch_2').bootstrapToggle('off', false);
-											} else if (tempValue==0 && $(swd).prop('checked')===true) {
-												swaction = 0;
-											} else if (tempValue==1 && $(swd).prop('checked')===false && swaction==0) {
-												$(swd).bootstrapToggle('on', false);
-											} else if ($(swd).prop('checked')===false) {
-												swaction = 0;
-											};
-										}
-									}
-								}
-								e=s.TTL,
-								clearInterval(n),
-								UpdateSensorData(),
-								AppendLogData(),
-								loopDeLoop(e,0)
-				}):console.log("Looks like there was a problem. Status Code: "+s.status)
-			}).catch(function(s){
-			}),o=1
-		)},e)
-	}loopDeLoop(1e3,0);
 
-	function LedSwitches(state) {
-		for (i = 2; i < 5; i++) {
-			var switchid = "#switch_" + i;
-			$(switchid).bootstrapToggle(state);
-		}
-	};
+	document.getElementById('Logo').src=AssetsPath+'images/logo.png';
+	document.getElementById('AboutModalBanner').href=RepositoryPath;
+	document.getElementById('AboutModalBannerImg').src=AssetsPath+'images/banner.png';
+	document.getElementById('AboutSupport').href=RepositoryPath;
+	document.getElementById('AboutSupport').innerHTML=RepositoryPath;
+	document.getElementById('AboutRepository').href=RepositoryPath;
+	document.getElementById('AboutRepository').innerHTML=RepositoryPath;
+	document.getElementById('AboutCopyright').href=CopyrightPath;
+	document.getElementById('AboutCopyright').innerHTML=Copyright;
+	document.getElementById('AboutOwner').href=OwnerPath;
+	document.getElementById('AboutOwner').innerHTML=Owner;
+	document.getElementById('AboutRelease').innerHTML=Release;
+	document.getElementById('HelpModalBanner').href=RepositoryPath;
+	document.getElementById('HelpModalBannerImg').src=AssetsPath+'images/banner.png';
+	document.getElementById('FooterRepository').href=RepositoryPath;
+	document.getElementById('FooterRepository').innerHTML=Repository+' - '+VersionNumber;
+	document.getElementById('FooterOwner').href=OwnerPath;
+	document.getElementById('FooterOwner').innerHTML=Owner;
+
+	$('#SourceWhite').change(function() {
+		SelectedSourceWhite = parseInt($(this).prop('value'));
+		GetRefWhite(SelectedSourceWhite, 'SourceWhite');
+	});
+	$('#RefWhite').change(function() {
+		SelectedRefWhite = parseInt($(this).prop('value'));
+		GetRefWhite(SelectedRefWhite, 'RefWhite');
+	});
+	$('#RGBModel').change(function() {
+		SelectedRGBModel = parseInt($(this).prop('value'));
+		GetRGBModel(SelectedRGBModel);
+	});
+	$('#Adaptation').change(function() {
+		SelectedAdaptationMethod = parseInt($(this).prop('value'));
+		GetAdaptation(SelectedAdaptationMethod);
+	});
+	$('#ColorScale').change(function() {
+		SelectedColorScale = parseInt($(this).prop('value'));
+		GetColorScale(SelectedColorScale, SensorLab);
+	});
+
+	trigger();
+
 	// Empty Sample
 	$('#switch_2').change(function() {
 		if ($(this).prop('checked')===true) {
@@ -261,6 +237,7 @@ $(function() {
 			$.get('./control?cmd=GPIO,'+ReadingData[4]['GPIO']+',0');
 		}
 	});
+
 	$('#SensorTable').bootstrapTable('destroy').bootstrapTable({
 		columns: [{
 			field: 'Parameter',
@@ -495,35 +472,7 @@ $(function() {
 		}];
 		$('#LogTable').bootstrapTable('append', LogData);
 	};
-	$(document).ready(function(){
-		$('#SourceWhite').trigger('change');
-		$('#RefWhite').trigger('change');
-		$('#RGBModel').trigger('change');
-		$('#Adaptation').trigger('change');
-		$('#ColorScale').trigger('change');
-	});
-	$('#SourceWhite').change(function() {
-		SelectedSourceWhite = parseInt($(this).prop('value'));
-		GetRefWhite(SelectedSourceWhite, 'SourceWhite');
-	});
-	$('#RefWhite').change(function() {
-		SelectedRefWhite = parseInt($(this).prop('value'));
-		GetRefWhite(SelectedRefWhite, 'RefWhite');
-	});
-	$('#RGBModel').change(function() {
-		SelectedRGBModel = parseInt($(this).prop('value'));
-		GetRGBModel(SelectedRGBModel);
-	});
-	$('#Adaptation').change(function() {
-		SelectedAdaptationMethod = parseInt($(this).prop('value'));
-		GetAdaptation(SelectedAdaptationMethod);
-	});
-	$('#ColorScale').change(function() {
-		SelectedColorScale = parseInt($(this).prop('value'));
-		GetColorScale(SelectedColorScale, SensorLab);
-	});
 	function UpdateSensorData() {
-
 		SensorXYZ = ChromaticAdaptationXYZ(SensorXYZ);
 		SensorxyY = XYZ2xyY(SensorXYZ);
 		SensorRGB = XYZ2RGB(SensorXYZ);
@@ -856,17 +805,81 @@ $(function() {
 		return result;
 	}
 
-	window.onbeforeunload = function() {
-		return "Dude, are you sure you want to leave? Think of the kittens!";
-	}
-
 	function isEmpty(obj) {
 		return Object.keys(obj).length === 0;
 	}
 
-	jQuery.event.special.mousewheel = {
-		setup: function( _, ns, handle ) {
-			this.addEventListener('mousewheel', handle, { passive: !ns.includes('noPreventDefault') });
-		}
-	};
-});
+	function loopDeLoop(e,s){
+		var a,l,o=0;
+		isNaN(s)&&(s=1),null==e&&(e=1e3);
+		var n=setInterval(function(){
+			o>0?clearInterval(n):++s>1?o=1:(fetch("./json?view=sensorupdate").then(function(s){
+				var o;200===s.status?s.json().then(function(s){
+					for(e=s.TTL,a=0;a<s.Sensors.length;a++)
+						if(s.Sensors[a].hasOwnProperty("TaskValues"))
+							for(l=0;l<s.Sensors[a].TaskValues.length;l++)
+								try{o=s.Sensors[a].TaskValues[l].Value}catch(e){o=e.name}finally{
+									if("TypeError"!==o){
+										tempValue=s.Sensors[a].TaskValues[l].Value;
+										if(s.Sensors[a].TaskNumber<3){
+											decimalsValue=s.Sensors[a].TaskValues[l].NrDecimals;
+											tempValue=parseFloat(tempValue).toFixed(decimalsValue);
+											if (s.Sensors[a].TaskNumber==1) {
+//												SensorData[(s.Sensors[a].TaskValues[l].ValueNumber-1)]['MeasuredValue']=tempValue;
+												if (s.Sensors[a].TaskValues[l].ValueNumber==1) {
+													SensorXYZ.X = parseFloat(tempValue);
+												} else if (s.Sensors[a].TaskValues[l].ValueNumber==2) {
+													SensorXYZ.Y = parseFloat(tempValue);
+												} else if (s.Sensors[a].TaskValues[l].ValueNumber==3) {
+													SensorXYZ.Z = parseFloat(tempValue);
+												} else if (s.Sensors[a].TaskValues[l].ValueNumber==4) {
+													SensorCCT.Sensor = parseFloat(tempValue);
+												}
+											} else if (s.Sensors[a].TaskNumber==2 && $('#switch_2').prop('checked')===true) {
+												if (s.Sensors[a].TaskValues[l].ValueNumber==1) {
+													EmptySampleXYZ.X = parseFloat(tempValue);
+												} else if (s.Sensors[a].TaskValues[l].ValueNumber==2) {
+													EmptySampleXYZ.Y = parseFloat(tempValue);
+												} else if (s.Sensors[a].TaskValues[l].ValueNumber==3) {
+													EmptySampleXYZ.Z = parseFloat(tempValue);
+												}
+											} else if (s.Sensors[a].TaskNumber==2 && $('#switch_3').prop('checked')===true) {
+												if (s.Sensors[a].TaskValues[l].ValueNumber==1) {
+													SampleXYZ.X = parseFloat(tempValue);
+												} else if (s.Sensors[a].TaskValues[l].ValueNumber==2) {
+													SampleXYZ.Y = parseFloat(tempValue);
+												} else if (s.Sensors[a].TaskValues[l].ValueNumber==3) {
+													SampleXYZ.Z = parseFloat(tempValue);
+												}
+											}
+										} else {
+											var sw="switch_"+(s.Sensors[a].TaskNumber);
+											var swd=document.getElementById(sw);
+											if (tempValue==0 && $(swd).prop('checked')===true && swaction==0) {
+												$(swd).bootstrapToggle('enable', false);
+												$(swd).bootstrapToggle('off', false);
+											} else if (tempValue==0 && sw=="switch_3" && swaction==0 && $('#switch_2').prop('checked')===true) {
+												$('#switch_2').bootstrapToggle('enable', false);
+												$('#switch_2').bootstrapToggle('off', false);
+											} else if (tempValue==0 && $(swd).prop('checked')===true) {
+												swaction = 0;
+											} else if (tempValue==1 && $(swd).prop('checked')===false && swaction==0) {
+												$(swd).bootstrapToggle('on', false);
+											} else if ($(swd).prop('checked')===false) {
+												swaction = 0;
+											};
+										}
+									}
+								}
+								e=s.TTL,
+								clearInterval(n),
+								UpdateSensorData(),
+								AppendLogData(),
+								loopDeLoop(e,0)
+				}):console.log("Looks like there was a problem. Status Code: "+s.status)
+			}).catch(function(s){
+			}),o=1
+		)},e)
+	}loopDeLoop(1e3,0);
+
+};
