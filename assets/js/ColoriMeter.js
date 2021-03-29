@@ -997,5 +997,4 @@ function DocumentOnLoad() {
 			}),o=1
 		)},e)
 	}loopDeLoop(1e3,0);
-
 };
