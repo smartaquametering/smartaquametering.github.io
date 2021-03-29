@@ -1,7 +1,7 @@
 <body>
 	<div class="container">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<a class="navbar-brand"><img id="Logo" src="#" width="40" height="30" class="" alt=""> smartColorimeter</a>
+			<a class="navbar-brand"><img id="Logo" src="#" width="40" height="30" class="" alt=""> smartColoriMeter</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -78,7 +78,7 @@
 							<br>Font Awesome JS - https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/js/fontawesome.min.js
 							<br>Google Chart - https://www.gstatic.com/charts/loader.js
 							<br>Culori color library for JavaScript - https://cdn.jsdelivr.net/npm/culori@0.18.0/build/culori.umd.min.js
-							<br>smartAquaMetering Colorimeter JS - https://smartaquametering.github.io/assets/js/colorimeter.js
+							<br>smartAquaMetering ColoriMeter JS - https://smartaquametering.github.io/assets/js/ColoriMeter.js
 							<br>smartAquaMetering Color conversion and Color delta JS - https://smartaquametering.github.io/assets/js/ColorConversion.js
 							<br>smartAquaMetering Color scales JS - https://smartaquametering.github.io/assets/js/ColorScales.js
 						</div>
@@ -102,7 +102,7 @@
 
 						<div class="card p-3 bg-light" style="margin: 0.5em 0em 1.5em;">
 							<samp>
-								smartColorimeter - <a href="#" id="AboutCopyright" target="_blank"></a> by <a href="#" id="AboutOwner" target="_blank"></a>. All Rights Reserved. Licensed under <a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU GPL v3 or higher</a>.
+								smartColoriMeter - <a href="#" id="AboutCopyright" target="_blank"></a> by <a href="#" id="AboutOwner" target="_blank"></a>. All Rights Reserved. Licensed under <a href="http://www.gnu.org/licenses/gpl.html" target="_blank">GNU GPL v3 or higher</a>.
 							</samp>
 						</div>
 							
@@ -252,17 +252,17 @@
 		<p>
 			<div class="row">
 				<div class="col">
-					<input id="switch_2" type="checkbox" data-toggle="toggle" data-width="300" data-size="lg" data-on="Running</br>Do not touch" data-off="Empty&nbsp;Sample</br><var>I<sub>0</sub></var>" data-onstyle="secondary" data-offstyle="light">
+					<input id="switch_4" type="checkbox" data-toggle="toggle" data-width="300" data-size="lg" data-on="Running</br>Do not touch" data-off="Empty&nbsp;Sample</br><var>I<sub>0</sub></var>" data-onstyle="secondary" data-offstyle="light">
 				</div>
 				<div class="col">
-					<input id="switch_3" type="checkbox" data-toggle="toggle" data-width="300" data-size="lg" data-on="Running</br>Do not touch" data-off="Sample</br><var>I<sub>T</sub></var>" data-onstyle="secondary" data-offstyle="light">
+					<input id="switch_5" type="checkbox" data-toggle="toggle" data-width="300" data-size="lg" data-on="Running</br>Do not touch" data-off="Sample</br><var>I<sub>T</sub></var>" data-onstyle="secondary" data-offstyle="light">
 				</div>
 			</div>
 		</p>
 		<p>
 		<div class="row">
 			<div class="col">
-				<input id="switch_4" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="outline-dark" data-offstyle="outline-dark" data-on="On" data-off="Off">
+				<input id="switch_6" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="outline-dark" data-offstyle="outline-dark" data-on="On" data-off="Off">
 			</div>
 		</div>
 		</p>
@@ -365,7 +365,7 @@
 						<option value="24" data-subtext="6598 K° - Phosphor-converted blue">LED-B5/2°</option>
 						<option value="25" data-subtext="2851 K° - Mixing of phosphor-converted blue LED and red LED (blue-hybrid)">LED-BH1/2°</option>
 						<option value="26" data-subtext="2840 K° - Mixing of red, green, and blue LEDs">LED-RGB1/2°</option>
-						<option value="27" data-subtext="2724 K° - Phosphor-converted violet">LED-V1/2°</option>
+						<option value="27" data-subtext="3079 K° - Phosphor-converted violet">LED-V1/2°</option>
 						<option value="28" data-subtext="4070 K° - Phosphor-converted violet">LED-V2/2°</option>
 					</optgroup>
 					<optgroup label="Standard illuminants for the 10 degree field of view (1964)">
@@ -380,7 +380,7 @@
 						<option value="38" data-subtext="6430 K° - Daylight (fluorescent)">F1/10°</option>
 						<option value="39" data-subtext="4230 K° - Cool white (fluorescent)">F2/10°</option>
 						<option value="40" data-subtext="3450 K° - White (fluorescent)">F3/10°</option>
-						<option value="41" data-subtext="2940 K° - Warm white ((fluorescent))">F4/10°</option>
+						<option value="41" data-subtext="2940 K° - Warm white (fluorescent)">F4/10°</option>
 						<option value="42" data-subtext="6350 K° - Daylight (fluorescent)">F5/10°</option>
 						<option value="43" data-subtext="4150 K° - Light white (fluorescent)">F6/10°</option>
 						<option value="44" data-subtext="6500 K° - Daylight / D65 (Simulator)">F7/10°</option>
@@ -435,11 +435,11 @@
 				</div>
 				<select class="form-control selectpicker show-tick" data-live-search="true" data-size="5" id="ColorScale">
 					<option value="0" selected data-subtext="">None</option>
-					<option value="1" data-subtext="Reference: n/a">Spectral Absorption Coefficient (SAC)</option>
-					<option value="2" data-subtext="Reference: n/a">EBC Color</option>
-					<option value="3" data-subtext="Reference: n/a">ASBC Color</option>
-					<option value="4" data-subtext="Reference: n/a">ICUMSA Suguar Color</option>
-					<option value="5" data-subtext="Reference: n/a">Hess-Ives Color</option>
+					<option value="1" data-subtext="Reference: Absorbance (Eλ)">Spectral Absorption Coefficient (SAC)</option>
+					<option value="2" data-subtext="Reference: Absorbance (Eλ=430)">EBC Color</option>
+					<option value="3" data-subtext="Reference: Absorbance (Eλ=430)">ASBC Color</option>
+					<option value="4" data-subtext="Reference: Absorbance (Eλ=420)">ICUMSA Suguar Color</option>
+					<option value="5" data-subtext="Reference: Absorbance (Eλ=640,560,464)">Hess-Ives Color</option>
 					<option value="11" data-subtext="Reference: CIE-L*a*b* (C/2°)">Yellowness Index</option>
 					<option value="12" data-subtext="Reference: CIE-L*a*b* (C/2°)">Platinum-Cobalt/Hazen/APHA Color</option>
 					<option value="13" data-subtext="Reference: CIE-L*a*b* (C/2°)">ADMI Color</option>

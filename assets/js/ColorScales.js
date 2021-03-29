@@ -63,6 +63,13 @@ function GetColorScale(SelectedColorScale, SensorLab)
 			//					Green channel	=> 525 nm (+/- 35 nm)
 			//					Blue channel	=> 465 nm (+/- 22 nm)
 			//
+
+//			var DX = -1 * Math.log10(SensorXYZ.X / 0.98072);
+//			var DY = -1 * Math.log10(SensorXYZ.Y / 1.00000);
+//			var DZ = -1 * Math.log10(SensorXYZ.Z / 1.18225);
+
+//			var SAC = (0.25 + 0.8695 * ( DX + DY + DZ )).toFixed(1);
+
 			ColorScale = {
 				Name: 'Spectral Absorption Coefficient (SAC)',
 				Standard: '',
@@ -74,10 +81,13 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ReferenceNull: 'Distilled water',
 				ColorSpace: 'n/a',
 				ColorReference: 'n/a',
+				Value: SAC,
 				Index: {
+					['ASTMColor-'+ASTM]: 'L: SensorLab.L, a: SensorLab.a, b: SensorLab.b' 
 				}
 			};
 			break;
+
 		case 2:
 			// EBC = 25 * E430 * d * x dilution factor
 			// EBC = (E430 x 25) – (E700 x 25)
@@ -181,7 +191,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				Range: '',
 				Unit: 'H-I units',
 				Decription: 'For cosmetic industry, color evaluation of fat derivatives and surfactant liquids',
-				DeterminationMethod: 'Calculated from Absorbances (Eλ=640,560,464)',
+				DeterminationMethod: 'Calculated from Absorbance (Eλ=640,560,464)',
 				ReferenceOpticalPathLength: 1,
 				ReferenceNull: 'Distilled water',
 				ColorSpace: 'n/a',
