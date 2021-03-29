@@ -313,7 +313,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ReferenceNull: 'Distilled water',
 				ColorSpace: 'CIE-XYZ',
 				ColorReference: 'C/2°',
-				ChartBackground: 'cieLab-L75-YellownessColor.png',
+				ChartBackground: 'CIE-Lab-L75-Yellowness-Color.png',
 				ChartCurveType: 'none',
 				ChartLineWidth: 0,
 				Value: YI,
@@ -365,7 +365,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ReferenceNull: 'Distilled water',
 				ColorSpace: 'CIE-L*a*b*',
 				ColorReference: 'C/2°',
-				ChartBackground: 'cieLab-L100.png',
+				ChartBackground: 'CIE-Lab-L100.png',
 				ChartCurveType: 'function',
 				ChartLineWidth: 2,
 				Index: {
@@ -425,7 +425,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ReferenceNull: 'Distilled water',
 				ColorSpace: 'CIE-L*a*b*',
 				ColorReference: 'C/2°',
-				ChartBackground: 'cieLab-L100.png',
+				ChartBackground: 'CIE-Lab-L100.png',
 				ChartCurveType: 'function',
 				ChartLineWidth: 2,
 				Index: {
@@ -459,7 +459,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ReferenceNull: 'Distilled water',
 				ColorSpace: 'CIE-L*a*b*',
 				ColorReference: 'C/2°',
-				ChartBackground: 'cieLab-L100.png',
+				ChartBackground: 'CIE-Lab-L100.png',
 				ChartCurveType: 'function',
 				ChartLineWidth: 2,
 				Index: {
@@ -522,7 +522,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ReferenceNull: 'Distilled water',
 				ColorSpace: 'CIE-xyY',
 				ColorReference: 'C/2°',
-				ChartBackground: 'cieLab-L75.png',
+				ChartBackground: 'CIE-Lab-L75.png',
 				ChartCurveType: 'function',
 				ChartLineWidth: 2,
 				Index: {
@@ -600,7 +600,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ReferenceNull: 'Distilled water',
 				ColorSpace: 'CIE-XYZ',
 				ColorReference: 'C/2°',
-				ChartBackground: 'cieLab-L75-ASTMColor.png',
+				ChartBackground: 'CIE-Lab-L75-ASTM-Color.png',
 				ChartCurveType: 'none',
 				ChartLineWidth: 0,
 				Value: ASTM,
@@ -645,7 +645,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ReferenceNull: 'Psychrometric lightness of the dodecane',
 				ColorSpace: 'CIE-L*a*b*',
 				ColorReference: 'C/2°',
-				ChartBackground: 'cieLab-L100.png',
+				ChartBackground: 'CIE-Lab-L100.png',
 				ChartCurveType: 'none',
 				ChartLineWidth: 0,
 				Value: Saybolt,
@@ -678,7 +678,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ReferenceNull: 'Distilled water',
 				ColorSpace: 'CIE-L*a*b*',
 				ColorReference: 'C/2°',
-				ChartBackground: 'cieLab-L100.png',
+				ChartBackground: 'CIE-Lab-L100.png',
 				ChartCurveType: 'none',
 				ChartLineWidth: 0,
 				Index: {
@@ -741,7 +741,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ReferenceNull: 'Distilled water',
 				ColorSpace: 'CIE-L*a*b*',
 				ColorReference: 'C/2°',
-				ChartBackground: 'cieLab-L100.png',
+				ChartBackground: 'CIE-Lab-L100.png',
 				ChartCurveType: 'none',
 				ChartLineWidth: 0,
 				Index: {
@@ -783,7 +783,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ReferenceNull: 'Distilled water',
 				ColorSpace: 'CIE-L*a*b*',
 				ColorReference: 'C/2°',
-				ChartBackground: 'cieLab-L100.png',
+				ChartBackground: 'CIE-Lab-L100.png',
 				ChartCurveType: 'none',
 				ChartLineWidth: 0,
 				Index: {
@@ -856,7 +856,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ReferenceNull: 'n/a',
 				ColorSpace: 'CIE-L*a*b*',
 				ColorReference: 'D65/2°',
-				ChartBackground: 'cieLab-L100.png',
+				ChartBackground: 'CIE-Lab-L100.png',
 				ChartCurveType: 'none',
 				ChartLineWidth: 0,
 				Index: {
