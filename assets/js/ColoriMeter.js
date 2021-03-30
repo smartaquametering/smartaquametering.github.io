@@ -706,7 +706,7 @@ function DocumentOnLoad() {
 			CIEChart.draw(CIEYxyChartData, CIEYxyChartOptions);
 			// This two lines are the ones that do the magic to load the background image to the proper chart position
 			var boundingBox = CIEChart.getChartLayoutInterface().getChartAreaBoundingBox(); 
-			$('#CIEChartBackground').css('background-image', "url('"+AssetsPath+"/images/cieYxy.png')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
+			$('#CIEChartBackground').css('background-image', "url('"+AssetsPath+"/images/CIE-Yxy.png')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
 		} else {
 				let SensorColor = culori.lab65({
 					l: +SensorLab.L,
