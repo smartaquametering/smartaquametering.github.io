@@ -38,7 +38,7 @@ var EmptySampleLab = {};
 var EmptySampleCCT = {};
 
 function LedSwitches(state) {
-	for (i = 4; i < 7; i++) {
+	for (i = 7; i < 10; i++) {
 		var switchid = "#switch_" + i;
 		$(switchid).bootstrapToggle(state);
 	}
@@ -251,7 +251,7 @@ function DocumentOnLoad() {
 	trigger();
 
 	// Empty Sample
-	$('#switch_4').change(function() {
+	$('#switch_7').change(function() {
 		if ($(this).prop('checked')===true) {
 			swaction = 1;
 			$.get('./control?cmd=GPIO,'+ReadingData[2]['GPIO']+',1');
@@ -263,7 +263,7 @@ function DocumentOnLoad() {
 		}
 	});
 	// Sample
-	$('#switch_5').change(function() {
+	$('#switch_8').change(function() {
 		if ($(this).prop('checked')===true) {
 			swaction = 1;
 			$.get('./control?cmd=GPIO,'+ReadingData[3]['GPIO']+',1');
@@ -276,7 +276,7 @@ function DocumentOnLoad() {
 		}
 	});
 	// Warm White LED
-	$('#switch_6').change(function() {
+	$('#switch_9').change(function() {
 		swaction = 1;
 		if ($(this).prop('checked')===true) {
 			swaction = 1;
@@ -556,45 +556,31 @@ function DocumentOnLoad() {
 	function UpdateReadingData(SampleMode) {
 
 		if (SampleMode == 'EmptySample') {
-			EmptySampleXYZ = ChromaticAdaptationXYZ(EmptySampleXYZ);
-			EmptySampleLab = XYZ2Lab(EmptySampleXYZ);
-			EmptySampleCCT.Robertson = XYZ2CCT_Robertson(SensorXYZ);
-			EmptySampleCCT.McCamy = XYZ2CCT_McCamy(SensorXYZ);
+//			EmptySampleXYZ = ChromaticAdaptationXYZ(EmptySampleXYZ);
+//			EmptySampleLab = XYZ2Lab(EmptySampleXYZ);
+//			EmptySampleCCT.Robertson = XYZ2CCT_Robertson(EmptySampleXYZ);
+//			EmptySampleCCT.McCamy = XYZ2CCT_McCamy(EmptySampleXYZ);
 			ReadingData[4]['Value01'] = printObject(EmptySampleLightIntensity);
-			ReadingData[8]['Value01'] = printObject(ScaleXYZ(EmptySampleXYZ));
-			ReadingData[9]['Value01'] = printObject(ScalexyY(XYZ2xyY(EmptySampleXYZ)));
-			ReadingData[10]['Value01'] = printObject(EmptySampleLab);
-			ReadingData[11]['Value01'] = printObject(XYZ2Luv(EmptySampleXYZ));
-			ReadingData[12]['Value01'] = printObject(XYZ2HunterLab(EmptySampleXYZ));
-			ReadingData[13]['Value01'] = printObject(ScaleRGB(XYZ2RGB(EmptySampleXYZ)));
-			ReadingData[14]['Value01'] = printObject(EmptySampleCCT);
-			ReadingData[15]['Value01'] = XYZ2DominantWavelength(EmptySampleXYZ);
-			ReadingData[16]['Value01'] = printObject(NearestColors(EmptySampleXYZ));
+//			ReadingData[8]['Value01'] = printObject(ScaleXYZ(EmptySampleXYZ));
+//			ReadingData[9]['Value01'] = printObject(ScalexyY(XYZ2xyY(EmptySampleXYZ)));
+//			ReadingData[10]['Value01'] = printObject(EmptySampleLab);
+//			ReadingData[11]['Value01'] = printObject(XYZ2Luv(EmptySampleXYZ));
+//			ReadingData[12]['Value01'] = printObject(XYZ2HunterLab(EmptySampleXYZ));
+//			ReadingData[13]['Value01'] = printObject(ScaleRGB(XYZ2RGB(EmptySampleXYZ)));
+//			ReadingData[14]['Value01'] = printObject(EmptySampleCCT);
+//			ReadingData[15]['Value01'] = XYZ2DominantWavelength(EmptySampleXYZ);
+//			ReadingData[16]['Value01'] = printObject(NearestColors(EmptySampleXYZ));
 		}
 		if (SampleMode == 'Sample') {
-
-		let SampleTransmission = {
-			[TX]: SampleLightIntensity[IX] / EmptySampleLightIntensity[IX],
-			[TY]: SampleLightIntensity[IY] / EmptySampleLightIntensity[IY],
-			[TZ]: SampleLightIntensity[IZ] / EmptySampleLightIntensity[IZ]
-		}
-
-		let SampleAbsorbance = {
-			[EX]: Math.log10(1 / SampleTransmission[TX]),
-			[EY]: Math.log10(1 / SampleTransmission[TY]),
-			[EZ]: Math.log10(1 / SampleTransmission[TZ])
-		}
-
-		let SampleSAC = {
-			[SACX]: SampleAbsorbance[EX] / ReadingData[4]['Thickness'] * 100,
-			[SACY]: SampleAbsorbance[EY] / ReadingData[4]['Thickness'] * 100,
-			[SACZ]: SampleAbsorbance[EZ] / ReadingData[4]['Thickness'] * 100
-		}
+			let SampleTransmission = LightIntensity2Transmission(EmptySampleLightIntensity, SampleLightIntensity);
+			let SampleAbsorbance = Transmission2Absorbance(SampleTransmission);
+			let SampleSAC = Absorbance2SAC(SampleAbsorbance, ReadingData[4]['Thickness']);
+			let SampleXYZ = Transmission2XYZ(SampleTransmission);
 
 			SampleXYZ = ChromaticAdaptationXYZ(SampleXYZ);
 			SampleLab = XYZ2Lab(SampleXYZ);
-			SampleCCT.Robertson = XYZ2CCT_Robertson(SensorXYZ);
-			SampleCCT.McCamy = XYZ2CCT_McCamy(SensorXYZ);
+			SampleCCT.Robertson = XYZ2CCT_Robertson(SampleXYZ);
+			SampleCCT.McCamy = XYZ2CCT_McCamy(SampleXYZ);
 
 			ReadingData[4]['Value1'] = printObject(SampleLightIntensity);
 			ReadingData[5]['Value1'] = printObject(SampleTransmission);
@@ -906,7 +892,7 @@ function DocumentOnLoad() {
 								try{o=s.Sensors[a].TaskValues[l].Value}catch(e){o=e.name}finally{
 									if("TypeError"!==o){
 										tempValue=s.Sensors[a].TaskValues[l].Value;
-										if(s.Sensors[a].TaskNumber<5){
+										if(s.Sensors[a].TaskNumber<8){
 											decimalsValue=s.Sensors[a].TaskValues[l].NrDecimals;
 											tempValue=parseFloat(tempValue).toFixed(decimalsValue);
 											if (s.Sensors[a].TaskNumber==1) {
@@ -920,52 +906,152 @@ function DocumentOnLoad() {
 												} else if (s.Sensors[a].TaskValues[l].ValueNumber==4) {
 													SensorCCT.Sensor = parseFloat(tempValue);
 												}
-											} else if (s.Sensors[a].TaskNumber==2 && $('#switch_4').prop('checked')===true) {
-												if (s.Sensors[a].TaskValues[l].ValueNumber==1) {
-													EmptySampleXYZ.X = parseFloat(tempValue/100);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==2) {
-													EmptySampleXYZ.Y = parseFloat(tempValue/100);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==3) {
-													EmptySampleXYZ.Z = parseFloat(tempValue/100);
-												}
-											} else if (s.Sensors[a].TaskNumber==2 && $('#switch_5').prop('checked')===true) {
-												if (s.Sensors[a].TaskValues[l].ValueNumber==1) {
-													SampleXYZ.X = parseFloat(tempValue/100);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==2) {
-													SampleXYZ.Y = parseFloat(tempValue/100);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==3) {
-													SampleXYZ.Z = parseFloat(tempValue/100);
-												}
-											} else if (s.Sensors[a].TaskNumber==3) {
+											} else if (s.Sensors[a].TaskNumber==2 && $('#switch_7').prop('checked')===true) {
 //												SensorData[(s.Sensors[a].TaskValues[l].ValueNumber-1)]['MeasuredValue']=tempValue;
-												if (s.Sensors[a].TaskValues[l].ValueNumber==1) {
-													SensorLightIntensity[IX] = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==2) {
-													SensorLightIntensity[IY] = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==3) {
-													SensorLightIntensity[IZ] = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==4) {
-													SensorLightIntensity.IClear = parseFloat(tempValue);
+												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
+													case 1:
+														EmptySampleLightIntensity.I410 = parseFloat(tempValue);
+														break;
+													case 2:
+														EmptySampleLightIntensity.I435 = parseFloat(tempValue);
+														break;
+													case 3:
+														EmptySampleLightIntensity.I460 = parseFloat(tempValue);
+														break;
 												}
-											} else if (s.Sensors[a].TaskNumber==4 && $('#switch_4').prop('checked')===true) {
-												if (s.Sensors[a].TaskValues[l].ValueNumber==1) {
-													EmptySampleLightIntensity[IX] = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==2) {
-													EmptySampleLightIntensity[IY] = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==3) {
-													EmptySampleLightIntensity[IZ] = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==4) {
-													EmptySampleLightIntensity.IClear = parseFloat(tempValue);
+											} else if (s.Sensors[a].TaskNumber==3 && $('#switch_7').prop('checked')===true) {
+												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
+													case 1:
+														EmptySampleLightIntensity.I485 = parseFloat(tempValue);
+														break;
+													case 2:
+														EmptySampleLightIntensity.I510 = parseFloat(tempValue);
+														break;
+													case 3:
+														EmptySampleLightIntensity.I535 = parseFloat(tempValue);
+														break;
 												}
-											} else if (s.Sensors[a].TaskNumber==4 && $('#switch_5').prop('checked')===true) {
-												if (s.Sensors[a].TaskValues[l].ValueNumber==1) {
-													SampleLightIntensity[IX] = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==2) {
-													SampleLightIntensity[IY] = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==3) {
-													SampleLightIntensity[IZ] = parseFloat(tempValue);
-												} else if (s.Sensors[a].TaskValues[l].ValueNumber==4) {
-													SampleLightIntensity.IClear = parseFloat(tempValue);
+											} else if (s.Sensors[a].TaskNumber==4 && $('#switch_7').prop('checked')===true) {
+												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
+													case 1:
+														EmptySampleLightIntensity.I560 = parseFloat(tempValue);
+														break;
+													case 2:
+														EmptySampleLightIntensity.I585 = parseFloat(tempValue);
+														break;
+													case 3:
+														EmptySampleLightIntensity.I610 = parseFloat(tempValue);
+														break;
+												}
+											} else if (s.Sensors[a].TaskNumber==5 && $('#switch_7').prop('checked')===true) {
+												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
+													case 1:
+														EmptySampleLightIntensity.I645 = parseFloat(tempValue);
+														break;
+													case 2:
+														EmptySampleLightIntensity.I680 = parseFloat(tempValue);
+														break;
+													case 3:
+														EmptySampleLightIntensity.I705 = parseFloat(tempValue);
+														break;
+												}
+											} else if (s.Sensors[a].TaskNumber==6 && $('#switch_7').prop('checked')===true) {
+												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
+													case 1:
+														EmptySampleLightIntensity.I730 = parseFloat(tempValue);
+														break;
+													case 2:
+														EmptySampleLightIntensity.I760 = parseFloat(tempValue);
+														break;
+													case 3:
+														EmptySampleLightIntensity.I810 = parseFloat(tempValue);
+														break;
+												}
+											} else if (s.Sensors[a].TaskNumber==7 && $('#switch_7').prop('checked')===true) {
+												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
+													case 1:
+														EmptySampleLightIntensity.I860 = parseFloat(tempValue);
+														break;
+													case 2:
+														EmptySampleLightIntensity.I900 = parseFloat(tempValue);
+														break;
+													case 3:
+														EmptySampleLightIntensity.I940 = parseFloat(tempValue);
+														break;
+												}
+
+											} else if (s.Sensors[a].TaskNumber==2 && $('#switch_8').prop('checked')===true) {
+//												SensorData[(s.Sensors[a].TaskValues[l].ValueNumber-1)]['MeasuredValue']=tempValue;
+												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
+													case 1:
+														SampleLightIntensity.I410 = parseFloat(tempValue);
+														break;
+													case 2:
+														SampleLightIntensity.I435 = parseFloat(tempValue);
+														break;
+													case 3:
+														SampleLightIntensity.I460 = parseFloat(tempValue);
+														break;
+												}
+											} else if (s.Sensors[a].TaskNumber==3 && $('#switch_8').prop('checked')===true) {
+												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
+													case 1:
+														SampleLightIntensity.I485 = parseFloat(tempValue);
+														break;
+													case 2:
+														SampleLightIntensity.I510 = parseFloat(tempValue);
+														break;
+													case 3:
+														SampleLightIntensity.I535 = parseFloat(tempValue);
+														break;
+												}
+											} else if (s.Sensors[a].TaskNumber==4 && $('#switch_8').prop('checked')===true) {
+												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
+													case 1:
+														SampleLightIntensity.I560 = parseFloat(tempValue);
+														break;
+													case 2:
+														SampleLightIntensity.I585 = parseFloat(tempValue);
+														break;
+													case 3:
+														SampleLightIntensity.I610 = parseFloat(tempValue);
+														break;
+												}
+											} else if (s.Sensors[a].TaskNumber==5 && $('#switch_8').prop('checked')===true) {
+												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
+													case 1:
+														SampleLightIntensity.I645 = parseFloat(tempValue);
+														break;
+													case 2:
+														SampleLightIntensity.I680 = parseFloat(tempValue);
+														break;
+													case 3:
+														SampleLightIntensity.I705 = parseFloat(tempValue);
+														break;
+												}
+											} else if (s.Sensors[a].TaskNumber==6 && $('#switch_8').prop('checked')===true) {
+												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
+													case 1:
+														SampleLightIntensity.I730 = parseFloat(tempValue);
+														break;
+													case 2:
+														SampleLightIntensity.I760 = parseFloat(tempValue);
+														break;
+													case 3:
+														SampleLightIntensity.I810 = parseFloat(tempValue);
+														break;
+												}
+											} else if (s.Sensors[a].TaskNumber==7 && $('#switch_8').prop('checked')===true) {
+												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
+													case 1:
+														SampleLightIntensity.I860 = parseFloat(tempValue);
+														break;
+													case 2:
+														SampleLightIntensity.I900 = parseFloat(tempValue);
+														break;
+													case 3:
+														SampleLightIntensity.I940 = parseFloat(tempValue);
+														break;
 												}
 											}
 										} else {
@@ -974,9 +1060,9 @@ function DocumentOnLoad() {
 											if (tempValue==0 && $(swd).prop('checked')===true && swaction==0) {
 												$(swd).bootstrapToggle('enable', false);
 												$(swd).bootstrapToggle('off', false);
-											} else if (tempValue==0 && sw=="switch_5" && swaction==0 && $('#switch_4').prop('checked')===true) {
-												$('#switch_4').bootstrapToggle('enable', false);
-												$('#switch_4').bootstrapToggle('off', false);
+											} else if (tempValue==0 && sw=="switch_8" && swaction==0 && $('#switch_7').prop('checked')===true) {
+												$('#switch_7').bootstrapToggle('enable', false);
+												$('#switch_7').bootstrapToggle('off', false);
 											} else if (tempValue==0 && $(swd).prop('checked')===true) {
 												swaction = 0;
 											} else if (tempValue==1 && $(swd).prop('checked')===false && swaction==0) {

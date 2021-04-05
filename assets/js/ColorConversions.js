@@ -60,6 +60,8 @@ var MtxFromRGB = {m00:1.0, m01:0.0, m02:0.0, m10:0.0, m11:1.0, m12:0.0, m20:0.0,
 var MtxAdaptMa = {m00:1.0, m01:0.0, m02:0.0, m10:0.0, m11:1.0, m12:0.0, m20:0.0, m21:0.0, m22:1.0};
 var MtxAdaptMaI = {m00:1.0, m01:0.0, m02:0.0, m10:0.0, m11:1.0, m12:0.0, m20:0.0, m21:0.0, m22:1.0};
 
+var WaveLengthIncrement = 5;
+
 // Spectral Tristimulus Values (Color-Matching Functions) x¯ , y¯ , z¯ of the
 // CIE 1931 Standard (2°) Observer (CIE 15.3:2004, ASTM E308−18)
 //
@@ -124,7 +126,7 @@ var CIE1931StdObs_z = [
 // Line  8: 690 - 735nm
 // Line  9: 740 - 785nm
 // Line 10: 790 - 830nm
-var CIE1964StdObs_x10 = [
+var CIE1964StdObs_x = [
 	0.000000122200, 0.000000919270, 0.000005958600, 0.000033266000, 0.000159952000, 0.000662440000,
 	0.002361600000, 0.007242300000, 0.019109700000, 0.043400000000, 0.084736000000, 0.140638000000, 0.204492000000, 0.264737000000, 0.314679000000, 0.357719000000,
 	0.383734000000, 0.386726000000, 0.370702000000, 0.342957000000, 0.302273000000, 0.254085000000, 0.195618000000, 0.132349000000, 0.080507000000, 0.041072000000,
@@ -136,7 +138,7 @@ var CIE1964StdObs_x10 = [
 	0.000508258000, 0.000356380000, 0.000250969000, 0.000177730000, 0.000126390000, 0.000090151000, 0.000064525800, 0.000046339000, 0.000033411700, 0.000024209000,
 	0.000017611500, 0.000012855000, 0.000009413630, 0.000006913000, 0.000005093470, 0.000003767100, 0.000002795310, 0.000002082000, 0.000001553140];
 
-var CIE1964StdObs_y10 = [
+var CIE1964StdObs_y = [
 	0.000000013398, 0.000000100650, 0.000000651100, 0.000003625000, 0.000017364000, 0.000071560000,
 	0.000253400000, 0.000768500000, 0.002004400000, 0.004509000000, 0.008756000000, 0.014456000000, 0.021391000000, 0.029497000000, 0.038676000000, 0.049602000000,
 	0.062077000000, 0.074704000000, 0.089456000000, 0.106256000000, 0.128201000000, 0.152761000000, 0.185190000000, 0.219940000000, 0.253589000000, 0.297665000000,
@@ -148,7 +150,7 @@ var CIE1964StdObs_y10 = [
 	0.000198730000, 0.000139550000, 0.000098428000, 0.000069819000, 0.000049737000, 0.000035540500, 0.000025486000, 0.000018338400, 0.000013249000, 0.000009619600,
 	0.000007012800, 0.000005129800, 0.000003764730, 0.000002770810, 0.000002046130, 0.000001516770, 0.000001128090, 0.000000842160, 0.000000629700];
 
-var CIE1964StdObs_z10 = [
+var CIE1964StdObs_z = [
 	0.000000535027, 0.000004028300, 0.000026143700, 0.000146220000, 0.000704776000, 0.002927800000,
 	0.010482200000, 0.032344000000, 0.086010900000, 0.197120000000, 0.389366000000, 0.656760000000, 0.972542000000, 1.282500000000, 1.553480000000, 1.798500000000,
 	1.967280000000, 2.027300000000, 1.994800000000, 1.900700000000, 1.745370000000, 1.554900000000, 1.317560000000, 1.030200000000, 0.772125000000, 0.570060000000,
@@ -296,6 +298,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "A/2°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Incandescent (Tungsten)";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "SPD_CIE_Illuminant_A";
 			window[White].CCT = "2856";
 			window[White].X = 1.09850;
 			window[White].Z = 0.35585;
@@ -306,6 +310,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "B/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Direct sunlight at noon (obsolete)";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "4874";
 			window[White].X = 0.99093;
 			window[White].Z = 0.85313;
@@ -316,6 +322,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "C/2°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "North sky daylight (average) (obsolete)";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "SPD_CIE_Illuminant_C";
 			window[White].CCT = "6774";
 			window[White].X = 0.98074;
 			window[White].Z = 1.18232;
@@ -326,6 +334,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "D50/2°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Horizon light / ICC profile PCS";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "SPD_CIE_Illuminant_D50";
 			window[White].CCT = "5003";
 			window[White].X = 0.96422;
 			window[White].Z = 0.82521;
@@ -336,6 +346,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "D55/2°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Mid-morning / Mid-afternoon daylight";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "SPD_CIE_Illuminant_D55";
 			window[White].CCT = "5503";
 			window[White].X = 0.95682;
 			window[White].Z = 0.92149;
@@ -346,6 +358,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "D65/2°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Noon daylight / Television, sRGB color space";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "SPD_CIE_Illuminant_D65";
 			window[White].CCT = "6504";
 			window[White].X = 0.95047;
 			window[White].Z = 1.08883;
@@ -356,6 +370,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "D75/2°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "North sky daylight";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "SPD_CIE_Illuminant_D75";
 			window[White].CCT = "7504";
 			window[White].X = 0.94972;
 			window[White].Z = 1.22638;
@@ -366,6 +382,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "E/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Equal energy";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "5454";
 			window[White].X = 1.00000;
 			window[White].Z = 1.00000;
@@ -376,6 +394,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F1/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Daylight (fluorescent)";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "6430";
 			window[White].X = 0.92834;
 			window[White].Z = 1.03665;
@@ -386,6 +406,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F2/2°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Cool white (fluorescent)";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "4230";
 			window[White].X = 0.99186;
 			window[White].Z = 0.67393;
@@ -396,6 +418,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F3/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "White (fluorescent)";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "3450";
 			window[White].X = 1.03754;
 			window[White].Z = 0.49861;
@@ -406,6 +430,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F4/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Warm white (fluorescent)";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "2940";
 			window[White].X = 1.09147;
 			window[White].Z = 0.38813;
@@ -416,6 +442,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F5/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Daylight (fluorescent)";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "6350";
 			window[White].X = 0.90872;
 			window[White].Z = 0.98723;
@@ -426,6 +454,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F6/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Light white (fluorescent)";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "4150";
 			window[White].X = 0.97309;
 			window[White].Z = 0.60191;
@@ -436,6 +466,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F7/2°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Daylight / D65 (Simulator)";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "6500";
 			window[White].X = 0.95041;
 			window[White].Z = 1.08747;
@@ -446,6 +478,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F8/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "D50 (Simulator) / Sylvania F40 Design 50";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "5000";
 			window[White].X = 0.96413;
 			window[White].Z = 0.82333;
@@ -456,6 +490,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F9/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Cool white deluxe (fluorescent)";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "4150";
 			window[White].X = 1.00365;
 			window[White].Z = 0.67868;
@@ -466,6 +502,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F10/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Philips TL85 / Ultralume 50";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "5000";
 			window[White].X = 0.96174;
 			window[White].Z = 0.81712;
@@ -476,6 +514,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F11/2°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Philips TL84 / Ultralume 40";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "4000";
 			window[White].X = 1.00962;
 			window[White].Z = 0.64350;
@@ -486,6 +526,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F12/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Philips TL83 / Ultralume 30";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "3000";
 			window[White].X = 1.08046;
 			window[White].Z = 0.39228;
@@ -496,6 +538,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "LED-B1/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Phosphor-converted blue";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "2733";
 			window[White].X = 1.118195;
 			window[White].Z = 0.333987;
@@ -506,6 +550,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "LED-B2/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Phosphor-converted blue";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "2998";
 			window[White].X = 1.085992;
 			window[White].Z = 0.406530;
@@ -516,6 +562,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "LED-B3/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Phosphor-converted blue";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "4103";
 			window[White].X = 1.008864;
 			window[White].Z = 0.677142;
@@ -526,6 +574,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "LED-B4/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Phosphor-converted blue";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "5109";
 			window[White].X = 0.977156;
 			window[White].Z = 0.878355;
@@ -536,6 +586,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "LED-B5/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Phosphor-converted blue";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "6598";
 			window[White].X = 0.963535;
 			window[White].Z = 1.126700;
@@ -546,6 +598,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "LED-BH1/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Mixing of phosphor-converted blue LED and red LED (blue-hybrid)";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "2851";
 			window[White].X = 1.100344;
 			window[White].Z = 0.359075;
@@ -556,6 +610,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "LED-RGB1/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Mixing of red, green, and blue LEDs";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "2840";
 			window[White].X = 1.082166;
 			window[White].Z = 0.292567;
@@ -566,6 +622,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "LED-V1/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Phosphor-converted violet";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "3079";
 			window[White].X = 1.002639;
 			window[White].Z = 0.196130;
@@ -576,6 +634,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "LED-V2/2°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Phosphor-converted violet";
+			window[White].StdObs = "CIE1931StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "4070";
 			window[White].X = 1.001589;
 			window[White].Z = 0.647417;
@@ -587,6 +647,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "A/10°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Incandescent (Tungsten)";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "SPD_CIE_Illuminant_A";
 			window[White].CCT = "2789";
 			window[White].X = 1.11144;
 			window[White].Z = 0.35200;
@@ -597,6 +659,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "B/10°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Direct sunlight at noon (obsolete)";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "4826";
 			window[White].X = 0.991778;
 			window[White].Z = 0.843493;
@@ -607,6 +671,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "C/10°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "North sky daylight (average) (obsolete)";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "SPD_CIE_Illuminant_C";
 			window[White].CCT = "6724";
 			window[White].X = 0.97285;
 			window[White].Z = 1.16145;
@@ -617,6 +683,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "D50/10°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Horizon light / ICC profile PCS";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "SPD_CIE_Illuminant_D50";
 			window[White].CCT = "4929";
 			window[White].X = 0.96720;
 			window[White].Z = 0.81427;
@@ -627,6 +695,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "D55/10°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Mid-morning / Mid-afternoon daylight";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "SPD_CIE_Illuminant_D55";
 			window[White].CCT = "5431";
 			window[White].X = 0.95799;
 			window[White].Z = 0.90926;
@@ -637,6 +707,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "D65/10°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Noon daylight / Television, sRGB color space";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "SPD_CIE_Illuminant_D65";
 			window[White].CCT = "6429";
 			window[White].X = 0.94811;
 			window[White].Z = 1.07304;
@@ -647,6 +719,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "D75/10°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "North sky daylight";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "SPD_CIE_Illuminant_D75";
 			window[White].CCT = "7418";
 			window[White].X = 0.94416;
 			window[White].Z = 1.20641;
@@ -657,6 +731,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "E/10°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Equal energy";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "5454";
 			window[White].X = 1.00000;
 			window[White].Z = 1.00000;
@@ -667,6 +743,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F1/10°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Daylight (fluorescent)";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "6182";
 			window[White].X = 0.94791;
 			window[White].Z = 1.03191;
@@ -677,6 +755,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F2/10°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Cool white (fluorescent)";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "3959";
 			window[White].X = 1.03279;
 			window[White].Z = 0.69027;
@@ -687,6 +767,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F3/10°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "White (fluorescent)";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "3177";
 			window[White].X = 1.08968;
 			window[White].Z = 0.51965;
@@ -697,6 +779,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F4/10°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Warm white (fluorescent)";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "2694";
 			window[White].X = 1.14961;
 			window[White].Z = 0.40963;
@@ -707,6 +791,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F5/10°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Daylight (fluorescent)";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "6074";
 			window[White].X = 0.93369;
 			window[White].Z = 0.98636;
@@ -717,6 +803,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F6/10°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Light white (fluorescent)";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "3848";
 			window[White].X = 1.02148;
 			window[White].Z = 0.62074;
@@ -727,6 +815,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F7/10°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Daylight / D65 (Simulator)";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "6342";
 			window[White].X = 0.95792;
 			window[White].Z = 1.07686;
@@ -737,6 +827,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F8/10°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "D50 (Simulator) / Sylvania F40 Design 50";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "4883";
 			window[White].X = 0.97115;
 			window[White].Z = 0.81135;
@@ -747,6 +839,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F9/10°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Cool white deluxe (fluorescent)";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "4013";
 			window[White].X = 1.02116;
 			window[White].Z = 0.67826;
@@ -757,6 +851,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F10/10°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Philips TL85 / Ultralume 50";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "4794";
 			window[White].X = 0.99001;
 			window[White].Z = 0.83134;
@@ -767,6 +863,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F11/10°";
 			window[White].Standard = "ASTM E308-18";
 			window[White].Note = "Philips TL84 / Ultralume 40";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "3820";
 			window[White].X = 1.03863;
 			window[White].Z = 0.65607;
@@ -777,6 +875,8 @@ function GetRefWhite(SelectedRefWhite, White)
 			window[White].Name = "F12/10°";
 			window[White].Standard = "https://en.wikipedia.org/wiki/Standard_illuminant";
 			window[White].Note = "Philips TL83 / Ultralume 30";
+			window[White].StdObs = "CIE1964StdObs";
+			window[White].SPD = "";
 			window[White].CCT = "2851";
 			window[White].X = 1.11428;
 			window[White].Z = 0.40353;
@@ -1809,3 +1909,132 @@ function DeltaECMC(L, C)
 		DECMC_11 = Math.sqrt(v1 * v1 + v2 * v2 + (dH2 / (v3 * v3)));
 	}
 }
+
+function LightIntensity2Transmission(IncidentLight, TransmittedLight) {
+	let Transmission = {};
+	for (var i in TransmittedLight) {
+		if (TransmittedLight.hasOwnProperty(i)) {
+			var j = 'T' + i.slice(1);
+			Transmission[j] = (TransmittedLight[i] / IncidentLight[i]).toFixed(6);
+		}
+	}
+	return(Transmission);
+}
+
+function Transmission2Absorbance(Transmission) {
+	let Absorbance = {};
+	for (var i in Transmission) {
+		if (Transmission.hasOwnProperty(i)) {
+			var j = 'E' + i.slice(1);
+			Absorbance[j] = (Math.log10(1 / Transmission[i])).toFixed(6);
+		}
+	}
+	return(Absorbance);
+}
+
+function Absorbance2SAC(Absorbance, Thickness) {
+	let SAC = {};
+	for (var i in Absorbance) {
+		if (Absorbance.hasOwnProperty(i)) {
+			var j = 'SAC' + i.slice(1);
+			SAC[j] = (Absorbance[i] / Thickness * 100).toFixed(6);
+		}
+	}
+	return(SAC);
+}
+
+function Transmission2XYZ(Transmission) {
+	let XYZ = {};
+
+	if (SourceWhite.SPD != "") {
+		var SPD = window[SourceWhite.SPD];
+		var StdObsX = window[SourceWhite.StdObs + '_x'];
+		var StdObsY = window[SourceWhite.StdObs + '_y'];
+		var StdObsZ = window[SourceWhite.StdObs + '_z'];
+
+		var k = 0;
+
+		// Normalizing Constant
+		for (var i = 0; i < SPD.length; i++) {
+			k += SPD[i] / 100 * StdObsY[i] * WaveLengthIncrement;
+		}
+		k = 100 / k;
+
+		var WaveLength = 360;
+		var wa = 0;
+		var wp = 0;
+
+		var WaveLengthNext = WaveLength;
+		for (var j = wa+1; j < SPD.length; j++) {
+			WaveLengthNext += WaveLengthIncrement;
+			if (Transmission['T' + WaveLengthNext] >= 0) {
+				var wn = j;
+
+				XYZ.X = (RangeLoop(0, 0, SPD, StdObsX, k) + RangeLoop(0, wn-1, SPD, StdObsX, k)) / 2;
+				XYZ.Y = (RangeLoop(0, 0, SPD, StdObsY, k) + RangeLoop(0, wn-1, SPD, StdObsY, k)) / 2;
+				XYZ.Z = (RangeLoop(0, 0, SPD, StdObsZ, k) + RangeLoop(0, wn-1, SPD, StdObsZ, k)) / 2;
+				break;
+			}
+		}
+
+		// Loop through SPD Array (360nm - 830nm)
+		for (var i = 0; i < SPD.length; i++) {
+			if (Transmission['T' + WaveLength] >= 0) {
+				wp = wa;
+				wa = i;
+				var WaveLengthNext = WaveLength;
+				for (var j = wa + 1; j < SPD.length; j++) {
+					WaveLengthNext += WaveLengthIncrement;
+					if (Transmission['T' + WaveLengthNext] >= 0) {
+						var wn = j;
+						break;
+					}
+				}
+
+				XYZ.X += (RangeLoop(wp+1, wa, SPD, StdObsX, k) + RangeLoop(wa, wn-1, SPD, StdObsX, k)) / 2 * Transmission['T' + WaveLength];
+				XYZ.Y += (RangeLoop(wp+1, wa, SPD, StdObsY, k) + RangeLoop(wa, wn-1, SPD, StdObsY, k)) / 2 * Transmission['T' + WaveLength];
+				XYZ.Z += (RangeLoop(wp+1, wa, SPD, StdObsZ, k) + RangeLoop(wa, wn-1, SPD, StdObsZ, k)) / 2 * Transmission['T' + WaveLength];
+
+// console.log(i, WaveLength, XYZ, Transmission['T' + WaveLength], wp, wa, wn);
+//			} else {
+// console.log(i, WaveLength, wp, wa, wn);
+			}
+			WaveLength += WaveLengthIncrement;
+		}
+
+		for (var j = wa+1; j < wa+6; j++) {
+			WaveLength += WaveLengthIncrement;
+			if (Transmission['T' + WaveLength] >= 0) {
+				var wn = j;
+
+				XYZ.X += (RangeLoop(i-1, i-1, SPD, StdObsX, k) + RangeLoop(wa+1, i-1, SPD, StdObsX, k)) / 2 * Transmission['T' + WaveLength];
+				XYZ.Y += (RangeLoop(i-1, i-1, SPD, StdObsY, k) + RangeLoop(wa+1, i-1, SPD, StdObsY, k)) / 2 * Transmission['T' + WaveLength];
+				XYZ.Z += (RangeLoop(i-1, i-1, SPD, StdObsZ, k) + RangeLoop(wa+1, i-1, SPD, StdObsZ, k)) / 2 * Transmission['T' + WaveLength];
+				break;
+			}
+		}
+
+// console.log(i, WaveLength, XYZ, Transmission['T' + WaveLength], wp, wa, wn);
+
+// XYZ.X = (RangeLoop(0, i-1, SPD, StdObsX, k) + RangeLoop(0, i-1, SPD, StdObsX, k)) / 2;
+// XYZ.Y = (RangeLoop(0, i-1, SPD, StdObsY, k) + RangeLoop(0, i-1, SPD, StdObsY, k)) / 2;
+// XYZ.Z = (RangeLoop(0, i-1, SPD, StdObsZ, k) + RangeLoop(0, i-1, SPD, StdObsZ, k)) / 2;
+console.log(XYZ);
+
+	} else {
+		XYZ = {
+			Source: "No SPD data"
+		}
+	}
+	return(XYZ);
+}
+
+function RangeLoop(Start, Stop, SPD, StdObs, k) {
+	var XYZIncrement = 0;
+	for (var i = Start; i <= Stop; i++) {
+		XYZIncrement += k * SPD[i] / 10000 * StdObs[i] * WaveLengthIncrement;
+	}
+	return(XYZIncrement);
+}
+
+
