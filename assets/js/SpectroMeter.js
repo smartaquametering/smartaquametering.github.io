@@ -553,7 +553,7 @@ function DocumentOnLoad() {
 		SensorData[9]['MeasuredValue'] = printObject(NearestColors(SensorXYZ));
 
 		$('#SensorTable').bootstrapTable('load', SensorData);
-//		DrawCharts();
+//		DrawCharts(SensorRGB, SensorxyY, SensorLab);
 	};
 	function UpdateReadingData(SampleMode) {
 
@@ -574,13 +574,15 @@ function DocumentOnLoad() {
 //			ReadingData[16]['Value01'] = printObject(NearestColors(EmptySampleXYZ));
 		}
 		if (SampleMode == 'Sample') {
-			let SampleTransmission = LightIntensity2Transmission(EmptySampleLightIntensity, SampleLightIntensity);
-			let SampleAbsorbance = Transmission2Absorbance(SampleTransmission);
-			let SampleSAC = Absorbance2SAC(SampleAbsorbance, ReadingData[4]['Thickness']);
-			let SampleXYZ = Transmission2XYZ(SampleTransmission);
+			SampleTransmission = LightIntensity2Transmission(EmptySampleLightIntensity, SampleLightIntensity);
+			SampleAbsorbance = Transmission2Absorbance(SampleTransmission);
+			SampleSAC = Absorbance2SAC(SampleAbsorbance, ReadingData[4]['Thickness']);
+			SampleXYZ = Transmission2XYZ(SampleTransmission);
 
 			SampleXYZ = ChromaticAdaptationXYZ(SampleXYZ);
+console.log(SampleXYZ);
 			SamplexyY = XYZ2xyY(SampleXYZ);
+console.log(SamplexyY);
 			SampleRGB = XYZ2RGB(SampleXYZ);
 			SampleLab = XYZ2Lab(SampleXYZ);
 			SampleCCT.Robertson = XYZ2CCT_Robertson(SampleXYZ);
@@ -591,7 +593,7 @@ function DocumentOnLoad() {
 			ReadingData[6]['Value1'] = printObject(SampleAbsorbance);
 			ReadingData[7]['Value1'] = printObject(SampleSAC);
 			ReadingData[8]['Value1'] = printObject(ScaleXYZ(SampleXYZ));
-			ReadingData[9]['Value1'] = printObject(ScalexyY(SampleXYZ));
+			ReadingData[9]['Value1'] = printObject(ScalexyY(SamplexyY));
 			ReadingData[10]['Value1'] = printObject(SampleLab);
 			ReadingData[11]['Value1'] = printObject(XYZ2Luv(SampleXYZ));
 			ReadingData[12]['Value1'] = printObject(XYZ2HunterLab(SampleXYZ));
