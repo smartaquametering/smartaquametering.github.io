@@ -27,6 +27,8 @@ var SensorCCT = {};
 
 var SampleXYZ = {};
 var SampleLightIntensity = {};
+var SamplexyY = {};
+var SampleRGB = {};
 var SampleAbsorbance = {};
 var SampleSAC = {};
 var SampleLab = {};
@@ -551,7 +553,7 @@ function DocumentOnLoad() {
 		SensorData[9]['MeasuredValue'] = printObject(NearestColors(SensorXYZ));
 
 		$('#SensorTable').bootstrapTable('load', SensorData);
-		DrawCharts();
+//		DrawCharts();
 	};
 	function UpdateReadingData(SampleMode) {
 
@@ -578,6 +580,8 @@ function DocumentOnLoad() {
 			let SampleXYZ = Transmission2XYZ(SampleTransmission);
 
 			SampleXYZ = ChromaticAdaptationXYZ(SampleXYZ);
+			SamplexyY = XYZ2xyY(SampleXYZ);
+			SampleRGB = XYZ2RGB(SampleXYZ);
 			SampleLab = XYZ2Lab(SampleXYZ);
 			SampleCCT.Robertson = XYZ2CCT_Robertson(SampleXYZ);
 			SampleCCT.McCamy = XYZ2CCT_McCamy(SampleXYZ);
@@ -587,11 +591,11 @@ function DocumentOnLoad() {
 			ReadingData[6]['Value1'] = printObject(SampleAbsorbance);
 			ReadingData[7]['Value1'] = printObject(SampleSAC);
 			ReadingData[8]['Value1'] = printObject(ScaleXYZ(SampleXYZ));
-			ReadingData[9]['Value1'] = printObject(ScalexyY(XYZ2xyY(SampleXYZ)));
+			ReadingData[9]['Value1'] = printObject(ScalexyY(SampleXYZ));
 			ReadingData[10]['Value1'] = printObject(SampleLab);
 			ReadingData[11]['Value1'] = printObject(XYZ2Luv(SampleXYZ));
 			ReadingData[12]['Value1'] = printObject(XYZ2HunterLab(SampleXYZ));
-			ReadingData[13]['Value1'] = printObject(ScaleRGB(XYZ2RGB(SampleXYZ)));
+			ReadingData[13]['Value1'] = printObject(ScaleRGB(SampleRGB));
 			ReadingData[14]['Value1'] = printObject(SampleCCT);
 			ReadingData[15]['Value1'] = XYZ2DominantWavelength(SampleXYZ);
 			ReadingData[16]['Value1'] = printObject(NearestColors(SampleXYZ));
@@ -605,16 +609,17 @@ function DocumentOnLoad() {
 			ReadingData[10]['ColorDifference']=printObject(Difference_CIELAB);
 		}
 		$('#ReadingTable').bootstrapTable('load', ReadingData);
+		DrawCharts(SampleRGB, SamplexyY, SampleLab);
 	};
 
 	google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback();
 
-	function DrawCharts() {
+	function DrawCharts(RGB, xyY, Lab) {
 
 		var sRGBCanvas = document.getElementById("sRGBCanvas");
 		var sRGBctx = sRGBCanvas.getContext("2d");
-		sRGBctx.fillStyle = SensorRGB.HEX;
+		sRGBctx.fillStyle = RGB.HEX;
 		sRGBctx.fillRect(0,0,400,150);
 
 		if (ColorScale.Name == "None") {
@@ -629,7 +634,7 @@ function DocumentOnLoad() {
 			CIEYxyChartData.addColumn('number', 'Spectrum locus');
 			CIEYxyChartData.addColumn({type:'number', role:'annotation'});
 			CIEYxyChartData.addRows([
-				[SensorxyY.x, SensorxyY.y, null, null, null, null, null, null, null],
+				[xyY.x, xyY.y, null, null, null, null, null, null, null],
 				[RefWhite.x, null, RefWhite.y, null, null, null, null, null, null],
 				[RGBModel.xr, null, null, RGBModel.yr, null, null, null, null, null],
 				[RGBModel.xg, null, null, RGBModel.yg, null, null, null, null, null],
@@ -671,7 +676,7 @@ function DocumentOnLoad() {
 				vAxis: {title: 'y', minValue: 0, maxValue: 0.9},
 				width: 533,
 				height: 600,
-				title: 'CIE-Yxy Chromaticity Diagram (Y=1, '+SensorxyY.Reference+')',
+				title: 'CIE-Yxy Chromaticity Diagram (Y=1, '+xyY.Reference+')',
 				backgroundColor: 'none',
 				annotations: {
 					textStyle: {
@@ -695,9 +700,9 @@ function DocumentOnLoad() {
 			$('#CIEChartBackground').css('background-image', "url('"+AssetsPath+"/images/CIE-Yxy.png')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
 		} else {
 				let SensorColor = culori.lab65({
-					l: +SensorLab.L,
-					a: +SensorLab.a,
-					b: +SensorLab.b
+					l: +Lab.L,
+					a: +Lab.a,
+					b: +Lab.b
 				});
 
 			var CIEYxyChartData = new google.visualization.DataTable();
@@ -709,11 +714,11 @@ function DocumentOnLoad() {
 
 			if (!ColorScale.Value) {
 				CIEYxyChartData.addRows([
-					[parseFloat(SensorLab.a), parseFloat(SensorLab.b), '<div style="background-color: ' + culori.formatHex(SensorColor) + ' ;opacity: 100; text-align: left; min-width: 100px; padding: 8px;"><b>Sensor</b><br><br>L: ' + SensorLab.L + '<br>a: ' + SensorLab.a + '<br>b: ' + SensorLab.b + '</div>', null, null],
+					[parseFloat(Lab.a), parseFloat(Lab.b), '<div style="background-color: ' + culori.formatHex(SensorColor) + ' ;opacity: 100; text-align: left; min-width: 100px; padding: 8px;"><b>Sensor</b><br><br>L: ' + Lab.L + '<br>a: ' + Lab.a + '<br>b: ' + Lab.b + '</div>', null, null],
 				]);
 			} else {
 				CIEYxyChartData.addRows([
-					[parseFloat(SensorLab.a), parseFloat(SensorLab.b), '<div style="background-color: ' + culori.formatHex(SensorColor) + ' ;opacity: 100; text-align: left; min-width: 100px; padding: 8px;"><b>Sensor</b><br><br>L: ' + SensorLab.L + '<br>a: ' + SensorLab.a + '<br>b: ' + SensorLab.b + '<br><br>' + ColorScale.Name + ': ' + ColorScale.Value + '</div>', null, null],
+					[parseFloat(Lab.a), parseFloat(Lab.b), '<div style="background-color: ' + culori.formatHex(SensorColor) + ' ;opacity: 100; text-align: left; min-width: 100px; padding: 8px;"><b>Sensor</b><br><br>L: ' + Lab.L + '<br>a: ' + Lab.a + '<br>b: ' + Lab.b + '<br><br>' + ColorScale.Name + ': ' + ColorScale.Value + '</div>', null, null],
 				]);
 			}
 			let ReferenceColors = Object.entries(ColorScale.Index).map(entry => {
@@ -734,7 +739,7 @@ function DocumentOnLoad() {
 				vAxis: {title: 'b', minValue: -150.0, maxValue: 150.0},
 				width: 900,
 				height: 900,
-				title: 'CIE-L*a*b* Chromaticity Diagram (L=75, '+SensorLab.Reference+')',
+				title: 'CIE-L*a*b* Chromaticity Diagram (L=75, '+Lab.Reference+')',
 				backgroundColor: 'none',
 				annotations: {
 					textStyle: {
