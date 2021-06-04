@@ -78,7 +78,6 @@
 							<br>Font Awesome CSS - https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css
 							<br>Font Awesome JS - https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/js/fontawesome.min.js
 							<br>Google Chart - https://www.gstatic.com/charts/loader.js
-							<br>Culori color library for JavaScript - https://cdn.jsdelivr.net/npm/culori@0.18.0/build/culori.umd.min.js
 							<br>smartAquaMetering ColoriMeter JS - https://smartaquametering.github.io/assets/js/ColoriMeter.js
 							<br>smartAquaMetering Color conversion and Color delta JS - https://smartaquametering.github.io/assets/js/ColorConversion.js
 							<br>smartAquaMetering Color scales JS - https://smartaquametering.github.io/assets/js/ColorScales.js
@@ -131,7 +130,6 @@
 								<br>Google Chart - <a href="https://github.com/GoogleWebComponents/google-chart/blob/master/LICENSE" target="_blank">Copyright © Google Inc</a>. Licensed under <a href="https://github.com/GoogleWebComponents/google-chart/blob/master/LICENSE" target="_blank">Apache License 2.0</a>.
 								<br>Color converting functions - <a href="http://www.brucelindbloom.com/index.html?ColorCalculator.html" target="_blank">Copyright © 2001-2021 by Bruce Justin Lindbloom</a>.
 								<br>Color delta functions - <a href="http://www.brucelindbloom.com/index.html?ColorDifferenceCalc.html" target="_blank">Copyright © 2001-2021 by Bruce Justin Lindbloom</a>.
-								<br>Culori color library for JavaScript - <a href="https://github.com/Evercoder/culori/blob/master/LICENSE" target="_blank">Copyright © 2018 by Dan Burzo</a>. Licensed under <a href="https://github.com/Evercoder/culori/blob/master/LICENSE" target="_blank">MIT License</a>.
 							</samp>
 						</div>
 					</div>
@@ -265,13 +263,194 @@
 			<div class="col">
 				<input id="switch_9" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="outline-dark" data-offstyle="outline-dark" data-on="On" data-off="Off">
 			</div>
+			<div class="col">
+				<input id="FadeLEDs" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="light" data-offstyle="light" data-on="LEDs" data-off="LEDs">
+			</div>
 		</div>
 		</p>
+		<div id="LEDArray">
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="switch_10" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="ultraviolett-a" data-offstyle="ultraviolett-a" data-on="<small>375 nm" data-off="<small>375 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_10_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="ultraviolett-a">
+				</div>
+				<div class="col">
+					<input id="switch_11" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="deep-purple" data-offstyle="deep-purple" data-on="<small>395 nm" data-off="<small>395 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_11_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="deep-purple">
+				</div>
+			</div>
+			</p>
+			<div class="row">
+				<div class="col">
+					<input id="switch_12" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="bluish-purple" data-offstyle="bluish-purple" data-on="<small>415 nm" data-off="<small>415 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_12_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="bluish-purple">
+				</div>
+				<div class="col">
+					<input id="switch_13" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="violet-like-blue" data-offstyle="violet-like-blue" data-on="<small>428 nm" data-off="<small>428 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_13_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="violet-like-blue">
 
-		<h4 class="mt-4 mb-4">Status</h4>
-		<table id="SensorTable"></table>
+				</div>
+			</div>
+			</p>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="switch_14" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="bright-blue" data-offstyle="bright-blue" data-on="<small>460 nm" data-off="<small>460 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_14_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="bright-blue">
 
+				</div>
+				<div class="col">
+					<input id="switch_15" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="greenisch-bright-blue" data-offstyle="greenisch-bright-blue" data-on="<small>470 nm" data-off="<small>470 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_15_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="greenisch-bright-blue">
+
+				</div>
+			</div>
+			</p>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="switch_16" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="greenish-cyan" data-offstyle="greenish-cyan" data-on="<small>500 nm" data-off="<small>500 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_16_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="greenish-cyan">
+
+				</div>
+				<div class="col">
+					<input id="switch_17" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="pure-green" data-offstyle="pure-green" data-on="<small>525 nm" data-off="<small>525 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_17_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="pure-green">
+
+				</div>
+			</div>
+			</p>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="switch_18" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="yellow-green" data-offstyle="yellow-green" data-on="<small>565 nm" data-off="<small>565 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_18_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="yellow-green">
+				</div>
+				<div class="col">
+					<input id="switch_19" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="citrus-yellow" data-offstyle="citrus-yellow" data-on="<small>574 nm" data-off="<small>574 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_19_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="citrus-yellow">
+
+				</div>
+			</div>
+			</p>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="switch_20" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="natrium-yellow" data-offstyle="natrium-yellow" data-on="<small>592 nm" data-off="<small>592 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_20_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="natrium-yellow">
+
+				</div>
+				<div class="col">
+					<input id="switch_21" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="pure-orange" data-offstyle="pure-orange" data-on="<small>611 nm" data-off="<small>611 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_21_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="pure-orange">
+
+				</div>
+			</div>
+			</p>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="switch_22" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="bright-red" data-offstyle="bright-red" data-on="<small>640 nm" data-off="<small>640 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_22_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="bright-red">
+				</div>
+				<div class="col">
+					<input id="switch_23" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="hyper-red" data-offstyle="hyper-red" data-on="<small>660 nm" data-off="<small>660 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_23_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="hyper-red">
+
+				</div>
+			</div>
+			</p>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="switch_24" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="very-deep-red" data-offstyle="very-deep-red" data-on="<small>700 nm" data-off="<small>700 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_24_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="very-deep-red">
+				</div>
+				<div class="col">
+					<input id="switch_25" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>830 nm" data-off="<small>830 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_25_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="NIR">
+				</div>
+			</div>
+			</p>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="switch_26" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>850 nm" data-off="<small>850 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_26_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="NIR">
+				</div>
+				<div class="col ">
+					<input id="switch_27" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>880 nm" data-off="<small>880 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_27_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="NIR">
+				</div>
+			</div>
+			</p>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="switch_28" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>940 nm" data-off="<small>940 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_28_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="NIR">
+				</div>
+				<div class="col">
+					<input id="switch_29" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>950 nm" data-off="<small>950 nm">&nbsp;&nbsp;&nbsp;
+					<input id="switch_29_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="NIR">
+				</div>
+			</div>
+			</p>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="switch_30" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>NIR" data-off="<small>NIR">&nbsp;&nbsp;&nbsp;
+					<input id="switch_30_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="NIR">
+				</div>
+				<div class="col">
+					<input id="switch_31" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>NIR" data-off="<small>NIR">&nbsp;&nbsp;&nbsp;
+					<input id="switch_31_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="NIR">
+				</div>
+			</div>
+			</p>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="switch_32" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>NIR" data-off="<small>NIR">&nbsp;&nbsp;&nbsp;
+					<input id="switch_32_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="NIR">
+				</div>
+				<div class="col">
+					<input id="switch_33" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>NIR" data-off="<small>NIR">&nbsp;&nbsp;&nbsp;
+					<input id="switch_33_slider" type="text" data-slider-min="0" data-slider-max="4000" data-slider-step="1" data-slider-value="2000" data-slider-enabled="false" data-slider-id="NIR">
+				</div>
+			</div>
+			</p>
+		</div>
 		<p>
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="BeamAngle">Beam Angle</label>
+				</div>
+				<select class="form-control selectpicker show-tick" data-size="5" id="BeamAngle">
+					<option value="0" selected data-subtext="Transmitted light measurement (Absorbance)">180 [°]</option>
+					<option value="1" data-subtext="Nephelometric turbidity (scattered light) measurement">90 [°]</option>
+					<option value="2" data-subtext="Fluorescence measurement (Excitation light source))">90 [°]</option>
+				</select>
+			</div>
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="CuvetteThickness">Cuvette Thickness</label>
+				</div>
+				<select class="form-control selectpicker show-tick" data-size="5" id="CuvetteThickness">
+					<option value="0" selected data-subtext="1.0 cm (10 mm) pathlength">10 [mm]</option>
+					<option value="1" data-subtext="1.1 cm (11 mm) pathlength">11 [mm]</option>
+					<option value="2" data-subtext="1.4 cm (14 mm) pathlength">14 [mm]</option>
+					<option value="3" data-subtext="1.5 cm (15 mm) pathlength">15 [mm]</option>
+					<option value="4" data-subtext="1.6 cm (16 mm) pathlength">16 [mm]</option>
+					<option value="5" data-subtext="2.0 cm (20 mm) pathlength">20 [mm]</option>
+					<option value="6" data-subtext="4.0 cm (40 mm) pathlength">40 [mm]</option>
+					<option value="7" data-subtext="5.0 cm (50 mm) pathlength">50 [mm]</option>
+				</select>
+			</div>
+
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
 					<label class="input-group-text" for="SourceWhite">Source white</label>
@@ -329,6 +508,13 @@
 						<option value="47" data-subtext="5000 K° - Philips TL85 / Ultralume 50">F10/10°</option>
 						<option value="48" data-subtext="4000 K° - Philips TL84 / Ultralume 40">F11/10°</option>
 						<option value="49" data-subtext="3000 K° - Philips TL83 / Ultralume 30">F12/10°</option>
+					</optgroup>
+					<optgroup label="Vendor illuminants for the 10 degree field of view (1964)">
+						<option value="50" data-subtext="xxx">Nichia NSPW500DS/10°</option>
+						<option value="51" data-subtext="xxx">Nichia NSPL500DS/10°</option>
+						<option value="52" data-subtext="xxx">Nichia NSPU510CS/10°</option>
+						<option value="53" data-subtext="xxx">Luckylight 504WC2E-W6-3PC/10°</option>
+						<option value="54" data-subtext="3200 K°">Tungsten Halogen (3200 K°)/10°</option>
 					</optgroup>
 				</select>
 			</div>
@@ -391,6 +577,13 @@
 						<option value="48" data-subtext="4000 K° - Philips TL84 / Ultralume 40">F11/10°</option>
 						<option value="49" data-subtext="3000 K° - Philips TL83 / Ultralume 30">F12/10°</option>
 					</optgroup>
+					<optgroup label="Vendor illuminants for the 10 degree field of view (1964)">
+						<option value="50" data-subtext="xxx">Nichia NSPW500DS/10°</option>
+						<option value="51" data-subtext="xxx">Nichia NSPL500DS/10°</option>
+						<option value="52" data-subtext="xxx">Nichia NSPU510CS/10°</option>
+						<option value="53" data-subtext="xxx">Luckylight 504WC2E-W6-3PC/10°</option>
+						<option value="54" data-subtext="3200 K°">Tungsten Halogen (3200 K°)/10°</option>
+					</optgroup>
 				</select>
 			</div>
 
@@ -399,10 +592,10 @@
 					<label class="input-group-text" for="Adaptation">Adaptation method</label>
 				</div>
 				<select class="form-control selectpicker show-tick" data-size="5" id="Adaptation">
-					<option value="0" selected>Bradford</option>
-					<option value="1">Von Kries</option>
-					<option value="2">XYZ Scaling</option>
-					<option value="3">None</option>
+					<option value="0" selected data-subtext="The newest of the three methods, and is considered by most experts to be the best of them">Bradford</option>
+					<option value="1"data-subtext="A simple model formulated from the hypotheses of Johannes von Kries in 1902, known as von Kries transform/model">Von Kries</option>
+					<option value="2"data-subtext="Generally considered to be an inferior chromatic adaptation algorithm">XYZ Scaling</option>
+					<option value="3"data-subtext="">None</option>
 				</select>
 			</div>
 
@@ -432,6 +625,18 @@
 
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
+					<label class="input-group-text" for="Scaling">Scale values</label>
+				</div>
+				<select class="form-control selectpicker show-tick" multiple data-live-search="false" data-size="5" id="Scaling">
+					<option value="0" selected data-subtext="">None</option>
+					<option value="1" data-subtext="Range of XYZ values: Unchecked (Default): 0.0-1.0; Checked: 0.0-100.0">CIE-XYZ</option>
+					<option value="2" data-subtext="Range of Y value: Unchecked (Default): 0.0-1.0; Checked: 0.0-100.0">CIE-xyY</option>
+					<option value="3" data-subtext="Range of RGB values: Unchecked (Default): 0.0-1.0; Checked: 0.0-255.0">RGB</option>
+				</select>
+			</div>
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
 					<label class="input-group-text" for="ColorScale">Color scale</label>
 				</div>
 				<select class="form-control selectpicker show-tick" data-live-search="true" data-size="5" id="ColorScale">
@@ -454,18 +659,71 @@
 					<option value="21" data-subtext="Reference: CIE-L*a*b* (D65/2°)">ColorChecker Patches</option>
 				</select>
 			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="SpectrumLightIntensityImport">Spectral Power Distribution import</label>
+				</div>
+				<div class="custom-file">
+					<input type="file" accept="text/plain ,.csv" class="custom-file-input" id="SpectrumLightIntensityImport">
+					<label class="custom-file-label" for="SpectrumLightIntensityImport">Choose txt or csv file extension...</label>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="SpectrumTransmissionImport">Spectral Transmission import</label>
+				</div>
+				<div class="custom-file">
+					<input type="file" accept="text/plain ,.csv" class="custom-file-input" id="SpectrumTransmissionImport">
+					<label class="custom-file-label" for="SpectrumTransmissionImport">Choose txt or csv file extension...</label>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="Charts">Charts</label>
+				</div>
+				<select class="form-control selectpicker show-tick" multiple data-live-search="false" data-size="5" id="Charts">
+					<option value="0" data-subtext="">None</option>
+					<option value="1" data-subtext="Intensity of incident light ( I0 ) and/or transmitted light ( IT )">Spectral Power Distribution</option>
+					<option value="2" data-subtext="Normalized intensity of light passing through the sample ( T = IT / I0 )">Spectral Transmission</option>
+					<option value="3" selected data-subtext="Extinction/Attenuation ( Eλ = - log ( T ) = log ( 1 / T ) = ελ * c * d )">Spectral Absorbance</option>
+					<option value="4" data-subtext="CIE-Yxy/L*a*b* Chromaticity diagram">CIE Color</option>
+					<option value="5" data-subtext="Color patch based on selected RGB model">RGB Color</option>
+				</select>
+			</div>
 		</p>
 
 		<div class="row">
 			<div class="col-md-8 offset-md-2 text-center">
-				<canvas id="sRGBCanvas" width="400" height="150" style="border:1px solid #d3d3d3;">Your browser does not support the HTML canvas tag.</canvas>
+				<div id="LightIntensitySpectrumBackground">
+					<div id="LightIntensitySpectrum"></div>
+				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-8 offset-md-2 text-center">
-				<div id="CIEChartBackground">
-					<div id="CIEChart"></div>
+				<div id="TransmissionSpectrumBackground">
+					<div id="TransmissionSpectrum"></div>
 				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<div id="AbsorbanceSpectrumBackground">
+					<div id="AbsorbanceSpectrum"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<div id="CIEColorBackground">
+					<div id="CIEColor"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<div id="RGBColorHeading" style="font-family:Arial; font-size:13px; font-weight:bold; padding-bottom:13px;"></div>
+				<canvas id="RGBColor">Your browser does not support the HTML canvas tag.</canvas>
 			</div>
 		</div>
 

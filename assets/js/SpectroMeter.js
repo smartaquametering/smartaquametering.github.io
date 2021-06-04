@@ -11,55 +11,24 @@ var Release=Repository+' - '+VersionNumber+' ('+VersionDate+')';
 var AssetsPath='https://smartaquametering.github.io/assets/';
 var ImagesPath=AssetsPath+'images/';
 
+var SelectedBeamAngle;
+var SelectedCuvetteThickness;
 var SelectedSourceWhite;
 var SelectedRefWhite;
-var SelectedRGBModel;
 var SelectedAdaptationMethod;
+var SelectedRGBModel;
 var SelectedColorScale;
+var SelectedCharts = [];
+var SelectedScaling = [];
 
-var SensorXYZ = {};
-var SensorLightIntensity = {};
-var SensorxyY = {};
-var SensorRGB = {};
-var SensorLab = { L: 100, a: 0, b: 0 };
-
-var SensorCCT = {};
-
-var SampleXYZ = {};
-var SampleLightIntensity = {};
-var SamplexyY = {};
-var SampleRGB = {};
-var SampleAbsorbance = {};
-var SampleSAC = {};
-var SampleLab = {};
-var SampleCCT = {};
-
-var EmptySampleXYZ = {};
-var EmptySampleLightIntensity = {};
-var EmptySampleLab = {};
-var EmptySampleCCT = {};
-
-function LedSwitches(state) {
-	for (i = 7; i < 10; i++) {
+function ToggleState(state) {
+	for (i = 7; i < 36; i++) {
 		var switchid = "#switch_" + i;
 		$(switchid).bootstrapToggle(state);
+		$(switchid+"_slider").slider();
 	}
+	$("#FadeLEDs").bootstrapToggle(state);
 };
-
-function trigger() {
-	LedSwitches('enable');
-	$('select').selectpicker();
-
-	$('#SourceWhite').trigger('change');
-	$('#RefWhite').trigger('change');
-	$('#RGBModel').trigger('change');
-	$('#Adaptation').trigger('change');
-	$('#ColorScale').trigger('change');
-};
-
-$(document).ready(function(){
-	trigger();
-});
 
 jQuery.event.special.mousewheel = {
 	setup: function( _, ns, handle ) {
@@ -72,10 +41,335 @@ window.onbeforeunload = function() {
 }
 
 function DocumentOnLoad() {
+
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback();
+
 	var swaction=0;
 	var ProtocolID=0;
 	var ProtocolData=[];
 	var LogData=[];
+	var LedData=new Array();
+		LedData[0]=new Array();
+			LedData[0]['Manufacturer']='';
+			LedData[0]['ProductID']='';
+			LedData[0]['Color']='Warm White';
+			LedData[0]['CCT']='6500';
+			LedData[0]['XYZ']='';
+			LedData[0]['DominantWavelength']='410-780';
+			LedData[0]['FWHMBandwidth']='';
+			LedData[0]['GPIO']='0';
+			LedData[0]['PCFGPIO']='';
+		LedData[1]=new Array();
+			LedData[1]['Manufacturer']='';
+			LedData[1]['ProductID']='';
+			LedData[1]['Color']='';
+			LedData[1]['CCT']='';
+			LedData[1]['XYZ']='';
+			LedData[1]['DominantWavelength']='';
+			LedData[1]['FWHMBandwidth']='';
+			LedData[1]['GPIO']='1';
+			LedData[1]['PCFGPIO']='';
+		LedData[2]=new Array();
+			LedData[2]['Manufacturer']='';
+			LedData[2]['ProductID']='';
+			LedData[2]['Color']='';
+			LedData[2]['CCT']='';
+			LedData[2]['XYZ']='';
+			LedData[2]['DominantWavelength']='';
+			LedData[2]['FWHMBandwidth']='';
+			LedData[2]['GPIO']='2';
+			LedData[2]['PCFGPIO']='';
+		LedData[3]=new Array();
+			LedData[3]['Manufacturer']='';
+			LedData[3]['ProductID']='';
+			LedData[3]['Color']='';
+			LedData[3]['CCT']='';
+			LedData[3]['XYZ']='';
+			LedData[3]['DominantWavelength']='';
+			LedData[3]['FWHMBandwidth']='';
+			LedData[3]['GPIO']='3';
+			LedData[3]['PCFGPIO']='';
+		LedData[4]=new Array();
+			LedData[4]['Manufacturer']='';
+			LedData[4]['ProductID']='';
+			LedData[4]['Color']='';
+			LedData[4]['CCT']='';
+			LedData[4]['XYZ']='';
+			LedData[4]['DominantWavelength']='';
+			LedData[4]['FWHMBandwidth']='';
+			LedData[4]['GPIO']='4';
+			LedData[4]['PCFGPIO']='';
+		LedData[5]=new Array();
+			LedData[5]['Manufacturer']='';
+			LedData[5]['ProductID']='';
+			LedData[5]['Color']='';
+			LedData[5]['CCT']='';
+			LedData[5]['XYZ']='';
+			LedData[5]['DominantWavelength']='';
+			LedData[5]['FWHMBandwidth']='';
+			LedData[5]['GPIO']='5';
+			LedData[5]['PCFGPIO']='';
+		LedData[6]=new Array();
+			LedData[6]['Manufacturer']='';
+			LedData[6]['ProductID']='';
+			LedData[6]['Color']='';
+			LedData[6]['CCT']='';
+			LedData[6]['XYZ']='';
+			LedData[6]['DominantWavelength']='';
+			LedData[6]['FWHMBandwidth']='';
+			LedData[6]['GPIO']='6';
+			LedData[6]['PCFGPIO']='';
+		LedData[7]=new Array();
+			LedData[7]['Manufacturer']='';
+			LedData[7]['ProductID']='';
+			LedData[7]['Color']='';
+			LedData[7]['CCT']='';
+			LedData[7]['XYZ']='';
+			LedData[7]['DominantWavelength']='';
+			LedData[7]['FWHMBandwidth']='';
+			LedData[7]['GPIO']='7';
+			LedData[7]['PCFGPIO']='';
+		LedData[8]=new Array();
+			LedData[8]['Manufacturer']='';
+			LedData[8]['ProductID']='';
+			LedData[8]['Color']='';
+			LedData[8]['CCT']='';
+			LedData[8]['XYZ']='';
+			LedData[8]['DominantWavelength']='';
+			LedData[8]['FWHMBandwidth']='';
+			LedData[8]['GPIO']='8';
+			LedData[8]['PCFGPIO']='';
+		LedData[9]=new Array();
+			LedData[9]['Manufacturer']='';
+			LedData[9]['ProductID']='';
+			LedData[9]['Color']='';
+			LedData[9]['CCT']='';
+			LedData[9]['XYZ']='';
+			LedData[9]['DominantWavelength']='';
+			LedData[9]['FWHMBandwidth']='';
+			LedData[9]['GPIO']='9';
+			LedData[9]['PCFGPIO']='';
+		LedData[10]=new Array();
+			LedData[10]['Manufacturer']='';
+			LedData[10]['ProductID']='';
+			LedData[10]['Color']='';
+			LedData[10]['CCT']='';
+			LedData[10]['XYZ']='';
+			LedData[10]['DominantWavelength']='';
+			LedData[10]['FWHMBandwidth']='';
+			LedData[10]['GPIO']='10';
+			LedData[10]['PCFGPIO']='';
+		LedData[11]=new Array();
+			LedData[11]['Manufacturer']='';
+			LedData[11]['ProductID']='';
+			LedData[11]['Color']='';
+			LedData[11]['CCT']='';
+			LedData[11]['XYZ']='';
+			LedData[11]['DominantWavelength']='';
+			LedData[11]['FWHMBandwidth']='';
+			LedData[11]['GPIO']='11';
+			LedData[11]['PCFGPIO']='';
+		LedData[12]=new Array();
+			LedData[12]['Manufacturer']='';
+			LedData[12]['ProductID']='';
+			LedData[12]['Color']='';
+			LedData[12]['CCT']='';
+			LedData[12]['XYZ']='';
+			LedData[12]['DominantWavelength']='';
+			LedData[12]['FWHMBandwidth']='';
+			LedData[12]['GPIO']='12';
+			LedData[12]['PCFGPIO']='';
+		LedData[13]=new Array();
+			LedData[13]['Manufacturer']='';
+			LedData[13]['ProductID']='';
+			LedData[13]['Color']='';
+			LedData[13]['CCT']='';
+			LedData[13]['XYZ']='';
+			LedData[13]['DominantWavelength']='';
+			LedData[13]['FWHMBandwidth']='';
+			LedData[13]['GPIO']='13';
+			LedData[13]['PCFGPIO']='';
+		LedData[14]=new Array();
+			LedData[14]['Manufacturer']='';
+			LedData[14]['ProductID']='';
+			LedData[14]['Color']='';
+			LedData[14]['CCT']='';
+			LedData[14]['XYZ']='';
+			LedData[14]['DominantWavelength']='';
+			LedData[14]['FWHMBandwidth']='';
+			LedData[14]['GPIO']='14';
+			LedData[14]['PCFGPIO']='';
+		LedData[15]=new Array();
+			LedData[15]['Manufacturer']='';
+			LedData[15]['ProductID']='';
+			LedData[15]['Color']='';
+			LedData[15]['CCT']='';
+			LedData[15]['XYZ']='';
+			LedData[15]['DominantWavelength']='';
+			LedData[15]['FWHMBandwidth']='';
+			LedData[15]['GPIO']='15';
+			LedData[15]['PCFGPIO']='';
+		LedData[16]=new Array();
+			LedData[16]['Manufacturer']='';
+			LedData[16]['ProductID']='';
+			LedData[16]['Color']='';
+			LedData[16]['CCT']='';
+			LedData[16]['XYZ']='';
+			LedData[16]['DominantWavelength']='';
+			LedData[16]['FWHMBandwidth']='';
+			LedData[16]['GPIO']='16';
+			LedData[16]['PCFGPIO']='';
+		LedData[17]=new Array();
+			LedData[17]['Manufacturer']='';
+			LedData[17]['ProductID']='';
+			LedData[17]['Color']='';
+			LedData[17]['CCT']='';
+			LedData[17]['XYZ']='';
+			LedData[17]['DominantWavelength']='';
+			LedData[17]['FWHMBandwidth']='';
+			LedData[17]['GPIO']='17';
+			LedData[17]['PCFGPIO']='';
+		LedData[18]=new Array();
+			LedData[18]['Manufacturer']='';
+			LedData[18]['ProductID']='';
+			LedData[18]['Color']='';
+			LedData[18]['CCT']='';
+			LedData[18]['XYZ']='';
+			LedData[18]['DominantWavelength']='';
+			LedData[18]['FWHMBandwidth']='';
+			LedData[18]['GPIO']='18';
+			LedData[18]['PCFGPIO']='';
+		LedData[19]=new Array();
+			LedData[19]['Manufacturer']='';
+			LedData[19]['ProductID']='';
+			LedData[19]['Color']='';
+			LedData[19]['CCT']='';
+			LedData[19]['XYZ']='';
+			LedData[19]['DominantWavelength']='';
+			LedData[19]['FWHMBandwidth']='';
+			LedData[19]['GPIO']='19';
+			LedData[19]['PCFGPIO']='';
+		LedData[20]=new Array();
+			LedData[20]['Manufacturer']='';
+			LedData[20]['ProductID']='';
+			LedData[20]['Color']='';
+			LedData[20]['CCT']='';
+			LedData[20]['XYZ']='';
+			LedData[20]['DominantWavelength']='';
+			LedData[20]['FWHMBandwidth']='';
+			LedData[20]['GPIO']='20';
+			LedData[20]['PCFGPIO']='';
+		LedData[21]=new Array();
+			LedData[21]['Manufacturer']='';
+			LedData[21]['ProductID']='';
+			LedData[21]['Color']='';
+			LedData[21]['CCT']='';
+			LedData[21]['XYZ']='';
+			LedData[21]['DominantWavelength']='';
+			LedData[21]['FWHMBandwidth']='';
+			LedData[21]['GPIO']='21';
+			LedData[21]['PCFGPIO']='';
+		LedData[22]=new Array();
+			LedData[22]['Manufacturer']='';
+			LedData[22]['ProductID']='';
+			LedData[22]['Color']='';
+			LedData[22]['CCT']='';
+			LedData[22]['XYZ']='';
+			LedData[22]['DominantWavelength']='';
+			LedData[22]['FWHMBandwidth']='';
+			LedData[22]['GPIO']='22';
+			LedData[22]['PCFGPIO']='';
+		LedData[23]=new Array();
+			LedData[23]['Manufacturer']='';
+			LedData[23]['ProductID']='';
+			LedData[23]['Color']='';
+			LedData[23]['CCT']='';
+			LedData[23]['XYZ']='';
+			LedData[23]['DominantWavelength']='';
+			LedData[23]['FWHMBandwidth']='';
+			LedData[23]['GPIO']='23';
+			LedData[23]['PCFGPIO']='';
+		LedData[24]=new Array();
+			LedData[24]['Manufacturer']='';
+			LedData[24]['ProductID']='';
+			LedData[24]['Color']='';
+			LedData[24]['CCT']='';
+			LedData[24]['XYZ']='';
+			LedData[24]['DominantWavelength']='';
+			LedData[24]['FWHMBandwidth']='';
+			LedData[24]['GPIO']='24';
+			LedData[24]['PCFGPIO']='';
+		LedData[25]=new Array();
+			LedData[25]['Manufacturer']='';
+			LedData[25]['ProductID']='';
+			LedData[25]['Color']='';
+			LedData[25]['CCT']='';
+			LedData[25]['XYZ']='';
+			LedData[25]['DominantWavelength']='';
+			LedData[25]['FWHMBandwidth']='';
+			LedData[25]['GPIO']='25';
+			LedData[25]['PCFGPIO']='';
+		LedData[26]=new Array();
+			LedData[26]['Manufacturer']='';
+			LedData[26]['ProductID']='';
+			LedData[26]['Color']='';
+			LedData[26]['CCT']='';
+			LedData[26]['XYZ']='';
+			LedData[26]['DominantWavelength']='';
+			LedData[26]['FWHMBandwidth']='';
+			LedData[26]['GPIO']='26';
+			LedData[26]['PCFGPIO']='';
+		LedData[27]=new Array();
+			LedData[27]['Manufacturer']='';
+			LedData[27]['ProductID']='';
+			LedData[27]['Color']='';
+			LedData[27]['CCT']='';
+			LedData[27]['XYZ']='';
+			LedData[27]['DominantWavelength']='';
+			LedData[27]['FWHMBandwidth']='';
+			LedData[27]['GPIO']='27';
+			LedData[27]['PCFGPIO']='';
+		LedData[28]=new Array();
+			LedData[28]['Manufacturer']='';
+			LedData[28]['ProductID']='';
+			LedData[28]['Color']='';
+			LedData[28]['CCT']='';
+			LedData[28]['XYZ']='';
+			LedData[28]['DominantWavelength']='';
+			LedData[28]['FWHMBandwidth']='';
+			LedData[28]['GPIO']='28';
+			LedData[28]['PCFGPIO']='';
+		LedData[29]=new Array();
+			LedData[29]['Manufacturer']='';
+			LedData[29]['ProductID']='';
+			LedData[29]['Color']='';
+			LedData[29]['CCT']='';
+			LedData[29]['XYZ']='';
+			LedData[29]['DominantWavelength']='';
+			LedData[29]['FWHMBandwidth']='';
+			LedData[29]['GPIO']='29';
+			LedData[29]['PCFGPIO']='';
+		LedData[30]=new Array();
+			LedData[30]['Manufacturer']='';
+			LedData[30]['ProductID']='';
+			LedData[30]['Color']='';
+			LedData[30]['CCT']='';
+			LedData[30]['XYZ']='';
+			LedData[30]['DominantWavelength']='';
+			LedData[30]['FWHMBandwidth']='';
+			LedData[30]['GPIO']='30';
+			LedData[30]['PCFGPIO']='';
+		LedData[31]=new Array();
+			LedData[31]['Manufacturer']='';
+			LedData[31]['ProductID']='';
+			LedData[31]['Color']='';
+			LedData[31]['CCT']='';
+			LedData[31]['XYZ']='';
+			LedData[31]['DominantWavelength']='';
+			LedData[31]['FWHMBandwidth']='';
+			LedData[31]['GPIO']='31';
+			LedData[31]['PCFGPIO']='';
 	var ReadingData=new Array();
 		ReadingData[0]=new Array();
 		ReadingData[1]=new Array();
@@ -87,13 +381,14 @@ function DocumentOnLoad() {
 			ReadingData[3]['GPIO']='16';
 		ReadingData[4]=new Array();
 			ReadingData[4]['Readings']='<var>I<sub>λ</sub></var>';
-			ReadingData[4]['Value1']='';
-			ReadingData[4]['Value01']='';
+			ReadingData[4]['ValueReference']='';
+			ReadingData[4]['ValueSample']='';
+			ReadingData[4]['ValueSpectrum']='';
 			ReadingData[4]['Light']='Warm White';
 			ReadingData[4]['LightWavelength']='410-780';
 			ReadingData[4]['GPIO']='12';
 			ReadingData[4]['BeamAngle']='180';
-			ReadingData[4]['Thickness']='1.4';
+			ReadingData[4]['Thickness']='1.0';
 			ReadingData[4]['Filter01Wavelength']='615';
 			ReadingData[4]['Filter01HalfWidth']='25';
 			ReadingData[4]['Filter02Wavelength']='525';
@@ -102,113 +397,99 @@ function DocumentOnLoad() {
 			ReadingData[4]['Filter03HalfWidth']='15';
 		ReadingData[5]=new Array();
 			ReadingData[5]['Readings']='<var>T<sub>λ</sub></var>';
-			ReadingData[5]['Value1']='';
-			ReadingData[5]['Value01']='';
+			ReadingData[5]['ValueReference']='';
+			ReadingData[5]['ValueSample']='';
+			ReadingData[5]['ValueSpectrum']='';
 		ReadingData[6]=new Array();
 			ReadingData[6]['Readings']='<var>E<sub>λ</sub></var>';
-			ReadingData[6]['Value1']='';
-			ReadingData[6]['Value01']='';
+			ReadingData[6]['ValueReference']='';
+			ReadingData[6]['ValueSample']='';
+			ReadingData[6]['ValueSpectrum']='';
 		ReadingData[7]=new Array();
 			ReadingData[7]['Readings']='<var>SAC<sub>λ</sub></var>';
-			ReadingData[7]['Value1']='';
-			ReadingData[7]['Value01']='';
+			ReadingData[7]['ValueReference']='';
+			ReadingData[7]['ValueSample']='';
+			ReadingData[7]['ValueSpectrum']='';
 		ReadingData[8]=new Array();
 			ReadingData[8]['Readings']='CIE-XYZ';
-			ReadingData[8]['Value1']='';
-			ReadingData[8]['Value01']='';
+			ReadingData[8]['ValueReference']='';
+			ReadingData[8]['ValueSample']='';
+			ReadingData[8]['ValueSpectrum']='';
 		ReadingData[9]=new Array();
 			ReadingData[9]['Readings']='CIE-xyY';
-			ReadingData[9]['Value1']='';
-			ReadingData[9]['Value01']='';
+			ReadingData[9]['ValueReference']='';
+			ReadingData[9]['ValueSample']='';
+			ReadingData[9]['ValueSpectrum']='';
 		ReadingData[10]=new Array();
 			ReadingData[10]['Readings']='CIE-L*a*b*';
-			ReadingData[10]['Value1']='';
-			ReadingData[10]['Value01']='';
+			ReadingData[10]['ValueReference']='';
+			ReadingData[10]['ValueSample']='';
+			ReadingData[10]['ValueSpectrum']='';
 			ReadingData[10]['ColorDifference']='';
 		ReadingData[11]=new Array();
 			ReadingData[11]['Readings']='CIE-L*u*v*';
-			ReadingData[11]['Value1']='';
-			ReadingData[11]['Value01']='';
+			ReadingData[11]['ValueReference']='';
+			ReadingData[11]['ValueSample']='';
+			ReadingData[11]['ValueSpectrum']='';
 			ReadingData[11]['ColorDifference']='';
 		ReadingData[12]=new Array();
 			ReadingData[12]['Readings']='Hunter-Lab';
-			ReadingData[12]['Value1']='';
-			ReadingData[12]['Value01']='';
+			ReadingData[12]['ValueReference']='';
+			ReadingData[12]['ValueSample']='';
+			ReadingData[12]['ValueSpectrum']='';
 			ReadingData[12]['ColorDifference']='';
 		ReadingData[13]=new Array();
 			ReadingData[13]['Readings']='RGB';
-			ReadingData[13]['Value1']='';
-			ReadingData[13]['Value01']='';
+			ReadingData[13]['ValueReference']='';
+			ReadingData[13]['ValueSample']='';
+			ReadingData[13]['ValueSpectrum']='';
 			ReadingData[13]['ColorDifference']='';
 		ReadingData[14]=new Array();
 			ReadingData[14]['Readings']='CCT';
-			ReadingData[14]['Value1']='';
-			ReadingData[14]['Value01']='';
+			ReadingData[14]['ValueReference']='';
+			ReadingData[14]['ValueSample']='';
+			ReadingData[14]['ValueSpectrum']='';
 		ReadingData[15]=new Array();
 			ReadingData[15]['Readings']='Dominant λ';
-			ReadingData[15]['Value1']='';
-			ReadingData[15]['Value01']='';
+			ReadingData[15]['ValueReference']='';
+			ReadingData[15]['ValueSample']='';
+			ReadingData[15]['ValueSpectrum']='';
 		ReadingData[16]=new Array();
 			ReadingData[16]['Readings']='Nearest color(s)';
-			ReadingData[16]['Value1']='';
-			ReadingData[16]['Value01']='';
+			ReadingData[16]['ValueReference']='';
+			ReadingData[16]['ValueSample']='';
+			ReadingData[16]['ValueSpectrum']='';
 	var SensorData=new Array();
 		SensorData[0]=new Array();
 			SensorData[0]['Parameter']='<b><var>I<sub>λ</sub></var></b>';
 			SensorData[0]['MeasuredValue']='';
-			SensorData[0]['ScaledValue']='';
 		SensorData[1]=new Array();
 			SensorData[1]['Parameter']='<b>CIE-XYZ</b>';
 			SensorData[1]['MeasuredValue']='';
-			SensorData[1]['ScaledValue']='<input type="checkbox" id="ScaleXYZ">';
 		SensorData[2]=new Array();
 			SensorData[2]['Parameter']='<b>CIE-xyY</b>';
 			SensorData[2]['MeasuredValue']='';
-			SensorData[2]['ScaledValue']='<input type="checkbox" id="ScalexyY">';
 		SensorData[3]=new Array();
 			SensorData[3]['Parameter']='<b>CIE-L*a*b*</b>';
 			SensorData[3]['MeasuredValue']='';
-			SensorData[3]['ScaledValue']='';
 		SensorData[4]=new Array();
 			SensorData[4]['Parameter']='<b>CIE-L*u*v*</b>';
 			SensorData[4]['MeasuredValue']='';
-			SensorData[4]['ScaledValue']='';
 		SensorData[5]=new Array();
 			SensorData[5]['Parameter']='<b>Hunter-Lab</b>';
 			SensorData[5]['MeasuredValue']='';
-			SensorData[5]['ScaledValue']='';
 		SensorData[6]=new Array();
 			SensorData[6]['Parameter']='<b>RGB</b>';
 			SensorData[6]['MeasuredValue']='';
-			SensorData[6]['ScaledValue']='<input type="checkbox" id="ScaleRGB">';
 		SensorData[7]=new Array();
 			SensorData[7]['Parameter']='<b>CCT</b> [K]';
 			SensorData[7]['MeasuredValue']='';
-			SensorData[7]['ScaledValue']='';
 		SensorData[8]=new Array();
 			SensorData[8]['Parameter']='<b>Dominant λ</b> [nm]';
 			SensorData[8]['MeasuredValue']='';
-			SensorData[8]['ScaledValue']='';
 		SensorData[9]=new Array();
 			SensorData[9]['Parameter']='<b>Nearest color(s)</b>';
 			SensorData[9]['MeasuredValue']='';
-			SensorData[9]['ScaledValue']='';
-
-	var IX = "I" + ReadingData[4]['Filter01Wavelength'];
-	var IY = "I" + ReadingData[4]['Filter02Wavelength'];
-	var IZ = "I" + ReadingData[4]['Filter03Wavelength'];
-
-	var TX = "T" + ReadingData[4]['Filter01Wavelength'];
-	var TY = "T" + ReadingData[4]['Filter02Wavelength'];
-	var TZ = "T" + ReadingData[4]['Filter03Wavelength'];
-
-	var EX = "E" + ReadingData[4]['Filter01Wavelength'];
-	var EY = "E" + ReadingData[4]['Filter02Wavelength'];
-	var EZ = "E" + ReadingData[4]['Filter03Wavelength'];
-
-	var SACX = "SAC" + ReadingData[4]['Filter01Wavelength'];
-	var SACY = "SAC" + ReadingData[4]['Filter02Wavelength'];
-	var SACZ = "SAC" + ReadingData[4]['Filter03Wavelength'];
 
 	document.getElementById('Logo').src=AssetsPath+'images/logo.png';
 	document.getElementById('AboutModalBanner').href=RepositoryPath;
@@ -229,38 +510,190 @@ function DocumentOnLoad() {
 	document.getElementById('FooterOwner').href=OwnerPath;
 	document.getElementById('FooterOwner').innerHTML=Owner;
 
+	var AbsorbanceSpectrum = document.getElementById('AbsorbanceSpectrum');
+	var CIEColor = document.getElementById('CIEColor');
+	var RGBColorHeading = document.getElementById('RGBColorHeading');
+	var RGBColor = document.getElementById('RGBColor');
+	RGBColor.width = 0;
+	RGBColor.height = 0;
+
+	var SensorXYZ = {};
+	var SensorLightIntensity = {};
+	var SensorxyY = {};
+	var SensorRGB = {};
+	var SensorLab = { L: 100, a: 0, b: 0 };
+
+	var SensorCCT = {};
+
+	var EmptySampleXYZ = {};
+	var EmptySampleLightIntensity = {};
+	var EmptySampleLab = {};
+	var EmptySampleCCT = {};
+
+	var SampleXYZ = {};
+	var SampleLightIntensity = {};
+	var SampleTransmission = {};
+	var SamplexyY = {};
+	var SampleRGB = {};
+	var SampleAbsorbance = {};
+	var SampleSAC = {};
+	var SampleLab = {};
+	var SampleCCT = {};
+
+	var SpectrumXYZ = {};
+	var SpectrumLightIntensity = {};
+	var SpectrumTransmission = {};
+	var SpectrumxyY = {};
+	var SpectrumRGB = {};
+	var SpectrumAbsorbance = {};
+	var SpectrumSAC = {};
+	var SpectrumLab = {};
+	var SpectrumCCT = {};
+
+	$('#BeamAngle').change(function() {
+		SelectedBeamAngle = parseInt($(this).prop('value'));
+		ReadingData[4]['BeamAngle'] = GetBeamAngle(SelectedBeamAngle);
+		UpdateReadingData('EmptySample');
+		UpdateReadingData('Sample');
+	});
+	$('#CuvetteThickness').change(function() {
+		SelectedCuvetteThickness = parseInt($(this).prop('value'));
+		ReadingData[4]['Thickness'] = GetCuvetteThickness(SelectedCuvetteThickness);
+		UpdateReadingData('EmptySample');
+		UpdateReadingData('Sample');
+	});
 	$('#SourceWhite').change(function() {
 		SelectedSourceWhite = parseInt($(this).prop('value'));
 		GetRefWhite(SelectedSourceWhite, 'SourceWhite');
+		UpdateReadingData('EmptySample');
+		UpdateReadingData('Sample');
+	});
+	$('#ColorScale').change(function() {
+		SelectedColorScale = parseInt($(this).prop('value'));
+		UpdateReadingData('EmptySample');
+		UpdateReadingData('Sample');
+	});
+	$('#Charts').change(function() {
+		SelectedCharts = $(this).val();
+		DrawCharts(SampleLightIntensity, SpectrumLightIntensity, SampleTransmission, SpectrumTransmission, SampleAbsorbance, SpectrumAbsorbance, SampleRGB, SamplexyY, SampleLab);
 	});
 	$('#RefWhite').change(function() {
 		SelectedRefWhite = parseInt($(this).prop('value'));
 		GetRefWhite(SelectedRefWhite, 'RefWhite');
-	});
-	$('#RGBModel').change(function() {
-		SelectedRGBModel = parseInt($(this).prop('value'));
-		GetRGBModel(SelectedRGBModel);
+		UpdateReadingData('EmptySample');
+		UpdateReadingData('Sample');
 	});
 	$('#Adaptation').change(function() {
 		SelectedAdaptationMethod = parseInt($(this).prop('value'));
 		GetAdaptation(SelectedAdaptationMethod);
+		UpdateReadingData('EmptySample');
+		UpdateReadingData('Sample');
 	});
-	$('#ColorScale').change(function() {
-		SelectedColorScale = parseInt($(this).prop('value'));
-		GetColorScale(SelectedColorScale, SensorLab);
+	$('#RGBModel').change(function() {
+		SelectedRGBModel = parseInt($(this).prop('value'));
+		GetRGBModel(SelectedRGBModel);
+		UpdateReadingData('EmptySample');
+		UpdateReadingData('Sample');
+	});
+	$('#Scaling').change(function() {
+		SelectedScaling = $(this).val();
+		UpdateReadingData('EmptySample');
+		UpdateReadingData('Sample');
 	});
 
+	$('#SpectrumLightIntensityImport').change(function(e) {
+		if (e.target.files.length === 0) {
+			console.log('No file selected.');
+			return;
+		}
+		if (e.target.files.length) {
+			$(this).next('.custom-file-label').html(e.target.files[0].name);
+		}
+		const reader = new FileReader();
+		reader.onload = function fileReadCompleted() {
+			SpectrumLightIntensity = {};
+			var allLines = this.result.split(/\r\n|\n/);
+			allLines.forEach((line) => {
+			var strParts = line.split(",");
+				if (strParts[0] && strParts[1]) {
+//					strParts[0] = parseFloat(strParts[0].trim()).toFixed(1);
+					strParts[0] = Math.round(strParts[0].trim());
+					strParts[1] = parseFloat(strParts[1].trim()).toFixed(6);
+					SpectrumLightIntensity[strParts[0]] = strParts[1];
+				}
+			});
+			UpdateReadingData('Spectrum');
+		};
+		reader.readAsText(e.target.files[0]);
+	});
+
+	$('#SpectrumTransmissionImport').change(function(e) {
+		if (e.target.files.length === 0) {
+			console.log('No file selected.');
+			return;
+		}
+		if (e.target.files.length) {
+			$(this).next('.custom-file-label').html(e.target.files[0].name);
+		}
+		const reader = new FileReader();
+		reader.onload = function fileReadCompleted() {
+			SpectrumTransmission = {};
+			var allLines = this.result.split(/\r\n|\n/);
+			allLines.forEach((line) => {
+			var strParts = line.split(",");
+				if (strParts[0] && strParts[1]) {
+//					strParts[0] = parseFloat(strParts[0].trim()).toFixed(1);
+					strParts[0] = Math.round(strParts[0].trim());
+					strParts[1] = (parseFloat(strParts[1].trim()) / 100).toFixed(6);
+					SpectrumTransmission[strParts[0]] = strParts[1];
+				}
+			});
+			UpdateReadingData('Spectrum');
+		};
+		reader.readAsText(e.target.files[0]);
+	});
+
+	function trigger() {
+		ToggleState('enable');
+		$('select').selectpicker();
+
+		SelectedSourceWhite = parseInt($('#SourceWhite').prop('value'));
+		GetRefWhite(SelectedSourceWhite, 'SourceWhite');
+
+		SelectedRefWhite = parseInt($('#RefWhite').prop('value'));
+		GetRefWhite(SelectedRefWhite, 'RefWhite');
+
+		SelectedAdaptationMethod = parseInt($('#Adaptation').prop('value'));
+		GetAdaptation(SelectedAdaptationMethod);
+
+		SelectedRGBModel = parseInt($('#RGBModel').prop('value'));
+		GetRGBModel(SelectedRGBModel);
+
+		SelectedColorScale = parseInt($('#ColorScale').prop('value'));
+		SelectedCharts = $('#Charts').val();
+
+		$('#Scaling').trigger('change');
+	};
+
 	trigger();
+
+	$('#FadeLEDs').change(function() {
+		if ($(this).prop('checked')===true) {
+			$("#LEDArray").fadeOut();
+		} else {
+			$("#LEDArray").fadeIn();
+		}
+	});
 
 	// Empty Sample
 	$('#switch_7').change(function() {
 		if ($(this).prop('checked')===true) {
 			swaction = 1;
 			$.get('./control?cmd=GPIO,'+ReadingData[2]['GPIO']+',1');
-			LedSwitches('disable');
+			ToggleState('disable');
 			ResetReadingData();
 		} else {
-			LedSwitches('enable');
+			ToggleState('enable');
 			UpdateReadingData('EmptySample');
 		}
 	});
@@ -269,24 +702,99 @@ function DocumentOnLoad() {
 		if ($(this).prop('checked')===true) {
 			swaction = 1;
 			$.get('./control?cmd=GPIO,'+ReadingData[3]['GPIO']+',1');
-			LedSwitches('disable');
+			ToggleState('disable');
 			ResetTransmissionReadingData();
 		} else {
-			LedSwitches('enable');
+			ToggleState('enable');
 			UpdateReadingData('Sample');
 			AppendProtocolData();
 		}
 	});
-	// Warm White LED
-	$('#switch_9').change(function() {
+
+	function LedSwitch(SwitchID,GPIO) {
+		var state;
 		swaction = 1;
-		if ($(this).prop('checked')===true) {
-			swaction = 1;
-			$.get('./control?cmd=GPIO,'+ReadingData[4]['GPIO']+',1');
+
+		if ($("#"+SwitchID).prop('checked')===true) {
+			$("#"+SwitchID+"_slider").slider("enable");
+			var SliderValue = $("#"+SwitchID+"_slider").slider('getValue');
+
+//PCAPWM,<pin>,<value>	0...4095	Control PCA9685 pwm level.
+
+
+console.log(SwitchID,GPIO,SliderValue);
+
+//			$.get('./control?cmd=GPIO,'+GPIO+',1');
+
+			$.get('./control?cmd=pcapwm,'+GPIO+','+SliderValue, function(data, status) {
+				console.log('${data}');
+			});
+
+
+			state = 1;
 		} else {
-			$.get('./control?cmd=GPIO,'+ReadingData[4]['GPIO']+',0');
+			$("#"+SwitchID+"_slider").slider("disable");
+//			$.get('./control?cmd=GPIO,'+GPIO+',0');
+			$.get('./control?cmd=pcapwm,'+GPIO+',0', function(data, status) {
+				console.log('${data}');
+			});
+			state = 0;
 		}
-	});
+	return(state);
+	};
+
+	// LED Array
+	$('#switch_9').change(function() {LedSwitch($(this).prop('id'),LedData[0]['GPIO'])});		// LED Array 0 - Warm White LED
+	$('#switch_10').change(function() {LedSwitch($(this).prop('id'),LedData[1]['GPIO'])});		// LED Array 1
+	$('#switch_11').change(function() {LedSwitch($(this).prop('id'),LedData[2]['GPIO'])});		// LED Array 2
+	$('#switch_12').change(function() {LedSwitch($(this).prop('id'),LedData[3]['GPIO'])});		// LED Array 3
+	$('#switch_13').change(function() {LedSwitch($(this).prop('id'),LedData[4]['GPIO'])});		// LED Array 4
+	$('#switch_14').change(function() {LedSwitch($(this).prop('id'),LedData[5]['GPIO'])});		// LED Array 5
+	$('#switch_15').change(function() {LedSwitch($(this).prop('id'),LedData[6]['GPIO'])});		// LED Array 6
+	$('#switch_16').change(function() {LedSwitch($(this).prop('id'),LedData[7]['GPIO'])});		// LED Array 7
+	$('#switch_17').change(function() {LedSwitch($(this).prop('id'),LedData[8]['GPIO'])});		// LED Array 8
+	$('#switch_18').change(function() {LedSwitch($(this).prop('id'),LedData[9]['GPIO'])});		// LED Array 9
+	$('#switch_19').change(function() {LedSwitch($(this).prop('id'),LedData[10]['GPIO'])});		// LED Array 10
+	$('#switch_20').change(function() {LedSwitch($(this).prop('id'),LedData[11]['GPIO'])});		// LED Array 11
+	$('#switch_21').change(function() {LedSwitch($(this).prop('id'),LedData[12]['GPIO'])});		// LED Array 12
+	$('#switch_22').change(function() {LedSwitch($(this).prop('id'),LedData[13]['GPIO'])});		// LED Array 13
+	$('#switch_23').change(function() {LedSwitch($(this).prop('id'),LedData[14]['GPIO'])});		// LED Array 14
+	$('#switch_24').change(function() {LedSwitch($(this).prop('id'),LedData[15]['GPIO'])});		// LED Array 15
+	$('#switch_25').change(function() {LedSwitch($(this).prop('id'),LedData[16]['GPIO'])});		// LED Array 16
+	$('#switch_26').change(function() {LedSwitch($(this).prop('id'),LedData[17]['GPIO'])});		// LED Array 17
+	$('#switch_27').change(function() {LedSwitch($(this).prop('id'),LedData[18]['GPIO'])});		// LED Array 18
+	$('#switch_28').change(function() {LedSwitch($(this).prop('id'),LedData[19]['GPIO'])});		// LED Array 19
+	$('#switch_29').change(function() {LedSwitch($(this).prop('id'),LedData[20]['GPIO'])});		// LED Array 20
+	$('#switch_30').change(function() {LedSwitch($(this).prop('id'),LedData[21]['GPIO'])});		// LED Array 21
+	$('#switch_31').change(function() {LedSwitch($(this).prop('id'),LedData[22]['GPIO'])});		// LED Array 22
+	$('#switch_32').change(function() {LedSwitch($(this).prop('id'),LedData[23]['GPIO'])});		// LED Array 23
+	$('#switch_33').change(function() {LedSwitch($(this).prop('id'),LedData[24]['GPIO'])});		// LED Array 24
+
+	$("#switch_9_slider").on("slideStop", function() {LedSwitch('switch_9',LedData[0]['GPIO'])});			// LED Array 0 - Warm White LED
+	$("#switch_10_slider").on("slideStop", function() {LedSwitch('switch_10',LedData[1]['GPIO'])});			// LED Array 1
+	$("#switch_11_slider").on("slideStop", function() {LedSwitch('switch_11',LedData[2]['GPIO'])});			// LED Array 2
+	$("#switch_12_slider").on("slideStop", function() {LedSwitch('switch_12',LedData[3]['GPIO'])});			// LED Array 3
+	$("#switch_13_slider").on("slideStop", function() {LedSwitch('switch_13',LedData[4]['GPIO'])});			// LED Array 4
+	$("#switch_14_slider").on("slideStop", function() {LedSwitch('switch_14',LedData[5]['GPIO'])});			// LED Array 5
+	$("#switch_15_slider").on("slideStop", function() {LedSwitch('switch_15',LedData[6]['GPIO'])});			// LED Array 6
+	$("#switch_16_slider").on("slideStop", function() {LedSwitch('switch_16',LedData[7]['GPIO'])});			// LED Array 7
+	$("#switch_17_slider").on("slideStop", function() {LedSwitch('switch_17',LedData[8]['GPIO'])});			// LED Array 8
+	$("#switch_18_slider").on("slideStop", function() {LedSwitch('switch_18',LedData[9]['GPIO'])});			// LED Array 9
+	$("#switch_19_slider").on("slideStop", function() {LedSwitch('switch_19',LedData[10]['GPIO'])});		// LED Array 10
+	$("#switch_20_slider").on("slideStop", function() {LedSwitch('switch_20',LedData[11]['GPIO'])});		// LED Array 11
+	$("#switch_21_slider").on("slideStop", function() {LedSwitch('switch_21',LedData[12]['GPIO'])});		// LED Array 12
+	$("#switch_22_slider").on("slideStop", function() {LedSwitch('switch_22',LedData[13]['GPIO'])});		// LED Array 13
+	$("#switch_23_slider").on("slideStop", function() {LedSwitch('switch_23',LedData[14]['GPIO'])});		// LED Array 14
+	$("#switch_24_slider").on("slideStop", function() {LedSwitch('switch_24',LedData[15]['GPIO'])});		// LED Array 15
+	$("#switch_25_slider").on("slideStop", function() {LedSwitch('switch_25',LedData[16]['GPIO'])});		// LED Array 16
+	$("#switch_26_slider").on("slideStop", function() {LedSwitch('switch_26',LedData[17]['GPIO'])});		// LED Array 17
+	$("#switch_27_slider").on("slideStop", function() {LedSwitch('switch_27',LedData[18]['GPIO'])});		// LED Array 18
+	$("#switch_28_slider").on("slideStop", function() {LedSwitch('switch_28',LedData[19]['GPIO'])});		// LED Array 19
+	$("#switch_29_slider").on("slideStop", function() {LedSwitch('switch_29',LedData[20]['GPIO'])});		// LED Array 20
+	$("#switch_30_slider").on("slideStop", function() {LedSwitch('switch_30',LedData[21]['GPIO'])});		// LED Array 21
+	$("#switch_31_slider").on("slideStop", function() {LedSwitch('switch_31',LedData[22]['GPIO'])});		// LED Array 22
+	$("#switch_32_slider").on("slideStop", function() {LedSwitch('switch_32',LedData[23]['GPIO'])});		// LED Array 23
+	$("#switch_33_slider").on("slideStop", function() {LedSwitch('switch_33',LedData[24]['GPIO'])});		// LED Array 24
 
 	$('#SensorTable').bootstrapTable('destroy').bootstrapTable({
 		columns: [{
@@ -295,9 +803,6 @@ function DocumentOnLoad() {
 		}, {
 			field: 'MeasuredValue',
 			title: 'Readings'
-		}, {
-			field: 'ScaledValue',
-			title: 'Scale'
 		}],
 		data: SensorData
 	});
@@ -323,12 +828,16 @@ function DocumentOnLoad() {
 			title: 'Readings',
 			align: 'left'
 		}, {
-			field: 'Value01',
+			field: 'ValueReference',
 			title: '<var>I<sub>0</sub></var>',
 			align: 'left'
 		}, {
-			field: 'Value1',
+			field: 'ValueSample',
 			title: '<var>I<sub>T</sub></var>',
+			align: 'left'
+		}, {
+			field: 'ValueSpectrum',
+			title: '<var>I<sub>Spectrum</sub></var>',
 			align: 'left'
 		}, {
 			field: 'ColorDifference',
@@ -350,8 +859,8 @@ function DocumentOnLoad() {
 	});
 	function ResetReadingData() {
 		for (i = 4; i < 17; i++) {
-			ReadingData[i]['Value1']='';
-			ReadingData[i]['Value01']='';
+			ReadingData[i]['ValueReference']='';
+			ReadingData[i]['ValueSample']='';
 			ReadingData[i]['ColorDifference']='';
 		}
 		$('#ReadingTable').bootstrapTable('load', ReadingData);
@@ -370,7 +879,7 @@ function DocumentOnLoad() {
 	};
 	function ResetTransmissionReadingData() {
 		for (i = 4; i < 17; i++) {
-			ReadingData[i]['Value1']='';
+			ReadingData[i]['ValueSample']='';
 			ReadingData[i]['ColorDifference']='';
 		}
 		$('#ReadingTable').bootstrapTable('load', ReadingData);
@@ -418,11 +927,15 @@ function DocumentOnLoad() {
 			title: 'Readings',
 			align: 'left'
 		}, {
-			field: 'Value01',
+			field: 'ValueReference',
 			title: '<var>I<sub>0</sub></var>',
 			align: 'left'
 		}, {
-			field: 'Value1',
+			field: 'ValueSample',
+			title: '<var>I<sub>T</sub></var>',
+			align: 'left'
+		}, {
+			field: 'ValueSpectrum',
 			title: '<var>I<sub>T</sub></var>',
 			align: 'left'
 		}, {
@@ -473,8 +986,9 @@ function DocumentOnLoad() {
 					'Thickness': ReadingData[i]['Thickness'],
 					'Readings': ReadingData[i]['Readings'],
 					'ReadingsReference': ReadingData[i]['ReadingsReference'],
-					'Value01': ReadingData[i]['Value01'],
-					'Value1': ReadingData[i]['Value1'],
+					'ValueReference': ReadingData[i]['ValueReference'],
+					'ValueSample': ReadingData[i]['ValueSample'],
+					'ValueSpectrum': ReadingData[i]['ValueSpectrum'],
 					'ColorDifference': ReadingData[i]['ColorDifference']
 			}];
 			$('#ProtocolTable').bootstrapTable('append', ProtocolData);
@@ -535,73 +1049,113 @@ function DocumentOnLoad() {
 		$('#LogTable').bootstrapTable('append', LogData);
 	};
 	function UpdateSensorData() {
-		SensorXYZ = ChromaticAdaptationXYZ(SensorXYZ);
-		SensorxyY = XYZ2xyY(SensorXYZ);
-		SensorRGB = XYZ2RGB(SensorXYZ);
-		SensorLab = XYZ2Lab(SensorXYZ);
-		SensorCCT.Robertson = XYZ2CCT_Robertson(SensorXYZ);
-		SensorCCT.McCamy = XYZ2CCT_McCamy(SensorXYZ);
-		SensorData[0]['MeasuredValue'] = printObject(SensorLightIntensity);
-		SensorData[1]['MeasuredValue'] = printObject(ScaleXYZ(SensorXYZ));
-		SensorData[2]['MeasuredValue'] = printObject(ScalexyY(SensorxyY));
-		SensorData[3]['MeasuredValue'] = printObject(SensorLab);
-		SensorData[4]['MeasuredValue'] = printObject(XYZ2Luv(SensorXYZ));
-		SensorData[5]['MeasuredValue'] = printObject(XYZ2HunterLab(SensorXYZ));
-		SensorData[6]['MeasuredValue'] = printObject(ScaleRGB(SensorRGB));
-		SensorData[7]['MeasuredValue'] = printObject(SensorCCT);
-		SensorData[8]['MeasuredValue'] = XYZ2DominantWavelength(SensorXYZ);
-		SensorData[9]['MeasuredValue'] = printObject(NearestColors(SensorXYZ));
+//		SensorXYZ = ChromaticAdaptationXYZ(SensorXYZ);
+//		SensorxyY = XYZ2xyY(SensorXYZ);
+//		SensorRGB = XYZ2RGB(SensorXYZ);
+//		SensorLab = XYZ2Lab(SensorXYZ);
+//		SensorCCT.Robertson = XYZ2CCT_Robertson(SensorXYZ);
+//		SensorCCT.McCamy = XYZ2CCT_McCamy(SensorXYZ);
+//		SensorData[0]['MeasuredValue'] = printObject(SensorLightIntensity);
+//		SensorData[1]['MeasuredValue'] = printObject(ScaleXYZ(SensorXYZ));
+//		SensorData[2]['MeasuredValue'] = printObject(ScalexyY(SensorxyY));
+//		SensorData[3]['MeasuredValue'] = printObject(SensorLab);
+//		SensorData[4]['MeasuredValue'] = printObject(XYZ2Luv(SensorXYZ));
+//		SensorData[5]['MeasuredValue'] = printObject(XYZ2HunterLab(SensorXYZ));
+//		SensorData[6]['MeasuredValue'] = printObject(ScaleRGB(SensorRGB));
+//		SensorData[7]['MeasuredValue'] = printObject(SensorCCT);
+//		SensorData[8]['MeasuredValue'] = XYZ2DominantWavelength(SensorXYZ);
+//		SensorData[9]['MeasuredValue'] = printObject(NearestColors(SensorXYZ));
 
 		$('#SensorTable').bootstrapTable('load', SensorData);
-//		DrawCharts(SensorRGB, SensorxyY, SensorLab);
+//		DrawCharts(SampleAbsorbance, SpectrumAbsorbance, SensorRGB, SensorxyY, SensorLab);
 	};
 	function UpdateReadingData(SampleMode) {
 
 		if (SampleMode == 'EmptySample') {
-//			EmptySampleXYZ = ChromaticAdaptationXYZ(EmptySampleXYZ);
-//			EmptySampleLab = XYZ2Lab(EmptySampleXYZ);
-//			EmptySampleCCT.Robertson = XYZ2CCT_Robertson(EmptySampleXYZ);
-//			EmptySampleCCT.McCamy = XYZ2CCT_McCamy(EmptySampleXYZ);
-			ReadingData[4]['Value01'] = printObject(EmptySampleLightIntensity);
-//			ReadingData[8]['Value01'] = printObject(ScaleXYZ(EmptySampleXYZ));
-//			ReadingData[9]['Value01'] = printObject(ScalexyY(XYZ2xyY(EmptySampleXYZ)));
-//			ReadingData[10]['Value01'] = printObject(EmptySampleLab);
-//			ReadingData[11]['Value01'] = printObject(XYZ2Luv(EmptySampleXYZ));
-//			ReadingData[12]['Value01'] = printObject(XYZ2HunterLab(EmptySampleXYZ));
-//			ReadingData[13]['Value01'] = printObject(ScaleRGB(XYZ2RGB(EmptySampleXYZ)));
-//			ReadingData[14]['Value01'] = printObject(EmptySampleCCT);
-//			ReadingData[15]['Value01'] = XYZ2DominantWavelength(EmptySampleXYZ);
-//			ReadingData[16]['Value01'] = printObject(NearestColors(EmptySampleXYZ));
+			EmptySampleTransmission = LightIntensity2Transmission(EmptySampleLightIntensity, EmptySampleLightIntensity);
+			EmptySampleAbsorbance = Transmission2Absorbance(EmptySampleTransmission);
+			EmptySampleSAC = Absorbance2SAC(EmptySampleAbsorbance, ReadingData[4]['Thickness']);
+			EmptySampleXYZ = Transmission2XYZ(EmptySampleTransmission);
+			EmptySampleXYZ = ChromaticAdaptationXYZ(EmptySampleXYZ);
+			EmptySamplexyY = XYZ2xyY(EmptySampleXYZ);
+			EmptySampleRGB = XYZ2RGB(EmptySampleXYZ);
+			EmptySampleLab = XYZ2Lab(EmptySampleXYZ);
+			EmptySampleCCT.Robertson = XYZ2CCT_Robertson(EmptySampleXYZ);
+			EmptySampleCCT.McCamy = XYZ2CCT_McCamy(EmptySampleXYZ);
+
+			ReadingData[4]['ValueReference'] = printObject(EmptySampleLightIntensity);
+			ReadingData[5]['ValueReference'] = printObject(EmptySampleTransmission);
+			ReadingData[6]['ValueReference'] = printObject(EmptySampleAbsorbance);
+			ReadingData[7]['ValueReference'] = printObject(EmptySampleSAC);
+			ReadingData[8]['ValueReference'] = printObject(ScaleXYZ(EmptySampleXYZ, SelectedScaling));
+			ReadingData[9]['ValueReference'] = printObject(ScalexyY(EmptySamplexyY, SelectedScaling));
+			ReadingData[10]['ValueReference'] = printObject(EmptySampleLab);
+			ReadingData[11]['ValueReference'] = printObject(XYZ2Luv(EmptySampleXYZ));
+			ReadingData[12]['ValueReference'] = printObject(XYZ2HunterLab(EmptySampleXYZ));
+			ReadingData[13]['ValueReference'] = printObject(ScaleRGB(EmptySampleRGB, SelectedScaling));
+			ReadingData[14]['ValueReference'] = printObject(EmptySampleCCT);
+			ReadingData[15]['ValueReference'] = XYZ2DominantWavelength(EmptySampleXYZ);
+			ReadingData[16]['ValueReference'] = printObject(NearestColors(EmptySampleXYZ, EmptySampleLab, SelectedColorScale));
+
+			DrawCharts(EmptySampleLightIntensity, SpectrumLightIntensity, EmptySampleTransmission, SpectrumTransmission, EmptySampleAbsorbance, SpectrumAbsorbance, EmptySampleRGB, EmptySamplexyY, EmptySampleLab);
 		}
 		if (SampleMode == 'Sample') {
+			SampleLightIntensity = Randomize(SampleLightIntensity);
 			SampleTransmission = LightIntensity2Transmission(EmptySampleLightIntensity, SampleLightIntensity);
 			SampleAbsorbance = Transmission2Absorbance(SampleTransmission);
 			SampleSAC = Absorbance2SAC(SampleAbsorbance, ReadingData[4]['Thickness']);
 			SampleXYZ = Transmission2XYZ(SampleTransmission);
-
 			SampleXYZ = ChromaticAdaptationXYZ(SampleXYZ);
-console.log(SampleXYZ);
 			SamplexyY = XYZ2xyY(SampleXYZ);
-console.log(SamplexyY);
 			SampleRGB = XYZ2RGB(SampleXYZ);
 			SampleLab = XYZ2Lab(SampleXYZ);
 			SampleCCT.Robertson = XYZ2CCT_Robertson(SampleXYZ);
 			SampleCCT.McCamy = XYZ2CCT_McCamy(SampleXYZ);
 
-			ReadingData[4]['Value1'] = printObject(SampleLightIntensity);
-			ReadingData[5]['Value1'] = printObject(SampleTransmission);
-			ReadingData[6]['Value1'] = printObject(SampleAbsorbance);
-			ReadingData[7]['Value1'] = printObject(SampleSAC);
-			ReadingData[8]['Value1'] = printObject(ScaleXYZ(SampleXYZ));
-			ReadingData[9]['Value1'] = printObject(ScalexyY(SamplexyY));
-			ReadingData[10]['Value1'] = printObject(SampleLab);
-			ReadingData[11]['Value1'] = printObject(XYZ2Luv(SampleXYZ));
-			ReadingData[12]['Value1'] = printObject(XYZ2HunterLab(SampleXYZ));
-			ReadingData[13]['Value1'] = printObject(ScaleRGB(SampleRGB));
-			ReadingData[14]['Value1'] = printObject(SampleCCT);
-			ReadingData[15]['Value1'] = XYZ2DominantWavelength(SampleXYZ);
-			ReadingData[16]['Value1'] = printObject(NearestColors(SampleXYZ));
+			ReadingData[4]['ValueSample'] = printObject(SampleLightIntensity);
+			ReadingData[5]['ValueSample'] = printObject(SampleTransmission);
+			ReadingData[6]['ValueSample'] = printObject(SampleAbsorbance);
+			ReadingData[7]['ValueSample'] = printObject(SampleSAC);
+			ReadingData[8]['ValueSample'] = printObject(ScaleXYZ(SampleXYZ, SelectedScaling));
+			ReadingData[9]['ValueSample'] = printObject(ScalexyY(SamplexyY, SelectedScaling));
+			ReadingData[10]['ValueSample'] = printObject(SampleLab);
+			ReadingData[11]['ValueSample'] = printObject(XYZ2Luv(SampleXYZ));
+			ReadingData[12]['ValueSample'] = printObject(XYZ2HunterLab(SampleXYZ));
+			ReadingData[13]['ValueSample'] = printObject(ScaleRGB(SampleRGB, SelectedScaling));
+			ReadingData[14]['ValueSample'] = printObject(SampleCCT);
+			ReadingData[15]['ValueSample'] = XYZ2DominantWavelength(SampleXYZ);
+			ReadingData[16]['ValueSample'] = printObject(NearestColors(SampleXYZ, SampleLab, SelectedColorScale));
+
+			DrawCharts(SampleLightIntensity, SpectrumLightIntensity, SampleTransmission, SpectrumTransmission, SampleAbsorbance, SpectrumAbsorbance, SampleRGB, SamplexyY, SampleLab);
 		}
+		if (SampleMode == 'Spectrum') {
+			SpectrumAbsorbance = Transmission2Absorbance(SpectrumTransmission);
+			SpectrumSAC = Absorbance2SAC(SpectrumAbsorbance, ReadingData[4]['Thickness']);
+			SpectrumXYZ = Transmission2XYZ(SpectrumTransmission);
+			SpectrumXYZ = ChromaticAdaptationXYZ(SpectrumXYZ);
+			SpectrumxyY = XYZ2xyY(SpectrumXYZ);
+			SpectrumRGB = XYZ2RGB(SpectrumXYZ);
+			SpectrumLab = XYZ2Lab(SpectrumXYZ);
+			SpectrumCCT.Robertson = XYZ2CCT_Robertson(SpectrumXYZ);
+			SpectrumCCT.McCamy = XYZ2CCT_McCamy(SpectrumXYZ);
+
+			ReadingData[4]['ValueSpectrum'] = "";
+			ReadingData[5]['ValueSpectrum'] = printObject(SpectrumTransmission);
+			ReadingData[6]['ValueSpectrum'] = printObject(SpectrumAbsorbance);
+			ReadingData[7]['ValueSpectrum'] = printObject(SpectrumSAC);
+			ReadingData[8]['ValueSpectrum'] = printObject(ScaleXYZ(SpectrumXYZ, SelectedScaling));
+			ReadingData[9]['ValueSpectrum'] = printObject(ScalexyY(SpectrumxyY, SelectedScaling));
+			ReadingData[10]['ValueSpectrum'] = printObject(SpectrumLab);
+			ReadingData[11]['ValueSpectrum'] = printObject(XYZ2Luv(SpectrumXYZ));
+			ReadingData[12]['ValueSpectrum'] = printObject(XYZ2HunterLab(SpectrumXYZ));
+			ReadingData[13]['ValueSpectrum'] = printObject(ScaleRGB(SpectrumRGB, SelectedScaling));
+			ReadingData[14]['ValueSpectrum'] = printObject(SpectrumCCT);
+			ReadingData[15]['ValueSpectrum'] = XYZ2DominantWavelength(SpectrumXYZ);
+			ReadingData[16]['ValueSpectrum'] = printObject(NearestColors(SpectrumXYZ, SpectrumLab, SelectedColorScale));
+
+			DrawCharts(SampleLightIntensity, SpectrumLightIntensity, SampleTransmission, SpectrumTransmission, SampleAbsorbance, SpectrumAbsorbance, SpectrumRGB, SpectrumxyY, SpectrumLab);
+		}
+
 		if (!isEmpty(EmptySampleLab) && !isEmpty(SampleLab)) {
 			let Difference_CIELAB = {};
 			Difference_CIELAB['<var>CIE1976 ΔE<sup>*</sup><sub>ab</sub></var>'] = DeltaE1976(EmptySampleLab, SampleLab);
@@ -611,137 +1165,58 @@ console.log(SamplexyY);
 			ReadingData[10]['ColorDifference']=printObject(Difference_CIELAB);
 		}
 		$('#ReadingTable').bootstrapTable('load', ReadingData);
-		DrawCharts(SampleRGB, SamplexyY, SampleLab);
 	};
 
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback();
+	function DrawCharts(SampleLightIntensity, SpectrumLightIntensity, SampleTransmission, SpectrumTransmission, SampleAbsorbance, SpectrumAbsorbance, RGB, xyY, Lab) {
+		var SourceSPD = window[SourceWhite.SPD];
+		var RefSPD = window[RefWhite.SPD];
 
-	function DrawCharts(RGB, xyY, Lab) {
-
-		var sRGBCanvas = document.getElementById("sRGBCanvas");
-		var sRGBctx = sRGBCanvas.getContext("2d");
-		sRGBctx.fillStyle = RGB.HEX;
-		sRGBctx.fillRect(0,0,400,150);
-
-		if (ColorScale.Name == "None") {
-			var CIEYxyChartData = new google.visualization.DataTable();
-			CIEYxyChartData.addColumn('number', '');
-			CIEYxyChartData.addColumn('number', 'Sensor');
-			CIEYxyChartData.addColumn('number', 'White Point');
-			CIEYxyChartData.addColumn('number', RGBModel.Name);
-			CIEYxyChartData.addColumn('number', RGBModel.Name);
-			CIEYxyChartData.addColumn('number', 'Planckian locus');
-			CIEYxyChartData.addColumn({type:'number', role:'annotation'});
-			CIEYxyChartData.addColumn('number', 'Spectrum locus');
-			CIEYxyChartData.addColumn({type:'number', role:'annotation'});
-			CIEYxyChartData.addRows([
-				[xyY.x, xyY.y, null, null, null, null, null, null, null],
-				[RefWhite.x, null, RefWhite.y, null, null, null, null, null, null],
-				[RGBModel.xr, null, null, RGBModel.yr, null, null, null, null, null],
-				[RGBModel.xg, null, null, RGBModel.yg, null, null, null, null, null],
-				[RGBModel.xb, null, null, RGBModel.yb, null, null, null, null, null],
-				[RGBModel.xb, null, null, null, RGBModel.yb, null, null, null, null],
-				[RGBModel.xr, null, null, null, RGBModel.yr, null, null, null, null],
-				[0.6528, null, null, null, null, 0.3445, 1000, null, null],
-				[0.5857, null, null, null, null, 0.3931, null, null, null],
-				[0.5267, null, null, null, null, 0.4133, 2000, null, null],
-				[0.4770, null, null, null, null, 0.4137, null, null, null],
-				[0.4369, null, null, null, null, 0.4041, 3000, null, null],
-				[0.3946, null, null, null, null, 0.3851, null, null, null],
-				[0.3608, null, null, null, null, 0.3635, 4500, null, null],
-				[0.3324, null, null, null, null, 0.3410, null, null, null],
-				[0.3135, null, null, null, null, 0.3236, 6500, null, null],
-				[0.2952, null, null, null, null, 0.3048, null, null, null],
-				[0.2806, null, null, null, null, 0.2883, 10000, null, null],
-				[0.1741, null, null, null, null, null, null, 0.0050, 380],
-				[0.1440, null, null, null, null, null, null, 0.0297, 460],
-				[0.0913, null, null, null, null, null, null, 0.1327, 480],
-				[0.0454, null, null, null, null, null, null, 0.2950, 490],
-				[0.0082, null, null, null, null, null, null, 0.5384, 500],
-				[0.0139, null, null, null, null, null, null, 0.7502, 510],
-				[0.0743, null, null, null, null, null, null, 0.8338, 520],
-				[0.1547, null, null, null, null, null, null, 0.8059, 530],
-				[0.2296, null, null, null, null, null, null, 0.7543, 540],
-				[0.3016, null, null, null, null, null, null, 0.6923, 550],
-				[0.3731, null, null, null, null, null, null, 0.6245, 560],
-				[0.4441, null, null, null, null, null, null, 0.5547, 570],
-				[0.5125, null, null, null, null, null, null, 0.4866, 580],
-				[0.5752, null, null, null, null, null, null, 0.4242, 590],
-				[0.6270, null, null, null, null, null, null, 0.3725, 600],
-				[0.6915, null, null, null, null, null, null, 0.3083, 620],
-				[0.7347, null, null, null, null, null, null, 0.2653, 700]
-			]);
-
-			let CIEYxyChartOptions = {
-				hAxis: {title: 'x', minValue: 0, maxValue: 0.8},
-				vAxis: {title: 'y', minValue: 0, maxValue: 0.9},
-				width: 533,
-				height: 600,
-				title: 'CIE-Yxy Chromaticity Diagram (Y=1, '+xyY.Reference+')',
-				backgroundColor: 'none',
-				annotations: {
-					textStyle: {
-						fontSize: 11,
-						opacity: 0.6
-					}
-				},
-				series: {
-					0:{type: 'line', color: 'black', visibleInLegend: true, lineWidth: 0, pointShape: { type: 'star', sides: 5, dent: 0.2 }, pointSize: 18},
-					1:{type: 'line', color: 'grey', visibleInLegend: true, lineWidth: 0, pointSize: 6},
-					2:{type: 'line', color: 'grey', visibleInLegend: true, lineWidth: 1},
-					3:{type: 'line', color: 'grey', visibleInLegend: false}, lineWidth: 1,
-					4:{type: 'line', color: 'blue', visibleInLegend: true, curveType: 'function'},
-					5:{type: 'line', color: 'black', visibleInLegend: true, curveType: 'function', lineWidth: 0}
+		if (SelectedCharts.includes('1') && !isEmpty(SampleLightIntensity)) {
+			var SPDChartData = new google.visualization.DataTable();
+			SPDChartData.addColumn('number', '');
+			SPDChartData.addColumn('number', 'Sample');
+			SPDChartData.addColumn('number', 'Import');
+			SPDChartData.addColumn('number', 'Light Source');
+			SPDChartData.addColumn('number', 'Light Reference');
+			for (var i in SampleLightIntensity) {
+				if (SampleLightIntensity.hasOwnProperty(i)) {
+					SPDChartData.addRows([
+						[parseFloat(i), parseFloat(SampleLightIntensity[i]), null, null, null],
+						]);
 				}
-			};
-			var CIEChart = new google.visualization.LineChart(document.getElementById('CIEChart'));
-			CIEChart.draw(CIEYxyChartData, CIEYxyChartOptions);
-			// This two lines are the ones that do the magic to load the background image to the proper chart position
-			var boundingBox = CIEChart.getChartLayoutInterface().getChartAreaBoundingBox(); 
-			$('#CIEChartBackground').css('background-image', "url('"+AssetsPath+"/images/CIE-Yxy.png')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
-		} else {
-				let SensorColor = culori.lab65({
-					l: +Lab.L,
-					a: +Lab.a,
-					b: +Lab.b
-				});
-
-			var CIEYxyChartData = new google.visualization.DataTable();
-			CIEYxyChartData.addColumn('number', '');
-			CIEYxyChartData.addColumn('number', 'Sensor');
-			CIEYxyChartData.addColumn({type:'string', role:'tooltip', 'p': {'html': true}});
-			CIEYxyChartData.addColumn('number', ColorScale.Name);
-			CIEYxyChartData.addColumn({type:'string', role:'tooltip', 'p': {'html': true}});
-
-			if (!ColorScale.Value) {
-				CIEYxyChartData.addRows([
-					[parseFloat(Lab.a), parseFloat(Lab.b), '<div style="background-color: ' + culori.formatHex(SensorColor) + ' ;opacity: 100; text-align: left; min-width: 100px; padding: 8px;"><b>Sensor</b><br><br>L: ' + Lab.L + '<br>a: ' + Lab.a + '<br>b: ' + Lab.b + '</div>', null, null],
-				]);
-			} else {
-				CIEYxyChartData.addRows([
-					[parseFloat(Lab.a), parseFloat(Lab.b), '<div style="background-color: ' + culori.formatHex(SensorColor) + ' ;opacity: 100; text-align: left; min-width: 100px; padding: 8px;"><b>Sensor</b><br><br>L: ' + Lab.L + '<br>a: ' + Lab.a + '<br>b: ' + Lab.b + '<br><br>' + ColorScale.Name + ': ' + ColorScale.Value + '</div>', null, null],
-				]);
 			}
-			let ReferenceColors = Object.entries(ColorScale.Index).map(entry => {
-				let ReferenceName = entry[0];
-				let values = entry[1].split(/\s*,\s*/);
-				let ReferenceColor = culori.lab65({
-					l: +values[0],
-					a: +values[1],
-					b: +values[2]
-				});
-				CIEYxyChartData.addRows([
-					[parseFloat(ReferenceColor.a), null, null, parseFloat(ReferenceColor.b), '<div style="background-color: ' + culori.formatHex(ReferenceColor) + ';opacity: 100; text-align: left; min-width: 100px; padding: 8px;"><b>' + ReferenceName + '</b><br><br>L: ' + ReferenceColor.l + '<br>a: ' + ReferenceColor.a + '<br>b: ' + ReferenceColor.b + '</div>'],
-					]);
-			});
-
-			let CIEYxyChartOptions = {
-				hAxis: {title: 'a', minValue: -150.0, maxValue: 150.0},
-				vAxis: {title: 'b', minValue: -150.0, maxValue: 150.0},
-				width: 900,
-				height: 900,
-				title: 'CIE-L*a*b* Chromaticity Diagram (L=75, '+Lab.Reference+')',
+			for (var i in SpectrumLightIntensity) {
+				if (SpectrumLightIntensity.hasOwnProperty(i)) {
+					SPDChartData.addRows([
+						[parseFloat(i), null, parseFloat(SpectrumLightIntensity[i]), null, null],
+						]);
+				}
+			}
+			for (var i in SourceSPD) {
+				if (SourceSPD.hasOwnProperty(i)) {
+					SPDChartData.addRows([
+						[parseFloat(i), null, null, parseFloat(SourceSPD[i]), null],
+						]);
+				}
+			}
+			for (var i in RefSPD) {
+				if (RefSPD.hasOwnProperty(i)) {
+					SPDChartData.addRows([
+						[parseFloat(i), null, null, null, parseFloat(RefSPD[i])],
+						]);
+				}
+			}
+			let SPDChartOptions = {
+//				hAxis: {title: 'λ [nm]', minValue: 200, maxValue: 1200},
+				hAxis: {title: 'λ [nm]'},
+				vAxes: {
+//					0: {title: 'Absolute Intensity [35 counts / μW/cm2]', viewWindow: {min: 0}, maxValue: 1.2},
+					0: {title: 'Absolute Intensity [35 counts / μW/cm2]', viewWindow: {min: 0}},
+					1: {title: 'Relative Intensity [%]', viewWindow: {min: 0}, gridlines: {color: 'transparent'}}
+				},
+				width: 1200,
+				height: 800,
+				title: 'Spectral Power Distribution',
 				backgroundColor: 'none',
 				annotations: {
 					textStyle: {
@@ -751,118 +1226,291 @@ console.log(SamplexyY);
 				},
 				tooltip: { isHtml: true },
 				series: {
-					0:{type: 'line', color: 'black', visibleInLegend: true, lineWidth: 0, pointShape: { type: 'star', sides: 5, dent: 0.2 }, pointSize: 18},
-					1:{type: 'line', color: 'grey', visibleInLegend: true, lineWidth: ColorScale.ChartLineWidth, curveType: ColorScale.ChartCurveType, pointSize: 3}
+					0:{targetAxisIndex: 0, type: 'line', color: 'grey', visibleInLegend: true, lineWidth: 2, curveType: 'function', pointSize: 3},
+					1:{targetAxisIndex: 1, type: 'line', color: 'blue', visibleInLegend: true, lineWidth: 1, curveType: 'none'},
+					2:{targetAxisIndex: 1, type: 'line', color: 'yellow', visibleInLegend: true, lineWidth: 1, curveType: 'function'},
+					3:{targetAxisIndex: 1, type: 'line', color: 'orange', visibleInLegend: true, lineWidth: 1, curveType: 'function'}
 				}
 			};
-			var CIEChart = new google.visualization.LineChart(document.getElementById('CIEChart'));
-			CIEChart.draw(CIEYxyChartData, CIEYxyChartOptions);
+
+			var SPDChart = new google.visualization.LineChart(LightIntensitySpectrum);
+			SPDChart.draw(SPDChartData, SPDChartOptions);
 			// This two lines are the ones that do the magic to load the background image to the proper chart position
-			var boundingBox = CIEChart.getChartLayoutInterface().getChartAreaBoundingBox(); 
-			$('#CIEChartBackground').css('background-image', "url('"+ImagesPath+ColorScale.ChartBackground+"')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
-		}
-	}
-
-	function NearestColors(Color) {
-
-		if (ColorScale.Name == "None") {
-			return({Note: 'No color scale selected'});
-		} else if (Color.Reference != ColorScale.ColorReference) {
-			return({Note: 'Reference White mismatch'});
+			var boundingBox = SPDChart.getChartLayoutInterface().getChartAreaBoundingBox(); 
+			$('#LightIntensitySpectrumBackground').css('background-image', "url('"+AssetsPath+"/images/Spectrum.png')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
+		} else {
+			LightIntensitySpectrum.innerHTML = "";
 		}
 
-		let xyz65 = {
-			mode: "xyz65",
-			x: Color.X,
-			y: Color.Y,
-			z: Color.Z
-		}
-
-		let ReferenceColors = Object.entries(ColorScale.Index).map(entry => {
-			let ReferenceName = entry[0];
-			let values = entry[1].split(/\s*,\s*/);
-			let ReferenceColor = culori.lab65({
-				l: +values[0],
-				a: +values[1],
-				b: +values[2]
-			});
-			let Distance = culori.differenceCie76()(xyz65, ReferenceColor);
-			return {
-				ReferenceName,
-				ReferenceColor,
-				Distance
+		if (SelectedCharts.includes('2') && !isEmpty(SampleTransmission)) {
+			var TransmissionChartData = new google.visualization.DataTable();
+			TransmissionChartData.addColumn('number', '');
+			TransmissionChartData.addColumn('number', 'Sample');
+			TransmissionChartData.addColumn('number', 'Import');
+			for (var i in SampleTransmission) {
+				if (SampleTransmission.hasOwnProperty(i)) {
+					TransmissionChartData.addRows([
+						[parseFloat(i), parseFloat(SampleTransmission[i]), null],
+						]);
+				}
+			}
+			for (var i in SpectrumTransmission) {
+				if (SpectrumTransmission.hasOwnProperty(i)) {
+					TransmissionChartData.addRows([
+						[parseFloat(i), null, parseFloat(SpectrumTransmission[i])],
+						]);
+				}
+			}
+			let TransmissionChartOptions = {
+//				hAxis: {title: 'λ [nm]', minValue: 200, maxValue: 1200},
+				hAxis: {title: 'λ [nm]'},
+				vAxes: {
+//					0: {title: 'T', viewWindow: {min: 0}, maxValue: 1.2},
+					0: {title: 'T', viewWindow: {min: 0}}
+				},
+				width: 1200,
+				height: 800,
+				title: 'Spectral Transmission',
+				backgroundColor: 'none',
+				annotations: {
+					textStyle: {
+						fontSize: 11,
+						opacity: 0.6
+					}
+				},
+				tooltip: { isHtml: true },
+				series: {
+					0:{targetAxisIndex: 0, type: 'line', color: 'grey', visibleInLegend: true, lineWidth: 2, curveType: 'function', pointSize: 3},
+					1:{targetAxisIndex: 0, type: 'line', color: 'blue', visibleInLegend: true, lineWidth: 1, curveType: 'none'}
+				}
 			};
-		});
-		let nearestReferenceColors = culori.nearest(ReferenceColors, culori.differenceCie76(), item => item.ReferenceColor);
-		return(nearestReferenceColors(xyz65, 3).map(item => item.ReferenceName + ' (<var>CIE1976 ΔE<sup>*</sup><sub>ab</sub>:</var> ' + item.Distance.toFixed(4) +')'));
+
+			var TransmissionChart = new google.visualization.LineChart(TransmissionSpectrum);
+			TransmissionChart.draw(TransmissionChartData, TransmissionChartOptions);
+			// This two lines are the ones that do the magic to load the background image to the proper chart position
+			var boundingBox = TransmissionChart.getChartLayoutInterface().getChartAreaBoundingBox(); 
+			$('#TransmissionSpectrumBackground').css('background-image', "url('"+AssetsPath+"/images/Spectrum.png')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
+		} else {
+			TransmissionSpectrum.innerHTML = "";
+		}
+
+		if (SelectedCharts.includes('3') && !isEmpty(SampleAbsorbance)) {
+			var AbsorbanceChartData = new google.visualization.DataTable();
+			AbsorbanceChartData.addColumn('number', '');
+			AbsorbanceChartData.addColumn('number', 'Sample');
+			AbsorbanceChartData.addColumn('number', 'Import');
+			for (var i in SampleAbsorbance) {
+				if (SampleAbsorbance.hasOwnProperty(i)) {
+					AbsorbanceChartData.addRows([
+						[parseFloat(i), parseFloat(SampleAbsorbance[i]), null],
+						]);
+				}
+			}
+			for (var i in SpectrumAbsorbance) {
+				if (SpectrumAbsorbance.hasOwnProperty(i)) {
+					AbsorbanceChartData.addRows([
+						[parseFloat(i), null, parseFloat(SpectrumAbsorbance[i])],
+						]);
+				}
+			}
+			let AbsorbanceChartOptions = {
+//				hAxis: {title: 'λ [nm]', minValue: 200, maxValue: 1200},
+				hAxis: {title: 'λ [nm]'},
+				vAxes: {
+//					0: {title: 'E', viewWindow: {min: 0}, maxValue: 1.2},
+					0: {title: 'E', viewWindow: {min: 0}}
+				},
+				width: 1200,
+				height: 800,
+				title: 'Spectral Absorbance',
+				backgroundColor: 'none',
+				annotations: {
+					textStyle: {
+						fontSize: 11,
+						opacity: 0.6
+					}
+				},
+				tooltip: { isHtml: true },
+				series: {
+					0:{targetAxisIndex: 0, type: 'line', color: 'grey', visibleInLegend: true, lineWidth: 2, curveType: 'function', pointSize: 3},
+					1:{targetAxisIndex: 0, type: 'line', color: 'blue', visibleInLegend: true, lineWidth: 1, curveType: 'none'}
+				}
+			};
+
+			var AbsorbanceChart = new google.visualization.LineChart(AbsorbanceSpectrum);
+			AbsorbanceChart.draw(AbsorbanceChartData, AbsorbanceChartOptions);
+			// This two lines are the ones that do the magic to load the background image to the proper chart position
+			var boundingBox = AbsorbanceChart.getChartLayoutInterface().getChartAreaBoundingBox(); 
+			$('#AbsorbanceSpectrumBackground').css('background-image', "url('"+AssetsPath+"/images/Spectrum.png')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
+		} else {
+			AbsorbanceSpectrum.innerHTML = "";
+		}
+
+		if (SelectedCharts.includes('4') && !isEmpty(xyY) && !isEmpty(Lab)) {
+			if (ColorScale.Name == "None") {
+				var CIEYxyChartData = new google.visualization.DataTable();
+				CIEYxyChartData.addColumn('number', '');
+				CIEYxyChartData.addColumn('number', 'Sensor');
+				CIEYxyChartData.addColumn('number', 'White Point');
+				CIEYxyChartData.addColumn('number', RGBModel.Name);
+				CIEYxyChartData.addColumn('number', RGBModel.Name);
+				CIEYxyChartData.addColumn('number', 'Planckian locus');
+				CIEYxyChartData.addColumn({type:'number', role:'annotation'});
+				CIEYxyChartData.addColumn('number', 'Spectrum locus');
+				CIEYxyChartData.addColumn({type:'number', role:'annotation'});
+				CIEYxyChartData.addRows([
+					[xyY.x, xyY.y,, null, null, null, null, null, null],
+					[RefWhite.x, null, RefWhite.y, null, null, null, null, null, null],
+					[RGBModel.xr, null, null, RGBModel.yr, null, null, null, null, null],
+					[RGBModel.xg, null, null, RGBModel.yg, null, null, null, null, null],
+					[RGBModel.xb, null, null, RGBModel.yb, null, null, null, null, null],
+					[RGBModel.xb, null, null, null, RGBModel.yb, null, null, null, null],
+					[RGBModel.xr, null, null, null, RGBModel.yr, null, null, null, null],
+					[0.6528, null, null, null, null, 0.3445, 1000, null, null],
+					[0.5857, null, null, null, null, 0.3931, null, null, null],
+					[0.5267, null, null, null, null, 0.4133, 2000, null, null],
+					[0.4770, null, null, null, null, 0.4137, null, null, null],
+					[0.4369, null, null, null, null, 0.4041, 3000, null, null],
+					[0.3946, null, null, null, null, 0.3851, null, null, null],
+					[0.3608, null, null, null, null, 0.3635, 4500, null, null],
+					[0.3324, null, null, null, null, 0.3410, null, null, null],
+					[0.3135, null, null, null, null, 0.3236, 6500, null, null],
+					[0.2952, null, null, null, null, 0.3048, null, null, null],
+					[0.2806, null, null, null, null, 0.2883, 10000, null, null],
+					[0.1741, null, null, null, null, null, null, 0.0050, 380],
+					[0.1440, null, null, null, null, null, null, 0.0297, 460],
+					[0.0913, null, null, null, null, null, null, 0.1327, 480],
+					[0.0454, null, null, null, null, null, null, 0.2950, 490],
+					[0.0082, null, null, null, null, null, null, 0.5384, 500],
+					[0.0139, null, null, null, null, null, null, 0.7502, 510],
+					[0.0743, null, null, null, null, null, null, 0.8338, 520],
+					[0.1547, null, null, null, null, null, null, 0.8059, 530],
+					[0.2296, null, null, null, null, null, null, 0.7543, 540],
+					[0.3016, null, null, null, null, null, null, 0.6923, 550],
+					[0.3731, null, null, null, null, null, null, 0.6245, 560],
+					[0.4441, null, null, null, null, null, null, 0.5547, 570],
+					[0.5125, null, null, null, null, null, null, 0.4866, 580],
+					[0.5752, null, null, null, null, null, null, 0.4242, 590],
+					[0.6270, null, null, null, null, null, null, 0.3725, 600],
+					[0.6915, null, null, null, null, null, null, 0.3083, 620],
+					[0.7347, null, null, null, null, null, null, 0.2653, 700]
+				]);
+				let CIEYxyChartOptions = {
+					hAxis: {title: 'x', minValue: 0, maxValue: 0.8},
+					vAxis: {title: 'y', minValue: 0, maxValue: 0.9},
+					width: 533,
+					height: 600,
+					title: 'CIE-Yxy Chromaticity Diagram (Y=1, '+xyY.Reference+')',
+					backgroundColor: 'none',
+					annotations: {
+						textStyle: {
+							fontSize: 11,
+							opacity: 0.6
+						}
+					},
+					series: {
+						0:{type: 'line', color: 'black', visibleInLegend: true, lineWidth: 0, pointShape: { type: 'star', sides: 5, dent: 0.2 }, pointSize: 18},
+						1:{type: 'line', color: 'grey', visibleInLegend: true, lineWidth: 0, pointSize: 6},
+						2:{type: 'line', color: 'grey', visibleInLegend: true, lineWidth: 1},
+						3:{type: 'line', color: 'grey', visibleInLegend: false}, lineWidth: 1,
+						4:{type: 'line', color: 'blue', visibleInLegend: true, curveType: 'function'},
+						5:{type: 'line', color: 'black', visibleInLegend: true, curveType: 'function', lineWidth: 0}
+					}
+				};
+				var CIEChart = new google.visualization.LineChart(CIEColor);
+				CIEChart.draw(CIEYxyChartData, CIEYxyChartOptions);
+				// This two lines are the ones that do the magic to load the background image to the proper chart position
+				var boundingBox = CIEChart.getChartLayoutInterface().getChartAreaBoundingBox(); 
+				$('#CIEColorBackground').css('background-image', "url('"+AssetsPath+"/images/CIE-Yxy.png')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
+			} else {
+				var CIEYxyChartData = new google.visualization.DataTable();
+				CIEYxyChartData.addColumn('number', '');
+				CIEYxyChartData.addColumn('number', 'Sensor');
+				CIEYxyChartData.addColumn({type:'string', role:'tooltip', 'p': {'html': true}});
+				CIEYxyChartData.addColumn('number', ColorScale.Name);
+				CIEYxyChartData.addColumn({type:'string', role:'tooltip', 'p': {'html': true}});
+
+				if (!ColorScale.Value) {
+					CIEYxyChartData.addRows([
+						[parseFloat(Lab.a), parseFloat(Lab.b), '<div style="background-color: ' + RGB.HEX + ' ;opacity: 100; text-align: left; min-width: 100px; padding: 8px;"><b>Sensor</b><br><br>L: ' + Lab.L + '<br>a: ' + Lab.a + '<br>b: ' + Lab.b + '</div>', null, null],
+					]);
+				} else {
+					CIEYxyChartData.addRows([
+						[parseFloat(Lab.a), parseFloat(Lab.b), '<div style="background-color: ' + RGB.HEX + ' ;opacity: 100; text-align: left; min-width: 100px; padding: 8px;"><b>Sensor</b><br><br>L: ' + Lab.L + '<br>a: ' + Lab.a + '<br>b: ' + Lab.b + '<br><br>' + ColorScale.Name + ': ' + ColorScale.Value + '</div>', null, null],
+					]);
+				}
+				let ReferenceColors = Object.entries(ColorScale.Index).map(entry => {
+					let ReferenceName = entry[0];
+					let values = entry[1].split(/\s*,\s*/);
+					let ReferenceColor = {
+						L: parseFloat(values[0]),
+						a: parseFloat(values[1]),
+						b: parseFloat(values[2])
+					};
+					let ReferenceColorXYZ = Lab2XYZ(ReferenceColor);
+					let ReferenceColorRGB = XYZ2RGB(ReferenceColorXYZ);
+
+					CIEYxyChartData.addRows([
+						[parseFloat(ReferenceColor.a), null, null, parseFloat(ReferenceColor.b), '<div style="background-color: ' + ReferenceColorRGB.HEX + ';opacity: 100; text-align: left; min-width: 100px; padding: 8px;"><b>' + ReferenceName + '</b><br><br>L: ' + ReferenceColor.L + '<br>a: ' + ReferenceColor.a + '<br>b: ' + ReferenceColor.b + '</div>'],
+						]);
+				});
+
+				let CIEYxyChartOptions = {
+					hAxis: {title: 'a', minValue: -150.0, maxValue: 150.0},
+					vAxis: {title: 'b', minValue: -150.0, maxValue: 150.0},
+					width: 900,
+					height: 900,
+					title: 'CIE-L*a*b* Chromaticity Diagram (L=75, '+Lab.Reference+')',
+					backgroundColor: 'none',
+					annotations: {
+						textStyle: {
+							fontSize: 11,
+							opacity: 0.6
+						}
+					},
+					tooltip: { isHtml: true },
+					series: {
+						0:{type: 'line', color: 'black', visibleInLegend: true, lineWidth: 0, pointShape: { type: 'star', sides: 5, dent: 0.2 }, pointSize: 18},
+						1:{type: 'line', color: 'grey', visibleInLegend: true, lineWidth: ColorScale.ChartLineWidth, curveType: ColorScale.ChartCurveType, pointSize: 3}
+					}
+				};
+				var CIEChart = new google.visualization.LineChart(CIEColor);
+				CIEChart.draw(CIEYxyChartData, CIEYxyChartOptions);
+				// This two lines are the ones that do the magic to load the background image to the proper chart position
+				var boundingBox = CIEChart.getChartLayoutInterface().getChartAreaBoundingBox(); 
+				$('#CIEColorBackground').css('background-image', "url('"+ImagesPath+ColorScale.ChartBackground+"')").css('background-repeat', 'no-repeat').css('background-position', boundingBox.left + "px " + boundingBox.top + "px").css('background-size', boundingBox.width + "px " + boundingBox.height + "px");
+			}
+		} else {
+			CIEColor.innerHTML = "";
+		}
+
+		if (SelectedCharts.includes('5') && !isEmpty(RGB)) {
+			RGBColorHeading.innerHTML = RGB.Model+'('+(RGB.R).toFixed(6)+', '+(RGB.G).toFixed(6)+', '+(RGB.B).toFixed(6)+') ('+RGB.Reference+')';
+			RGBColor.width = 400;
+			RGBColor.height = 150;
+			var RGBContext = RGBColor.getContext('2d');
+			RGBContext.globalCompositeOperation = "destination-over";
+			RGBContext.fillStyle = RGB.HEX;
+			RGBContext.fillRect(0, 0, RGBColor.width, RGBColor.height);
+			RGBContext.globalCompositeOperation = "source-over";
+			RGBContext.lineWidth = 1;
+			RGBContext.strokeStyle = "#d3d3d3";
+			RGBContext.strokeRect(0, 0, RGBColor.width, RGBColor.height);
+		} else {
+			RGBColorHeading.innerHTML = "";
+			RGBColor.innerHTML = "";
+			RGBColor.width = 0;
+			RGBColor.height = 0;
+		}
 	}
 
-	function ScaleXYZ({Source, Reference, Adaptation, X, Y, Z}) {
-		var Scale = ($('#ScaleXYZ').prop('checked') == false) ? 1.0 : 100.0;
-		var Digits = ($('#ScaleXYZ').prop('checked') == false) ? 6 : 4;
-
-		if ($('#ScaleXYZ').prop('checked')===true) {
-			SensorData[1]['ScaledValue']='<input id="ScaleXYZ" type="checkbox" checked="checked">';
-		} else {
-			SensorData[1]['ScaledValue']='<input id="ScaleXYZ" type="checkbox">';
+	function Randomize(obj) {
+		for (var i in obj) {
+			if (obj.hasOwnProperty(i)) {
+				obj[i] = obj[i] * Math.random();
+			}
 		}
-		let res = {
-			X: (Scale * X).toFixed(Digits),
-			Y: (Scale * Y).toFixed(Digits),
-			Z: (Scale * Z).toFixed(Digits),
-			Source: Source,
-			Reference: Reference,
-			Adaptation: Adaptation,
-			Scale: Scale
-		}
-		return res;
-	}
-
-	function ScalexyY({Source, Reference, Adaptation, x, y, Y}) {
-		var Scale = ($('#ScalexyY').prop('checked') == false) ? 1.0 : 100.0;
-		var Digits = ($('#ScalexyY').prop('checked') == false) ? 6 : 4;
-
-		if ($('#ScalexyY').prop('checked')===true) {
-			SensorData[2]['ScaledValue']='<input id="ScalexyY" type="checkbox" checked="checked">';
-		} else {
-			SensorData[2]['ScaledValue']='<input id="ScalexyY" type="checkbox">';
-		}
-
-		let res = {
-			x: (x).toFixed(6),
-			y: (y).toFixed(6),
-			Y: (Scale * Y).toFixed(Digits),
-			Source: Source,
-			Reference: Reference,
-			Adaptation: Adaptation,
-			Scale: Scale
-		}
-		return res;
-	}
-
-	function ScaleRGB({Model, Source, Reference, Adaptation, Gamma, HEX, R, G, B}) {
-		var Scale = ($('#ScaleRGB').prop('checked') == false) ? 1.0 : 255.0;
-		var Digits = ($('#ScaleRGB').prop('checked') == false) ? 6 : 4;
-
-		if ($('#ScaleRGB').prop('checked')===true) {
-			SensorData[6]['ScaledValue']='<input id="ScaleRGB" type="checkbox" checked="checked">';
-		} else {
-			SensorData[6]['ScaledValue']='<input id="ScaleRGB" type="checkbox">';
-		}
-
-		let res = {
-			R: (Scale * R).toFixed(Digits),
-			G: (Scale * G).toFixed(Digits),
-			B: (Scale * B).toFixed(Digits),
-			HEX: HEX,
-			Model: Model,
-			Source: Source,
-			Reference: Reference,
-			Adaptation: Adaptation,
-			Gamma: Gamma,
-			Scale: Scale
-		}
-		return res;
+		return(obj);
 	}
 
 	function printObject(obj) {
@@ -880,11 +1528,7 @@ console.log(SamplexyY);
 				result += `${i}`+': '+objValue+'</br>';
 			}
 		}
-		return result;
-	}
-
-	function isEmpty(obj) {
-		return Object.keys(obj).length === 0;
+		return(result);
 	}
 
 	function loopDeLoop(e,s){
@@ -913,151 +1557,168 @@ console.log(SamplexyY);
 												} else if (s.Sensors[a].TaskValues[l].ValueNumber==4) {
 													SensorCCT.Sensor = parseFloat(tempValue);
 												}
-											} else if (s.Sensors[a].TaskNumber==2 && $('#switch_7').prop('checked')===true) {
+											} else if (s.Sensors[a].TaskNumber==2) {
+//												SensorData[(s.Sensors[a].TaskValues[l].ValueNumber-1)]['MeasuredValue']=tempValue;
+												if (s.Sensors[a].TaskValues[l].ValueNumber==1) {
+													SensorXYZ.X = parseFloat(tempValue/100);
+												} else if (s.Sensors[a].TaskValues[l].ValueNumber==2) {
+													SensorXYZ.Y = parseFloat(tempValue/100);
+												} else if (s.Sensors[a].TaskValues[l].ValueNumber==3) {
+													SensorXYZ.Z = parseFloat(tempValue/100);
+												} else if (s.Sensors[a].TaskValues[l].ValueNumber==4) {
+													SensorCCT.Sensor = parseFloat(tempValue);
+												}
+											} else if (s.Sensors[a].TaskNumber==3 && $('#switch_7').prop('checked')===true) {
 //												SensorData[(s.Sensors[a].TaskValues[l].ValueNumber-1)]['MeasuredValue']=tempValue;
 												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
 													case 1:
-														EmptySampleLightIntensity.I410 = parseFloat(tempValue);
+														EmptySampleLightIntensity[330] = parseFloat(tempValue);
 														break;
 													case 2:
-														EmptySampleLightIntensity.I435 = parseFloat(tempValue);
+														EmptySampleLightIntensity[365] = parseFloat(tempValue);
 														break;
 													case 3:
-														EmptySampleLightIntensity.I460 = parseFloat(tempValue);
+														EmptySampleLightIntensity[410] = parseFloat(tempValue);
 														break;
-												}
-											} else if (s.Sensors[a].TaskNumber==3 && $('#switch_7').prop('checked')===true) {
-												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
-													case 1:
-														EmptySampleLightIntensity.I485 = parseFloat(tempValue);
-														break;
-													case 2:
-														EmptySampleLightIntensity.I510 = parseFloat(tempValue);
-														break;
-													case 3:
-														EmptySampleLightIntensity.I535 = parseFloat(tempValue);
+													case 4:
+														EmptySampleLightIntensity[435] = parseFloat(tempValue);
 														break;
 												}
 											} else if (s.Sensors[a].TaskNumber==4 && $('#switch_7').prop('checked')===true) {
 												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
 													case 1:
-														EmptySampleLightIntensity.I560 = parseFloat(tempValue);
+														EmptySampleLightIntensity[460] = parseFloat(tempValue);
 														break;
 													case 2:
-														EmptySampleLightIntensity.I585 = parseFloat(tempValue);
+														EmptySampleLightIntensity[485] = parseFloat(tempValue);
 														break;
 													case 3:
-														EmptySampleLightIntensity.I610 = parseFloat(tempValue);
+														EmptySampleLightIntensity[510] = parseFloat(tempValue);
+														break;
+													case 4:
+														EmptySampleLightIntensity[535] = parseFloat(tempValue);
 														break;
 												}
 											} else if (s.Sensors[a].TaskNumber==5 && $('#switch_7').prop('checked')===true) {
 												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
 													case 1:
-														EmptySampleLightIntensity.I645 = parseFloat(tempValue);
+														EmptySampleLightIntensity[560] = parseFloat(tempValue);
 														break;
 													case 2:
-														EmptySampleLightIntensity.I680 = parseFloat(tempValue);
+														EmptySampleLightIntensity[585] = parseFloat(tempValue);
 														break;
 													case 3:
-														EmptySampleLightIntensity.I705 = parseFloat(tempValue);
+														EmptySampleLightIntensity[610] = parseFloat(tempValue);
+														break;
+													case 4:
+														EmptySampleLightIntensity[645] = parseFloat(tempValue);
 														break;
 												}
 											} else if (s.Sensors[a].TaskNumber==6 && $('#switch_7').prop('checked')===true) {
 												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
 													case 1:
-														EmptySampleLightIntensity.I730 = parseFloat(tempValue);
+														EmptySampleLightIntensity[680] = parseFloat(tempValue);
 														break;
 													case 2:
-														EmptySampleLightIntensity.I760 = parseFloat(tempValue);
+														EmptySampleLightIntensity[705] = parseFloat(tempValue);
 														break;
 													case 3:
-														EmptySampleLightIntensity.I810 = parseFloat(tempValue);
+														EmptySampleLightIntensity[730] = parseFloat(tempValue);
+														break;
+													case 4:
+														EmptySampleLightIntensity[760] = parseFloat(tempValue);
 														break;
 												}
 											} else if (s.Sensors[a].TaskNumber==7 && $('#switch_7').prop('checked')===true) {
 												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
 													case 1:
-														EmptySampleLightIntensity.I860 = parseFloat(tempValue);
+														EmptySampleLightIntensity[810] = parseFloat(tempValue);
 														break;
 													case 2:
-														EmptySampleLightIntensity.I900 = parseFloat(tempValue);
+														EmptySampleLightIntensity[860] = parseFloat(tempValue);
 														break;
 													case 3:
-														EmptySampleLightIntensity.I940 = parseFloat(tempValue);
+														EmptySampleLightIntensity[900] = parseFloat(tempValue);
+														break;
+													case 4:
+														EmptySampleLightIntensity[940] = parseFloat(tempValue);
 														break;
 												}
 
-											} else if (s.Sensors[a].TaskNumber==2 && $('#switch_8').prop('checked')===true) {
+											} else if (s.Sensors[a].TaskNumber==3 && $('#switch_8').prop('checked')===true) {
 //												SensorData[(s.Sensors[a].TaskValues[l].ValueNumber-1)]['MeasuredValue']=tempValue;
 												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
 													case 1:
-														SampleLightIntensity.I410 = parseFloat(tempValue);
+														SampleLightIntensity[330] = parseFloat(tempValue);
 														break;
 													case 2:
-														SampleLightIntensity.I435 = parseFloat(tempValue);
+														SampleLightIntensity[365] = parseFloat(tempValue);
 														break;
 													case 3:
-														SampleLightIntensity.I460 = parseFloat(tempValue);
+														SampleLightIntensity[410] = parseFloat(tempValue);
 														break;
-												}
-											} else if (s.Sensors[a].TaskNumber==3 && $('#switch_8').prop('checked')===true) {
-												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
-													case 1:
-														SampleLightIntensity.I485 = parseFloat(tempValue);
-														break;
-													case 2:
-														SampleLightIntensity.I510 = parseFloat(tempValue);
-														break;
-													case 3:
-														SampleLightIntensity.I535 = parseFloat(tempValue);
+													case 4:
+														SampleLightIntensity[435] = parseFloat(tempValue);
 														break;
 												}
 											} else if (s.Sensors[a].TaskNumber==4 && $('#switch_8').prop('checked')===true) {
 												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
 													case 1:
-														SampleLightIntensity.I560 = parseFloat(tempValue);
+														SampleLightIntensity[460] = parseFloat(tempValue);
 														break;
 													case 2:
-														SampleLightIntensity.I585 = parseFloat(tempValue);
+														SampleLightIntensity[485] = parseFloat(tempValue);
 														break;
 													case 3:
-														SampleLightIntensity.I610 = parseFloat(tempValue);
+														SampleLightIntensity[510] = parseFloat(tempValue);
+														break;
+													case 4:
+														SampleLightIntensity[535] = parseFloat(tempValue);
 														break;
 												}
 											} else if (s.Sensors[a].TaskNumber==5 && $('#switch_8').prop('checked')===true) {
 												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
 													case 1:
-														SampleLightIntensity.I645 = parseFloat(tempValue);
+														SampleLightIntensity[560] = parseFloat(tempValue);
 														break;
 													case 2:
-														SampleLightIntensity.I680 = parseFloat(tempValue);
+														SampleLightIntensity[585] = parseFloat(tempValue);
 														break;
 													case 3:
-														SampleLightIntensity.I705 = parseFloat(tempValue);
+														SampleLightIntensity[610] = parseFloat(tempValue);
+														break;
+													case 4:
+														SampleLightIntensity[645] = parseFloat(tempValue);
 														break;
 												}
 											} else if (s.Sensors[a].TaskNumber==6 && $('#switch_8').prop('checked')===true) {
 												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
 													case 1:
-														SampleLightIntensity.I730 = parseFloat(tempValue);
+														SampleLightIntensity[680] = parseFloat(tempValue);
 														break;
 													case 2:
-														SampleLightIntensity.I760 = parseFloat(tempValue);
+														SampleLightIntensity[705] = parseFloat(tempValue);
 														break;
 													case 3:
-														SampleLightIntensity.I810 = parseFloat(tempValue);
+														SampleLightIntensity[730] = parseFloat(tempValue);
+														break;
+													case 4:
+														SampleLightIntensity[760] = parseFloat(tempValue);
 														break;
 												}
 											} else if (s.Sensors[a].TaskNumber==7 && $('#switch_8').prop('checked')===true) {
 												switch(s.Sensors[a].TaskValues[l].ValueNumber) {
 													case 1:
-														SampleLightIntensity.I860 = parseFloat(tempValue);
+														SampleLightIntensity[810] = parseFloat(tempValue);
 														break;
 													case 2:
-														SampleLightIntensity.I900 = parseFloat(tempValue);
+														SampleLightIntensity[860] = parseFloat(tempValue);
 														break;
 													case 3:
-														SampleLightIntensity.I940 = parseFloat(tempValue);
+														SampleLightIntensity[900] = parseFloat(tempValue);
+														break;
+													case 4:
+														SampleLightIntensity[940] = parseFloat(tempValue);
 														break;
 												}
 											}

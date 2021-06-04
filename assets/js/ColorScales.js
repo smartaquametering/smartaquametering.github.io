@@ -37,7 +37,7 @@
 // d				Thickness of the solution layer (Optical Path Length of cuvette) [cm]
 // NULL-Reference	Distilled water
 
-function GetColorScale(SelectedColorScale, SensorLab)
+function GetColorScale(XYZ, Lab, SelectedColorScale)
 {
 	switch (SelectedColorScale)
 	{
@@ -64,9 +64,9 @@ function GetColorScale(SelectedColorScale, SensorLab)
 			//					Blue channel	=> 465 nm (+/- 22 nm)
 			//
 
-//			var DX = -1 * Math.log10(SensorXYZ.X / 0.98072);
-//			var DY = -1 * Math.log10(SensorXYZ.Y / 1.00000);
-//			var DZ = -1 * Math.log10(SensorXYZ.Z / 1.18225);
+//			var DX = -1 * Math.log10(XYZ.X / 0.98072);
+//			var DY = -1 * Math.log10(XYZ.Y / 1.00000);
+//			var DZ = -1 * Math.log10(XYZ.Z / 1.18225);
 
 //			var SAC = (0.25 + 0.8695 * ( DX + DY + DZ )).toFixed(1);
 
@@ -83,7 +83,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ColorReference: 'n/a',
 				Value: SAC,
 				Index: {
-					['ASTMColor-'+ASTM]: 'L: SensorLab.L, a: SensorLab.a, b: SensorLab.b' 
+					['ASTMColor-'+ASTM]: 'L: Lab.L, a: Lab.a, b: Lab.b' 
 				}
 			};
 			break;
@@ -300,7 +300,10 @@ function GetColorScale(SelectedColorScale, SensorLab)
 
 			var CX = 1.2769;
 			var CZ = 1.0592;
-			var YI = ((100 * (CX * SensorXYZ.X - CZ * SensorXYZ.Z)) / SensorXYZ.Y).toFixed(0);
+			var YI = ((100 * (CX * XYZ.X - CZ * XYZ.Z)) / XYZ.Y);
+
+			YI = (YI < 0.0) ? 0.0 : (YI > 850) ? NaN : YI;
+			YI = (YI).toFixed(0);
 
 			ColorScale = {
 				Name: 'Yellowness Index',
@@ -318,7 +321,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ChartLineWidth: 0,
 				Value: YI,
 				Index: {
-					['YellownessIndex-'+YI]: 'L: SensorLab.L, a: SensorLab.a, b: SensorLab.b' 
+					['YellownessIndex-'+YI]: Lab.L + ', ' + Lab.a + ', ' + Lab.b
 				}
 			};
 			break;
@@ -582,9 +585,9 @@ function GetColorScale(SelectedColorScale, SensorLab)
 			// DZ = -log(Z/118.225)
 			//
 
-			var DX = -1 * Math.log10(SensorXYZ.X / 0.98072);
-			var DY = -1 * Math.log10(SensorXYZ.Y / 1.00000);
-			var DZ = -1 * Math.log10(SensorXYZ.Z / 1.18225);
+			var DX = -1 * Math.log10(XYZ.X / 0.98072);
+			var DY = -1 * Math.log10(XYZ.Y / 1.00000);
+			var DZ = -1 * Math.log10(XYZ.Z / 1.18225);
 
 			var ASTM = (0.25 + 0.8695 * ( DX + DY + DZ )).toFixed(1);
 
@@ -605,7 +608,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ChartLineWidth: 0,
 				Value: ASTM,
 				Index: {
-					['ASTMColor-'+ASTM]: 'L: SensorLab.L, a: SensorLab.a, b: SensorLab.b' 
+					['ASTMColor-'+ASTM]: Lab.L + ', ' + Lab.a + ', ' + Lab.b
 				}
 			};
 			break;
@@ -626,7 +629,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 			// -16 (strongest color, corresponds to approx. 350 Hazen)
 			//
 
-			var DeltaE = Math.sqrt(Math.pow((100 - SensorLab.L), 2) + Math.pow(SensorLab.a, 2) + Math.pow(SensorLab.b, 2));
+			var DeltaE = Math.sqrt(Math.pow((100 - Lab.L), 2) + Math.pow(Lab.a, 2) + Math.pow(Lab.b, 2));
 
 			var A = 51.1;
 			var B = 44.5;
@@ -650,7 +653,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 				ChartLineWidth: 0,
 				Value: Saybolt,
 				Index: {
-					['SayboltColor-'+Saybolt]: 'L: SensorLab.L, a: SensorLab.a, b: SensorLab.b' 
+					['SayboltColor-'+Saybolt]: Lab.L + ', ' + Lab.a + ', ' + Lab.b
 				}
 			};
 			break;
@@ -888,6 +891,7 @@ function GetColorScale(SelectedColorScale, SensorLab)
 			};
 			break;
 	}
+	return(ColorScale);
 }
 
 
