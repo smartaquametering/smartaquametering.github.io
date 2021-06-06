@@ -754,6 +754,7 @@ function DocumentOnLoad() {
 console.log(SwitchID,GPIO,SliderValue);
 
 			$.get('./control?cmd=pcapwm,'+GPIO+','+SliderValue, function(data, status) {
+console.log("test");
 console.log("2. row", ${data}, ${status});
 			});
 
