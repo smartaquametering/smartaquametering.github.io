@@ -22,10 +22,24 @@ var SelectedCharts = [];
 var SelectedScaling = [];
 
 function ToggleState(state) {
-	for (i = 7; i < 36; i++) {
+	for (i = 7; i < 9; i++) {
 		var switchid = "#switch_" + i;
 		$(switchid).bootstrapToggle(state);
+	}
+	for (i = 0; i < 32; i++) {
+		var switchid = "#ledswitch_" + i;
+		$(switchid).bootstrapToggle(state)
 		$(switchid+"_slider").slider();
+
+		if (state=="enable") {
+			if ($(switchid).prop('checked')===true) {
+				$(switchid+"_slider").slider("enable");
+			} else {
+				$(switchid+"_slider").slider("disable");
+			}
+		} else {
+			$(switchid+"_slider").slider(state);
+		}
 	}
 	$("#FadeLEDs").bootstrapToggle(state);
 };
@@ -751,10 +765,8 @@ function DocumentOnLoad() {
 			$("#"+SwitchID+"_slider").slider("enable");
 			var SliderValue = $("#"+SwitchID+"_slider").slider('getValue');
 
-console.log(SwitchID,GPIO,SliderValue);
-
 			$.get('./control?cmd=pcapwm,'+GPIO+','+SliderValue, function(data, status) {
-console.log("test");
+console.log(SwitchID,GPIO,SliderValue);
 console.log(data);
 console.log(status);
 			});
@@ -763,6 +775,7 @@ console.log(status);
 		} else {
 			$("#"+SwitchID+"_slider").slider("disable");
 			$.get('./control?cmd=pcapwm,'+GPIO+',0', function(data, status) {
+console.log(SwitchID,GPIO,SliderValue);
 console.log(data);
 console.log(status);
 			});
@@ -772,71 +785,71 @@ console.log(status);
 	};
 
 	// LED Array
-	$('#switch_9').change(function() {LedSwitch($(this).prop('id'),LedData[0]['GPIO'])});
-	$('#switch_10').change(function() {LedSwitch($(this).prop('id'),LedData[1]['GPIO'])});
-	$('#switch_11').change(function() {LedSwitch($(this).prop('id'),LedData[2]['GPIO'])});
-	$('#switch_12').change(function() {LedSwitch($(this).prop('id'),LedData[3]['GPIO'])});
-	$('#switch_13').change(function() {LedSwitch($(this).prop('id'),LedData[4]['GPIO'])});
-	$('#switch_14').change(function() {LedSwitch($(this).prop('id'),LedData[5]['GPIO'])});
-	$('#switch_15').change(function() {LedSwitch($(this).prop('id'),LedData[6]['GPIO'])});
-	$('#switch_16').change(function() {LedSwitch($(this).prop('id'),LedData[7]['GPIO'])});
-	$('#switch_17').change(function() {LedSwitch($(this).prop('id'),LedData[8]['GPIO'])});
-	$('#switch_18').change(function() {LedSwitch($(this).prop('id'),LedData[9]['GPIO'])});
-	$('#switch_19').change(function() {LedSwitch($(this).prop('id'),LedData[10]['GPIO'])});
-	$('#switch_20').change(function() {LedSwitch($(this).prop('id'),LedData[11]['GPIO'])});
-	$('#switch_21').change(function() {LedSwitch($(this).prop('id'),LedData[12]['GPIO'])});
-	$('#switch_22').change(function() {LedSwitch($(this).prop('id'),LedData[13]['GPIO'])});
-	$('#switch_23').change(function() {LedSwitch($(this).prop('id'),LedData[14]['GPIO'])});
-	$('#switch_24').change(function() {LedSwitch($(this).prop('id'),LedData[15]['GPIO'])});
-	$('#switch_25').change(function() {LedSwitch($(this).prop('id'),LedData[16]['GPIO'])});
-	$('#switch_26').change(function() {LedSwitch($(this).prop('id'),LedData[17]['GPIO'])});
-	$('#switch_27').change(function() {LedSwitch($(this).prop('id'),LedData[18]['GPIO'])});
-	$('#switch_28').change(function() {LedSwitch($(this).prop('id'),LedData[19]['GPIO'])});
-	$('#switch_29').change(function() {LedSwitch($(this).prop('id'),LedData[20]['GPIO'])});
-	$('#switch_30').change(function() {LedSwitch($(this).prop('id'),LedData[21]['GPIO'])});
-	$('#switch_31').change(function() {LedSwitch($(this).prop('id'),LedData[22]['GPIO'])});
-	$('#switch_32').change(function() {LedSwitch($(this).prop('id'),LedData[23]['GPIO'])});
-	$('#switch_33').change(function() {LedSwitch($(this).prop('id'),LedData[24]['GPIO'])});
-	$('#switch_34').change(function() {LedSwitch($(this).prop('id'),LedData[25]['GPIO'])});
-	$('#switch_35').change(function() {LedSwitch($(this).prop('id'),LedData[26]['GPIO'])});
-	$('#switch_36').change(function() {LedSwitch($(this).prop('id'),LedData[27]['GPIO'])});
-	$('#switch_37').change(function() {LedSwitch($(this).prop('id'),LedData[28]['GPIO'])});
-	$('#switch_38').change(function() {LedSwitch($(this).prop('id'),LedData[29]['GPIO'])});
-	$('#switch_39').change(function() {LedSwitch($(this).prop('id'),LedData[30]['GPIO'])});
-	$('#switch_40').change(function() {LedSwitch($(this).prop('id'),LedData[31]['GPIO'])});
+	$('#ledswitch_0').change(function() {LedSwitch($(this).prop('id'),LedData[0]['GPIO'])});
+	$('#ledswitch_1').change(function() {LedSwitch($(this).prop('id'),LedData[1]['GPIO'])});
+	$('#ledswitch_2').change(function() {LedSwitch($(this).prop('id'),LedData[2]['GPIO'])});
+	$('#ledswitch_3').change(function() {LedSwitch($(this).prop('id'),LedData[3]['GPIO'])});
+	$('#ledswitch_4').change(function() {LedSwitch($(this).prop('id'),LedData[4]['GPIO'])});
+	$('#ledswitch_5').change(function() {LedSwitch($(this).prop('id'),LedData[5]['GPIO'])});
+	$('#ledswitch_6').change(function() {LedSwitch($(this).prop('id'),LedData[6]['GPIO'])});
+	$('#ledswitch_7').change(function() {LedSwitch($(this).prop('id'),LedData[7]['GPIO'])});
+	$('#ledswitch_8').change(function() {LedSwitch($(this).prop('id'),LedData[8]['GPIO'])});
+	$('#ledswitch_9').change(function() {LedSwitch($(this).prop('id'),LedData[9]['GPIO'])});
+	$('#ledswitch_10').change(function() {LedSwitch($(this).prop('id'),LedData[10]['GPIO'])});
+	$('#ledswitch_11').change(function() {LedSwitch($(this).prop('id'),LedData[11]['GPIO'])});
+	$('#ledswitch_12').change(function() {LedSwitch($(this).prop('id'),LedData[12]['GPIO'])});
+	$('#ledswitch_13').change(function() {LedSwitch($(this).prop('id'),LedData[13]['GPIO'])});
+	$('#ledswitch_14').change(function() {LedSwitch($(this).prop('id'),LedData[14]['GPIO'])});
+	$('#ledswitch_15').change(function() {LedSwitch($(this).prop('id'),LedData[15]['GPIO'])});
+	$('#ledswitch_16').change(function() {LedSwitch($(this).prop('id'),LedData[16]['GPIO'])});
+	$('#ledswitch_17').change(function() {LedSwitch($(this).prop('id'),LedData[17]['GPIO'])});
+	$('#ledswitch_18').change(function() {LedSwitch($(this).prop('id'),LedData[18]['GPIO'])});
+	$('#ledswitch_19').change(function() {LedSwitch($(this).prop('id'),LedData[19]['GPIO'])});
+	$('#ledswitch_20').change(function() {LedSwitch($(this).prop('id'),LedData[20]['GPIO'])});
+	$('#ledswitch_21').change(function() {LedSwitch($(this).prop('id'),LedData[21]['GPIO'])});
+	$('#ledswitch_22').change(function() {LedSwitch($(this).prop('id'),LedData[22]['GPIO'])});
+	$('#ledswitch_23').change(function() {LedSwitch($(this).prop('id'),LedData[23]['GPIO'])});
+	$('#ledswitch_24').change(function() {LedSwitch($(this).prop('id'),LedData[24]['GPIO'])});
+	$('#ledswitch_25').change(function() {LedSwitch($(this).prop('id'),LedData[25]['GPIO'])});
+	$('#ledswitch_26').change(function() {LedSwitch($(this).prop('id'),LedData[26]['GPIO'])});
+	$('#ledswitch_27').change(function() {LedSwitch($(this).prop('id'),LedData[27]['GPIO'])});
+	$('#ledswitch_28').change(function() {LedSwitch($(this).prop('id'),LedData[28]['GPIO'])});
+	$('#ledswitch_29').change(function() {LedSwitch($(this).prop('id'),LedData[29]['GPIO'])});
+	$('#ledswitch_30').change(function() {LedSwitch($(this).prop('id'),LedData[30]['GPIO'])});
+	$('#ledswitch_31').change(function() {LedSwitch($(this).prop('id'),LedData[31]['GPIO'])});
 
-	$("#switch_9_slider").on("slideStop", function() {LedSwitch('switch_9',LedData[0]['GPIO'])});
-	$("#switch_10_slider").on("slideStop", function() {LedSwitch('switch_10',LedData[1]['GPIO'])});
-	$("#switch_11_slider").on("slideStop", function() {LedSwitch('switch_11',LedData[2]['GPIO'])});
-	$("#switch_12_slider").on("slideStop", function() {LedSwitch('switch_12',LedData[3]['GPIO'])});
-	$("#switch_13_slider").on("slideStop", function() {LedSwitch('switch_13',LedData[4]['GPIO'])});
-	$("#switch_14_slider").on("slideStop", function() {LedSwitch('switch_14',LedData[5]['GPIO'])});
-	$("#switch_15_slider").on("slideStop", function() {LedSwitch('switch_15',LedData[6]['GPIO'])});
-	$("#switch_16_slider").on("slideStop", function() {LedSwitch('switch_16',LedData[7]['GPIO'])});
-	$("#switch_17_slider").on("slideStop", function() {LedSwitch('switch_17',LedData[8]['GPIO'])});
-	$("#switch_18_slider").on("slideStop", function() {LedSwitch('switch_18',LedData[9]['GPIO'])});
-	$("#switch_19_slider").on("slideStop", function() {LedSwitch('switch_19',LedData[10]['GPIO'])});
-	$("#switch_20_slider").on("slideStop", function() {LedSwitch('switch_20',LedData[11]['GPIO'])});
-	$("#switch_21_slider").on("slideStop", function() {LedSwitch('switch_21',LedData[12]['GPIO'])});
-	$("#switch_22_slider").on("slideStop", function() {LedSwitch('switch_22',LedData[13]['GPIO'])});
-	$("#switch_23_slider").on("slideStop", function() {LedSwitch('switch_23',LedData[14]['GPIO'])});
-	$("#switch_24_slider").on("slideStop", function() {LedSwitch('switch_24',LedData[15]['GPIO'])});
-	$("#switch_25_slider").on("slideStop", function() {LedSwitch('switch_25',LedData[16]['GPIO'])});
-	$("#switch_26_slider").on("slideStop", function() {LedSwitch('switch_26',LedData[17]['GPIO'])});
-	$("#switch_27_slider").on("slideStop", function() {LedSwitch('switch_27',LedData[18]['GPIO'])});
-	$("#switch_28_slider").on("slideStop", function() {LedSwitch('switch_28',LedData[19]['GPIO'])});
-	$("#switch_29_slider").on("slideStop", function() {LedSwitch('switch_29',LedData[20]['GPIO'])});
-	$("#switch_30_slider").on("slideStop", function() {LedSwitch('switch_30',LedData[21]['GPIO'])});
-	$("#switch_31_slider").on("slideStop", function() {LedSwitch('switch_31',LedData[22]['GPIO'])});
-	$("#switch_32_slider").on("slideStop", function() {LedSwitch('switch_32',LedData[23]['GPIO'])});
-	$("#switch_33_slider").on("slideStop", function() {LedSwitch('switch_33',LedData[24]['GPIO'])});
-	$("#switch_34_slider").on("slideStop", function() {LedSwitch('switch_34',LedData[13]['GPIO'])});
-	$("#switch_35_slider").on("slideStop", function() {LedSwitch('switch_35',LedData[14]['GPIO'])});
-	$("#switch_36_slider").on("slideStop", function() {LedSwitch('switch_36',LedData[15]['GPIO'])});
-	$("#switch_37_slider").on("slideStop", function() {LedSwitch('switch_37',LedData[16]['GPIO'])});
-	$("#switch_38_slider").on("slideStop", function() {LedSwitch('switch_38',LedData[17]['GPIO'])});
-	$("#switch_39_slider").on("slideStop", function() {LedSwitch('switch_39',LedData[18]['GPIO'])});
-	$("#switch_40_slider").on("slideStop", function() {LedSwitch('switch_40',LedData[19]['GPIO'])});
+	$("#ledswitch_0_slider").on("slideStop", function() {LedSwitch('ledswitch_0',LedData[0]['GPIO'])});
+	$("#ledswitch_1_slider").on("slideStop", function() {LedSwitch('ledswitch_1',LedData[1]['GPIO'])});
+	$("#ledswitch_2_slider").on("slideStop", function() {LedSwitch('ledswitch_2',LedData[2]['GPIO'])});
+	$("#ledswitch_3_slider").on("slideStop", function() {LedSwitch('ledswitch_3',LedData[3]['GPIO'])});
+	$("#ledswitch_4_slider").on("slideStop", function() {LedSwitch('ledswitch_4',LedData[4]['GPIO'])});
+	$("#ledswitch_5_slider").on("slideStop", function() {LedSwitch('ledswitch_5',LedData[5]['GPIO'])});
+	$("#ledswitch_6_slider").on("slideStop", function() {LedSwitch('ledswitch_6',LedData[6]['GPIO'])});
+	$("#ledswitch_7_slider").on("slideStop", function() {LedSwitch('ledswitch_7',LedData[7]['GPIO'])});
+	$("#ledswitch_8_slider").on("slideStop", function() {LedSwitch('ledswitch_8',LedData[8]['GPIO'])});
+	$("#ledswitch_9_slider").on("slideStop", function() {LedSwitch('ledswitch_9',LedData[9]['GPIO'])});
+	$("#ledswitch_10_slider").on("slideStop", function() {LedSwitch('ledswitch_10',LedData[10]['GPIO'])});
+	$("#ledswitch_11_slider").on("slideStop", function() {LedSwitch('ledswitch_11',LedData[11]['GPIO'])});
+	$("#ledswitch_12_slider").on("slideStop", function() {LedSwitch('ledswitch_12',LedData[12]['GPIO'])});
+	$("#ledswitch_13_slider").on("slideStop", function() {LedSwitch('ledswitch_13',LedData[13]['GPIO'])});
+	$("#ledswitch_14_slider").on("slideStop", function() {LedSwitch('ledswitch_14',LedData[14]['GPIO'])});
+	$("#ledswitch_15_slider").on("slideStop", function() {LedSwitch('ledswitch_15',LedData[15]['GPIO'])});
+	$("#ledswitch_16_slider").on("slideStop", function() {LedSwitch('ledswitch_16',LedData[16]['GPIO'])});
+	$("#ledswitch_17_slider").on("slideStop", function() {LedSwitch('ledswitch_17',LedData[17]['GPIO'])});
+	$("#ledswitch_18_slider").on("slideStop", function() {LedSwitch('ledswitch_18',LedData[18]['GPIO'])});
+	$("#ledswitch_19_slider").on("slideStop", function() {LedSwitch('ledswitch_19',LedData[19]['GPIO'])});
+	$("#ledswitch_20_slider").on("slideStop", function() {LedSwitch('ledswitch_20',LedData[20]['GPIO'])});
+	$("#ledswitch_21_slider").on("slideStop", function() {LedSwitch('ledswitch_21',LedData[21]['GPIO'])});
+	$("#ledswitch_22_slider").on("slideStop", function() {LedSwitch('ledswitch_22',LedData[22]['GPIO'])});
+	$("#ledswitch_23_slider").on("slideStop", function() {LedSwitch('ledswitch_23',LedData[23]['GPIO'])});
+	$("#ledswitch_24_slider").on("slideStop", function() {LedSwitch('ledswitch_24',LedData[24]['GPIO'])});
+	$("#ledswitch_25_slider").on("slideStop", function() {LedSwitch('ledswitch_25',LedData[13]['GPIO'])});
+	$("#ledswitch_26_slider").on("slideStop", function() {LedSwitch('ledswitch_26',LedData[14]['GPIO'])});
+	$("#ledswitch_27_slider").on("slideStop", function() {LedSwitch('ledswitch_27',LedData[15]['GPIO'])});
+	$("#ledswitch_28_slider").on("slideStop", function() {LedSwitch('ledswitch_28',LedData[16]['GPIO'])});
+	$("#ledswitch_29_slider").on("slideStop", function() {LedSwitch('ledswitch_29',LedData[17]['GPIO'])});
+	$("#ledswitch_30_slider").on("slideStop", function() {LedSwitch('ledswitch_30',LedData[18]['GPIO'])});
+	$("#ledswitch_31_slider").on("slideStop", function() {LedSwitch('ledswitch_31',LedData[19]['GPIO'])});
 
 	$('#SensorTable').bootstrapTable('destroy').bootstrapTable({
 		columns: [{
