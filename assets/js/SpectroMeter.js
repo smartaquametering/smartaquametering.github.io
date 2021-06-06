@@ -755,8 +755,8 @@ console.log(SwitchID,GPIO,SliderValue);
 
 			$.get('./control?cmd=pcapwm,'+GPIO+','+SliderValue, function(data, status) {
 console.log("test");
-console.log("Data: " ${data});
-console.log("Status: " ${status});
+console.log(${data});
+console.log(${status});
 			});
 
 			state = 1;
