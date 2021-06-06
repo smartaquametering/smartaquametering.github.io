@@ -755,7 +755,7 @@ console.log(SwitchID,GPIO,SliderValue);
 
 			$.get('./control?cmd=pcapwm,'+GPIO+','+SliderValue, function(data, status) {
 console.log("Data: ", ${data});
-console.log("Status: " ${status});
+console.log("Status: ", ${status});
 			});
 
 			state = 1;
@@ -763,7 +763,7 @@ console.log("Status: " ${status});
 			$("#"+SwitchID+"_slider").slider("disable");
 			$.get('./control?cmd=pcapwm,'+GPIO+',0', function(data, status) {
 console.log("Data: ", ${data});
-console.log("Status: " ${status});
+console.log("Status: ", ${status});
 			});
 			state = 0;
 		}
