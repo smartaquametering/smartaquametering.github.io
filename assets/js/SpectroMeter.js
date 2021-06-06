@@ -754,16 +754,14 @@ function DocumentOnLoad() {
 console.log(SwitchID,GPIO,SliderValue);
 
 			$.get('./control?cmd=pcapwm,'+GPIO+','+SliderValue, function(data, status) {
-console.log("Data: ", ${data});
-console.log("Status: ", ${status});
+console.log("2. row", ${data}, ${status});
 			});
 
 			state = 1;
 		} else {
 			$("#"+SwitchID+"_slider").slider("disable");
 			$.get('./control?cmd=pcapwm,'+GPIO+',0', function(data, status) {
-console.log("Data: ", ${data});
-console.log("Status: ", ${status});
+console.log("2. row", ${data}, ${status});
 			});
 			state = 0;
 		}
