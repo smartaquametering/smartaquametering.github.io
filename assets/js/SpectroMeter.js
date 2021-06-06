@@ -53,6 +53,7 @@ function DocumentOnLoad() {
 		LedData[0]=new Array();
 			LedData[0]['Manufacturer']='';
 			LedData[0]['ProductID']='';
+			LedData[0]['DeviceType']='Halogen lamp';
 			LedData[0]['Color']='Warm White';
 			LedData[0]['CCT']='6500';
 			LedData[0]['XYZ']='';
@@ -63,6 +64,7 @@ function DocumentOnLoad() {
 		LedData[1]=new Array();
 			LedData[1]['Manufacturer']='';
 			LedData[1]['ProductID']='';
+			LedData[1]['DeviceType']='LED';
 			LedData[1]['Color']='';
 			LedData[1]['CCT']='';
 			LedData[1]['XYZ']='';
@@ -73,6 +75,7 @@ function DocumentOnLoad() {
 		LedData[2]=new Array();
 			LedData[2]['Manufacturer']='';
 			LedData[2]['ProductID']='';
+			LedData[2]['DeviceType']='LED';
 			LedData[2]['Color']='';
 			LedData[2]['CCT']='';
 			LedData[2]['XYZ']='';
@@ -83,6 +86,7 @@ function DocumentOnLoad() {
 		LedData[3]=new Array();
 			LedData[3]['Manufacturer']='';
 			LedData[3]['ProductID']='';
+			LedData[3]['DeviceType']='LED';
 			LedData[3]['Color']='';
 			LedData[3]['CCT']='';
 			LedData[3]['XYZ']='';
@@ -93,6 +97,7 @@ function DocumentOnLoad() {
 		LedData[4]=new Array();
 			LedData[4]['Manufacturer']='';
 			LedData[4]['ProductID']='';
+			LedData[4]['DeviceType']='LED';
 			LedData[4]['Color']='';
 			LedData[4]['CCT']='';
 			LedData[4]['XYZ']='';
@@ -103,6 +108,7 @@ function DocumentOnLoad() {
 		LedData[5]=new Array();
 			LedData[5]['Manufacturer']='';
 			LedData[5]['ProductID']='';
+			LedData[5]['DeviceType']='LED';
 			LedData[5]['Color']='';
 			LedData[5]['CCT']='';
 			LedData[5]['XYZ']='';
@@ -113,6 +119,7 @@ function DocumentOnLoad() {
 		LedData[6]=new Array();
 			LedData[6]['Manufacturer']='';
 			LedData[6]['ProductID']='';
+			LedData[6]['DeviceType']='LED';
 			LedData[6]['Color']='';
 			LedData[6]['CCT']='';
 			LedData[6]['XYZ']='';
@@ -123,6 +130,7 @@ function DocumentOnLoad() {
 		LedData[7]=new Array();
 			LedData[7]['Manufacturer']='';
 			LedData[7]['ProductID']='';
+			LedData[7]['DeviceType']='LED';
 			LedData[7]['Color']='';
 			LedData[7]['CCT']='';
 			LedData[7]['XYZ']='';
@@ -133,6 +141,7 @@ function DocumentOnLoad() {
 		LedData[8]=new Array();
 			LedData[8]['Manufacturer']='';
 			LedData[8]['ProductID']='';
+			LedData[8]['DeviceType']='LED';
 			LedData[8]['Color']='';
 			LedData[8]['CCT']='';
 			LedData[8]['XYZ']='';
@@ -143,6 +152,7 @@ function DocumentOnLoad() {
 		LedData[9]=new Array();
 			LedData[9]['Manufacturer']='';
 			LedData[9]['ProductID']='';
+			LedData[9]['DeviceType']='LED';
 			LedData[9]['Color']='';
 			LedData[9]['CCT']='';
 			LedData[9]['XYZ']='';
@@ -153,6 +163,7 @@ function DocumentOnLoad() {
 		LedData[10]=new Array();
 			LedData[10]['Manufacturer']='';
 			LedData[10]['ProductID']='';
+			LedData[10]['DeviceType']='LED';
 			LedData[10]['Color']='';
 			LedData[10]['CCT']='';
 			LedData[10]['XYZ']='';
@@ -163,6 +174,7 @@ function DocumentOnLoad() {
 		LedData[11]=new Array();
 			LedData[11]['Manufacturer']='';
 			LedData[11]['ProductID']='';
+			LedData[11]['DeviceType']='LED';
 			LedData[11]['Color']='';
 			LedData[11]['CCT']='';
 			LedData[11]['XYZ']='';
@@ -173,6 +185,7 @@ function DocumentOnLoad() {
 		LedData[12]=new Array();
 			LedData[12]['Manufacturer']='';
 			LedData[12]['ProductID']='';
+			LedData[12]['DeviceType']='LED';
 			LedData[12]['Color']='';
 			LedData[12]['CCT']='';
 			LedData[12]['XYZ']='';
@@ -183,6 +196,7 @@ function DocumentOnLoad() {
 		LedData[13]=new Array();
 			LedData[13]['Manufacturer']='';
 			LedData[13]['ProductID']='';
+			LedData[13]['DeviceType']='LED';
 			LedData[13]['Color']='';
 			LedData[13]['CCT']='';
 			LedData[13]['XYZ']='';
@@ -193,6 +207,7 @@ function DocumentOnLoad() {
 		LedData[14]=new Array();
 			LedData[14]['Manufacturer']='';
 			LedData[14]['ProductID']='';
+			LedData[14]['DeviceType']='LED';
 			LedData[14]['Color']='';
 			LedData[14]['CCT']='';
 			LedData[14]['XYZ']='';
@@ -203,6 +218,7 @@ function DocumentOnLoad() {
 		LedData[15]=new Array();
 			LedData[15]['Manufacturer']='';
 			LedData[15]['ProductID']='';
+			LedData[15]['DeviceType']='LED';
 			LedData[15]['Color']='';
 			LedData[15]['CCT']='';
 			LedData[15]['XYZ']='';
@@ -213,6 +229,7 @@ function DocumentOnLoad() {
 		LedData[16]=new Array();
 			LedData[16]['Manufacturer']='';
 			LedData[16]['ProductID']='';
+			LedData[16]['DeviceType']='LED';
 			LedData[16]['Color']='';
 			LedData[16]['CCT']='';
 			LedData[16]['XYZ']='';
@@ -223,6 +240,7 @@ function DocumentOnLoad() {
 		LedData[17]=new Array();
 			LedData[17]['Manufacturer']='';
 			LedData[17]['ProductID']='';
+			LedData[17]['DeviceType']='LED';
 			LedData[17]['Color']='';
 			LedData[17]['CCT']='';
 			LedData[17]['XYZ']='';
@@ -233,6 +251,7 @@ function DocumentOnLoad() {
 		LedData[18]=new Array();
 			LedData[18]['Manufacturer']='';
 			LedData[18]['ProductID']='';
+			LedData[18]['DeviceType']='LED';
 			LedData[18]['Color']='';
 			LedData[18]['CCT']='';
 			LedData[18]['XYZ']='';
@@ -243,6 +262,7 @@ function DocumentOnLoad() {
 		LedData[19]=new Array();
 			LedData[19]['Manufacturer']='';
 			LedData[19]['ProductID']='';
+			LedData[19]['DeviceType']='LED';
 			LedData[19]['Color']='';
 			LedData[19]['CCT']='';
 			LedData[19]['XYZ']='';
@@ -253,6 +273,7 @@ function DocumentOnLoad() {
 		LedData[20]=new Array();
 			LedData[20]['Manufacturer']='';
 			LedData[20]['ProductID']='';
+			LedData[20]['DeviceType']='LED';
 			LedData[20]['Color']='';
 			LedData[20]['CCT']='';
 			LedData[20]['XYZ']='';
@@ -263,6 +284,7 @@ function DocumentOnLoad() {
 		LedData[21]=new Array();
 			LedData[21]['Manufacturer']='';
 			LedData[21]['ProductID']='';
+			LedData[21]['DeviceType']='LED';
 			LedData[21]['Color']='';
 			LedData[21]['CCT']='';
 			LedData[21]['XYZ']='';
@@ -273,6 +295,7 @@ function DocumentOnLoad() {
 		LedData[22]=new Array();
 			LedData[22]['Manufacturer']='';
 			LedData[22]['ProductID']='';
+			LedData[22]['DeviceType']='LED';
 			LedData[22]['Color']='';
 			LedData[22]['CCT']='';
 			LedData[22]['XYZ']='';
@@ -283,6 +306,7 @@ function DocumentOnLoad() {
 		LedData[23]=new Array();
 			LedData[23]['Manufacturer']='';
 			LedData[23]['ProductID']='';
+			LedData[23]['DeviceType']='LED';
 			LedData[23]['Color']='';
 			LedData[23]['CCT']='';
 			LedData[23]['XYZ']='';
@@ -293,6 +317,7 @@ function DocumentOnLoad() {
 		LedData[24]=new Array();
 			LedData[24]['Manufacturer']='';
 			LedData[24]['ProductID']='';
+			LedData[24]['DeviceType']='LED';
 			LedData[24]['Color']='';
 			LedData[24]['CCT']='';
 			LedData[24]['XYZ']='';
@@ -303,6 +328,7 @@ function DocumentOnLoad() {
 		LedData[25]=new Array();
 			LedData[25]['Manufacturer']='';
 			LedData[25]['ProductID']='';
+			LedData[25]['DeviceType']='LED';
 			LedData[25]['Color']='';
 			LedData[25]['CCT']='';
 			LedData[25]['XYZ']='';
@@ -313,6 +339,7 @@ function DocumentOnLoad() {
 		LedData[26]=new Array();
 			LedData[26]['Manufacturer']='';
 			LedData[26]['ProductID']='';
+			LedData[26]['DeviceType']='LED';
 			LedData[26]['Color']='';
 			LedData[26]['CCT']='';
 			LedData[26]['XYZ']='';
@@ -323,6 +350,7 @@ function DocumentOnLoad() {
 		LedData[27]=new Array();
 			LedData[27]['Manufacturer']='';
 			LedData[27]['ProductID']='';
+			LedData[27]['DeviceType']='LED';
 			LedData[27]['Color']='';
 			LedData[27]['CCT']='';
 			LedData[27]['XYZ']='';
@@ -333,6 +361,7 @@ function DocumentOnLoad() {
 		LedData[28]=new Array();
 			LedData[28]['Manufacturer']='';
 			LedData[28]['ProductID']='';
+			LedData[28]['DeviceType']='LED';
 			LedData[28]['Color']='';
 			LedData[28]['CCT']='';
 			LedData[28]['XYZ']='';
@@ -343,6 +372,7 @@ function DocumentOnLoad() {
 		LedData[29]=new Array();
 			LedData[29]['Manufacturer']='';
 			LedData[29]['ProductID']='';
+			LedData[29]['DeviceType']='LED';
 			LedData[29]['Color']='';
 			LedData[29]['CCT']='';
 			LedData[29]['XYZ']='';
@@ -353,6 +383,7 @@ function DocumentOnLoad() {
 		LedData[30]=new Array();
 			LedData[30]['Manufacturer']='';
 			LedData[30]['ProductID']='';
+			LedData[30]['DeviceType']='LED';
 			LedData[30]['Color']='';
 			LedData[30]['CCT']='';
 			LedData[30]['XYZ']='';
@@ -363,6 +394,7 @@ function DocumentOnLoad() {
 		LedData[31]=new Array();
 			LedData[31]['Manufacturer']='';
 			LedData[31]['ProductID']='';
+			LedData[31]['DeviceType']='LED';
 			LedData[31]['Color']='';
 			LedData[31]['CCT']='';
 			LedData[31]['XYZ']='';
@@ -719,24 +751,18 @@ function DocumentOnLoad() {
 			$("#"+SwitchID+"_slider").slider("enable");
 			var SliderValue = $("#"+SwitchID+"_slider").slider('getValue');
 
-//PCAPWM,<pin>,<value>	0...4095	Control PCA9685 pwm level.
-
-
 console.log(SwitchID,GPIO,SliderValue);
 
-//			$.get('./control?cmd=GPIO,'+GPIO+',1');
-
 			$.get('./control?cmd=pcapwm,'+GPIO+','+SliderValue, function(data, status) {
-				console.log('${data}');
+console.log(${data});
 			});
-
 
 			state = 1;
 		} else {
 			$("#"+SwitchID+"_slider").slider("disable");
-//			$.get('./control?cmd=GPIO,'+GPIO+',0');
 			$.get('./control?cmd=pcapwm,'+GPIO+',0', function(data, status) {
-				console.log('${data}');
+console.log(`${data} and ${status}`);
+console.log("2. row", data, status);
 			});
 			state = 0;
 		}
@@ -744,57 +770,71 @@ console.log(SwitchID,GPIO,SliderValue);
 	};
 
 	// LED Array
-	$('#switch_9').change(function() {LedSwitch($(this).prop('id'),LedData[0]['GPIO'])});		// LED Array 0 - Warm White LED
-	$('#switch_10').change(function() {LedSwitch($(this).prop('id'),LedData[1]['GPIO'])});		// LED Array 1
-	$('#switch_11').change(function() {LedSwitch($(this).prop('id'),LedData[2]['GPIO'])});		// LED Array 2
-	$('#switch_12').change(function() {LedSwitch($(this).prop('id'),LedData[3]['GPIO'])});		// LED Array 3
-	$('#switch_13').change(function() {LedSwitch($(this).prop('id'),LedData[4]['GPIO'])});		// LED Array 4
-	$('#switch_14').change(function() {LedSwitch($(this).prop('id'),LedData[5]['GPIO'])});		// LED Array 5
-	$('#switch_15').change(function() {LedSwitch($(this).prop('id'),LedData[6]['GPIO'])});		// LED Array 6
-	$('#switch_16').change(function() {LedSwitch($(this).prop('id'),LedData[7]['GPIO'])});		// LED Array 7
-	$('#switch_17').change(function() {LedSwitch($(this).prop('id'),LedData[8]['GPIO'])});		// LED Array 8
-	$('#switch_18').change(function() {LedSwitch($(this).prop('id'),LedData[9]['GPIO'])});		// LED Array 9
-	$('#switch_19').change(function() {LedSwitch($(this).prop('id'),LedData[10]['GPIO'])});		// LED Array 10
-	$('#switch_20').change(function() {LedSwitch($(this).prop('id'),LedData[11]['GPIO'])});		// LED Array 11
-	$('#switch_21').change(function() {LedSwitch($(this).prop('id'),LedData[12]['GPIO'])});		// LED Array 12
-	$('#switch_22').change(function() {LedSwitch($(this).prop('id'),LedData[13]['GPIO'])});		// LED Array 13
-	$('#switch_23').change(function() {LedSwitch($(this).prop('id'),LedData[14]['GPIO'])});		// LED Array 14
-	$('#switch_24').change(function() {LedSwitch($(this).prop('id'),LedData[15]['GPIO'])});		// LED Array 15
-	$('#switch_25').change(function() {LedSwitch($(this).prop('id'),LedData[16]['GPIO'])});		// LED Array 16
-	$('#switch_26').change(function() {LedSwitch($(this).prop('id'),LedData[17]['GPIO'])});		// LED Array 17
-	$('#switch_27').change(function() {LedSwitch($(this).prop('id'),LedData[18]['GPIO'])});		// LED Array 18
-	$('#switch_28').change(function() {LedSwitch($(this).prop('id'),LedData[19]['GPIO'])});		// LED Array 19
-	$('#switch_29').change(function() {LedSwitch($(this).prop('id'),LedData[20]['GPIO'])});		// LED Array 20
-	$('#switch_30').change(function() {LedSwitch($(this).prop('id'),LedData[21]['GPIO'])});		// LED Array 21
-	$('#switch_31').change(function() {LedSwitch($(this).prop('id'),LedData[22]['GPIO'])});		// LED Array 22
-	$('#switch_32').change(function() {LedSwitch($(this).prop('id'),LedData[23]['GPIO'])});		// LED Array 23
-	$('#switch_33').change(function() {LedSwitch($(this).prop('id'),LedData[24]['GPIO'])});		// LED Array 24
+	$('#switch_9').change(function() {LedSwitch($(this).prop('id'),LedData[0]['GPIO'])});
+	$('#switch_10').change(function() {LedSwitch($(this).prop('id'),LedData[1]['GPIO'])});
+	$('#switch_11').change(function() {LedSwitch($(this).prop('id'),LedData[2]['GPIO'])});
+	$('#switch_12').change(function() {LedSwitch($(this).prop('id'),LedData[3]['GPIO'])});
+	$('#switch_13').change(function() {LedSwitch($(this).prop('id'),LedData[4]['GPIO'])});
+	$('#switch_14').change(function() {LedSwitch($(this).prop('id'),LedData[5]['GPIO'])});
+	$('#switch_15').change(function() {LedSwitch($(this).prop('id'),LedData[6]['GPIO'])});
+	$('#switch_16').change(function() {LedSwitch($(this).prop('id'),LedData[7]['GPIO'])});
+	$('#switch_17').change(function() {LedSwitch($(this).prop('id'),LedData[8]['GPIO'])});
+	$('#switch_18').change(function() {LedSwitch($(this).prop('id'),LedData[9]['GPIO'])});
+	$('#switch_19').change(function() {LedSwitch($(this).prop('id'),LedData[10]['GPIO'])});
+	$('#switch_20').change(function() {LedSwitch($(this).prop('id'),LedData[11]['GPIO'])});
+	$('#switch_21').change(function() {LedSwitch($(this).prop('id'),LedData[12]['GPIO'])});
+	$('#switch_22').change(function() {LedSwitch($(this).prop('id'),LedData[13]['GPIO'])});
+	$('#switch_23').change(function() {LedSwitch($(this).prop('id'),LedData[14]['GPIO'])});
+	$('#switch_24').change(function() {LedSwitch($(this).prop('id'),LedData[15]['GPIO'])});
+	$('#switch_25').change(function() {LedSwitch($(this).prop('id'),LedData[16]['GPIO'])});
+	$('#switch_26').change(function() {LedSwitch($(this).prop('id'),LedData[17]['GPIO'])});
+	$('#switch_27').change(function() {LedSwitch($(this).prop('id'),LedData[18]['GPIO'])});
+	$('#switch_28').change(function() {LedSwitch($(this).prop('id'),LedData[19]['GPIO'])});
+	$('#switch_29').change(function() {LedSwitch($(this).prop('id'),LedData[20]['GPIO'])});
+	$('#switch_30').change(function() {LedSwitch($(this).prop('id'),LedData[21]['GPIO'])});
+	$('#switch_31').change(function() {LedSwitch($(this).prop('id'),LedData[22]['GPIO'])});
+	$('#switch_32').change(function() {LedSwitch($(this).prop('id'),LedData[23]['GPIO'])});
+	$('#switch_33').change(function() {LedSwitch($(this).prop('id'),LedData[24]['GPIO'])});
+	$('#switch_34').change(function() {LedSwitch($(this).prop('id'),LedData[25]['GPIO'])});
+	$('#switch_35').change(function() {LedSwitch($(this).prop('id'),LedData[26]['GPIO'])});
+	$('#switch_36').change(function() {LedSwitch($(this).prop('id'),LedData[27]['GPIO'])});
+	$('#switch_37').change(function() {LedSwitch($(this).prop('id'),LedData[28]['GPIO'])});
+	$('#switch_38').change(function() {LedSwitch($(this).prop('id'),LedData[29]['GPIO'])});
+	$('#switch_39').change(function() {LedSwitch($(this).prop('id'),LedData[30]['GPIO'])});
+	$('#switch_40').change(function() {LedSwitch($(this).prop('id'),LedData[31]['GPIO'])});
 
-	$("#switch_9_slider").on("slideStop", function() {LedSwitch('switch_9',LedData[0]['GPIO'])});			// LED Array 0 - Warm White LED
-	$("#switch_10_slider").on("slideStop", function() {LedSwitch('switch_10',LedData[1]['GPIO'])});			// LED Array 1
-	$("#switch_11_slider").on("slideStop", function() {LedSwitch('switch_11',LedData[2]['GPIO'])});			// LED Array 2
-	$("#switch_12_slider").on("slideStop", function() {LedSwitch('switch_12',LedData[3]['GPIO'])});			// LED Array 3
-	$("#switch_13_slider").on("slideStop", function() {LedSwitch('switch_13',LedData[4]['GPIO'])});			// LED Array 4
-	$("#switch_14_slider").on("slideStop", function() {LedSwitch('switch_14',LedData[5]['GPIO'])});			// LED Array 5
-	$("#switch_15_slider").on("slideStop", function() {LedSwitch('switch_15',LedData[6]['GPIO'])});			// LED Array 6
-	$("#switch_16_slider").on("slideStop", function() {LedSwitch('switch_16',LedData[7]['GPIO'])});			// LED Array 7
-	$("#switch_17_slider").on("slideStop", function() {LedSwitch('switch_17',LedData[8]['GPIO'])});			// LED Array 8
-	$("#switch_18_slider").on("slideStop", function() {LedSwitch('switch_18',LedData[9]['GPIO'])});			// LED Array 9
-	$("#switch_19_slider").on("slideStop", function() {LedSwitch('switch_19',LedData[10]['GPIO'])});		// LED Array 10
-	$("#switch_20_slider").on("slideStop", function() {LedSwitch('switch_20',LedData[11]['GPIO'])});		// LED Array 11
-	$("#switch_21_slider").on("slideStop", function() {LedSwitch('switch_21',LedData[12]['GPIO'])});		// LED Array 12
-	$("#switch_22_slider").on("slideStop", function() {LedSwitch('switch_22',LedData[13]['GPIO'])});		// LED Array 13
-	$("#switch_23_slider").on("slideStop", function() {LedSwitch('switch_23',LedData[14]['GPIO'])});		// LED Array 14
-	$("#switch_24_slider").on("slideStop", function() {LedSwitch('switch_24',LedData[15]['GPIO'])});		// LED Array 15
-	$("#switch_25_slider").on("slideStop", function() {LedSwitch('switch_25',LedData[16]['GPIO'])});		// LED Array 16
-	$("#switch_26_slider").on("slideStop", function() {LedSwitch('switch_26',LedData[17]['GPIO'])});		// LED Array 17
-	$("#switch_27_slider").on("slideStop", function() {LedSwitch('switch_27',LedData[18]['GPIO'])});		// LED Array 18
-	$("#switch_28_slider").on("slideStop", function() {LedSwitch('switch_28',LedData[19]['GPIO'])});		// LED Array 19
-	$("#switch_29_slider").on("slideStop", function() {LedSwitch('switch_29',LedData[20]['GPIO'])});		// LED Array 20
-	$("#switch_30_slider").on("slideStop", function() {LedSwitch('switch_30',LedData[21]['GPIO'])});		// LED Array 21
-	$("#switch_31_slider").on("slideStop", function() {LedSwitch('switch_31',LedData[22]['GPIO'])});		// LED Array 22
-	$("#switch_32_slider").on("slideStop", function() {LedSwitch('switch_32',LedData[23]['GPIO'])});		// LED Array 23
-	$("#switch_33_slider").on("slideStop", function() {LedSwitch('switch_33',LedData[24]['GPIO'])});		// LED Array 24
+	$("#switch_9_slider").on("slideStop", function() {LedSwitch('switch_9',LedData[0]['GPIO'])});
+	$("#switch_10_slider").on("slideStop", function() {LedSwitch('switch_10',LedData[1]['GPIO'])});
+	$("#switch_11_slider").on("slideStop", function() {LedSwitch('switch_11',LedData[2]['GPIO'])});
+	$("#switch_12_slider").on("slideStop", function() {LedSwitch('switch_12',LedData[3]['GPIO'])});
+	$("#switch_13_slider").on("slideStop", function() {LedSwitch('switch_13',LedData[4]['GPIO'])});
+	$("#switch_14_slider").on("slideStop", function() {LedSwitch('switch_14',LedData[5]['GPIO'])});
+	$("#switch_15_slider").on("slideStop", function() {LedSwitch('switch_15',LedData[6]['GPIO'])});
+	$("#switch_16_slider").on("slideStop", function() {LedSwitch('switch_16',LedData[7]['GPIO'])});
+	$("#switch_17_slider").on("slideStop", function() {LedSwitch('switch_17',LedData[8]['GPIO'])});
+	$("#switch_18_slider").on("slideStop", function() {LedSwitch('switch_18',LedData[9]['GPIO'])});
+	$("#switch_19_slider").on("slideStop", function() {LedSwitch('switch_19',LedData[10]['GPIO'])});
+	$("#switch_20_slider").on("slideStop", function() {LedSwitch('switch_20',LedData[11]['GPIO'])});
+	$("#switch_21_slider").on("slideStop", function() {LedSwitch('switch_21',LedData[12]['GPIO'])});
+	$("#switch_22_slider").on("slideStop", function() {LedSwitch('switch_22',LedData[13]['GPIO'])});
+	$("#switch_23_slider").on("slideStop", function() {LedSwitch('switch_23',LedData[14]['GPIO'])});
+	$("#switch_24_slider").on("slideStop", function() {LedSwitch('switch_24',LedData[15]['GPIO'])});
+	$("#switch_25_slider").on("slideStop", function() {LedSwitch('switch_25',LedData[16]['GPIO'])});
+	$("#switch_26_slider").on("slideStop", function() {LedSwitch('switch_26',LedData[17]['GPIO'])});
+	$("#switch_27_slider").on("slideStop", function() {LedSwitch('switch_27',LedData[18]['GPIO'])});
+	$("#switch_28_slider").on("slideStop", function() {LedSwitch('switch_28',LedData[19]['GPIO'])});
+	$("#switch_29_slider").on("slideStop", function() {LedSwitch('switch_29',LedData[20]['GPIO'])});
+	$("#switch_30_slider").on("slideStop", function() {LedSwitch('switch_30',LedData[21]['GPIO'])});
+	$("#switch_31_slider").on("slideStop", function() {LedSwitch('switch_31',LedData[22]['GPIO'])});
+	$("#switch_32_slider").on("slideStop", function() {LedSwitch('switch_32',LedData[23]['GPIO'])});
+	$("#switch_33_slider").on("slideStop", function() {LedSwitch('switch_33',LedData[24]['GPIO'])});
+	$("#switch_34_slider").on("slideStop", function() {LedSwitch('switch_34',LedData[13]['GPIO'])});
+	$("#switch_35_slider").on("slideStop", function() {LedSwitch('switch_35',LedData[14]['GPIO'])});
+	$("#switch_36_slider").on("slideStop", function() {LedSwitch('switch_36',LedData[15]['GPIO'])});
+	$("#switch_37_slider").on("slideStop", function() {LedSwitch('switch_37',LedData[16]['GPIO'])});
+	$("#switch_38_slider").on("slideStop", function() {LedSwitch('switch_38',LedData[17]['GPIO'])});
+	$("#switch_39_slider").on("slideStop", function() {LedSwitch('switch_39',LedData[18]['GPIO'])});
+	$("#switch_40_slider").on("slideStop", function() {LedSwitch('switch_40',LedData[19]['GPIO'])});
 
 	$('#SensorTable').bootstrapTable('destroy').bootstrapTable({
 		columns: [{
