@@ -807,15 +807,20 @@ console.log(status);
 			}
 			state = 1;
 		} else {
-
-console.log(SwitchID,GPIO,SliderValue);
-
-			$("#"+SwitchID+"_slider").slider("disable");
-			$.get('./control?cmd=pcapwm,'+Channel.PCAPWM+',0', function(data, status) {
-
+			if (Channel.PCAPWM != '') {
+				$.get('./control?cmd=pcapwm,'+Channel.PCAPWM+',0', function(data, status) {
+console.log('PCAPWM');
 console.log(data);
 console.log(status);
-			});
+				});
+			}
+			if (Channel.GPIO != '') {
+				$.get('./control?cmd=gpio,'+Channel.GPIO+',0', function(data, status) {
+console.log('GPIO');
+console.log(data);
+console.log(status);
+				});
+			}
 			state = 0;
 		}
 	return(state);
