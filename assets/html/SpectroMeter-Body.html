@@ -258,36 +258,78 @@
 				</div>
 			</div>
 		</p>
-		<p>
-		<div class="row">
-			<div class="col">
-				<input id="ledswitch_0" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="outline-dark" data-offstyle="outline-dark" data-on="On" data-off="Off">
-			</div>
-			<div class="col">
-				<input id="FadeLEDs" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="light" data-offstyle="light" data-on="LEDs" data-off="LEDs">
-			</div>
-		</div>
-		</p>
-		<div id="LEDArray">
+
+		<div id="IncandescentLamp">
+			<h4 class="mt-4 mb-4">Incandescent lamp (Tungsten Halogen)</h4>
 			<p>
 			<div class="row">
 				<div class="col">
-					<input id="ledswitch_1" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="ultraviolett-a" data-offstyle="ultraviolett-a" data-on="<small>375 nm" data-off="<small>375 nm">&nbsp;&nbsp;&nbsp;
-					<input id="ledswitch_1_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="ultraviolett-a">
+					<input id="ledswitch_32" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-on="<small>3200 K" data-off="<small>3200 K" data-onstyle="cream-brulee-yellow-2" data-offstyle="cream-brulee-yellow-2">
+				</div>
+			</div>
+			</p>
+		</div>
+
+		<div id="BroadbandLEDs">
+			<h4 class="mt-4 mb-4">Broadband LEDs</h4>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="ledswitch_26" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="salomie-yellow-1" data-offstyle="salomie-yellow-1" data-on="<small>2700 K" data-off="<small>2700 K">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_26_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="salomie-yellow-1">
 				</div>
 				<div class="col">
-					<input id="ledswitch_2" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="deep-purple" data-offstyle="deep-purple" data-on="<small>395 nm" data-off="<small>395 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_27" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="salomie-yellow-2" data-offstyle="salomie-yellow-2" data-on="<small>2800 K" data-off="<small>2800 K">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_27_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="salomie-yellow-2">
+				</div>
+			</div>
+			</p>
+			<div class="row">
+				<div class="col">
+					<input id="ledswitch_28" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="cream-brulee-yellow-1" data-offstyle="cream-brulee-yellow-1" data-on="<small>3000 K" data-off="<small>3000 K">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_28_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="cream-brulee-yellow-1">
+				</div>
+				<div class="col">
+					<input id="ledswitch_29" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="lemon-chiffon-yellow" data-offstyle="lemon-chiffon-yellow" data-on="<small>4000 K" data-off="<small>4000 K">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_29_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="lemon-chiffon-yellow">
+				</div>
+			</div>
+			</p>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="ledswitch_30" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="corn-silk-yellow" data-offstyle="corn-silk-yellow" data-on="<small>5000 K" data-off="<small>5000 K">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_30_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="corn-silk-yellow">
+				</div>
+				<div class="col">
+					<input id="ledswitch_31" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="lavender-blush-violet" data-offstyle="lavender-blush-violet" data-on="<small>6500 K" data-off="<small>6500 K">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_31_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="lavender-blush-violet">
+				</div>
+			</div>
+			</p>
+		</div>
+
+		<div id="MonochromaticLEDs">
+			<h4 class="mt-4 mb-4">Monochromatic LEDs</h4>
+			<p>
+			<div class="row">
+				<div class="col">
+					<input id="ledswitch_1" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="ultraviolet-a" data-offstyle="ultraviolet-a" data-on="<small>375 nm" data-off="<small>375 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_1_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="ultraviolet-a">
+				</div>
+				<div class="col">
+					<input id="ledswitch_2" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="deep-purple" data-offstyle="deep-purple" data-on="<small>395 nm" data-off="<small>395 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_2_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="deep-purple">
 				</div>
 			</div>
 			</p>
 			<div class="row">
 				<div class="col">
-					<input id="ledswitch_3" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="bluish-purple" data-offstyle="bluish-purple" data-on="<small>415 nm" data-off="<small>415 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_3" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="bluish-purple" data-offstyle="bluish-purple" data-on="<small>415 nm" data-off="<small>415 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_3_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="bluish-purple">
 				</div>
 				<div class="col">
-					<input id="ledswitch_4" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="violet-like-blue" data-offstyle="violet-like-blue" data-on="<small>428 nm" data-off="<small>428 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_4" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="violet-like-blue" data-offstyle="violet-like-blue" data-on="<small>428 nm" data-off="<small>428 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_4_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="violet-like-blue">
 				</div>
 			</div>
@@ -295,11 +337,11 @@
 			<p>
 			<div class="row">
 				<div class="col">
-					<input id="ledswitch_5" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="bright-blue" data-offstyle="bright-blue" data-on="<small>460 nm" data-off="<small>460 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_5" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="bright-blue" data-offstyle="bright-blue" data-on="<small>460 nm" data-off="<small>460 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_5_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="bright-blue">
 				</div>
 				<div class="col">
-					<input id="ledswitch_6" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="greenisch-bright-blue" data-offstyle="greenisch-bright-blue" data-on="<small>470 nm" data-off="<small>470 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_6" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="greenisch-bright-blue" data-offstyle="greenisch-bright-blue" data-on="<small>470 nm" data-off="<small>470 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_6_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="greenisch-bright-blue">
 				</div>
 			</div>
@@ -307,11 +349,11 @@
 			<p>
 			<div class="row">
 				<div class="col">
-					<input id="ledswitch_7" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="greenish-cyan" data-offstyle="greenish-cyan" data-on="<small>500 nm" data-off="<small>500 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_7" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="greenish-cyan" data-offstyle="greenish-cyan" data-on="<small>500 nm" data-off="<small>500 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_7_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="greenish-cyan">
 				</div>
 				<div class="col">
-					<input id="ledswitch_8" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="pure-green" data-offstyle="pure-green" data-on="<small>525 nm" data-off="<small>525 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_8" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="pure-green" data-offstyle="pure-green" data-on="<small>525 nm" data-off="<small>525 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_8_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="pure-green">
 				</div>
 			</div>
@@ -319,11 +361,11 @@
 			<p>
 			<div class="row">
 				<div class="col">
-					<input id="ledswitch_9" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="yellow-green" data-offstyle="yellow-green" data-on="<small>565 nm" data-off="<small>565 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_9" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="yellow-green" data-offstyle="yellow-green" data-on="<small>565 nm" data-off="<small>565 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_9_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="yellow-green">
 				</div>
 				<div class="col">
-					<input id="ledswitch_10" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="citrus-yellow" data-offstyle="citrus-yellow" data-on="<small>574 nm" data-off="<small>574 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_10" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="citrus-yellow" data-offstyle="citrus-yellow" data-on="<small>574 nm" data-off="<small>574 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_10_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="citrus-yellow">
 				</div>
 			</div>
@@ -331,11 +373,11 @@
 			<p>
 			<div class="row">
 				<div class="col">
-					<input id="ledswitch_11" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="natrium-yellow" data-offstyle="natrium-yellow" data-on="<small>592 nm" data-off="<small>592 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_11" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="natrium-yellow" data-offstyle="natrium-yellow" data-on="<small>592 nm" data-off="<small>592 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_11_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="natrium-yellow">
 				</div>
 				<div class="col">
-					<input id="ledswitch_12" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="pure-orange" data-offstyle="pure-orange" data-on="<small>611 nm" data-off="<small>611 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_12" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="pure-orange" data-offstyle="pure-orange" data-on="<small>611 nm" data-off="<small>611 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_12_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="pure-orange">
 				</div>
 			</div>
@@ -343,11 +385,11 @@
 			<p>
 			<div class="row">
 				<div class="col">
-					<input id="ledswitch_13" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="bright-red" data-offstyle="bright-red" data-on="<small>640 nm" data-off="<small>640 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_13" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="bright-red" data-offstyle="bright-red" data-on="<small>640 nm" data-off="<small>640 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_13_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="bright-red">
 				</div>
 				<div class="col">
-					<input id="ledswitch_14" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="hyper-red" data-offstyle="hyper-red" data-on="<small>660 nm" data-off="<small>660 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_14" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="hyper-red" data-offstyle="hyper-red" data-on="<small>660 nm" data-off="<small>660 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_14_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="hyper-red">
 				</div>
 			</div>
@@ -355,11 +397,11 @@
 			<p>
 			<div class="row">
 				<div class="col">
-					<input id="ledswitch_15" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="very-deep-red" data-offstyle="very-deep-red" data-on="<small>700 nm" data-off="<small>700 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_15" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="very-deep-red" data-offstyle="very-deep-red" data-on="<small>700 nm" data-off="<small>700 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_15_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="very-deep-red">
 				</div>
 				<div class="col">
-					<input id="ledswitch_16" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>830 nm" data-off="<small>830 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_16" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>830 nm" data-off="<small>830 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_16_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="NIR">
 				</div>
 			</div>
@@ -367,11 +409,11 @@
 			<p>
 			<div class="row">
 				<div class="col">
-					<input id="ledswitch_17" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>850 nm" data-off="<small>850 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_17" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>850 nm" data-off="<small>850 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_17_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="NIR">
 				</div>
 				<div class="col ">
-					<input id="ledswitch_18" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>880 nm" data-off="<small>880 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_18" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>880 nm" data-off="<small>880 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_18_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="NIR">
 				</div>
 			</div>
@@ -379,11 +421,11 @@
 			<p>
 			<div class="row">
 				<div class="col">
-					<input id="ledswitch_19" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>940 nm" data-off="<small>940 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_19" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>940 nm" data-off="<small>940 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_19_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="NIR">
 				</div>
 				<div class="col">
-					<input id="ledswitch_20" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>950 nm" data-off="<small>950 nm">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_20" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>950 nm" data-off="<small>950 nm">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_20_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="NIR">
 				</div>
 			</div>
@@ -391,11 +433,11 @@
 			<p>
 			<div class="row">
 				<div class="col">
-					<input id="ledswitch_21" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>NIR" data-off="<small>NIR">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_21" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>NIR" data-off="<small>NIR">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_21_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="NIR">
 				</div>
 				<div class="col">
-					<input id="ledswitch_22" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>NIR" data-off="<small>NIR">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_22" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>NIR" data-off="<small>NIR">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_22_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="NIR">
 				</div>
 			</div>
@@ -403,17 +445,29 @@
 			<p>
 			<div class="row">
 				<div class="col">
-					<input id="ledswitch_23" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>NIR" data-off="<small>NIR">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_23" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>NIR" data-off="<small>NIR">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_23_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="NIR">
 				</div>
 				<div class="col">
-					<input id="ledswitch_24" type="checkbox" data-toggle="toggle" data-width="140" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>NIR" data-off="<small>NIR">&nbsp;&nbsp;&nbsp;
+					<input id="ledswitch_24" type="checkbox" data-toggle="toggle" data-width="120" data-size="lg" data-onstyle="NIR" data-offstyle="NIR" data-on="<small>NIR" data-off="<small>NIR">&nbsp;&nbsp;&nbsp;
 					<input id="ledswitch_24_slider" type="text" data-slider-min="0" data-slider-max="4095" data-slider-step="1" data-slider-value="2048" data-slider-enabled="false" data-slider-id="NIR">
 				</div>
 			</div>
 			</p>
 		</div>
-		<p>
+
+			<h4 class="mt-4 mb-4">Settings</h4>
+
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<label class="input-group-text" for="Illumination">Illumination</label>
+				</div>
+				<select class="form-control selectpicker show-tick" multiple data-live-search="false" data-size="5" id="Illumination">
+					<option value="0" selected data-subtext="Warm White (3200 K)">Incandescent lamp (Tungsten Halogen)</option>
+					<option value="1" data-subtext="Warm White / White (2700-6500 K)">Broadband LEDs</option>
+					<option value="2" data-subtext="Nephelometric turbidity (scattered light) measurement">Monochromatic LEDs</option>
+				</select>
+			</div>
 
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">

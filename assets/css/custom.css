@@ -1,8 +1,14 @@
 .slider.slider-horizontal{
-	width:360px !important;
+	width:380px !important;
 }
-
-#ultraviolett-a.slider.slider-disabled .slider-selection,
+#salomie-yellow-1.slider.slider-disabled .slider-selection,
+#salomie-yellow-2.slider.slider-disabled .slider-selection,
+#cream-brulee-yellow-1.slider.slider-disabled .slider-selection,
+#cream-brulee-yellow-2.slider.slider-disabled .slider-selection,
+#lemon-chiffon-yellow.slider.slider-disabled .slider-selection,
+#corn-silk-yellow.slider.slider-disabled .slider-selection,
+#lavender-blush-violet.slider.slider-disabled .slider-selection,
+#ultraviolet-a.slider.slider-disabled .slider-selection,
 #deep-purple.slider.slider-disabled .slider-selection,
 #bluish-purple.slider.slider-disabled .slider-selection,
 #violet-like-blue.slider.slider-disabled .slider-selection,
@@ -20,7 +26,14 @@
 #NIR.slider.slider-disabled .slider-selection {
 	background: #f7f7f7;
 }
-#ultraviolett-a.slider.slider-disabled .slider-handle,
+#salomie-yellow-1.slider.slider-disabled .slider-handle,
+#salomie-yellow-2.slider.slider-disabled .slider-handle,
+#cream-brulee-yellow-1.slider.slider-disabled .slider-handle,
+#cream-brulee-yellow-2.slider.slider-disabled .slider-handle,
+#lemon-chiffon-yellow.slider.slider-disabled .slider-handle,
+#corn-silk-yellow.slider.slider-disabled .slider-handle,
+#lavender-blush-violet.slider.slider-disabled .slider-handle,
+#ultraviolet-a.slider.slider-disabled .slider-handle,
 #deep-purple.slider.slider-disabled .slider-handle,
 #bluish-purple.slider.slider-disabled .slider-handle,
 #violet-like-blue.slider.slider-disabled .slider-handle,
@@ -39,19 +52,132 @@
 	background: #cfcfcf;
 }
 
+/* Salomie Yellow - 2700 K */
+	.btn-salomie-yellow-1 {
+		border-color: #FFE879;
+		color: #212529;
+	}
+	.toggle.btn-salomie-yellow-1 .toggle-handle,
+	.btn-salomie-yellow-1:hover {
+		color: #212529;
+		background-color: #FFE879;
+		border-color: #FFE879;
+	}
+	#salomie-yellow-1 .slider-selection,
+	#salomie-yellow-1 .slider-handle{
+		background: #FFE879;
+	}
+
+/* Salomie Yellow - 2800 K */
+	.btn-salomie-yellow-2 {
+		border-color: #FFE981;
+		color: #212529;
+	}
+	.toggle.btn-salomie-yellow-2 .toggle-handle,
+	.btn-salomie-yellow-2:hover {
+		color: #212529;
+		background-color: #FFE981;
+		border-color: #FFE981;
+	}
+	#salomie-yellow-2 .slider-selection,
+	#salomie-yellow-2 .slider-handle{
+		background: #FFE981;
+	}
+
+/* Cream Brulee Yellow - 3000 K */
+	.btn-cream-brulee-yellow-1 {
+		border-color: #FFED8E;
+		color: #212529;
+	}
+	.toggle.btn-cream-brulee-yellow-1 .toggle-handle,
+	.btn-cream-brulee-yellow-1:hover {
+		color: #212529;
+		background-color: #FFED8E;
+		border-color: #FFED8E;
+	}
+	#cream-brulee-yellow-1 .slider-selection,
+	#cream-brulee-yellow-1 .slider-handle{
+		background: #FFED8E;
+	}
+
+/* Cream Brulee Yellow - 3200 K */
+	.btn-cream-brulee-yellow-2 {
+		border-color: #FFEF9B;
+		color: #212529;
+	}
+	.toggle.btn-cream-brulee-yellow-2 .toggle-handle,
+	.btn-cream-brulee-yellow-2:hover {
+		color: #212529;
+		background-color: #FFEF9B;
+		border-color: #FFEF9B;
+	}
+	#cream-brulee-yellow-2 .slider-selection,
+	#cream-brulee-yellow-2 .slider-handle{
+		background: #FFEF9B;
+	}
+
+/* Lemon Chiffon Yellow - 4000 K */
+	.btn-lemon-chiffon-yellow {
+		border-color: #FFF6C1;
+		color: #212529;
+	}
+	.toggle.btn-lemon-chiffon-yellow .toggle-handle,
+	.btn-lemon-chiffon-yellow:hover {
+		color: #212529;
+		background-color: #FFF6C1;
+		border-color: #FFF6C1;
+	}
+	#lemon-chiffon-yellow .slider-selection,
+	#lemon-chiffon-yellow .slider-handle{
+		background: #FFF6C1;
+	}
+
+/* Corn Silk Yellow - 5000 K */
+	.btn-corn-silk-yellow {
+		border-color: #FFFBE2;
+		color: #212529;
+	}
+	.toggle.btn-corn-silk-yellow .toggle-handle,
+	.btn-corn-silk-yellow:hover {
+		color: #212529;
+		background-color: #FFFBE2;
+		border-color: #FFFBE2;
+	}
+	#corn-silk-yellow .slider-selection,
+	#corn-silk-yellow .slider-handle{
+		background: #FFFBE2;
+	}
+
+/* Lavender Blush Violet - 6500 K */
+	.btn-lavender-blush-violet {
+		color: #212529;
+		background-color: #FFFDFF;
+		border-color: #dae0e5;
+	}
+	.toggle.btn-lavender-blush-violet .toggle-handle,
+	.btn-lavender-blush-violet:hover {
+		color: #212529;
+		background-color: #e2e6ea;
+		border-color: #dae0e5;
+	}
+	#lavender-blush-violet .slider-selection,
+	#lavender-blush-violet .slider-handle{
+		background: #f7f7f7;
+	}
+
 /* UVA - 375 nm */
-	.btn-ultraviolett-a {
+	.btn-ultraviolet-a {
 		border-color: #610061;
 		color: #610061;
 	}
-	.toggle.btn-ultraviolett-a .toggle-handle,
-	.btn-ultraviolett-a:hover {
+	.toggle.btn-ultraviolet-a .toggle-handle,
+	.btn-ultraviolet-a:hover {
 		color: #fff;
 		background-color: #610061;
 		border-color: #610061;
 	}
-	#ultraviolett-a .slider-selection,
-	#ultraviolett-a .slider-handle{
+	#ultraviolet-a .slider-selection,
+	#ultraviolet-a .slider-handle{
 		background: #610061;
 	}
 

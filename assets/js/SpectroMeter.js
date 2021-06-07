@@ -11,6 +11,7 @@ var Release=Repository+' - '+VersionNumber+' ('+VersionDate+')';
 var AssetsPath='https://smartaquametering.github.io/assets/';
 var ImagesPath=AssetsPath+'images/';
 
+var SelectedIllumination;
 var SelectedBeamAngle;
 var SelectedCuvetteThickness;
 var SelectedSourceWhite;
@@ -26,7 +27,7 @@ function ToggleState(state) {
 		var switchid = "#switch_" + i;
 		$(switchid).bootstrapToggle(state);
 	}
-	for (i = 0; i < 32; i++) {
+	for (i = 0; i < 33; i++) {
 		var switchid = "#ledswitch_" + i;
 		$(switchid).bootstrapToggle(state)
 		$(switchid+"_slider").slider();
@@ -41,7 +42,8 @@ function ToggleState(state) {
 			$(switchid+"_slider").slider(state);
 		}
 	}
-	$("#FadeLEDs").bootstrapToggle(state);
+	$("#BroadbandIlluminationFade").bootstrapToggle(state);
+	$("#MonochromaticIlluminationFade").bootstrapToggle(state);
 };
 
 jQuery.event.special.mousewheel = {
@@ -67,14 +69,13 @@ function DocumentOnLoad() {
 		LedData[0]=new Array();
 			LedData[0]['Manufacturer']='';
 			LedData[0]['ProductID']='';
-			LedData[0]['DeviceType']='Halogen lamp';
-			LedData[0]['Color']='Warm White';
-			LedData[0]['CCT']='6500';
+			LedData[0]['DeviceType']='';
+			LedData[0]['Color']='';
+			LedData[0]['CCT']='';
 			LedData[0]['XYZ']='';
-			LedData[0]['DominantWavelength']='410-780';
+			LedData[0]['DominantWavelength']='';
 			LedData[0]['FWHMBandwidth']='';
-			LedData[0]['GPIO']='0';
-			LedData[0]['PCFGPIO']='';
+			LedData[0]['Channel']={'GPIO':'', 'PCAPWM': '0'};
 		LedData[1]=new Array();
 			LedData[1]['Manufacturer']='';
 			LedData[1]['ProductID']='';
@@ -84,8 +85,8 @@ function DocumentOnLoad() {
 			LedData[1]['XYZ']='';
 			LedData[1]['DominantWavelength']='';
 			LedData[1]['FWHMBandwidth']='';
-			LedData[1]['GPIO']='1';
-			LedData[1]['PCFGPIO']='';
+			LedData[1]['GPIO']='';
+			LedData[1]['PCAPWM']='1';
 		LedData[2]=new Array();
 			LedData[2]['Manufacturer']='';
 			LedData[2]['ProductID']='';
@@ -95,8 +96,8 @@ function DocumentOnLoad() {
 			LedData[2]['XYZ']='';
 			LedData[2]['DominantWavelength']='';
 			LedData[2]['FWHMBandwidth']='';
-			LedData[2]['GPIO']='2';
-			LedData[2]['PCFGPIO']='';
+			LedData[2]['GPIO']='';
+			LedData[2]['PCAPWM']='2';
 		LedData[3]=new Array();
 			LedData[3]['Manufacturer']='';
 			LedData[3]['ProductID']='';
@@ -106,8 +107,8 @@ function DocumentOnLoad() {
 			LedData[3]['XYZ']='';
 			LedData[3]['DominantWavelength']='';
 			LedData[3]['FWHMBandwidth']='';
-			LedData[3]['GPIO']='3';
-			LedData[3]['PCFGPIO']='';
+			LedData[3]['GPIO']='';
+			LedData[3]['PCAPWM']='3';
 		LedData[4]=new Array();
 			LedData[4]['Manufacturer']='';
 			LedData[4]['ProductID']='';
@@ -117,8 +118,8 @@ function DocumentOnLoad() {
 			LedData[4]['XYZ']='';
 			LedData[4]['DominantWavelength']='';
 			LedData[4]['FWHMBandwidth']='';
-			LedData[4]['GPIO']='4';
-			LedData[4]['PCFGPIO']='';
+			LedData[4]['GPIO']='';
+			LedData[4]['PCAPWM']='4';
 		LedData[5]=new Array();
 			LedData[5]['Manufacturer']='';
 			LedData[5]['ProductID']='';
@@ -128,8 +129,8 @@ function DocumentOnLoad() {
 			LedData[5]['XYZ']='';
 			LedData[5]['DominantWavelength']='';
 			LedData[5]['FWHMBandwidth']='';
-			LedData[5]['GPIO']='5';
-			LedData[5]['PCFGPIO']='';
+			LedData[5]['GPIO']='';
+			LedData[5]['PCAPWM']='5';
 		LedData[6]=new Array();
 			LedData[6]['Manufacturer']='';
 			LedData[6]['ProductID']='';
@@ -139,8 +140,8 @@ function DocumentOnLoad() {
 			LedData[6]['XYZ']='';
 			LedData[6]['DominantWavelength']='';
 			LedData[6]['FWHMBandwidth']='';
-			LedData[6]['GPIO']='6';
-			LedData[6]['PCFGPIO']='';
+			LedData[6]['GPIO']='';
+			LedData[6]['PCAPWM']='6';
 		LedData[7]=new Array();
 			LedData[7]['Manufacturer']='';
 			LedData[7]['ProductID']='';
@@ -150,8 +151,8 @@ function DocumentOnLoad() {
 			LedData[7]['XYZ']='';
 			LedData[7]['DominantWavelength']='';
 			LedData[7]['FWHMBandwidth']='';
-			LedData[7]['GPIO']='7';
-			LedData[7]['PCFGPIO']='';
+			LedData[7]['GPIO']='';
+			LedData[7]['PCAPWM']='7';
 		LedData[8]=new Array();
 			LedData[8]['Manufacturer']='';
 			LedData[8]['ProductID']='';
@@ -161,8 +162,8 @@ function DocumentOnLoad() {
 			LedData[8]['XYZ']='';
 			LedData[8]['DominantWavelength']='';
 			LedData[8]['FWHMBandwidth']='';
-			LedData[8]['GPIO']='8';
-			LedData[8]['PCFGPIO']='';
+			LedData[8]['GPIO']='';
+			LedData[8]['PCAPWM']='8';
 		LedData[9]=new Array();
 			LedData[9]['Manufacturer']='';
 			LedData[9]['ProductID']='';
@@ -172,8 +173,8 @@ function DocumentOnLoad() {
 			LedData[9]['XYZ']='';
 			LedData[9]['DominantWavelength']='';
 			LedData[9]['FWHMBandwidth']='';
-			LedData[9]['GPIO']='9';
-			LedData[9]['PCFGPIO']='';
+			LedData[9]['GPIO']='';
+			LedData[9]['PCAPWM']='9';
 		LedData[10]=new Array();
 			LedData[10]['Manufacturer']='';
 			LedData[10]['ProductID']='';
@@ -183,8 +184,8 @@ function DocumentOnLoad() {
 			LedData[10]['XYZ']='';
 			LedData[10]['DominantWavelength']='';
 			LedData[10]['FWHMBandwidth']='';
-			LedData[10]['GPIO']='10';
-			LedData[10]['PCFGPIO']='';
+			LedData[10]['GPIO']='';
+			LedData[10]['PCAPWM']='10';
 		LedData[11]=new Array();
 			LedData[11]['Manufacturer']='';
 			LedData[11]['ProductID']='';
@@ -194,8 +195,8 @@ function DocumentOnLoad() {
 			LedData[11]['XYZ']='';
 			LedData[11]['DominantWavelength']='';
 			LedData[11]['FWHMBandwidth']='';
-			LedData[11]['GPIO']='11';
-			LedData[11]['PCFGPIO']='';
+			LedData[11]['GPIO']='';
+			LedData[11]['PCAPWM']='11';
 		LedData[12]=new Array();
 			LedData[12]['Manufacturer']='';
 			LedData[12]['ProductID']='';
@@ -205,8 +206,8 @@ function DocumentOnLoad() {
 			LedData[12]['XYZ']='';
 			LedData[12]['DominantWavelength']='';
 			LedData[12]['FWHMBandwidth']='';
-			LedData[12]['GPIO']='12';
-			LedData[12]['PCFGPIO']='';
+			LedData[12]['GPIO']='';
+			LedData[12]['PCAPWM']='12';
 		LedData[13]=new Array();
 			LedData[13]['Manufacturer']='';
 			LedData[13]['ProductID']='';
@@ -216,8 +217,8 @@ function DocumentOnLoad() {
 			LedData[13]['XYZ']='';
 			LedData[13]['DominantWavelength']='';
 			LedData[13]['FWHMBandwidth']='';
-			LedData[13]['GPIO']='13';
-			LedData[13]['PCFGPIO']='';
+			LedData[13]['GPIO']='';
+			LedData[13]['PCAPWM']='13';
 		LedData[14]=new Array();
 			LedData[14]['Manufacturer']='';
 			LedData[14]['ProductID']='';
@@ -227,8 +228,8 @@ function DocumentOnLoad() {
 			LedData[14]['XYZ']='';
 			LedData[14]['DominantWavelength']='';
 			LedData[14]['FWHMBandwidth']='';
-			LedData[14]['GPIO']='14';
-			LedData[14]['PCFGPIO']='';
+			LedData[14]['GPIO']='';
+			LedData[14]['PCAPWM']='14';
 		LedData[15]=new Array();
 			LedData[15]['Manufacturer']='';
 			LedData[15]['ProductID']='';
@@ -238,8 +239,8 @@ function DocumentOnLoad() {
 			LedData[15]['XYZ']='';
 			LedData[15]['DominantWavelength']='';
 			LedData[15]['FWHMBandwidth']='';
-			LedData[15]['GPIO']='15';
-			LedData[15]['PCFGPIO']='';
+			LedData[15]['GPIO']='';
+			LedData[15]['PCAPWM']='15';
 		LedData[16]=new Array();
 			LedData[16]['Manufacturer']='';
 			LedData[16]['ProductID']='';
@@ -249,8 +250,8 @@ function DocumentOnLoad() {
 			LedData[16]['XYZ']='';
 			LedData[16]['DominantWavelength']='';
 			LedData[16]['FWHMBandwidth']='';
-			LedData[16]['GPIO']='16';
-			LedData[16]['PCFGPIO']='';
+			LedData[16]['GPIO']='';
+			LedData[16]['PCAPWM']='16';
 		LedData[17]=new Array();
 			LedData[17]['Manufacturer']='';
 			LedData[17]['ProductID']='';
@@ -260,8 +261,8 @@ function DocumentOnLoad() {
 			LedData[17]['XYZ']='';
 			LedData[17]['DominantWavelength']='';
 			LedData[17]['FWHMBandwidth']='';
-			LedData[17]['GPIO']='17';
-			LedData[17]['PCFGPIO']='';
+			LedData[17]['GPIO']='';
+			LedData[17]['PCAPWM']='17';
 		LedData[18]=new Array();
 			LedData[18]['Manufacturer']='';
 			LedData[18]['ProductID']='';
@@ -271,8 +272,8 @@ function DocumentOnLoad() {
 			LedData[18]['XYZ']='';
 			LedData[18]['DominantWavelength']='';
 			LedData[18]['FWHMBandwidth']='';
-			LedData[18]['GPIO']='18';
-			LedData[18]['PCFGPIO']='';
+			LedData[18]['GPIO']='';
+			LedData[18]['PCAPWM']='18';
 		LedData[19]=new Array();
 			LedData[19]['Manufacturer']='';
 			LedData[19]['ProductID']='';
@@ -282,8 +283,8 @@ function DocumentOnLoad() {
 			LedData[19]['XYZ']='';
 			LedData[19]['DominantWavelength']='';
 			LedData[19]['FWHMBandwidth']='';
-			LedData[19]['GPIO']='19';
-			LedData[19]['PCFGPIO']='';
+			LedData[19]['GPIO']='';
+			LedData[19]['PCAPWM']='19';
 		LedData[20]=new Array();
 			LedData[20]['Manufacturer']='';
 			LedData[20]['ProductID']='';
@@ -293,8 +294,8 @@ function DocumentOnLoad() {
 			LedData[20]['XYZ']='';
 			LedData[20]['DominantWavelength']='';
 			LedData[20]['FWHMBandwidth']='';
-			LedData[20]['GPIO']='20';
-			LedData[20]['PCFGPIO']='';
+			LedData[20]['GPIO']='';
+			LedData[20]['PCAPWM']='20';
 		LedData[21]=new Array();
 			LedData[21]['Manufacturer']='';
 			LedData[21]['ProductID']='';
@@ -304,8 +305,8 @@ function DocumentOnLoad() {
 			LedData[21]['XYZ']='';
 			LedData[21]['DominantWavelength']='';
 			LedData[21]['FWHMBandwidth']='';
-			LedData[21]['GPIO']='21';
-			LedData[21]['PCFGPIO']='';
+			LedData[21]['GPIO']='';
+			LedData[21]['PCAPWM']='21';
 		LedData[22]=new Array();
 			LedData[22]['Manufacturer']='';
 			LedData[22]['ProductID']='';
@@ -315,8 +316,8 @@ function DocumentOnLoad() {
 			LedData[22]['XYZ']='';
 			LedData[22]['DominantWavelength']='';
 			LedData[22]['FWHMBandwidth']='';
-			LedData[22]['GPIO']='22';
-			LedData[22]['PCFGPIO']='';
+			LedData[22]['GPIO']='';
+			LedData[22]['PCAPWM']='22';
 		LedData[23]=new Array();
 			LedData[23]['Manufacturer']='';
 			LedData[23]['ProductID']='';
@@ -326,8 +327,8 @@ function DocumentOnLoad() {
 			LedData[23]['XYZ']='';
 			LedData[23]['DominantWavelength']='';
 			LedData[23]['FWHMBandwidth']='';
-			LedData[23]['GPIO']='23';
-			LedData[23]['PCFGPIO']='';
+			LedData[23]['GPIO']='';
+			LedData[23]['PCAPWM']='23';
 		LedData[24]=new Array();
 			LedData[24]['Manufacturer']='';
 			LedData[24]['ProductID']='';
@@ -337,8 +338,8 @@ function DocumentOnLoad() {
 			LedData[24]['XYZ']='';
 			LedData[24]['DominantWavelength']='';
 			LedData[24]['FWHMBandwidth']='';
-			LedData[24]['GPIO']='24';
-			LedData[24]['PCFGPIO']='';
+			LedData[24]['GPIO']='';
+			LedData[24]['PCAPWM']='24';
 		LedData[25]=new Array();
 			LedData[25]['Manufacturer']='';
 			LedData[25]['ProductID']='';
@@ -348,8 +349,8 @@ function DocumentOnLoad() {
 			LedData[25]['XYZ']='';
 			LedData[25]['DominantWavelength']='';
 			LedData[25]['FWHMBandwidth']='';
-			LedData[25]['GPIO']='25';
-			LedData[25]['PCFGPIO']='';
+			LedData[25]['GPIO']='';
+			LedData[25]['PCAPWM']='25';
 		LedData[26]=new Array();
 			LedData[26]['Manufacturer']='';
 			LedData[26]['ProductID']='';
@@ -359,8 +360,8 @@ function DocumentOnLoad() {
 			LedData[26]['XYZ']='';
 			LedData[26]['DominantWavelength']='';
 			LedData[26]['FWHMBandwidth']='';
-			LedData[26]['GPIO']='26';
-			LedData[26]['PCFGPIO']='';
+			LedData[26]['GPIO']='';
+			LedData[26]['PCAPWM']='26';
 		LedData[27]=new Array();
 			LedData[27]['Manufacturer']='';
 			LedData[27]['ProductID']='';
@@ -370,8 +371,8 @@ function DocumentOnLoad() {
 			LedData[27]['XYZ']='';
 			LedData[27]['DominantWavelength']='';
 			LedData[27]['FWHMBandwidth']='';
-			LedData[27]['GPIO']='27';
-			LedData[27]['PCFGPIO']='';
+			LedData[27]['GPIO']='';
+			LedData[27]['PCAPWM']='27';
 		LedData[28]=new Array();
 			LedData[28]['Manufacturer']='';
 			LedData[28]['ProductID']='';
@@ -381,8 +382,8 @@ function DocumentOnLoad() {
 			LedData[28]['XYZ']='';
 			LedData[28]['DominantWavelength']='';
 			LedData[28]['FWHMBandwidth']='';
-			LedData[28]['GPIO']='28';
-			LedData[28]['PCFGPIO']='';
+			LedData[28]['GPIO']='';
+			LedData[28]['PCAPWM']='28';
 		LedData[29]=new Array();
 			LedData[29]['Manufacturer']='';
 			LedData[29]['ProductID']='';
@@ -392,8 +393,8 @@ function DocumentOnLoad() {
 			LedData[29]['XYZ']='';
 			LedData[29]['DominantWavelength']='';
 			LedData[29]['FWHMBandwidth']='';
-			LedData[29]['GPIO']='29';
-			LedData[29]['PCFGPIO']='';
+			LedData[29]['GPIO']='';
+			LedData[29]['PCAPWM']='29';
 		LedData[30]=new Array();
 			LedData[30]['Manufacturer']='';
 			LedData[30]['ProductID']='';
@@ -403,8 +404,8 @@ function DocumentOnLoad() {
 			LedData[30]['XYZ']='';
 			LedData[30]['DominantWavelength']='';
 			LedData[30]['FWHMBandwidth']='';
-			LedData[30]['GPIO']='30';
-			LedData[30]['PCFGPIO']='';
+			LedData[30]['GPIO']='';
+			LedData[30]['PCAPWM']='30';
 		LedData[31]=new Array();
 			LedData[31]['Manufacturer']='';
 			LedData[31]['ProductID']='';
@@ -414,8 +415,18 @@ function DocumentOnLoad() {
 			LedData[31]['XYZ']='';
 			LedData[31]['DominantWavelength']='';
 			LedData[31]['FWHMBandwidth']='';
-			LedData[31]['GPIO']='31';
-			LedData[31]['PCFGPIO']='';
+			LedData[31]['GPIO']='';
+			LedData[31]['PCAPWM']='31';
+		LedData[32]=new Array();
+			LedData[32]['Manufacturer']='';
+			LedData[32]['ProductID']='';
+			LedData[32]['DeviceType']='Halogen lamp';
+			LedData[32]['Color']='Warm White';
+			LedData[32]['CCT']='6500';
+			LedData[32]['XYZ']='';
+			LedData[32]['DominantWavelength']='410-780';
+			LedData[32]['FWHMBandwidth']='';
+			LedData[32]['Channel']={'GPIO':'12', 'PCAPWM': ''};
 	var ReadingData=new Array();
 		ReadingData[0]=new Array();
 		ReadingData[1]=new Array();
@@ -596,6 +607,25 @@ function DocumentOnLoad() {
 	var SpectrumLab = {};
 	var SpectrumCCT = {};
 
+	$('#Illumination').change(function() {
+		SelectedIllumination = $(this).val();
+		if (SelectedIllumination.includes('0')) {
+			$("#IncandescentLamp").fadeIn();
+		} else {
+			$("#IncandescentLamp").fadeOut();
+		}
+		if (SelectedIllumination.includes('1')) {
+			$("#BroadbandLEDs").fadeIn();
+		} else {
+			$("#BroadbandLEDs").fadeOut();
+		}
+		if (SelectedIllumination.includes('2')) {
+			$("#MonochromaticLEDs").fadeIn();
+		} else {
+			$("#MonochromaticLEDs").fadeOut();
+		}
+	});
+
 	$('#BeamAngle').change(function() {
 		SelectedBeamAngle = parseInt($(this).prop('value'));
 		ReadingData[4]['BeamAngle'] = GetBeamAngle(SelectedBeamAngle);
@@ -700,6 +730,8 @@ function DocumentOnLoad() {
 	});
 
 	function trigger() {
+		$("#BroadbandLEDs").fadeOut();
+		$("#MonochromaticLEDs").fadeOut();
 		ToggleState('enable');
 		$('select').selectpicker();
 
@@ -722,14 +754,6 @@ function DocumentOnLoad() {
 	};
 
 	trigger();
-
-	$('#FadeLEDs').change(function() {
-		if ($(this).prop('checked')===true) {
-			$("#LEDArray").fadeOut();
-		} else {
-			$("#LEDArray").fadeIn();
-		}
-	});
 
 	// Empty Sample
 	$('#switch_7').change(function() {
@@ -757,7 +781,7 @@ function DocumentOnLoad() {
 		}
 	});
 
-	function LedSwitch(SwitchID,GPIO) {
+	function LedSwitch(SwitchID,Channel) {
 		var state;
 		swaction = 1;
 
@@ -765,17 +789,30 @@ function DocumentOnLoad() {
 			$("#"+SwitchID+"_slider").slider("enable");
 			var SliderValue = $("#"+SwitchID+"_slider").slider('getValue');
 
-			$.get('./control?cmd=pcapwm,'+GPIO+','+SliderValue, function(data, status) {
-console.log(SwitchID,GPIO,SliderValue);
+console.log(SwitchID,Channel,SliderValue);
+
+			if (Channel.PCAPWM != '') {
+				$.get('./control?cmd=pcapwm,'+Channel.PCAPWM+','+SliderValue, function(data, status) {
+console.log('PCAPWM');
 console.log(data);
 console.log(status);
-			});
-
+				});
+			}
+			if (Channel.GPIO != '') {
+				$.get('./control?cmd=gpio,'+Channel.GPIO+',1', function(data, status) {
+console.log('GPIO');
+console.log(data);
+console.log(status);
+				});
+			}
 			state = 1;
 		} else {
-			$("#"+SwitchID+"_slider").slider("disable");
-			$.get('./control?cmd=pcapwm,'+GPIO+',0', function(data, status) {
+
 console.log(SwitchID,GPIO,SliderValue);
+
+			$("#"+SwitchID+"_slider").slider("disable");
+			$.get('./control?cmd=pcapwm,'+Channel.PCAPWM+',0', function(data, status) {
+
 console.log(data);
 console.log(status);
 			});
@@ -817,6 +854,7 @@ console.log(status);
 	$('#ledswitch_29').change(function() {LedSwitch($(this).prop('id'),LedData[29]['GPIO'])});
 	$('#ledswitch_30').change(function() {LedSwitch($(this).prop('id'),LedData[30]['GPIO'])});
 	$('#ledswitch_31').change(function() {LedSwitch($(this).prop('id'),LedData[31]['GPIO'])});
+	$('#ledswitch_32').change(function() {LedSwitch($(this).prop('id'),LedData[32]['Channel'])});
 
 	$("#ledswitch_0_slider").on("slideStop", function() {LedSwitch('ledswitch_0',LedData[0]['GPIO'])});
 	$("#ledswitch_1_slider").on("slideStop", function() {LedSwitch('ledswitch_1',LedData[1]['GPIO'])});
@@ -843,14 +881,15 @@ console.log(status);
 	$("#ledswitch_22_slider").on("slideStop", function() {LedSwitch('ledswitch_22',LedData[22]['GPIO'])});
 	$("#ledswitch_23_slider").on("slideStop", function() {LedSwitch('ledswitch_23',LedData[23]['GPIO'])});
 	$("#ledswitch_24_slider").on("slideStop", function() {LedSwitch('ledswitch_24',LedData[24]['GPIO'])});
-	$("#ledswitch_25_slider").on("slideStop", function() {LedSwitch('ledswitch_25',LedData[13]['GPIO'])});
-	$("#ledswitch_26_slider").on("slideStop", function() {LedSwitch('ledswitch_26',LedData[14]['GPIO'])});
-	$("#ledswitch_27_slider").on("slideStop", function() {LedSwitch('ledswitch_27',LedData[15]['GPIO'])});
-	$("#ledswitch_28_slider").on("slideStop", function() {LedSwitch('ledswitch_28',LedData[16]['GPIO'])});
-	$("#ledswitch_29_slider").on("slideStop", function() {LedSwitch('ledswitch_29',LedData[17]['GPIO'])});
-	$("#ledswitch_30_slider").on("slideStop", function() {LedSwitch('ledswitch_30',LedData[18]['GPIO'])});
-	$("#ledswitch_31_slider").on("slideStop", function() {LedSwitch('ledswitch_31',LedData[19]['GPIO'])});
-
+	$("#ledswitch_25_slider").on("slideStop", function() {LedSwitch('ledswitch_25',LedData[25]['GPIO'])});
+	$("#ledswitch_26_slider").on("slideStop", function() {LedSwitch('ledswitch_26',LedData[26]['GPIO'])});
+	$("#ledswitch_27_slider").on("slideStop", function() {LedSwitch('ledswitch_27',LedData[27]['GPIO'])});
+	$("#ledswitch_28_slider").on("slideStop", function() {LedSwitch('ledswitch_28',LedData[28]['GPIO'])});
+	$("#ledswitch_29_slider").on("slideStop", function() {LedSwitch('ledswitch_29',LedData[29]['GPIO'])});
+	$("#ledswitch_30_slider").on("slideStop", function() {LedSwitch('ledswitch_30',LedData[30]['GPIO'])});
+	$("#ledswitch_31_slider").on("slideStop", function() {LedSwitch('ledswitch_31',LedData[31]['GPIO'])});
+	$("#ledswitch_32_slider").on("slideStop", function() {LedSwitch('ledswitch_32',LedData[32]['GPIO'])});
+	
 	$('#SensorTable').bootstrapTable('destroy').bootstrapTable({
 		columns: [{
 			field: 'Parameter',
