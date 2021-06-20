@@ -157,8 +157,8 @@ function DocumentOnLoad() {
 			LedData[8]['FWHMBandwidth']='';
 			LedData[8]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '8', 'Mode': 'PWM'};
 		LedData[9]=new Array();
-			LedData[9]['Manufacturer']='Kingbright';
-			LedData[9]['ProductID']='468 nm';
+			LedData[9]['Manufacturer']='Kingbright (468 nm)';
+			LedData[9]['ProductID']='470 nm';
 			LedData[9]['DeviceType']='LED';
 			LedData[9]['Color']='';
 			LedData[9]['CCT']='';
