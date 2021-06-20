@@ -148,7 +148,7 @@ function DocumentOnLoad() {
 			LedData[7]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '7', 'Mode': 'PWM'};
 		LedData[8]=new Array();
 			LedData[8]['Manufacturer']='EverLight (428 nm)';
-			LedData[8]['ProductID']='411 nm';
+			LedData[8]['ProductID']='410 nm';
 			LedData[8]['DeviceType']='LED';
 			LedData[8]['Color']='';
 			LedData[8]['CCT']='';
@@ -167,8 +167,8 @@ function DocumentOnLoad() {
 			LedData[9]['FWHMBandwidth']='';
 			LedData[9]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '9', 'Mode': 'PWM'};
 		LedData[10]=new Array();
-			LedData[10]['Manufacturer']='Nichia';
-			LedData[10]['ProductID']='498 nm';
+			LedData[10]['Manufacturer']='Nichia (498 nm)';
+			LedData[10]['ProductID']='500 nm';
 			LedData[10]['DeviceType']='LED';
 			LedData[10]['Color']='';
 			LedData[10]['CCT']='';
@@ -177,8 +177,8 @@ function DocumentOnLoad() {
 			LedData[10]['FWHMBandwidth']='';
 			LedData[10]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '10', 'Mode': 'PWM'};
 		LedData[11]=new Array();
-			LedData[11]['Manufacturer']='Kingbright';
-			LedData[11]['ProductID']='515 nm';
+			LedData[11]['Manufacturer']='Kingbright (515 nm)';
+			LedData[11]['ProductID']='520 nm';
 			LedData[11]['DeviceType']='LED';
 			LedData[11]['Color']='';
 			LedData[11]['CCT']='';
@@ -197,8 +197,8 @@ function DocumentOnLoad() {
 			LedData[12]['FWHMBandwidth']='';
 			LedData[12]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '12', 'Mode': 'PWM'};
 		LedData[13]=new Array();
-			LedData[13]['Manufacturer']='Kingbright';
-			LedData[13]['ProductID']='574 nm';
+			LedData[13]['Manufacturer']='Kingbright (574 nm)';
+			LedData[13]['ProductID']='570 nm';
 			LedData[13]['DeviceType']='LED';
 			LedData[13]['Color']='';
 			LedData[13]['CCT']='';
@@ -207,8 +207,8 @@ function DocumentOnLoad() {
 			LedData[13]['FWHMBandwidth']='';
 			LedData[13]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '13', 'Mode': 'PWM'};
 		LedData[14]=new Array();
-			LedData[14]['Manufacturer']='Lumitronix';
-			LedData[14]['ProductID']='593 nm';
+			LedData[14]['Manufacturer']='Lumitronix (593 nm)';
+			LedData[14]['ProductID']='590 nm';
 			LedData[14]['DeviceType']='LED';
 			LedData[14]['Color']='';
 			LedData[14]['CCT']='';
@@ -217,8 +217,8 @@ function DocumentOnLoad() {
 			LedData[14]['FWHMBandwidth']='';
 			LedData[14]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '14', 'Mode': 'PWM'};
 		LedData[15]=new Array();
-			LedData[15]['Manufacturer']='EverLight';
-			LedData[15]['ProductID']='611 nm';
+			LedData[15]['Manufacturer']='EverLight (611 nm)';
+			LedData[15]['ProductID']='610 nm';
 			LedData[15]['DeviceType']='LED';
 			LedData[15]['Color']='';
 			LedData[15]['CCT']='';
@@ -227,8 +227,8 @@ function DocumentOnLoad() {
 			LedData[15]['FWHMBandwidth']='';
 			LedData[15]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '15', 'Mode': 'PWM'};
 		LedData[16]=new Array();
-			LedData[16]['Manufacturer']='Kingbright';
-			LedData[16]['ProductID']='640 nm';
+			LedData[16]['Manufacturer']='Kingbright (640 nm)';
+			LedData[16]['ProductID']='630 nm';
 			LedData[16]['DeviceType']='LED';
 			LedData[16]['Color']='';
 			LedData[16]['CCT']='';
@@ -237,8 +237,8 @@ function DocumentOnLoad() {
 			LedData[16]['FWHMBandwidth']='';
 			LedData[16]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '0', 'Mode': 'PWM'};
 		LedData[17]=new Array();
-			LedData[17]['Manufacturer']='Kingbright';
-			LedData[17]['ProductID']='660 nm';
+			LedData[17]['Manufacturer']='Kingbright (660 nm)';
+			LedData[17]['ProductID']='650 nm';
 			LedData[17]['DeviceType']='LED';
 			LedData[17]['Color']='';
 			LedData[17]['CCT']='';
