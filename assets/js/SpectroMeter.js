@@ -51,7 +51,7 @@ function DocumentOnLoad() {
 			LedData[0]['XYZ']='';
 			LedData[0]['DominantWavelength']='';
 			LedData[0]['FWHMBandwidth']='';
-			LedData[0]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '0', 'Mode': 'PWM', 'DimValue': '2048'};
+			LedData[0]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '0', 'Mode': 'PWM', 'DimValue': '2200'};
 		LedData[1]=new Array();
 			LedData[1]['Manufacturer']='Nichia';
 			LedData[1]['ProductID']='';
@@ -61,7 +61,7 @@ function DocumentOnLoad() {
 			LedData[1]['XYZ']='';
 			LedData[1]['DominantWavelength']='';
 			LedData[1]['FWHMBandwidth']='';
-			LedData[1]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '1', 'Mode': 'PWM', 'DimValue': '2048'};
+			LedData[1]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '1', 'Mode': 'PWM', 'DimValue': '1000'};
 		LedData[2]=new Array();
 			LedData[2]['Manufacturer']='Nichia';
 			LedData[2]['ProductID']='';
@@ -71,7 +71,7 @@ function DocumentOnLoad() {
 			LedData[2]['XYZ']='';
 			LedData[2]['DominantWavelength']='';
 			LedData[2]['FWHMBandwidth']='';
-			LedData[2]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '2', 'Mode': 'PWM', 'DimValue': '2048'};
+			LedData[2]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '2', 'Mode': 'PWM', 'DimValue': '600'};
 		LedData[3]=new Array();
 			LedData[3]['Manufacturer']='Nichia';
 			LedData[3]['ProductID']='';
@@ -81,7 +81,7 @@ function DocumentOnLoad() {
 			LedData[3]['XYZ']='';
 			LedData[3]['DominantWavelength']='';
 			LedData[3]['FWHMBandwidth']='';
-			LedData[3]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '3', 'Mode': 'PWM', 'DimValue': '2048'};
+			LedData[3]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '3', 'Mode': 'PWM', 'DimValue': '600'};
 		LedData[4]=new Array();
 			LedData[4]['Manufacturer']='Nichia';
 			LedData[4]['ProductID']='';
@@ -91,7 +91,7 @@ function DocumentOnLoad() {
 			LedData[4]['XYZ']='';
 			LedData[4]['DominantWavelength']='';
 			LedData[4]['FWHMBandwidth']='5000';
-			LedData[4]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '4', 'Mode': 'PWM', 'DimValue': '2048'};;
+			LedData[4]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '4', 'Mode': 'PWM', 'DimValue': '600'};;
 		LedData[5]=new Array();
 			LedData[5]['Manufacturer']='Nichia';
 			LedData[5]['ProductID']='';
@@ -101,7 +101,7 @@ function DocumentOnLoad() {
 			LedData[5]['XYZ']='';
 			LedData[5]['DominantWavelength']='';
 			LedData[5]['FWHMBandwidth']='';
-			LedData[5]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '5', 'Mode': 'PWM', 'DimValue': '2048'};
+			LedData[5]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '5', 'Mode': 'PWM', 'DimValue': '3200'};
 		LedData[6]=new Array();
 			LedData[6]['Manufacturer']='Nichia';
 			LedData[6]['ProductID']='375 nm';
