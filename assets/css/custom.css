@@ -197,20 +197,20 @@
 		background: #8000a1;
 	}
 
-/* Bluish Purple - 415 nm */
+/* Bluish Purple - 410 nm */
 	.btn-bluish-purple {
-		border-color: #7600ed;
-		color: #7600ed;
+		border-color: #7e00db;
+		color: #7e00db;
 	}
 	.toggle.btn-bluish-purple .toggle-handle,
 	.btn-bluish-purple:hover {
 		color: #fff;
-		background-color: #7600ed;
-		border-color: #7600ed;
+		background-color: #7e00db;
+		border-color: #7e00db;
 	}
 	#bluish-purple .slider-selection,
 	#bluish-purple .slider-handle{
-		background: #7600ed;
+		background: #7e00db;
 	}
 
 /* Violet-like Blue - 428 nm */
@@ -247,146 +247,146 @@
 
 /* Bright blue with some greenisch touch - 470 nm */
 	.btn-greenisch-bright-blue {
-		border-color: #007fff;
-		color: #007fff;
+		border-color: #00a9ff;
+		color: #00a9ff;
 	}
 	.toggle.btn-greenisch-bright-blue .toggle-handle, 
 	.btn-greenisch-bright-blue:hover {
 		color: #fff;
-		background-color: #007fff;
-		border-color: #007fff;
+		background-color: #00a9ff;
+		border-color: #00a9ff;
 	}
 	#greenisch-bright-blue .slider-selection,
 	#greenisch-bright-blue .slider-handle{
-		background: #007fff;
+		background: #00a9ff;
 	}
 
 /* Greenish Cyan - 500 nm */
 	.btn-greenish-cyan {
-		border-color: #00ffb6;
-		color: #00ffb6;
+		border-color: #00ff92;
+		color: #00ff92;
 	}
 	.toggle.btn-greenish-cyan .toggle-handle,
 	.btn-greenish-cyan:hover {
 		color: #fff;
-		background-color: #00ffb6;
-		border-color: #00ffb6;
+		background-color: #00ff92;
+		border-color: #00ff92;
 	}
 	#greenish-cyan .slider-selection,
 	#greenish-cyan .slider-handle{
-		background: #00ffb6;
+		background: #00ff92;
 	}
 
-/* Pure Green - 525 nm */
+/* Pure Green - 520 nm */
 	.btn-pure-green {
-		border-color: #00ff00;
-		color: #00ff00;
+		border-color: #36ff00;
+		color: #36ff00;
 	}
 	.toggle.btn-pure-green .toggle-handle,
 	.btn-pure-green:hover {
 		color: #fff;
-		background-color: #00ff00;
-		border-color: #00ff00;
+		background-color: #36ff00;
+		border-color: #36ff00;
 	}
 	#pure-green .slider-selection,
 	#pure-green .slider-handle{
-		background: #00ff00;
+		background: #36ff00;
 	}
 
 /* Yellow Green - 565 nm */
 	.btn-yellow-green {
-		border-color: #b9ff00;
-		color: #b9ff00;
+		border-color: #d2ff00;
+		color: #d2ff00;
 	}
 	.toggle.btn-yellow-green .toggle-handle,
 	.btn-yellow-green:hover {
 		color: #fff;
-		background-color: #b9ff00;
-		border-color: #b9ff00;
+		background-color: #d2ff00;
+		border-color: #d2ff00;
 	}
 	#yellow-green .slider-selection,
 	#yellow-green .slider-handle{
-		background: #b9ff00;
+		background: #d2ff00;
 	}
 
-/* Citrus Yellow - 574 nm */
+/* Citrus Yellow - 570 nm */
 	.btn-citrus-yellow {
-		border-color: #e3ff00;
-		color: #e3ff00;
+		border-color: #e1ff00;
+		color: #e1ff00;
 	}
 	.toggle.btn-citrus-yellow .toggle-handle,
 	.btn-citrus-yellow:hover {
 		color: #fff;
-		background-color: #e3ff00;
-		border-color: #e3ff00;
+		background-color: #e1ff00;
+		border-color: #e1ff00;
 	}
 	#citrus-yellow .slider-selection,
 	#citrus-yellow .slider-handle{
-		background: #e3ff00;
+		background: #e1ff00;
 	}
 
-/* Natrium Yellow - 592 nm */
+/* Natrium Yellow - 590 nm */
 	.btn-natrium-yellow {
-		border-color: #ffbf00;
-		color: #ffbf00;
+		border-color: #ffdf00;
+		color: #ffdf00;
 	}
 	.toggle.btn-natrium-yellow .toggle-handle,
 	.btn-natrium-yellow:hover {
 		color: #fff;
-		background-color: #ffbf00;
-		border-color: #ffbf00;
+		background-color: #ffdf00;
+		border-color: #ffdf00;
 	}
 	#natrium-yellow .slider-selection,
 	#natrium-yellow .slider-handle{
-		background: #ffbf00;
+		background: #ffdf00;
 	}
 
-/* Pure Orange - 611 nm */
+/* Pure Orange - 610 nm */
 	.btn-pure-orange {
-		border-color: #ff7b00;
-		color: #ff7b00;
+		border-color: #ff9b00;
+		color: #ff9b00;
 	}
 	.toggle.btn-pure-orange .toggle-handle,
 	.btn-pure-orange:hover {
 		color: #fff;
-		background-color: #ff7b00;
-		border-color: #ff7b00;
+		background-color: #ff9b00;
+		border-color: #ff9b00;
 	}
 	#pure-orange .slider-selection,
 	#pure-orange .slider-handle{
-		background: #ff7b00;
+		background: #ff9b00;
 	}
 
-/* Bright Red - 640 nm */
+/* Bright Red - 630 nm */
 	.btn-bright-red {
-		border-color: #ff1200;
-		color: #ff1200;
+		border-color: #ff4f00;
+		color: #ff4f00;
 	}
 	.toggle.btn-bright-red .toggle-handle,
 	.btn-bright-red:hover {
 		color: #fff;
-		background-color: #ff1200;
-		border-color: #ff1200;
+		background-color: #ff4f00;
+		border-color: #ff4f00;
 	}
 	#bright-red .slider-selection,
 	#bright-red .slider-handle{
-		background: #ff1200;
+		background: #ff4f00;
 	}
 
-/* Hyper Red - 660 nm */
+/* Hyper Red - 650 nm */
 	.btn-hyper-red {
-		border-color: #e4002d;
-		color: #e4002d;
+		border-color: #ff0000;
+		color: #ff0000;
 	}
 	.toggle.btn-hyper-red .toggle-handle,
 	.btn-hyper-red:hover {
 		color: #fff;
-		background-color: #e4002d;
-		border-color: #e4002d;
+		background-color: #ff0000;
+		border-color: #ff0000;
 	}
 	#hyper-red .slider-selection,
 	#hyper-red .slider-handle{
-		background: #e4002d;
+		background: #ff0000;
 	}
 
 /* Very deep Red - 700 nm */
