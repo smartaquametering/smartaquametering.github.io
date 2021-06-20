@@ -758,7 +758,7 @@ console.log(SwitchID,Channel,SliderValue);
 		} else {
 
 console.log(SwitchID,Channel);
-
+			$("#"+SwitchID+"_slider").slider("disable")
 			$.get('./control?cmd='+Channel.ID+','+Channel.OutputPin+',0', function(data, status) {
 				console.log(data);
 				console.log(status);
