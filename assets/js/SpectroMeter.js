@@ -137,8 +137,8 @@ function DocumentOnLoad() {
 			LedData[6]['FWHMBandwidth']='';
 			LedData[6]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '6', 'Mode': 'PWM'};
 		LedData[7]=new Array();
-			LedData[7]['Manufacturer']='Lumitronix';
-			LedData[7]['ProductID']='405 nm';
+			LedData[7]['Manufacturer']='Lumitronix (405 nm)';
+			LedData[7]['ProductID']='395 nm';
 			LedData[7]['DeviceType']='LED';
 			LedData[7]['Color']='';
 			LedData[7]['CCT']='';
@@ -147,8 +147,8 @@ function DocumentOnLoad() {
 			LedData[7]['FWHMBandwidth']='';
 			LedData[7]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '7', 'Mode': 'PWM'};
 		LedData[8]=new Array();
-			LedData[8]['Manufacturer']='EverLight';
-			LedData[8]['ProductID']=' 428 nm';
+			LedData[8]['Manufacturer']='EverLight (428 nm)';
+			LedData[8]['ProductID']='411 nm';
 			LedData[8]['DeviceType']='LED';
 			LedData[8]['Color']='';
 			LedData[8]['CCT']='';
@@ -377,11 +377,11 @@ function DocumentOnLoad() {
 			LedData[30]['FWHMBandwidth']='';
 			LedData[30]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '14', 'Mode': 'PWM'};
 		LedData[31]=new Array();
-			LedData[31]['Manufacturer']='';
+			LedData[31]['Manufacturer']='Philips';
 			LedData[31]['ProductID']='';
-			LedData[31]['DeviceType']='LED';
+			LedData[31]['DeviceType']='Tungsten Halogen lamp';
 			LedData[31]['Color']='';
-			LedData[31]['CCT']='';
+			LedData[31]['CCT']='3200';
 			LedData[31]['XYZ']='';
 			LedData[31]['DominantWavelength']='';
 			LedData[31]['FWHMBandwidth']='';
@@ -801,7 +801,6 @@ console.log(SwitchID,Channel);
 	$('#ledswitch_29').change(function() {LedSwitch($(this).prop('id'),LedData[29]['Channel'])});
 	$('#ledswitch_30').change(function() {LedSwitch($(this).prop('id'),LedData[30]['Channel'])});
 	$('#ledswitch_31').change(function() {LedSwitch($(this).prop('id'),LedData[31]['Channel'])});
-	$('#ledswitch_32').change(function() {LedSwitch($(this).prop('id'),LedData[32]['Channel'])});
 
 	$("#ledswitch_0_slider").on("slideStop", function() {LedSwitch('ledswitch_0',LedData[0]['Channel'])});
 	$("#ledswitch_1_slider").on("slideStop", function() {LedSwitch('ledswitch_1',LedData[1]['Channel'])});
@@ -835,7 +834,6 @@ console.log(SwitchID,Channel);
 	$("#ledswitch_29_slider").on("slideStop", function() {LedSwitch('ledswitch_29',LedData[29]['Channel'])});
 	$("#ledswitch_30_slider").on("slideStop", function() {LedSwitch('ledswitch_30',LedData[30]['Channel'])});
 	$("#ledswitch_31_slider").on("slideStop", function() {LedSwitch('ledswitch_31',LedData[31]['Channel'])});
-	$("#ledswitch_32_slider").on("slideStop", function() {LedSwitch('ledswitch_32',LedData[32]['Channel'])});
 	
 	$('#SensorTable').bootstrapTable('destroy').bootstrapTable({
 		columns: [{
