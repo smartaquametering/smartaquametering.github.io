@@ -22,30 +22,6 @@ var SelectedColorScale;
 var SelectedCharts = [];
 var SelectedScaling = [];
 
-function ToggleState(state) {
-	for (i = 7; i < 9; i++) {
-		var switchid = "#switch_" + i;
-		$(switchid).bootstrapToggle(state);
-	}
-	for (i = 0; i < 33; i++) {
-		var switchid = "#ledswitch_" + i;
-		$(switchid).bootstrapToggle(state)
-		$(switchid+"_slider").slider();
-
-		if (state=="enable") {
-			if ($(switchid).prop('checked')===true) {
-				$(switchid+"_slider").slider("enable");
-			} else {
-				$(switchid+"_slider").slider("disable");
-			}
-		} else {
-			$(switchid+"_slider").slider(state);
-		}
-	}
-	$("#BroadbandIlluminationFade").bootstrapToggle(state);
-	$("#MonochromaticIlluminationFade").bootstrapToggle(state);
-};
-
 jQuery.event.special.mousewheel = {
 	setup: function( _, ns, handle ) {
 		this.addEventListener('mousewheel', handle, { passive: !ns.includes('noPreventDefault') });
@@ -75,7 +51,7 @@ function DocumentOnLoad() {
 			LedData[0]['XYZ']='';
 			LedData[0]['DominantWavelength']='';
 			LedData[0]['FWHMBandwidth']='';
-			LedData[0]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '0', 'Mode': 'PWM'};
+			LedData[0]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '0', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[1]=new Array();
 			LedData[1]['Manufacturer']='Nichia';
 			LedData[1]['ProductID']='';
@@ -85,7 +61,7 @@ function DocumentOnLoad() {
 			LedData[1]['XYZ']='';
 			LedData[1]['DominantWavelength']='';
 			LedData[1]['FWHMBandwidth']='';
-			LedData[1]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '1', 'Mode': 'PWM'};
+			LedData[1]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '1', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[2]=new Array();
 			LedData[2]['Manufacturer']='Nichia';
 			LedData[2]['ProductID']='';
@@ -95,7 +71,7 @@ function DocumentOnLoad() {
 			LedData[2]['XYZ']='';
 			LedData[2]['DominantWavelength']='';
 			LedData[2]['FWHMBandwidth']='';
-			LedData[2]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '2', 'Mode': 'PWM'};
+			LedData[2]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '2', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[3]=new Array();
 			LedData[3]['Manufacturer']='Nichia';
 			LedData[3]['ProductID']='';
@@ -105,7 +81,7 @@ function DocumentOnLoad() {
 			LedData[3]['XYZ']='';
 			LedData[3]['DominantWavelength']='';
 			LedData[3]['FWHMBandwidth']='';
-			LedData[3]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '3', 'Mode': 'PWM'};
+			LedData[3]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '3', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[4]=new Array();
 			LedData[4]['Manufacturer']='Nichia';
 			LedData[4]['ProductID']='';
@@ -115,7 +91,7 @@ function DocumentOnLoad() {
 			LedData[4]['XYZ']='';
 			LedData[4]['DominantWavelength']='';
 			LedData[4]['FWHMBandwidth']='5000';
-			LedData[4]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '4', 'Mode': 'PWM'};;
+			LedData[4]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '4', 'Mode': 'PWM', 'DimValue': '2048'};;
 		LedData[5]=new Array();
 			LedData[5]['Manufacturer']='Nichia';
 			LedData[5]['ProductID']='';
@@ -125,7 +101,7 @@ function DocumentOnLoad() {
 			LedData[5]['XYZ']='';
 			LedData[5]['DominantWavelength']='';
 			LedData[5]['FWHMBandwidth']='';
-			LedData[5]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '5', 'Mode': 'PWM'};
+			LedData[5]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '5', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[6]=new Array();
 			LedData[6]['Manufacturer']='Nichia';
 			LedData[6]['ProductID']='375 nm';
@@ -135,7 +111,7 @@ function DocumentOnLoad() {
 			LedData[6]['XYZ']='';
 			LedData[6]['DominantWavelength']='';
 			LedData[6]['FWHMBandwidth']='';
-			LedData[6]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '6', 'Mode': 'PWM'};
+			LedData[6]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '6', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[7]=new Array();
 			LedData[7]['Manufacturer']='Lumitronix (405 nm)';
 			LedData[7]['ProductID']='395 nm';
@@ -145,7 +121,7 @@ function DocumentOnLoad() {
 			LedData[7]['XYZ']='';
 			LedData[7]['DominantWavelength']='';
 			LedData[7]['FWHMBandwidth']='';
-			LedData[7]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '7', 'Mode': 'PWM'};
+			LedData[7]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '7', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[8]=new Array();
 			LedData[8]['Manufacturer']='EverLight (428 nm)';
 			LedData[8]['ProductID']='410 nm';
@@ -155,7 +131,7 @@ function DocumentOnLoad() {
 			LedData[8]['XYZ']='';
 			LedData[8]['DominantWavelength']='';
 			LedData[8]['FWHMBandwidth']='';
-			LedData[8]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '8', 'Mode': 'PWM'};
+			LedData[8]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '8', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[9]=new Array();
 			LedData[9]['Manufacturer']='Kingbright (468 nm)';
 			LedData[9]['ProductID']='470 nm';
@@ -165,7 +141,7 @@ function DocumentOnLoad() {
 			LedData[9]['XYZ']='';
 			LedData[9]['DominantWavelength']='';
 			LedData[9]['FWHMBandwidth']='';
-			LedData[9]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '9', 'Mode': 'PWM'};
+			LedData[9]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '9', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[10]=new Array();
 			LedData[10]['Manufacturer']='Nichia (498 nm)';
 			LedData[10]['ProductID']='500 nm';
@@ -175,7 +151,7 @@ function DocumentOnLoad() {
 			LedData[10]['XYZ']='';
 			LedData[10]['DominantWavelength']='';
 			LedData[10]['FWHMBandwidth']='';
-			LedData[10]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '10', 'Mode': 'PWM'};
+			LedData[10]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '10', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[11]=new Array();
 			LedData[11]['Manufacturer']='Kingbright (515 nm)';
 			LedData[11]['ProductID']='520 nm';
@@ -185,7 +161,7 @@ function DocumentOnLoad() {
 			LedData[11]['XYZ']='';
 			LedData[11]['DominantWavelength']='';
 			LedData[11]['FWHMBandwidth']='';
-			LedData[11]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '11', 'Mode': 'PWM'};
+			LedData[11]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '11', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[12]=new Array();
 			LedData[12]['Manufacturer']='Kingbright';
 			LedData[12]['ProductID']='565 nm';
@@ -195,7 +171,7 @@ function DocumentOnLoad() {
 			LedData[12]['XYZ']='';
 			LedData[12]['DominantWavelength']='';
 			LedData[12]['FWHMBandwidth']='';
-			LedData[12]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '12', 'Mode': 'PWM'};
+			LedData[12]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '12', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[13]=new Array();
 			LedData[13]['Manufacturer']='Kingbright (574 nm)';
 			LedData[13]['ProductID']='570 nm';
@@ -205,7 +181,7 @@ function DocumentOnLoad() {
 			LedData[13]['XYZ']='';
 			LedData[13]['DominantWavelength']='';
 			LedData[13]['FWHMBandwidth']='';
-			LedData[13]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '13', 'Mode': 'PWM'};
+			LedData[13]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '13', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[14]=new Array();
 			LedData[14]['Manufacturer']='Lumitronix (593 nm)';
 			LedData[14]['ProductID']='590 nm';
@@ -215,7 +191,7 @@ function DocumentOnLoad() {
 			LedData[14]['XYZ']='';
 			LedData[14]['DominantWavelength']='';
 			LedData[14]['FWHMBandwidth']='';
-			LedData[14]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '14', 'Mode': 'PWM'};
+			LedData[14]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '14', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[15]=new Array();
 			LedData[15]['Manufacturer']='EverLight (611 nm)';
 			LedData[15]['ProductID']='610 nm';
@@ -225,7 +201,7 @@ function DocumentOnLoad() {
 			LedData[15]['XYZ']='';
 			LedData[15]['DominantWavelength']='';
 			LedData[15]['FWHMBandwidth']='';
-			LedData[15]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '15', 'Mode': 'PWM'};
+			LedData[15]['Channel']={'ID':'PWM1.PWM', 'OutputPin': '15', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[16]=new Array();
 			LedData[16]['Manufacturer']='Kingbright (640 nm)';
 			LedData[16]['ProductID']='630 nm';
@@ -235,7 +211,7 @@ function DocumentOnLoad() {
 			LedData[16]['XYZ']='';
 			LedData[16]['DominantWavelength']='';
 			LedData[16]['FWHMBandwidth']='';
-			LedData[16]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '0', 'Mode': 'PWM'};
+			LedData[16]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '0', 'Mode': 'PWM', 'DimValue': '310'};
 		LedData[17]=new Array();
 			LedData[17]['Manufacturer']='Kingbright (660 nm)';
 			LedData[17]['ProductID']='650 nm';
@@ -245,7 +221,7 @@ function DocumentOnLoad() {
 			LedData[17]['XYZ']='';
 			LedData[17]['DominantWavelength']='';
 			LedData[17]['FWHMBandwidth']='';
-			LedData[17]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '1', 'Mode': 'PWM'};
+			LedData[17]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '1', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[18]=new Array();
 			LedData[18]['Manufacturer']='Kingbright';
 			LedData[18]['ProductID']='700 nm';
@@ -255,7 +231,7 @@ function DocumentOnLoad() {
 			LedData[18]['XYZ']='';
 			LedData[18]['DominantWavelength']='';
 			LedData[18]['FWHMBandwidth']='';
-			LedData[18]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '2', 'Mode': 'PWM'};
+			LedData[18]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '2', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[19]=new Array();
 			LedData[19]['Manufacturer']='EverLight';
 			LedData[19]['ProductID']='850 nm';
@@ -265,7 +241,7 @@ function DocumentOnLoad() {
 			LedData[19]['XYZ']='';
 			LedData[19]['DominantWavelength']='';
 			LedData[19]['FWHMBandwidth']='';
-			LedData[19]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '3', 'Mode': 'PWM'};
+			LedData[19]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '3', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[20]=new Array();
 			LedData[20]['Manufacturer']='OSRAM';
 			LedData[20]['ProductID']='950 nm';
@@ -275,7 +251,7 @@ function DocumentOnLoad() {
 			LedData[20]['XYZ']='';
 			LedData[20]['DominantWavelength']='';
 			LedData[20]['FWHMBandwidth']='';
-			LedData[20]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '4', 'Mode': 'PWM'};
+			LedData[20]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '4', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[21]=new Array();
 			LedData[21]['Manufacturer']='';
 			LedData[21]['ProductID']='';
@@ -285,7 +261,7 @@ function DocumentOnLoad() {
 			LedData[21]['XYZ']='';
 			LedData[21]['DominantWavelength']='';
 			LedData[21]['FWHMBandwidth']='';
-			LedData[21]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '5', 'Mode': 'PWM'};
+			LedData[21]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '5', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[22]=new Array();
 			LedData[22]['Manufacturer']='';
 			LedData[22]['ProductID']='';
@@ -295,7 +271,7 @@ function DocumentOnLoad() {
 			LedData[22]['XYZ']='';
 			LedData[22]['DominantWavelength']='';
 			LedData[22]['FWHMBandwidth']='';
-			LedData[22]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '6', 'Mode': 'PWM'};
+			LedData[22]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '6', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[23]=new Array();
 			LedData[23]['Manufacturer']='';
 			LedData[23]['ProductID']='';
@@ -305,7 +281,7 @@ function DocumentOnLoad() {
 			LedData[23]['XYZ']='';
 			LedData[23]['DominantWavelength']='';
 			LedData[23]['FWHMBandwidth']='';
-			LedData[23]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '7', 'Mode': 'PWM'};
+			LedData[23]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '7', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[24]=new Array();
 			LedData[24]['Manufacturer']='';
 			LedData[24]['ProductID']='';
@@ -315,7 +291,7 @@ function DocumentOnLoad() {
 			LedData[24]['XYZ']='';
 			LedData[24]['DominantWavelength']='';
 			LedData[24]['FWHMBandwidth']='';
-			LedData[24]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '8', 'Mode': 'PWM'};
+			LedData[24]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '8', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[25]=new Array();
 			LedData[25]['Manufacturer']='';
 			LedData[25]['ProductID']='';
@@ -325,7 +301,7 @@ function DocumentOnLoad() {
 			LedData[25]['XYZ']='';
 			LedData[25]['DominantWavelength']='';
 			LedData[25]['FWHMBandwidth']='';
-			LedData[25]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '9', 'Mode': 'PWM'};
+			LedData[25]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '9', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[26]=new Array();
 			LedData[26]['Manufacturer']='';
 			LedData[26]['ProductID']='';
@@ -335,7 +311,7 @@ function DocumentOnLoad() {
 			LedData[26]['XYZ']='';
 			LedData[26]['DominantWavelength']='';
 			LedData[26]['FWHMBandwidth']='';
-			LedData[26]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '10', 'Mode': 'PWM'};
+			LedData[26]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '10', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[27]=new Array();
 			LedData[27]['Manufacturer']='';
 			LedData[27]['ProductID']='';
@@ -345,7 +321,7 @@ function DocumentOnLoad() {
 			LedData[27]['XYZ']='';
 			LedData[27]['DominantWavelength']='';
 			LedData[27]['FWHMBandwidth']='';
-			LedData[27]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '11', 'Mode': 'PWM'};
+			LedData[27]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '11', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[28]=new Array();
 			LedData[28]['Manufacturer']='';
 			LedData[28]['ProductID']='';
@@ -355,7 +331,7 @@ function DocumentOnLoad() {
 			LedData[28]['XYZ']='';
 			LedData[28]['DominantWavelength']='';
 			LedData[28]['FWHMBandwidth']='';
-			LedData[28]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '12', 'Mode': 'PWM'};
+			LedData[28]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '12', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[29]=new Array();
 			LedData[29]['Manufacturer']='';
 			LedData[29]['ProductID']='';
@@ -365,7 +341,7 @@ function DocumentOnLoad() {
 			LedData[29]['XYZ']='';
 			LedData[29]['DominantWavelength']='';
 			LedData[29]['FWHMBandwidth']='';
-			LedData[29]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '13', 'Mode': 'PWM'};
+			LedData[29]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '13', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[30]=new Array();
 			LedData[30]['Manufacturer']='';
 			LedData[30]['ProductID']='';
@@ -375,7 +351,7 @@ function DocumentOnLoad() {
 			LedData[30]['XYZ']='';
 			LedData[30]['DominantWavelength']='';
 			LedData[30]['FWHMBandwidth']='';
-			LedData[30]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '14', 'Mode': 'PWM'};
+			LedData[30]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '14', 'Mode': 'PWM', 'DimValue': '2048'};
 		LedData[31]=new Array();
 			LedData[31]['Manufacturer']='Philips';
 			LedData[31]['ProductID']='';
@@ -385,7 +361,7 @@ function DocumentOnLoad() {
 			LedData[31]['XYZ']='';
 			LedData[31]['DominantWavelength']='';
 			LedData[31]['FWHMBandwidth']='';
-			LedData[31]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '15', 'Mode': 'PWM'};
+			LedData[31]['Channel']={'ID':'PWM2.PWM', 'OutputPin': '15', 'Mode': 'PWM', 'DimValue': '2048'};
 	var ReadingData=new Array();
 		ReadingData[0]=new Array();
 		ReadingData[1]=new Array();
@@ -566,6 +542,35 @@ function DocumentOnLoad() {
 	var SpectrumLab = {};
 	var SpectrumCCT = {};
 
+	function ToggleState(state) {
+		for (i = 7; i < 9; i++) {
+			var switchid = "#switch_" + i;
+			$(switchid).bootstrapToggle(state);
+		}
+		for (i = 0; i < 32; i++) {
+			var switchid = "#ledswitch_" + i;
+			var PWMDimValue = LedData[i]['Channel'].DimValue;
+			$(switchid).bootstrapToggle(state)
+			$(switchid+"_slider").slider();
+			$(switchid+"_slider").slider('setAttribute', 'max', 4095);
+			$(switchid+"_slider").slider('setAttribute', 'min', 0);
+			$(switchid+"_slider").slider('setAttribute', 'step', 1);
+			$(switchid+"_slider").slider('setValue', PWMDimValue);
+//			$(switchid+"_slider").slider('refresh');
+
+			if (state=="enable") {
+				if ($(switchid).prop('checked')===true) {
+					$(switchid+"_slider").slider("enable");
+				} else {
+					$(switchid+"_slider").slider("disable");
+				}
+			} else {
+				$(switchid+"_slider").slider(state);
+			}
+		}
+		$("#BroadbandIlluminationFade").bootstrapToggle(state);
+		$("#MonochromaticIlluminationFade").bootstrapToggle(state);
+	};
 	$('#Illumination').change(function() {
 		SelectedIllumination = $(this).val();
 		if (SelectedIllumination.includes('0')) {
@@ -748,20 +753,20 @@ function DocumentOnLoad() {
 			$("#"+SwitchID+"_slider").slider("enable");
 			var SliderValue = $("#"+SwitchID+"_slider").slider('getValue');
 
-console.log(SwitchID,Channel,SliderValue);
+//console.log(SwitchID,Channel,SliderValue);
 
 			$.get('./control?cmd='+Channel.ID+','+Channel.OutputPin+','+SliderValue, function(data, status) {
-				console.log(data);
-				console.log(status);
+//				console.log(data);
+//				console.log(status);
 			});
 			state = 1;
 		} else {
 
-console.log(SwitchID,Channel);
+//console.log(SwitchID,Channel);
 			$("#"+SwitchID+"_slider").slider("disable")
 			$.get('./control?cmd='+Channel.ID+','+Channel.OutputPin+',0', function(data, status) {
-				console.log(data);
-				console.log(status);
+//				console.log(data);
+//				console.log(status);
 			});
 			state = 0;
 		}
