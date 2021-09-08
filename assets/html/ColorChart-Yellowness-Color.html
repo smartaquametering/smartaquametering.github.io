@@ -12,19 +12,37 @@
 
 		Standard: ASTM E 313-05, ASTM D1925 (deprecated)</br>
 		Range: 0-850</br>
-		Reference: C/2Â°</br>
+		Reference: C/°</br>
 
 		<p>L = [100], a = [-150..+150], b = [-150..+150]</p>
 		<canvas id="CIELab100" width=600 height=600></canvas>
 
-		<p>L = [75], a = [-150..+150], b = [-150..+150]</p>
-		<canvas id="CIELab75" width=600 height=600></canvas>
+		<p>L = [90], a = [-150..+150], b = [-150..+150]</p>
+		<canvas id="CIELab90" width=600 height=600></canvas>
+
+		<p>L = [80], a = [-150..+150], b = [-150..+150]</p>
+		<canvas id="CIELab80" width=600 height=600></canvas>
+
+		<p>L = [70], a = [-150..+150], b = [-150..+150]</p>
+		<canvas id="CIELab70" width=600 height=600></canvas>
+
+		<p>L = [60], a = [-150..+150], b = [-150..+150]</p>
+		<canvas id="CIELab60" width=600 height=600></canvas>
 
 		<p>L = [50], a = [-150..+150], b = [-150..+150]</p>
 		<canvas id="CIELab50" width=600 height=600></canvas>
 
-		<p>L = [25], a = [-150..+150], b = [-150..+150]</p>
-		<canvas id="CIELab25" width=600 height=600></canvas>
+		<p>L = [40], a = [-150..+150], b = [-150..+150]</p>
+		<canvas id="CIELab40" width=600 height=600></canvas>
+
+		<p>L = [30], a = [-150..+150], b = [-150..+150]</p>
+		<canvas id="CIELab30" width=600 height=600></canvas>
+
+		<p>L = [20], a = [-150..+150], b = [-150..+150]</p>
+		<canvas id="CIELab20" width=600 height=600></canvas>
+
+		<p>L = [10], a = [-150..+150], b = [-150..+150]</p>
+		<canvas id="CIELab10" width=600 height=600></canvas>
 
 		<p>L = [0], a = [-150..+150], b = [-150..+150]</p>
 		<canvas id="CIELab0" width=600 height=600></canvas>
@@ -35,17 +53,41 @@
 			var ctx100 = canvas100.getContext("2d");
 			ctx100 = printCanvas(canvas100, ctx100, 100);
 
-			var canvas75 = document.getElementById("CIELab75");
-			var ctx75 = canvas75.getContext("2d");
-			ctx75 = printCanvas(canvas75, ctx75, 75);
+			var canvas90 = document.getElementById("CIELab90");
+			var ctx90 = canvas90.getContext("2d");
+			ctx90 = printCanvas(canvas90, ctx90, 90);
+
+			var canvas80 = document.getElementById("CIELab80");
+			var ctx80 = canvas80.getContext("2d");
+			ctx80 = printCanvas(canvas80, ctx80, 80);
+
+			var canvas70 = document.getElementById("CIELab70");
+			var ctx70 = canvas70.getContext("2d");
+			ctx70 = printCanvas(canvas70, ctx70, 70);
+
+			var canvas60 = document.getElementById("CIELab60");
+			var ctx60 = canvas60.getContext("2d");
+			ctx60 = printCanvas(canvas60, ctx60, 60);
 
 			var canvas50 = document.getElementById("CIELab50");
 			var ctx50 = canvas50.getContext("2d");
 			ctx50 = printCanvas(canvas50, ctx50, 50);
 
-			var canvas25 = document.getElementById("CIELab25");
-			var ctx25 = canvas25.getContext("2d");
-			ctx25 = printCanvas(canvas25, ctx25, 25);
+			var canvas40 = document.getElementById("CIELab40");
+			var ctx40 = canvas40.getContext("2d");
+			ctx40 = printCanvas(canvas40, ctx40, 40);
+
+			var canvas30 = document.getElementById("CIELab30");
+			var ctx30 = canvas30.getContext("2d");
+			ctx30 = printCanvas(canvas30, ctx30, 30);
+
+			var canvas20 = document.getElementById("CIELab20");
+			var ctx20 = canvas20.getContext("2d");
+			ctx20 = printCanvas(canvas20, ctx20, 20);
+
+			var canvas10 = document.getElementById("CIELab10");
+			var ctx10 = canvas10.getContext("2d");
+			ctx10 = printCanvas(canvas10, ctx10, 10);
 
 			var canvas0 = document.getElementById("CIELab0");
 			var ctx0 = canvas0.getContext("2d");
