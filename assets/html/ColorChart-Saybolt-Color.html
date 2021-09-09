@@ -1,209 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<!-- Copyright © 2020-2021 by https://github.com/smartAquaMetering. All Rights Reserved. -->
+		<meta name="author" content="smartAquaMetering">
+		<meta name="description" content="smartSpectroMeter">
+		<meta name="keywords" content="Photometry, Spectrometry, Colorimetry, Nephelometry">
 
-		<!-- Culori color library for JavaScript -->
-		<script src="https://cdn.jsdelivr.net/npm/culori@0.18.0/build/culori.umd.min.js"></script>
+		<!-- Required meta tags -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<meta http-equiv="X-UA-Compatible" content="text/html">
 
+		<!-- favicon -->
+		<link rel="shortcut icon" href="https://smartaquametering.github.io/assets/ico/favicon.ico">
+
+		<title>smartSpectroMeter</title>
+
+		<!-- Spectral Distributions of the CIE Color Matching Functions JS by smartAquaMetering -->
+		<script src="./CIE-ColorMatchingFunctions.js"></script>
+
+		<!-- Spectral Distributions of the CIE Illuminants JS by smartAquaMetering -->
+		<script src="./CIE-Illuminants-SDs.js"></script>
+
+		<!-- RGB working space information by Bruce Justin Lindbloom adapted by smartAquaMetering -->
+		<script src="./RGB-Models.js"></script>
+
+		<!-- Color conversion and Color delta functions by Bruce Justin Lindbloom adapted by smartAquaMetering -->
+		<script src="./ColorConversions.js"></script>
+
+		<!-- Color scales by smartAquaMetering -->
+		<script src="./ColorScales.js"></script>
 	</head>
 	<body>
+		<h4 id="ColorScaleHeading"></h4>
+		<p>
+			<table>
+				<tr><td style="width:200px">Name</td><td id="ColorScaleName"></td></tr>
+				<tr><td>Standard</td><td id="ColorScaleStandard"></td></tr>
+				<tr><td>Note</td><td id="ColorScaleNote"></td></tr>
+				<tr><td>Range</td><td id="ColorScaleRange"></td></tr>
+				<tr><td>Step</td><td id="ColorScaleStep"></td></tr>
+				<tr><td>Unit</td><td id="ColorScaleUnit"></td></tr>
+				<tr><td>Description</td><td id="ColorScaleDescription"></td></tr>
+				<tr><td>Determination method</td><td id="ColorScaleDeterminationMethod"></td></tr>
+				<tr><td></br></td></tr>
+				<tr><td>Measurement method</td><td id="MeasurementMode"></td></tr>
+				<tr><td>Beam angle</td><td id="BeamAngle"></td></tr>
+				<tr><td></br></td></tr>
+				<tr><td>Color space</td><td id="ColorSpace"></td></tr>
+				<tr><td>Observer</td><td id="Observer"></td></tr>
+				<tr><td>Reference white</td><td id="ReferenceWhite"></td></tr>
+				<tr><td>Reference cell path length</td><td id="ReferenceCellPathLength"></td></tr>
+				<tr><td>Reference null</td><td id="ReferenceNull"></td></tr>
+				<tr><td></br></td></tr>
+				<tr><td>RGB model</td><td id="RGBModel"></td></tr>
+				<tr><td>RGB gamma</td><td id="RGBGamma"></td></tr>
+				<tr><td>RGB reference</td><td id="RGBReference"></td></tr>
+				<tr><td>Adaptation method</td><td id="AdaptationMethod"></td></tr>
+			</table>
+		</p>
 
-		<h4 class="mt-4 mb-4">Saybolt Color (ASTM D156, ASTM D6045-20) in CIE-L*a*b* color space</h4>
-
-		Standard: ASTM D156, ASTM D6045-20</br>
-		Range: -16-30</br>
-		Reference: C/2°</br>
-
-		<p>L = [100], a = [-150..+150], b = [-150..+150]</p>
+		<h4>L* = [100], a* = [-150..+150], b* = [-150..+150]</h4>
 		<canvas id="CIELab100" width=600 height=600></canvas>
 
-		<p>L = [90], a = [-150..+150], b = [-150..+150]</p>
+		<h4>L* = [90], a* = [-150..+150], b* = [-150..+150]</h4>
 		<canvas id="CIELab90" width=600 height=600></canvas>
 
-		<p>L = [80], a = [-150..+150], b = [-150..+150]</p>
+		<h4>L* = [80], a* = [-150..+150], b* = [-150..+150]</h4>
 		<canvas id="CIELab80" width=600 height=600></canvas>
 
-		<p>L = [70], a = [-150..+150], b = [-150..+150]</p>
+		<h4>L* = [70], a* = [-150..+150], b* = [-150..+150]</h4>
 		<canvas id="CIELab70" width=600 height=600></canvas>
 
-		<p>L = [60], a = [-150..+150], b = [-150..+150]</p>
+		<h4>L* = [60], a* = [-150..+150], b* = [-150..+150]</h4>
 		<canvas id="CIELab60" width=600 height=600></canvas>
 
-		<p>L = [50], a = [-150..+150], b = [-150..+150]</p>
+		<h4>L* = [50], a* = [-150..+150], b* = [-150..+150]</h4>
 		<canvas id="CIELab50" width=600 height=600></canvas>
 
-		<p>L = [40], a = [-150..+150], b = [-150..+150]</p>
+		<h4>L* = [40], a* = [-150..+150], b* = [-150..+150]</h4>
 		<canvas id="CIELab40" width=600 height=600></canvas>
 
-		<p>L = [30], a = [-150..+150], b = [-150..+150]</p>
+		<h4>L* = [30], a* = [-150..+150], b* = [-150..+150]</h4>
 		<canvas id="CIELab30" width=600 height=600></canvas>
 
-		<p>L = [20], a = [-150..+150], b = [-150..+150]</p>
+		<h4>L* = [20], a* = [-150..+150], b* = [-150..+150]</h4>
 		<canvas id="CIELab20" width=600 height=600></canvas>
 
-		<p>L = [10], a = [-150..+150], b = [-150..+150]</p>
+		<h4>L* = [10], a* = [-150..+150], b* = [-150..+150]</h4>
 		<canvas id="CIELab10" width=600 height=600></canvas>
 
-		<p>L = [0], a = [-150..+150], b = [-150..+150]</p>
+		<h4>L* = [0], a* = [-150..+150], b* = [-150..+150]</h4>
 		<canvas id="CIELab0" width=600 height=600></canvas>
 
-
 		<script>
+			// Color Index: Saybolt Color
+			var ColorScale = ColorIndex[17];
 
+			// Colorimetry settings
+			var SelectedColorimetry = {
+				Observer: 0,
+				ReferenceWhite: 2,
+				AdaptationMethod: 0,
+				RGBModel: 14,
+				RGBGamma: 3,
+				Scaling: []
+			}
+			GetColorimetry(SelectedColorimetry);
+
+			// Heading value
+			var ColorScaleHeading = ColorScale.Name + " (" + ColorScale.Standard + ") in " + ColorScale.ColorSpace + " color space";
+			document.getElementById("ColorScaleHeading").innerHTML = ColorScaleHeading;
+
+			// Table values
+			document.getElementById("ColorScaleName").innerHTML = ColorScale.Name;
+			document.getElementById("ColorScaleStandard").innerHTML = ColorScale.Standard;
+			document.getElementById("ColorScaleNote").innerHTML = ColorScale.Note;
+			document.getElementById("ColorScaleRange").innerHTML = ColorScale.Range;
+			document.getElementById("ColorScaleStep").innerHTML = ColorScale.Step;
+			document.getElementById("ColorScaleUnit").innerHTML = ColorScale.Unit;
+			document.getElementById("ColorScaleDescription").innerHTML = ColorScale.Description;
+			document.getElementById("ColorScaleDeterminationMethod").innerHTML = ColorScale.DeterminationMethod;
+			document.getElementById("MeasurementMode").innerHTML = ColorScale.MeasurementMode;
+			document.getElementById("BeamAngle").innerHTML = ColorScale.BeamAngle;
+			document.getElementById("ColorSpace").innerHTML = ColorScale.ColorSpace;
+			document.getElementById("Observer").innerHTML = ColorScale.Observer;
+			document.getElementById("ReferenceWhite").innerHTML = ColorScale.ReferenceWhite;
+			document.getElementById("ReferenceCellPathLength").innerHTML = ColorScale.ReferenceCellPathLength;
+			document.getElementById("ReferenceNull").innerHTML = ColorScale.ReferenceNull;
+			document.getElementById("RGBModel").innerHTML = Colorimetry.RGBModel.Name;
+			document.getElementById("RGBGamma").innerHTML = Colorimetry.RGBModel.Gamma;
+			document.getElementById("RGBReference").innerHTML = Colorimetry.RGBModel.Reference;
+			document.getElementById("AdaptationMethod").innerHTML = Colorimetry.AdaptationMethod;
+
+			// Generate canvas
 			var canvas100 = document.getElementById("CIELab100");
 			var ctx100 = canvas100.getContext("2d");
-			ctx100 = printCanvas(canvas100, ctx100, 100);
+			ctx100 = SayboltColor2Canvas(canvas100, ctx100, 100);
 
 			var canvas90 = document.getElementById("CIELab90");
 			var ctx90 = canvas90.getContext("2d");
-			ctx90 = printCanvas(canvas90, ctx90, 90);
+			ctx90 = SayboltColor2Canvas(canvas90, ctx90, 90);
 
 			var canvas80 = document.getElementById("CIELab80");
 			var ctx80 = canvas80.getContext("2d");
-			ctx80 = printCanvas(canvas80, ctx80, 80);
+			ctx80 = SayboltColor2Canvas(canvas80, ctx80, 80);
 
 			var canvas70 = document.getElementById("CIELab70");
 			var ctx70 = canvas70.getContext("2d");
-			ctx70 = printCanvas(canvas70, ctx70, 70);
+			ctx70 = SayboltColor2Canvas(canvas70, ctx70, 70);
 
 			var canvas60 = document.getElementById("CIELab60");
 			var ctx60 = canvas60.getContext("2d");
-			ctx60 = printCanvas(canvas60, ctx60, 60);
+			ctx60 = SayboltColor2Canvas(canvas60, ctx60, 60);
 
 			var canvas50 = document.getElementById("CIELab50");
 			var ctx50 = canvas50.getContext("2d");
-			ctx50 = printCanvas(canvas50, ctx50, 50);
+			ctx50 = SayboltColor2Canvas(canvas50, ctx50, 50);
 
 			var canvas40 = document.getElementById("CIELab40");
 			var ctx40 = canvas40.getContext("2d");
-			ctx40 = printCanvas(canvas40, ctx40, 40);
+			ctx40 = SayboltColor2Canvas(canvas40, ctx40, 40);
 
 			var canvas30 = document.getElementById("CIELab30");
 			var ctx30 = canvas30.getContext("2d");
-			ctx30 = printCanvas(canvas30, ctx30, 30);
+			ctx30 = SayboltColor2Canvas(canvas30, ctx30, 30);
 
 			var canvas20 = document.getElementById("CIELab20");
 			var ctx20 = canvas20.getContext("2d");
-			ctx20 = printCanvas(canvas20, ctx20, 20);
+			ctx20 = SayboltColor2Canvas(canvas20, ctx20, 20);
 
 			var canvas10 = document.getElementById("CIELab10");
 			var ctx10 = canvas10.getContext("2d");
-			ctx10 = printCanvas(canvas10, ctx10, 10);
+			ctx10 = SayboltColor2Canvas(canvas10, ctx10, 10);
 
 			var canvas0 = document.getElementById("CIELab0");
 			var ctx0 = canvas0.getContext("2d");
-			ctx0 = printCanvas(canvas0, ctx0, 0);
-
-			function printCanvas(canvas, ctx, L) {
-				var x;
-				var y;
-				var Tx = -5;
-				var Ty = -5;
-				var DMin = 0.985;
-				var DMax = 1.015;
-
-				var Saybolt;
-				var DeltaE;
-
-				var Index=new Array();
-
-				for (x = 0; x <= canvas.width; x++) {
-					for (y = 0; y <= canvas.height; y++) {
-						let Lab = {mode: 'lab', l: L, a: -150+300*x/canvas.width, b: 150-300*y/canvas.height};
-
-						DeltaE = Math.sqrt(Math.pow((100 - Lab.l), 2) + Math.pow(Lab.a, 2) + Math.pow(Lab.b, 2));
-						Saybolt = (51.1 + 44.5 / (Math.log10(DeltaE) - 2.55)).toFixed(2);
-
-						ctx.fillStyle = 'DimGrey';
-
-						if (Saybolt >= 30 * DMin && Saybolt <= 30 * DMax) {
-							if (!Index[0]) {
-								Index[0]=new Array();
-								Index[0]['Color'] = 30;
-								Index[0]['x'] = x + Tx;
-								Index[0]['y'] = y + Ty;
-							}
-						} else if (Saybolt >= 25 * DMin && Saybolt <= 25 * DMax) {
-						ctx.fillStyle = 'Gainsboro';
-						} else if (Saybolt >= 20 * DMin && Saybolt <= 20 * DMax) {
-							if (!Index[1]) {
-								Index[1]=new Array();
-								Index[1]['Color'] = 20;
-								Index[1]['x'] = x + Tx;
-								Index[1]['y'] = y + Ty;
-							}
-						} else if (Saybolt >= 15 * DMin && Saybolt <= 15 * DMax) {
-						ctx.fillStyle = 'Gainsboro';
-						} else if (Saybolt >= 10 * DMin && Saybolt <= 10 * DMax) {
-							if (!Index[2]) {
-								Index[2]=new Array();
-								Index[2]['Color'] = 10;
-								Index[2]['x'] = x + Tx;
-								Index[2]['y'] = y + Ty;
-							}
-						} else if (Saybolt >= 5 * DMin && Saybolt <= 5 * DMax) {
-						ctx.fillStyle = 'Gainsboro';
-						} else if (Saybolt >= 0 * DMin && Saybolt <= 0 * DMax) {
-							if (!Index[3]) {
-								Index[3]=new Array();
-								Index[3]['Color'] = 0;
-								Index[3]['x'] = x + Tx;
-								Index[3]['y'] = y + Ty;
-							}
-						} else if (Saybolt >= -5 * DMax && Saybolt <= -5 * DMin) {
-						ctx.fillStyle = 'Gainsboro';
-						} else if (Saybolt >= -10 * DMax && Saybolt <= -10 * DMin) {
-							if (!Index[4]) {
-								Index[4]=new Array();
-								Index[4]['Color'] = -10;
-								Index[4]['x'] = x + Tx;
-								Index[4]['y'] = y + Ty;
-							}
-						} else if (Saybolt >= -16 * DMax && Saybolt <= -16 * DMin) {
-						ctx.fillStyle = 'Gainsboro';
-							if (!Index[5]) {
-								Index[5]=new Array();
-								Index[5]['Color'] = -16;
-								Index[5]['x'] = x + Tx;
-								Index[5]['y'] = y + Ty;
-							}
-						} else {
-							ctx.fillStyle = culori.formatRgb(Lab);
-						}
-						ctx.fillRect(x, y, 1, 1);
-//console.log(Saybolt);
-					}
-				}
-				ctx.font = "14px Arial";
-				ctx.fillStyle = "black";
-
-				if (Index[0]) {	ctx.fillText(Index[0]['Color'], Index[0]['x'], Index[0]['y']); }
-				if (Index[1]) {	ctx.fillText(Index[1]['Color'], Index[1]['x'], Index[1]['y']); }
-				if (Index[2]) {	ctx.fillText(Index[2]['Color'], Index[2]['x'], Index[2]['y']); }
-				if (Index[3]) {	ctx.fillText(Index[3]['Color'], Index[3]['x'], Index[3]['y']); }
-				if (Index[4]) {	ctx.fillText(Index[4]['Color'], Index[4]['x'], Index[4]['y']); }
-				if (Index[5]) {	ctx.fillText(Index[5]['Color'], Index[5]['x'], Index[5]['y']); }
-				if (Index[6]) {	ctx.fillText(Index[6]['Color'], Index[6]['x'], Index[6]['y']); }
-				if (Index[7]) {	ctx.fillText(Index[7]['Color'], Index[7]['x'], Index[7]['y']); }
-				if (Index[8]) {	ctx.fillText(Index[8]['Color'], Index[8]['x'], Index[8]['y']); }
-
-				return(ctx);
-			}
-
-			//To check if an array is empty using javascript
-			function arrayIsEmpty(array){
-				//If it's not an array, return FALSE.
-				if(!Array.isArray(array)){
-					return FALSE;
-				}
-				//If it is an array, check its length property
-				if(array.length == 0){
-					//Return TRUE if the array is empty
-					return true;
-				}
-				//Otherwise, return FALSE.
-				return false;
-			}
+			ctx0 = SayboltColor2Canvas(canvas0, ctx0, 0);
 		</script>
 	</body>
 </html>
